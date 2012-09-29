@@ -1,0 +1,23 @@
+<!-- IF .cat_list -->
+<div class="post bg3">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<div class="left_menu_title">{L_KB_CATS}</div>
+		<div style="padding-bottom: 3px;" class="user_menu">
+			<div id="show_cat">
+				<h4><a href="#" onmousedown="javascript:dE('cat_list', ''); javascript:dE('hide_cat', ''); javascript:dE('show_cat', '');" title="{L_SHOW_CAT}"><img src="{T_THEME_PATH}/images/arrow_down.gif" alt=">" />&nbsp;{L_SHOW_CAT}</a></h4>
+			</div>
+			<div id="hide_cat"  style="display:none;">
+				<h4><a href="#" onmousedown="javascript:dE('cat_list', ''); javascript:dE('show_cat', ''); javascript:dE('hide_cat', '');" title="{L_HIDE_CAT}"><img src="{T_THEME_PATH}/images/arrow_up.gif" alt=">" />&nbsp;{L_HIDE_CAT}</a></h4>
+			</div>
+			<div id="cat_list" style="display:none;">
+			<hr />
+			<!-- BEGIN cat_list -->
+				<a href="{cat_list.U_VIEW_CAT}" title="{cat_list.CAT_DESC}"><!-- IF cat_list.CAT_SEL --><strong>{cat_list.CAT_NAME}</strong><!-- ELSE -->{cat_list.CAT_NAME}<!-- ENDIF --></a><br />
+			<!-- END cat_list -->				
+			</div>
+		</div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<!-- ENDIF -->

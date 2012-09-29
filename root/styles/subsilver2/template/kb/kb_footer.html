@@ -1,0 +1,40 @@
+<!-- IF not S_IS_MCP and not S_IS_UCP -->
+		<!-- IF S_DISPLAY_ONLINE_LIST -->
+			<br clear="all" />
+		
+			<table class="tablebg" width="100%" cellspacing="1">
+			<tr>
+				<td class="cat"><h4>{L_WHO_IS_ONLINE}</h4></td>
+			</tr>
+			<tr>
+				<td class="row1"><p class="gensmall">{LOGGED_IN_USER_LIST}</p></td>
+			</tr>
+			</table>
+		<!-- ENDIF -->
+		
+		<!-- IF .articlerow and not IN_TAG -->
+			<br clear="all" />
+			
+			<table width="100%" cellspacing="0">
+			<tr>
+				<td align="{S_CONTENT_FLOW_END}"><span class="gensmall"><!-- BEGIN rules -->{rules.RULE}<br /><!-- END rules --></span></td>
+			</tr>
+			</table>
+		<!-- ENDIF -->
+		</td>
+		<!-- IF .right_menu -->
+		<td id="right_menu" style="width: {RIGHT_MENU_WIDTH}; vertical-align: top; padding-left: 10px;">
+			<!-- BEGIN right_menu -->
+			{right_menu.CONTENT}
+			<!-- END right_menu -->
+		</td>
+		<!-- ENDIF -->
+	</tr>
+</table>
+<p class="mcplink"><!-- IF U_MODCP -->[&nbsp;<a href="{U_MODCP}">{L_MCP}</a>&nbsp;]<!-- ENDIF --></p>
+<!-- INCLUDE overall_footer.html -->
+<!-- ELSEIF S_IS_MCP -->
+<!-- INCLUDE mcp_footer.html -->
+<!-- ELSE -->
+<!-- INCLUDE ucp_footer.html -->
+<!-- ENDIF -->

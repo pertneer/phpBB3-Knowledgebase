@@ -1,0 +1,17 @@
+<!-- IF .cat_list -->
+<table class="tablebg" width="100%" cellspacing="1">
+<tr>
+	<th>{L_KB_CATS}</th>
+</tr>
+<tr>
+	<td class="row1">
+		<ul>
+		<!-- BEGIN cat_list -->
+			<li><span class="genmed"><!-- IF cat_list.CAT_SEL -->{cat_list.CAT_NAME}<!-- ELSE --><a href="{cat_list.U_VIEW_CAT}" title="{cat_list.CAT_DESC}">{cat_list.CAT_NAME}</a><!-- ENDIF --></span></li>
+		<!-- END cat_list -->				
+		</ul>
+	</td>
+</tr>
+</table>
+<br />
+<!-- ENDIF -->

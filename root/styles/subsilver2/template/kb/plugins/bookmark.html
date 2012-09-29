@@ -1,0 +1,45 @@
+<!-- IF U_WATCH_ARTICLE or U_BOOKMARK_ARTICLE or S_SOCIAL_BOOKMARKS -->
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_BOOKMARK_OPTIONS}</th>
+	</tr>
+	<!-- IF U_WATCH_ARTICLE or U_BOOKMARK_ARTICLE -->
+	<tr>
+		<td class="row1">
+			<ul>
+			<!-- IF U_WATCH_ARTICLE --><li><a href="{U_WATCH_ARTICLE}" title="{L_WATCH_ARTICLE}">{L_WATCH_ARTICLE}</a></li><!-- ENDIF -->
+			<!-- IF U_BOOKMARK_ARTICLE --><li><a href="{U_BOOKMARK_ARTICLE}" title="{L_BOOKMARK_ARTICLE}">{L_BOOKMARK_ARTICLE}</a></li><!-- ENDIF -->	
+			</ul>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+	<!-- IF S_SOCIAL_BOOKMARKS -->
+	<tr>
+		<td class="row1">
+			<b class="genmed">{L_SOCIAL_BOOKMARKS}:</b>
+			<div class="addthis_toolbox">   
+				<div class="custom_images">
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;amp;s=blogger&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/blogger.png" width="24" height="24" alt="{L_BLOGGER}" title="{L_BLOGGER} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=delicious&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/delicious.png" width="24" height="24" alt="{L_DELICIOUS}" title="{L_DELICIOUS} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=digg&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/digg.png" width="24" height="24" alt="{L_DIGG}" title="{L_DIGG} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=facebook&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/facebook.png" width="24" height="24" alt="{L_FACEBOOK}" title="{L_FACEBOOK} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=friendfeed&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/friendfeed.png" width="24" height="24" alt="{L_FRIEND_FEED}" title="{L_FRIEND_FEED} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=google&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/Google.png" width="24" height="24" alt="{L_GOOGLE}" title="{L_GOOGLE} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=linkedin&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/linkedin.png" width="24" height="24" alt="{L_LINKED_IN}" title="{L_LINKED_IN} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=live&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/live.png" width="24" height="24" alt="{L_LIVE}" title="{L_LIVE} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=mixx&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/mixx.png" width="24" height="24" alt="{L_MIXX}" title="{L_MIXX} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=myspace&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/myspace.png" width="24" height="24" alt="{L_MYSPACE}" title="{L_MYSPACE} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=netvibes&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/netvibes.png" width="24" height="24" alt="{L_NETVIBES}" title="{L_NETVIBES} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=reddit&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/reddit.png" width="24" height="24" alt="{L_REDDIT}" title="{L_REDDIT} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=stumbleupon&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/stumbleupon.png" width="24" height="24" alt="{L_STUMBLE_UPON}" title="{L_STUMBLE_UPON} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=technorati&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/technorati.png" width="24" height="24" alt="{L_TECHNORATI}" title="{L_TECHNORATI} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=twitter&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/twitter.png" width="24" height="24" alt="{L_TWITTER}" title="{L_TWITTER} {L_THIS}" /></a>
+					<a href="http://www.addthis.com/bookmark.php?pub=&amp;v=250&amp;source=men-250&amp;s=wordpress&amp;url={U_PERM_LINK}&amp;title={ARTICLE_TITLE_CLEAN}&amp;content={ARTICLE_DESC_CLEAN}"><img src="{T_THEME_PATH}/images/social_bookmarking/wordpress.png" width="24" height="24" alt="{L_WORDPRESS}" title="{L_WORDPRESS} {L_THIS}" /></a>	
+				</div>
+			</div>
+		</td>
+	</tr>
+	<!-- ENDIF -->
+</table>
+<br />
+<!-- ENDIF -->

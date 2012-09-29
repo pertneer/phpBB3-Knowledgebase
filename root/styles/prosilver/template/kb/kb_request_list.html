@@ -1,0 +1,69 @@
+<!-- INCLUDE kb/kb_header.html -->
+<div class="topic-actions">
+	<!-- IF U_ADD_REQ -->
+	<div class="buttons">
+		<div class="request-icon"><a href="{U_ADD_REQ}" title="{L_KB_ADD_REQUEST}"><span></span>{L_KB_ADD_REQUEST}</a></div>
+	</div>
+	<!-- ENDIF -->
+
+	<div class="pagination">
+		{TOTAL_REQUESTS} {L_REQUESTS}
+		<!-- IF PAGE_NUMBER -->
+		<!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF -->
+		<!-- ENDIF -->
+	</div>
+</div>
+
+<!-- BEGIN req_list -->
+	<!-- IF req_list.S_FIRST_ROW -->
+	<div class="forabg">
+		<div class="inner"><span class="corners-top"><span></span></span>
+			<ul class="topiclist">
+				<li class="header">
+					<dl>
+						<dt>{L_KB_REQS}</dt>
+						<dd class="lastpost"><span>&nbsp;</span></dd>
+					</dl>
+				</li>
+			</ul>
+			<ul class="topiclist forums">
+	<!-- ENDIF -->
+				<li class="row">
+					<dl>
+						<dt>
+							<a href="{req_list.U_VIEW_REQ}">{req_list.REQ_TITLE}</a>
+						</dt>
+						<dd class="lastpost">
+							<span><dfn>{L_LAST_POST} </dfn>{L_POST_BY_AUTHOR} {req_list.REQ_AUTHOR_FULL}<br />{req_list.REQ_DATE}</span>
+						</dd>
+					</dl>
+				</li>
+	<!-- IF req_list.S_LAST_ROW -->
+			</ul>
+		<span class="corners-bottom"><span></span></span></div>
+	</div>
+	<!-- ENDIF -->
+<!-- BEGINELSE -->
+	<div class="panel">
+		<div class="inner"><span class="corners-top"><span></span></span>
+		<strong>{L_KB_NO_REQS}</strong>
+		<span class="corners-bottom"><span></span></span></div>
+	</div>
+<!-- END req_list -->
+	
+<div class="topic-actions">
+	<!-- IF U_ADD_REQ -->
+	<div class="buttons">
+		<div class="request-icon"><a href="{U_ADD_REQ}" title="{L_KB_ADD_REQUEST}"><span></span>{L_KB_ADD_REQUEST}</a></div>
+	</div>
+	<!-- ENDIF -->
+
+	<div class="pagination">
+	{TOTAL_REQUESTS} {L_REQUESTS}
+	<!-- IF PAGE_NUMBER -->
+	<!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF -->
+	<!-- ENDIF -->
+	</div>
+</div>
+
+<!-- INCLUDE kb/kb_footer.html -->		

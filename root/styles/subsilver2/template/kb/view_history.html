@@ -1,0 +1,266 @@
+<!-- INCLUDE kb/kb_header.html -->
+			<!-- IF S_VIEW_EDIT -->
+			<table class="tablebg" cellspacing="1" width="100%">
+				<tr>
+					<th colspan="2"><a href="{U_VIEW_ARTICLE}">{ARTICLE_TITLE}</a></th>
+				</tr>
+				<tr>
+					<td class="row1" width="40%"><b>{L_EDIT_AUTHOR}:</b></td>
+					<td class="row2">{EDIT_AUTHOR}</td>
+				</tr>
+				<tr>
+					<td class="row1" width="40%"><b>{L_EDIT_TIME}:</b></td>
+					<td class="row2">{EDIT_TIME}</td>
+				</tr>
+				<tr>
+					<td class="row1" width="40%"><b>{L_REV_CHANGES}:</b></td>
+					<td class="row2"><p><!-- BEGIN changerow -->{changerow.CHANGE}<br /><!-- END changerow --></p></td>
+				</tr>
+				<!-- IF EDIT_REASON != '' and EDIT_REASON_GLOBAL -->
+				<tr>
+					<td class="row1" width="40%"><b>{L_EDIT_REASON}:</b></td>
+					<td class="row2">{EDIT_REASON}</td>
+				</tr>
+				<!-- ENDIF -->
+				<tr>
+					<td class="row1" width="40%"><b>{L_ARTICLE_TITLE}:</b></td>
+					<td class="row2">{EDIT_TITLE}</td>
+				</tr>
+				<tr>
+					<td class="row1" width="40%"><b>{L_ARTICLE_CAT}:</b></td>
+					<td class="row2">{CAT_NAME}</td>
+				</tr>
+				<tr>
+					<td class="row1" width="40%"><b>{L_ARTICLE_TYPE}:</b></td>
+					<td class="row2">{EDIT_TYPE}</td>
+				</tr>
+				<tr>
+					<td class="row1" width="40%"><b>{L_TAGS}:</b></td>
+					<td class="row2">{EDIT_TAGS}</td>
+				</tr>
+				<tr>
+					<td class="row1" width="40%"><b>{L_ARTICLE_STATUS}:</b></td>
+					<td class="row2">{EDIT_STATUS}</td>
+				</tr>
+				<tr>
+					<td class="row1" width="40%"><b>{L_ARTICLE_DESC}:</b></td>
+					<td class="row2">{ARTICLE_DESC}</td>
+				</tr>
+				<tr>
+					<td class="row1" width="40%"><b>{L_CONTENT}:</b></td>
+					<td class="row2">{ARTICLE_MESSAGE}</td>
+				</tr>
+				<tr>
+					<td class="cat" colspan="2">&nbsp;</td>
+				</tr>
+			</table>
+		<!-- ELSEIF S_VIEW_DIFF -->
+			<style type="text/css">
+			/* <![CDATA[ */
+			
+			#main {
+				font-size: 1em;
+				line-height: 0.7em;
+				margin: 0;
+				padding: 0;
+				width: 100%;
+			}
+			
+			div#codepanel {
+				overflow: auto;
+				width: 100%;
+				height: 550px;
+				display: inline-block;
+			}
+			
+			/**
+			* Unified Diff
+			*/
+			.file {
+				line-height: .7em;
+			}
+			
+			.diff {
+				margin: 0;
+			}
+			
+			.added {
+				background-color: #dfd;
+			}
+			
+			.removed {
+				background-color: #fdd;
+			}
+			
+			.info {
+				color: #888;
+			}
+			
+			.context {
+				background-color: #eee;
+			}
+			
+			/**
+			* Inline Diff
+			*/
+			.ins {
+				background-color: #dfd;
+				text-decoration: underline;
+			}
+			
+			.del {
+				background-color: #fdd;
+				text-decoration: line-through;
+			}
+			
+			/**
+			* Column Diff
+			*/
+			table.hrdiff {
+				margin: 0 0 8px 5px;
+				width: 100%;
+				overflow: hidden;
+				border-bottom: 1px solid #999;
+				table-layout: fixed;
+			}
+			
+			table.hrdiff th {
+				text-align: left;
+				width: 50%;
+				color: #333;
+				font-family: Verdana,Helvetica,sans-serif;
+				font-size: 11px;
+				border-bottom: 1px solid #999;
+				background: transparent;
+			}
+			
+			table.hrdiff thead th {
+				font-weight: bold;
+				font-size: 110%;
+				padding: 2px;
+			}
+			
+			table.hrdiff tr:first-child th {
+				border-top: none;
+			}
+			
+			table.hrdiff tbody th {
+				padding: 2em 1px 1px 1px;
+				font-size: 80%;
+				border-top: 1px solid #999;
+			}
+			
+			table.hrdiff tbody td.old {
+				border-left: 1px solid #999;
+				border-right: 1px solid #999;	
+			}
+			table.hrdiff tbody td.new {
+				border-right: 1px solid #999;	
+			}
+			
+			table.hrdiff td pre {
+				overflow: auto;
+				display: block;
+				width: 100%;
+				overflow: auto;
+				display: block;
+			}
+			
+			table.hrdiff .unmodified {
+				background: #fff;
+			}
+			
+			table.hrdiff .added {
+				background: #9f9;
+			}
+			
+			table.hrdiff .added_empty {
+				background: #cfc;
+			}
+			
+			table.hrdiff .modified {
+				background: #fd9;
+			}
+			
+			table.hrdiff .removed {
+				background: #f99;
+			}
+			
+			table.hrdiff .removed_empty {
+				background: #fcc;
+			}
+			
+			table.hrdiff caption {
+				caption-side: top;
+				text-align: left;
+				margin: 0 0 8px 5px;
+				font-size: 90%;
+				font-weight: bold;
+				padding: 5px;
+			}
+			
+			table.hrdiff caption span {
+				height: 10px;
+				width: 10px;
+				line-height: 10px;
+				letter-spacing: 10px;
+				border: 1px solid #000;
+				margin-left: 0.5em;
+				vertical-align: baseline;
+			}
+			
+			/* ]]> */
+			</style>	
+			<table class="tablebg" cellspacing="1" width="100%">
+				<tr>
+					<th>{L_VIEWING_EDIT_DIFF}</th>
+				</tr>
+				<tr>
+					<td class="row1">
+						<div id="diff_content">
+							<div id="codepanel">
+								<div id="main"><a name="content"></a>
+										{DIFF_CONTENT}
+										<table style="width: 100%;">
+											<tr>
+												<td style="width: 50%; text-align: center;">
+													{L_KB_DIFF_FROM}
+												</td>
+												<td style="width: 50%; text-align: center;">
+													{L_KB_DIFF_TO}
+												</td>
+											</tr>
+										</table>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		<!-- ELSE -->
+			<form action="{U_DIFF_ACTION}" method="get" name="diff_form">
+			<table class="tablebg" cellspacing="1" width="100%">
+			<tr>
+				<th width="30%">{L_EDITS}</th>
+				<th width="10%">{L_DIFF_FROM}</th>
+				<th width="10%">{L_DIFF_TO}</th>
+				<th width="30%">{L_EDIT_TIME}</th>
+				<th>{L_STATUS}</th>
+			</tr>
+			<!-- BEGIN editrow -->
+			<tr>
+				<td class="row1"><!-- IF editrow.U_EDIT != '' --><a href="{editrow.U_EDIT}">{editrow.ARTICLE_TITLE}</a><!-- ELSE -->{editrow.ARTICLE_TITLE}<!-- ENDIF --> {editrow.EDIT_BY} <!-- IF editrow.S_NEWEST --><span class="gensmall">&nbsp;<b>({L_NEWEST})</b></span><!-- ELSEIF editrow.S_ORG --><span class="gensmall">&nbsp;<b>({L_ORIGINAL})</b></span><!-- ENDIF --><br />
+								<!-- IF editrow.U_VIEW_REV != '' -->[ <a href="{editrow.U_EDIT}">{L_VIEW_REV_INFO}</a> ]<!-- ENDIF --></td>
+				<td class="row1" align="center"><!-- IF editrow.S_CAN_DIFF_F --><input type="radio" id="df-{editrow.NUM}" onclick="" name="df" value="{editrow.EDIT_ID}" /><!-- ELSE -->{L_N_A}<!-- ENDIF --></td>
+				<td class="row1" align="center"><!-- IF editrow.S_CAN_DIFF_T --><input type="radio" id="dt-{editrow.NUM}" onclick="" name="dt" value="{editrow.EDIT_ID}" /><!-- ELSE -->{L_N_A}<!-- ENDIF --></td>
+				<td class="row2" align="center">{editrow.EDIT_TIME}</td>
+				<td class="row2" align="center">{editrow.EDIT_STATUS}</td>
+			</tr>
+			<!-- END editrow -->
+			<tr>
+				<td class="cat" colspan="5" align="center"><input name="submit" value="{L_VIEW_DIFF}" class="btnmain" type="submit" /><input name="i" value="history" type="hidden" /><input name="a" value="{ARTICLE_ID}" type="hidden" /></td>
+			</tr>
+			</table>
+			</form>
+		<!-- ENDIF --> 		
+<!-- INCLUDE kb/kb_footer.html -->

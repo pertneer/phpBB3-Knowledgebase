@@ -1,0 +1,44 @@
+<div class="post bg3<!-- IF S_ONLINE --> online<!-- ENDIF -->">
+<div class="inner">
+	<span class="corners-top"><span></span></span>
+	<div class="left_menu_title">{L_AUTHOR} <a href="{U_RSS_AUTHOR}"><img src="{T_THEME_PATH}/images/feed.gif" width="14" height="14" alt="{L_RSS_AUTHOR}" title="{L_RSS_AUTHOR}" /></a></div>
+	<dl class="user_menu">
+		<dt>
+			<!-- IF POSTER_AVATAR -->
+				<!-- IF U_POST_AUTHOR --><a href="{U_POST_AUTHOR}">{POSTER_AVATAR}</a><!-- ELSE -->{POSTER_AVATAR}<!-- ENDIF --><br />
+			<!-- ENDIF -->
+			<!-- IF not U_POST_AUTHOR --><strong>{POST_AUTHOR_FULL}</strong><!-- ELSE -->{POST_AUTHOR_FULL}<!-- ENDIF -->
+		</dt>
+
+		<!-- IF RANK_TITLE or RANK_IMG --><dd>{RANK_TITLE}<!-- IF RANK_TITLE and RANK_IMG --><br /><!-- ENDIF -->{RANK_IMG}</dd><!-- ENDIF -->
+
+		<dd>&nbsp;</dd>
+
+		<!-- IF POSTER_ARTICLES > 0 --><dd><strong>{L_ARTICLES}:</strong> <a href="{U_POSTER_ARTICLES}" title="{L_SAME_AUTHOR_ARTICLES}">{POSTER_ARTICLES}</a></dd><!-- ENDIF -->
+		<!-- IF POSTER_POSTS != '' --><dd><strong>{L_POSTS}:</strong> {POSTER_POSTS}</dd><!-- ENDIF -->
+		<!-- IF POSTER_JOINED --><dd><strong>{L_JOINED}:</strong> {POSTER_JOINED}</dd><!-- ENDIF -->
+		<!-- IF POSTER_FROM --><dd><strong>{L_LOCATION}:</strong> {POSTER_FROM}</dd><!-- ENDIF -->
+
+		<!-- BEGIN custom_fields -->
+			<dd><strong>{custom_fields.PROFILE_FIELD_NAME}:</strong> {custom_fields.PROFILE_FIELD_VALUE}</dd>
+		<!-- END custom_fields -->
+
+		<!-- IF U_PM or U_EMAIL or U_WWW or U_MSN or U_ICQ or U_YIM or U_AIM and not S_IS_BOT -->
+			<dd>
+				<ul class="profile-icons">
+					<!-- IF U_PM --><li class="pm-icon"><a href="{U_PM}" title="{L_PRIVATE_MESSAGE}"><span>{L_PRIVATE_MESSAGE}</span></a></li><!-- ENDIF -->
+					<!-- IF U_EMAIL --><li class="email-icon"><a href="{U_EMAIL}" title="{L_EMAIL}"><span>{L_EMAIL}</span></a></li><!-- ENDIF -->
+					<!-- IF U_WWW --><li class="web-icon"><a href="{U_WWW}" title="{L_VISIT_WEBSITE}: {U_WWW}"><span>{L_WEBSITE}</span></a></li><!-- ENDIF -->
+					<!-- IF U_MSN --><li class="msnm-icon"><a href="{U_MSN}" title="{L_MSNM}"><span>{L_MSNM}</span></a></li><!-- ENDIF -->
+					<!-- IF U_ICQ --><li class="icq-icon"><a href="{U_ICQ}" title="{L_ICQ}"><span>{L_ICQ}</span></a></li><!-- ENDIF -->
+					<!-- IF U_YIM --><li class="yahoo-icon"><a href="{U_YIM}" title="{L_YIM}"><span>{L_YIM}</span></a></li><!-- ENDIF -->
+					<!-- IF U_AIM --><li class="aim-icon"><a href="{U_AIM}" title="{L_AIM}"><span>{L_AIM}</span></a></li><!-- ENDIF -->
+					<!-- IF U_JABBER --><li class="jabber-icon"><a href="{U_JABBER}" title="{L_JABBER}"><span>{L_JABBER}</span></a></li><!-- ENDIF -->
+				</ul>
+			</dd>
+		<!-- ENDIF -->
+	</dl>
+
+	<span class="corners-bottom"><span></span></span>
+</div>
+</div>

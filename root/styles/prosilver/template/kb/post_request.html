@@ -1,0 +1,70 @@
+<!-- INCLUDE overall_header.html -->
+
+<form id="postform" method="post" action="{S_POST_ACTION}"{S_FORM_ENCTYPE}>
+<div class="panel" id="postingbox">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	
+	<h3>{L_POST_A}</h3>
+
+	<fieldset class="fields1">
+	<!-- IF ERROR --><p class="error">{ERROR}</p><!-- ENDIF -->
+
+	<!-- IF S_SHOW_USERNAME_FIELD -->
+	<dl style="clear: left;">
+		<dt><label for="guest_username">{L_USERNAME}:</label></dt>
+		<dd><input type="text" tabindex="1" name="guest_username" id="guest_username" size="25" value="{USERNAME}" class="inputbox" /></dd>
+	</dl>
+	<!-- ENDIF -->
+		
+	<!-- IF S_POST_ACTION -->
+	<dl style="clear: left;">
+		<dt><label for="title">{L_REQUEST_TITLE}:</label></dt>
+		<dd><input type="text" name="title" id="title" size="45" maxlength="64" tabindex="2" value="{REQUEST_TITLE}" class="inputbox autowidth" /></dd>
+	</dl>
+	<!-- ENDIF -->
+	<!-- INCLUDE kb/posting_buttons.html -->
+
+	<div id="smiley-box">
+		<!-- IF S_SMILIES_ALLOWED and .smiley -->
+			<strong>{L_SMILIES}</strong><br />
+			<!-- BEGIN smiley -->
+				<a href="#" onclick="insert_text('{smiley.A_SMILEY_CODE}', true); return false;"><img src="{smiley.SMILEY_IMG}" width="{smiley.SMILEY_WIDTH}" height="{smiley.SMILEY_HEIGHT}" alt="{smiley.SMILEY_CODE}" title="{smiley.SMILEY_DESC}" /></a>
+			<!-- END smiley -->
+		<!-- ENDIF -->
+		<!-- IF S_SHOW_SMILEY_LINK and S_SMILIES_ALLOWED-->
+			<br /><a href="{U_MORE_SMILIES}" onclick="popup(this.href, 300, 350, '_phpbbsmilies'); return false;">{L_MORE_SMILIES}</a>
+		<!-- ENDIF -->
+
+		<!-- IF BBCODE_STATUS -->
+		<!-- IF .smiley --><hr /><!-- ENDIF -->
+		{BBCODE_STATUS}<br />
+		<!-- IF S_BBCODE_ALLOWED -->
+			{IMG_STATUS}<br />
+			{FLASH_STATUS}<br />
+			{URL_STATUS}<br />
+			{SMILIES_STATUS}
+		<!-- ENDIF -->
+		<!-- ENDIF -->
+	</div>
+
+	<div id="message-box">
+		<textarea name="message" id="message" rows="15" cols="76" tabindex="3" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" class="inputbox">{TEXT_MESSAGE}</textarea>
+	</div>
+	</fieldset>
+	
+		<span class="corners-bottom"><span></span></span></div>
+	</div>
+	
+	<div class="panel bg2">
+		<div class="inner"><span class="corners-top"><span></span></span>
+		<fieldset class="submit-buttons">
+			{S_HIDDEN_FIELDS}
+			<input type="submit" accesskey="s" tabindex="6" name="post" value="{L_SUBMIT}" class="button1" />&nbsp;
+		</fieldset>
+
+		<span class="corners-bottom"><span></span></span></div>
+	</div>	
+{S_FORM_TOKEN}
+</form>
+
+<!-- INCLUDE overall_footer.html -->

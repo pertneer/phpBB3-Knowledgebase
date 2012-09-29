@@ -1,0 +1,11 @@
+Subject: "{SITENAME}" - E-mail a friend
+
+Hello {TO_EMAIL},
+
+This e-mail was sent from "{SITENAME}" by {FROM_USERNAME} - {FROM_EMAIL} who thought you may be interested in the following knowledge base article:
+
+{ARTICLE_NAME}
+
+You can find it at:
+
+{U_ARTICLE_URL}

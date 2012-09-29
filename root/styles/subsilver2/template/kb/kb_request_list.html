@@ -1,0 +1,59 @@
+<!-- INCLUDE kb/kb_header.html -->
+
+<!-- IF U_ADD_REQ or TOTAL_REQUESTS -->
+	<table width="100%" cellspacing="1">
+	<tr>
+		<!-- IF U_ADD_REQ -->
+			<td align="{S_CONTENT_FLOW_BEGIN}" valign="middle"><a href="{U_ADD_REQ}" title="{L_KB_ADD_REQUEST}">{ADD_REQ_IMG}</a></td>
+		<!-- ENDIF -->
+		<!-- IF TOTAL_REQUESTS -->
+			<td class="nav" valign="middle" nowrap="nowrap">&nbsp;{PAGE_NUMBER}<br /></td>
+			<td class="gensmall" nowrap="nowrap">&nbsp;[ {TOTAL_REQUESTS} {L_REQUESTS} ]&nbsp;</td>
+			<td class="gensmall" width="100%" align="{S_CONTENT_FLOW_END}" nowrap="nowrap"><!-- INCLUDE pagination.html --></td>
+		<!-- ENDIF -->
+	</tr>
+	</table>
+<!-- ENDIF -->
+
+<table class="tablebg" width="100%" cellspacing="1">
+	<tr>
+		<td class="cat" colspan="2">&nbsp;</td>
+	</tr>
+	<tr>
+		<th>&nbsp;{L_KB_REQS}&nbsp;</th>
+		<th>&nbsp;</th>
+	</tr>
+<!-- BEGIN req_list -->
+	<tr>
+		<td class="row1" width="80%"><a href="{req_list.U_VIEW_REQ}" class="topictitle">{req_list.REQ_TITLE}</a></td>
+		<td class="row2">
+			<p class="topicdetails" style="white-space: nowrap;">{req_list.REQ_DATE}</p>
+			<p class="topicdetails">{L_POST_BY_AUTHOR} {req_list.REQ_AUTHOR_FULL}</p>
+		</td>
+	</tr>
+<!-- BEGINELSE -->
+	<tr>
+		<td class="row1" colspan="2" height="30" align="center" valign="middle"><span class="gen">{L_KB_NO_REQS}</span></td>
+	</tr>
+<!-- END req_list -->
+	<tr>
+		<td colspan="2" class="cat">&nbsp;</td>
+	</tr>
+</table>
+
+<!-- IF U_ADD_REQ or TOTAL_REQUESTS -->
+	<table width="100%" cellspacing="1">
+	<tr>
+		<!-- IF U_ADD_REQ -->
+			<td align="{S_CONTENT_FLOW_BEGIN}" valign="middle"><a href="{U_ADD_REQ}" title="{L_KB_ADD_REQUEST}">{ADD_REQ_IMG}</a></td>
+		<!-- ENDIF -->
+		<!-- IF TOTAL_REQUESTS -->
+			<td class="nav" valign="middle" nowrap="nowrap">&nbsp;{PAGE_NUMBER}<br /></td>
+			<td class="gensmall" nowrap="nowrap">&nbsp;[ {TOTAL_REQUESTS} {L_REQUESTS} ]&nbsp;</td>
+			<td class="gensmall" width="100%" align="{S_CONTENT_FLOW_END}" nowrap="nowrap"><!-- INCLUDE pagination.html --></td>
+		<!-- ENDIF -->
+	</tr>
+	</table>
+<!-- ENDIF -->
+
+<!-- INCLUDE kb/kb_footer.html -->		

@@ -1,0 +1,82 @@
+/* CSS for the Knowledge Base */
+textarea.desc {
+	width: 40%;
+}
+
+/**
+* Left menu
+*/
+#left_menu {
+	vertical-align: top;
+}
+
+#right_menu {
+	vertical-align: top;
+}
+
+.left_menu_title {
+	font-weight: bold;
+	font-size: 11px;
+	text-align: center;
+	padding: 1px 0 5px 0;
+}
+
+.cat_menu_title {
+	font-weight: bold;
+	font-size: 11px;
+	text-align: left;
+	padding: 1px 0 5px 0;
+}
+
+#kb_searchform {
+	color: #FFFFFF;
+	margin-top: 5px;
+	white-space: nowrap;
+}
+
+/* MCP Specific tweaks */
+.mcp-main .kb-mcp-postbody {
+	width: 76%;
+}
+
+.addthis_toolbox .custom_images a
+{
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.article-icon span		{ background: transparent none 0 0 no-repeat; }
+.buttons div.article-icon		{ width: {IMG_BUTTON_ARTICLE_NEW_WIDTH}px; height: {IMG_BUTTON_ARTICLE_NEW_HEIGHT}px; }
+.article-icon span		{ background-image: url("{IMG_BUTTON_ARTICLE_NEW_SRC}"); }
+
+.comment-icon span		{ background: transparent none 0 0 no-repeat; }
+.buttons div.comment-icon		{ width: {IMG_BUTTON_COMMENT_NEW_WIDTH}px; height: {IMG_BUTTON_COMMENT_NEW_HEIGHT}px; }
+.comment-icon span		{ background-image: url("{IMG_BUTTON_COMMENT_NEW_SRC}"); }
+
+.request-icon span		{ background: transparent none 0 0 no-repeat; }
+.buttons div.request-icon		{ width: {IMG_BUTTON_REQUEST_NEW_WIDTH}px; height: {IMG_BUTTON_REQUEST_NEW_HEIGHT}px; }
+.request-icon span		{ background-image: url("{IMG_BUTTON_REQUEST_NEW_SRC}"); }
+
+.icon-kb {
+	background-image: url("{T_THEME_PATH}/images/icon_kb.gif");
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+	padding: 1px 0 0 23px;
+}
+
+/* Rating Code */
+ul.rating, ul.rated {
+	list-style-type: none;
+	display: inline;
+}
+
+ul.rating li, ul.rated li {
+	display: inline;
+	border: 0;
+}
+
+.hidden {
+	display: none !important;
+}

@@ -1,0 +1,139 @@
+<!-- INCLUDE kb/kb_header.html -->
+			<!-- IF S_SHOW_FORM -->
+			<form method="get" action="{S_SEARCH_ACTION}">
+
+			<div class="panel">
+				<div class="inner"><span class="corners-top"><span></span></span>
+				<h3>{L_SEARCH_QUERY}</h3>
+				
+				<fieldset>
+				<dl>
+					<dt><label for="keywords">{L_SEARCH_KEYWORDS}:</label><br /><span>{L_SEARCH_KEYWORDS_EXPLAIN}</span></dt>
+					<dd><input type="text" class="inputbox" name="q" id="keywords" size="40" title="{L_SEARCH_KEYWORDS}" /></dd>
+					<dd><label for="terms1"><input type="radio" name="search_terms" id="terms1" value="all" checked="checked" /> {L_SEARCH_ALL_TERMS}</label></dd>
+					<dd><label for="terms2"><input type="radio" name="search_terms" id="terms2" value="any" /> {L_SEARCH_ANY_TERMS}</label></dd>
+				</dl>
+				<dl>
+					<dt><label for="author">{L_SEARCH_AUTHOR}:</label><br /><span>{L_SEARCH_AUTHOR_EXPLAIN}</span></dt>
+					<dd><input type="text" class="inputbox" name="author" id="author" size="40" title="{L_SEARCH_AUTHOR}" /></dd>
+				</dl>
+				</fieldset>
+
+				<span class="corners-bottom"><span></span></span></div>
+			</div>
+
+			<div class="panel bg1">
+				<div class="inner"><span class="corners-top"><span></span></span>
+
+				<h3>{L_SEARCH_OPTIONS}</h3>
+				
+				<fieldset>
+				<dl>
+					<dt><label for="search_forum">{L_SEARCH_CATS}:</label><br /><span>{L_SEARCH_CATS_EXPLAIN}</span></dt>
+					<dd><select name="cat_ids[]" id="search_forum" multiple="multiple" size="8" title="{L_SEARCH_CATS}">{S_CAT_OPTIONS}</select></dd>
+				</dl>
+				<dl>
+					<dt><label for="sf1">{L_SEARCH_WITHIN}:</label></dt>
+					<!-- IF S_SEARCH_DESC --><dd><label for="sf1"><input type="radio" name="search_in" id="sf1" value="0" checked="checked" /> {L_SEARCH_TITLE_TEXT_DESC}</label></dd><!-- ENDIF -->
+					<dd><label for="sf2"><input type="radio" name="search_in" id="sf2" value="1" /> {L_SEARCH_TITLE}</label></dd>
+					<dd><label for="sf3"><input type="radio" name="search_in" id="sf3" value="2" /> {L_SEARCH_TEXT}</label></dd>
+					<!-- IF S_SEARCH_DESC --><dd><label for="sf4"><input type="radio" name="search_in" id="sf4" value="3" /> {L_SEARCH_DESC}</label></dd><!-- ENDIF -->
+				</dl>
+
+				<hr class="dashed" />
+
+				<dl>
+					<dt><label for="sd">{L_RESULT_SORT}:</label></dt>
+					<dd><select name="sort" id="sort" title="{L_RESULT_SORT}"> {S_SORT_OPTIONS}</select>&nbsp;
+						<label for="sa"><input type="radio" name="dir" id="sa" value="ASC" /> {L_SORT_ASCENDING}</label> 
+						<label for="sd"><input type="radio" name="dir" id="sd" value="DESC" checked="checked" /> {L_SORT_DESCENDING}</label>
+					</dd>
+				</dl>
+				<dl>
+					<dt><label>{L_RESULT_DAYS}:</label></dt>
+					<dd><select name="time" id="time" title="{L_RESULT_DAYS}">{S_TIME_OPTIONS}</select>&nbsp;
+						<label for="etime"><input type="checkbox" name="etime" id="etime" value="1" /> {L_SORT_ETIME}</label></dd>
+				</dl>
+				</fieldset>
+
+				<span class="corners-bottom"><span></span></span></div>
+			</div>
+
+			<div class="panel bg1">
+				<div class="inner"><span class="corners-top"><span></span></span>
+
+				<fieldset class="submit-buttons">
+					{S_HIDDEN_FIELDS}<input type="reset" value="{L_RESET}" name="reset" class="button2" />&nbsp; 
+					<input type="submit" name="submit" value="{L_SEARCH}" class="button1" />
+				</fieldset>
+
+				<span class="corners-bottom"><span></span></span></div>
+			</div>
+
+			</form>
+			<!-- ELSE -->
+			<h2><!-- IF SEARCH_MATCHES -->{SEARCH_MATCHES}: <a href="{U_SEARCH_WORDS}">{SEARCH_WORD}</a><!-- ELSE -->{L_NO_SEARCH_MATCHES}<!-- ENDIF --></h2>
+			<!-- IF .articlerow -->
+			<form method="post" action="{S_SEARCH_ACTION}">
+
+			<div class="topic-actions">
+				<div class="search-box">
+					<label for="add_keywords">{L_SEARCH_IN_RESULTS}: <input type="text" name="add_keywords" id="add_keywords" value="" class="inputbox narrow" /></label>
+					<input class="button2" type="submit" name="submit" value="{L_SEARCH}" />
+				</div>
+				
+				<div class="pagination">
+					{SEARCH_MATCHES}
+					<!-- IF PAGE_NUMBER -->
+						<!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF -->
+					<!-- ENDIF -->
+				</div>
+			</div>
+			<div class="forumbg">
+				<div class="inner"><span class="corners-top"><span></span></span>
+				<ul class="topiclist">
+					<li class="header">
+						<dl class="icon">
+							<dt>{L_ARTICLES}</dt>
+							<dd class="posts">{L_COMMENTS}</dd>
+							<dd class="views">{L_VIEWS}</dd>
+							<dd class="lastpost"><span>{L_AUTHOR}</span></dd>
+						</dl>
+					</li>
+				</ul>
+				<ul class="topiclist topics">
+					<!-- BEGIN articlerow -->
+					<li class="row<!-- IF articlerow.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
+						<dl class="icon" style="background-image: url({articlerow.ARTICLE_FOLDER_IMG_SRC}); background-repeat: no-repeat;">
+							<dt><!-- IF articlerow.ARTICLE_TYPE_IMG --><img src="{articlerow.ARTICLE_TYPE_IMG}" width="{articlerow.ARTICLE_TYPE_IMG_WIDTH}" height="{articlerow.ARTICLE_TYPE_IMG_HEIGHT}" alt="" /><!-- ENDIF --><a href="{articlerow.U_VIEW_ARTICLE}" class="topictitle">{articlerow.ARTICLE_TITLE}</a>
+								<br /><!-- IF articlerow.ARTICLE_DESC -->{articlerow.ARTICLE_DESC}<!-- ENDIF -->
+							</dt>
+							<dd class="posts">{articlerow.COMMENTS} <dfn>{L_COMMENTS}</dfn></dd>
+							<dd class="views">{articlerow.VIEWS} <dfn>{L_VIEWS}</dfn></dd>
+							<dd class="lastpost"><span>{articlerow.ARTICLE_AUTHOR_FULL}<br /><!-- IF articlerow.ATTACH_ICON_IMG -->{articlerow.ATTACH_ICON_IMG} <!-- ENDIF -->{articlerow.FIRST_POST_TIME}	</span>
+							</dd>
+						</dl>
+					</li>
+					<!-- END articlerow -->
+				</ul>
+				<span class="corners-bottom"><span></span></span></div>
+			</div>
+			<div class="topic-actions">
+				<div class="pagination">
+					{SEARCH_MATCHES}
+					<!-- IF PAGE_NUMBER -->
+						<!-- IF PAGINATION --> &bull; <a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a> &bull; <span>{PAGINATION}</span><!-- ELSE --> &bull; {PAGE_NUMBER}<!-- ENDIF -->
+					<!-- ENDIF -->
+				</div>
+			</div>
+
+			</form>
+			<!-- ELSE -->
+			<div class="panel">
+				<div class="inner"><span class="corners-top"><span></span></span>
+				<strong>{L_NO_SEARCH_MATCHES}</strong>
+				<span class="corners-bottom"><span></span></span></div>
+			</div>
+			<!-- ENDIF -->
+			<!-- ENDIF -->
+<!-- INCLUDE kb/kb_footer.html -->

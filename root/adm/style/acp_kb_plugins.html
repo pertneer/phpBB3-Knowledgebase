@@ -1,0 +1,208 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<h1>{L_ACP_PLUGINS}</h1>
+
+<p>{L_PLUGINS_EXPLAIN}</p>
+
+<!-- IF S_ERROR -->
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{ERROR_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- IF S_SUCCESS -->
+	<div class="successbox">
+		<h3>{L_SUCCESS}</h3>
+		<p>{SUCCESS_MSG}</p>
+	</div>
+<!-- ENDIF -->
+
+<!-- IF S_SETTINGS -->
+	{U_BACK_LINK}
+
+	<form id="acp_board" method="post" action="{U_ACTION_PLUG}">
+
+	<!-- BEGIN options -->
+		<!-- IF options.S_LEGEND -->
+			<!-- IF not options.S_FIRST_ROW -->
+				</fieldset>
+			<!-- ENDIF -->
+			<fieldset>
+				<legend>{options.LEGEND}</legend>
+		<!-- ELSE -->
+
+			<dl>
+				<dt><label for="{options.KEY}">{options.TITLE}:</label><!-- IF options.S_EXPLAIN --><br /><span>{options.TITLE_EXPLAIN}</span><!-- ENDIF --></dt>
+				<dd>{options.CONTENT}</dd>
+			</dl>
+
+		<!-- ENDIF -->
+	<!-- END options -->
+	
+	</fieldset>
+	
+	<fieldset>
+		<!-- IF S_SHOW_PAGE -->
+		<legend>{L_DISPLAY_ON_PAGE}</legend>
+		<p>{L_DISPLAY_ON_PAGE_EXPLAIN}</p>		
+		<dl>
+			<dt>
+				<label for="page">{L_DISPLAY_ON_PAGE}:</label>
+			</dt>
+			<dd>
+				<select id="page" name="page[]" multiple="multiple" size="7">
+					{PAGE_OPTIONS}
+				</select>
+			</dd>
+			<dd>
+				<label><input type="checkbox" class="radio" name="all_pages" value="1" /> {L_ALL_PAGES}</label>
+			</dd>		
+		</dl>
+		<!-- ENDIF -->
+	<!-- IF S_AUTH -->
+		<!-- BEGIN auth_tpl -->
+			{auth_tpl.TPL}
+		<!-- END auth_tpl -->
+	<!-- ENDIF -->
+		<p class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		</p>
+		{S_FORM_TOKEN}
+	</fieldset>
+	{APPEND_MESSAGE}
+	</form>
+<!-- ELSEIF S_PLUGIN_MENU -->
+	<table cellspacing="1">
+		<col class="row1" /><col class="row2" /><col class="row2" /><col class="row2" /><col class="row2" />
+		<thead>
+			<tr>
+				<th>{L_PLUGIN_NAME}</th>
+				<th>{L_COPYRIGHT}</th>
+				<th style="text-align: center;">{L_VERSION}</th>
+				<th style="text-align: center;">{L_OPTIONS}</th>
+				<th style="text-align: center;">{L_ACTIONS}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="row3" colspan="5"><strong>{L_LEFT_MENU}</strong></td>
+			</tr>
+			<!-- IF not .left_menu -->
+				<tr>
+					<td class="row1" colspan="5" style="text-align: center;">{L_NO_LEFT_MENU_PLUGINS}</td>
+				</tr>
+			<!-- ENDIF -->
+			<!-- BEGIN left_menu -->
+				<tr>
+					<td><strong>{left_menu.PLUGIN_NAME}</strong><br /><span>{left_menu.PLUGIN_DESC}</td>
+					<td style="text-align: left;">{left_menu.PLUGIN_COPY}</td>
+					<td style="text-align: center;">{left_menu.PLUGIN_VERSION}</td>
+					<td style="text-align: center;"><a href="{left_menu.U_SETTINGS}">{L_SETTINGS}</a></td>
+					<td style="vertical-align: middle; width: 100px; text-align: right; white-space: nowrap;">
+						<!-- IF left_menu.S_FIRST_ROW && not left_menu.S_LAST_ROW -->
+							{ICON_MOVE_UP_DISABLED}
+							<a href="{left_menu.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+						<!-- ELSEIF not left_menu.S_FIRST_ROW && not left_menu.S_LAST_ROW -->
+							<a href="{left_menu.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+							<a href="{left_menu.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+						<!-- ELSEIF left_menu.S_LAST_ROW && not left_menu.S_FIRST_ROW -->
+							<a href="{left_menu.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+							{ICON_MOVE_DOWN_DISABLED}
+						<!-- ELSE -->
+							{ICON_MOVE_UP_DISABLED}
+							{ICON_MOVE_DOWN_DISABLED}
+						<!-- ENDIF -->
+						<!-- IF left_menu.PLUGIN_PERM eq 1 -->
+							{ICON_DELETE_DISABLED}
+						<!-- ELSE -->
+							<a href="{left_menu.U_UNINSTALL}">{ICON_DELETE}</a>
+						<!-- ENDIF -->
+					</td>
+				</tr>
+			<!-- END left_menu -->			
+			<tr>
+				<td class="row3" colspan="5"><strong>{L_RIGHT_MENU}</strong></td>
+			</tr>
+			<!-- IF not .right_menu -->
+				<tr>
+					<td class="row1" colspan="5" style="text-align: center;">{L_NO_RIGHT_MENU_PLUGINS}</td>
+				</tr>
+			<!-- ENDIF -->
+			<!-- BEGIN right_menu -->
+				<tr>
+					<td><strong>{right_menu.PLUGIN_NAME}</strong><br /><span>{right_menu.PLUGIN_DESC}</span></td>
+					<td style="text-align: left;">{right_menu.PLUGIN_COPY}</td>
+					<td style="text-align: center;">{right_menu.PLUGIN_VERSION}</td>
+					<td style="text-align: center;"><a href="{right_menu.U_SETTINGS}">{L_SETTINGS}</a></td>
+					<td style="vertical-align: middle; width: 100px; text-align: right; white-space: nowrap;">
+						<!-- IF right_menu.S_FIRST_ROW && not right_menu.S_LAST_ROW -->
+							{ICON_MOVE_UP_DISABLED}
+							<a href="{right_menu.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+						<!-- ELSEIF not right_menu.S_FIRST_ROW && not right_menu.S_LAST_ROW -->
+							<a href="{right_menu.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+							<a href="{right_menu.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+						<!-- ELSEIF right_menu.S_LAST_ROW && not right_menu.S_FIRST_ROW -->
+							<a href="{right_menu.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+							{ICON_MOVE_DOWN_DISABLED}
+						<!-- ELSE -->
+							{ICON_MOVE_UP_DISABLED}
+							{ICON_MOVE_DOWN_DISABLED}
+						<!-- ENDIF -->
+						<!-- IF right_menu.PLUGIN_PERM eq 1 -->
+							{ICON_DELETE_DISABLED}
+						<!-- ELSE -->
+							<a href="{right_menu.U_UNINSTALL}">{ICON_DELETE}</a>
+						<!-- ENDIF -->
+					</td>
+				</tr>
+			<!-- END right_menu -->
+			<!-- IF .no_menu -->
+				<tr>
+					<td class="row3" colspan="5"><strong>{L_NO_MENU}</strong></td>
+				</tr>
+				<!-- IF not .no_menu -->
+					<tr>
+						<td class="row1" colspan="5" style="text-align: center;">{L_NO_MENU_PLUGINS}</td>
+					</tr>
+				<!-- ENDIF -->
+				<!-- BEGIN no_menu -->
+					<tr>
+						<td><strong>{no_menu.PLUGIN_NAME}</strong><br /><span>{no_menu.PLUGIN_DESC}</span></td>
+						<td style="text-align: left;">{no_menu.PLUGIN_COPY}</td>
+						<td style="text-align: center;">{no_menu.PLUGIN_VERSION}</td>
+						<td style="text-align: center;"><a href="{no_menu.U_SETTINGS}">{L_SETTINGS}</a></td>
+						<td style="vertical-align: middle; width: 100px; text-align: right; white-space: nowrap;">
+							<!-- IF no_menu.PLUGIN_PERM eq 1 -->
+								{ICON_DELETE_DISABLED}
+							<!-- ELSE -->
+								<a href="{no_menu.U_UNINSTALL}">{ICON_DELETE}</a>
+							<!-- ENDIF -->
+						</td>
+					</tr>
+				<!-- END no_menu -->
+			<!-- ENDIF -->
+			<tr>
+				<td class="row3" colspan="5"><strong>{L_UNINSTALLED_PLUGINS}</strong></td>
+			</tr>
+			<!-- IF not .uninstalled -->
+				<tr>
+					<td class="row1" colspan="5" style="text-align: center;">{L_NO_UNINSTALLED_PLUGINS}</td>
+				</tr>
+			<!-- ENDIF -->
+			<!-- BEGIN uninstalled -->
+				<tr>
+					<td><strong>{uninstalled.PLUGIN_NAME}</strong><br /><span>{uninstalled.PLUGIN_DESC}</span></td>
+					<td style="text-align: left;">{uninstalled.PLUGIN_COPY}</td>
+					<td style="text-align: center;">{uninstalled.PLUGIN_VERSION}</td>
+					<td style="text-align: center;" colspan="2"><a href="{uninstalled.U_INSTALL}">{L_INSTALL} {uninstalled.PLUGIN_NAME}</a></td>
+				</tr>
+			<!-- END uninstalled -->
+		</tbody>
+	</table>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

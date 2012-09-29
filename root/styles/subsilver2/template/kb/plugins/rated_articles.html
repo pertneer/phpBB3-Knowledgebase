@@ -1,0 +1,17 @@
+<!-- IF .ratingrow -->
+<table class="tablebg" width="100%" cellspacing="1">
+<tr>
+	<th>{L_HIGHEST_RATED_ARTICLES}</th>
+</tr>
+<tr>
+	<td class="row1">
+	<p class="genmed">
+		<!-- BEGIN ratingrow -->
+		<a href="{ratingrow.U_VIEW_ARTICLE}">{ratingrow.ARTICLE_TITLE} [{ratingrow.ARTICLE_RATING}]</a><br />
+		<!-- END ratingrow -->
+	</p>
+	</td>
+</tr>
+</table>
+<br />
+<!-- ENDIF -->

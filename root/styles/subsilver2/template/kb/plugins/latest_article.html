@@ -1,0 +1,21 @@
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_KB_LATEST} <a href="{U_RSS_LAST_ARTICLE}"><img src="{T_THEME_PATH}/images/feed.gif" width="14" height="14" alt="{L_RSS_LATEST}" title="{L_RSS_LATEST}" /></a></th>
+	</tr>
+	<!-- IF not NO_LAST_ARTICLE -->
+	<tr>
+		<td class="row1"><b class="genmed">{L_ARTICLE_TITLE}:</b> <a class="forumlink" href="{U_LAST_ARTICLE}">{LAST_ARTICLE_TITLE}</a></td>
+	</tr>
+	<tr>
+		<td class="row2"><span class="postbody">{LAST_ARTICLE_DESC}</span></td>
+	</tr>
+	<tr>
+		<td class="cat" align="center"><p class="genmed"><b>{L_COMMENTS}: </b>{LAST_ARTICLE_COMMENTS} | <b>{L_VIEWS}: </b>{LAST_ARTICLE_VIEWS}</p></td>
+	</tr>
+	<!-- ELSE -->
+	<tr>
+		<td class="row1"><p class="genmed">{L_NO_ARTICLES_CREATED}</p></td>
+	</tr>
+	<!-- ENDIF -->
+</table>
+<br />

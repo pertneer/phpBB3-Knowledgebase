@@ -1,0 +1,176 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<!-- IF S_EDIT_CAT -->
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+
+	<h1>{L_TITLE} <!-- IF CAT_NAME -->:: {CAT_NAME}<!-- ENDIF --></h1>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="forumedit" method="post" action="{U_EDIT_ACTION}">
+
+	<fieldset>
+		<legend>{L_CAT_SETTINGS}</legend>
+	<dl>
+		<dt><label for="parent">{L_CAT_PARENT}:</label></dt>
+		<dd><select id="parent" name="cat_parent_id"><option value="0"<!-- IF not S_CAT_PARENT_ID --> selected="selected"<!-- ENDIF -->>{L_NO_PARENT}</option>{S_PARENT_OPTIONS}</select></dd>
+	</dl>
+	<dl>
+		<dt><label for="cat_name">{L_CAT_NAME}:</label></dt>
+		<dd><input class="text medium" type="text" id="cat_name" name="cat_name" value="{CAT_NAME}" maxlength="255" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="cat_desc">{L_CAT_DESC}:</label></dt>
+		<dd><textarea id="cat_desc" name="cat_desc" rows="5" cols="45">{CAT_DESC}</textarea></dd>		
+	</dl>
+	<dl>
+		<dt><label for="cat_image">{L_CAT_IMAGE}:</label><br /><span>{L_CAT_IMAGE_EXPLAIN}</span></dt>
+		<dd><input class="text medium" type="text" id="cat_image" name="cat_image" value="{CAT_IMAGE}" maxlength="255" /></dd>
+		<!-- IF CAT_IMAGE_SRC -->
+			<dd><img src="{CAT_IMAGE_SRC}" alt="{L_CAT_IMAGE}" /></dd>
+		<!-- ENDIF -->
+	</dl>
+	<!-- IF S_CAN_COPY_PERMISSIONS -->
+		<dl>
+			<dt><label for="cat_perm_from">{L_COPY_PERMISSIONS}:</label></dt>
+			<dd><select id="cat_perm_from" name="cat_perm_from"><option value="0">{L_NO_PERMISSIONS}</option>{S_CAT_OPTIONS}</select></dd>
+		</dl>
+	<!-- ENDIF -->
+	</fieldset>	
+
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ELSEIF S_DELETE_CAT -->
+
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+
+	<h1>{L_CAT_DELETE}</h1>
+
+	<p>{L_CAT_DELETE_EXPLAIN}</p>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="acp_forum" method="post" action="{U_ACTION}">
+
+	<fieldset>
+		<legend>{L_CAT_DELETE}</legend>
+	<dl>
+		<dt><label>{L_CAT_NAME}:</label></dt>
+		<dd><strong>{CAT_NAME}</strong></dd>
+	</dl>
+	<!-- IF S_CAT_ARTICLES -->
+		<dl>
+			<dt><label for="delete_action">{L_ACTION}:</label></dt>
+			<dd><label><input type="radio" class="radio" id="delete_action" name="action_articles" value="delete" checked="checked" /> {L_DELETE_ALL_ARTICLES}</label></dd>
+			<!-- IF S_MOVE_CAT_OPTIONS -->
+				<dd><label><input type="radio" class="radio" name="action_articles" value="move" /> {L_MOVE_ARTICLES_TO}</label> <select name="articles_to_id">{S_MOVE_CAT_OPTIONS}</select></dd>
+			<!-- ENDIF -->
+		</dl>
+	<!-- ENDIF -->
+	<!-- IF S_HAS_SUBFORUMS -->
+		<dl>
+			<dt><label for="sub_delete_action">{L_ACTION}:</label></dt>
+			<dd><label><input type="radio" class="radio" id="sub_delete_action" name="action_subcats" value="delete" checked="checked" /> {L_DELETE_SUBFORUMS}</label></dd>
+			<!-- IF S_CAT_LIST -->
+				<dd><label><input type="radio" class="radio" name="action_subcats" value="move" /> {L_MOVE_SUBFORUMS_TO}</label> <select name="subcats_to_id">{S_CAT_LIST}</select></dd>
+			<!-- ENDIF -->
+		</dl>
+	<!-- ENDIF -->
+
+	<p class="quick">
+		<input class="button1" type="submit" name="update" value="{L_SUBMIT}" />
+	</p>
+	{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+	
+<!-- ELSE -->
+	<h1>{L_CAT_ADMIN}</h1>
+
+	<!-- IF ERROR_MSG -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<p><strong>{NAVIGATION}<!-- IF S_NO_CAT --> [<a href="{U_EDIT}">{L_EDIT}</a> | <a href="{U_DELETE}">{L_DELETE}</a>]<!-- ENDIF --></strong></p>
+
+	<!-- IF .cats -->
+		<table cellspacing="1">
+			<col class="row1" /><col class="row1" /><col class="row2" />
+		<tbody>
+		<!-- BEGIN cats -->
+			<tr>
+				<td style="width: 5%; text-align: center;">{cats.FOLDER_IMAGE}</td>
+				<td>
+					<!-- IF cats.CAT_IMAGE --><div style="float: {S_CONTENT_FLOW_BEGIN}; margin-right: 5px;">{cats.CAT_IMAGE}</div><!-- ENDIF -->
+					<strong><!-- IF cats.S_CAT_LINK -->{cats.CAT_NAME}<!-- ELSE --><a href="{cats.U_CAT}">{cats.CAT_NAME}</a><!-- ENDIF --></strong>
+					<!-- IF cats.CAT_DESCRIPTION --><br /><span>{cats.CAT_DESCRIPTION}</span><!-- ENDIF -->
+					<br /><br /><span>{L_ARTICLES}: <strong>{cats.CAT_ARTICLES}</strong></span>
+				</td>
+				<td style="vertical-align: top; width: 100px; text-align: right; white-space: nowrap;">
+					<!-- IF cats.S_FIRST_ROW && not cats.S_LAST_ROW -->
+						{ICON_MOVE_UP_DISABLED}
+						<a href="{cats.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+					<!-- ELSEIF not cats.S_FIRST_ROW && not cats.S_LAST_ROW -->
+						<a href="{cats.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+						<a href="{cats.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+					<!-- ELSEIF cats.S_LAST_ROW && not cats.S_FIRST_ROW -->
+						<a href="{cats.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+						{ICON_MOVE_DOWN_DISABLED}
+					<!-- ELSE -->
+						{ICON_MOVE_UP_DISABLED}
+						{ICON_MOVE_DOWN_DISABLED}
+					<!-- ENDIF -->
+					<a href="{cats.U_EDIT}">{ICON_EDIT}</a>
+					<a href="{cats.U_DELETE}">{ICON_DELETE}</a>
+				</td>
+			</tr>
+		<!-- END cats -->
+		</tbody>
+		</table>
+	<!-- ENDIF -->
+
+	<form id="fselect" method="post" action="{U_SEL_ACTION}">
+
+	<fieldset class="quick">
+		{L_SELECT_CAT}: <select name="parent_id" onchange="if(this.options[this.selectedIndex].value != -1){ this.form.submit(); }">{CAT_BOX}</select>
+
+		<input class="button2" type="submit" value="{L_GO}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+	<form id="forums" method="post" action="{U_ACTION}">
+
+	<fieldset class="quick">
+		<input type="hidden" name="action" value="add" />
+
+		<input type="text" name="cat_name" value="" maxlength="255" />
+		<input class="button2" name="addcat" type="submit" value="{L_CREATE_CAT}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,15 @@
+<div class="post bg3">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<div class="left_menu_title">{L_SEARCH_ARTICLES}</div>
+		<form id="kb_searchform" method="post" action="{U_KB_SEARCH}">
+			<fieldset>
+				<input name="q" id="kb_keywords" type="text" style="width: 128px" maxlength="128" title="{L_SEARCH_KEYWORDS}" class="inputbox search" value="<!-- IF SEARCH_WORDS-->{SEARCH_WORDS}<!-- ELSE -->{L_SEARCH_MINI}<!-- ENDIF -->" onclick="if(this.value=='{LA_SEARCH_MINI}')this.value='';" onblur="if(this.value=='')this.value='{LA_SEARCH_MINI}';" />
+				<input class="button2" value="{L_SEARCH}" type="submit" /><br />
+				{S_HIDDEN_FIELDS}
+			</fieldset>
+		</form>
+		<div style="padding: 2px;"><a href="{U_KB_SEARCH_ADV}" title="{L_SEARCH_ADV_EXPLAIN}">{L_SEARCH_ADV}</a></div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>

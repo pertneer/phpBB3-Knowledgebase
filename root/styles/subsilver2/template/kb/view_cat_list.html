@@ -1,0 +1,91 @@
+<!-- INCLUDE kb/kb_header.html -->
+<!-- IF .catrow -->
+	<!-- IF S_CAT_STYLE -->
+		<!-- INCLUDE kb/cat_list_modern.html -->
+	<!-- ELSE -->
+		<!-- INCLUDE kb/cat_list_classic.html -->
+	<!-- ENDIF -->
+<!-- ELSEIF S_ON_INDEX -->
+<table class="tablebg" width="100%" cellspacing="1">
+<tr>
+	<td class="row1" height="30" align="center" valign="middle"><span class="gen">{L_NO_CATS}</span></td>
+</tr>
+</table>
+<!-- ENDIF -->
+
+<!-- IF not S_ON_INDEX -->
+<!-- IF U_ADD_NEW_ARTICLE or TOTAL_ARTICLES -->
+	<table width="100%" cellspacing="1">
+	<tr>
+		<!-- IF U_ADD_NEW_ARTICLE -->
+			<td align="{S_CONTENT_FLOW_BEGIN}" valign="middle"><a href="{U_ADD_NEW_ARTICLE}" title="{L_KB_ADD_ARTICLE}">{NEW_ARTICLE_IMG}</a></td>
+		<!-- ENDIF -->
+		<!-- IF TOTAL_ARTICLES -->
+			<td class="nav" valign="middle" nowrap="nowrap">&nbsp;{PAGE_NUMBER}<br /></td>
+			<td class="gensmall" nowrap="nowrap">&nbsp;[ {TOTAL_ARTICLES} {L_ARTICLES_LC} ]&nbsp;</td>
+			<td class="gensmall" width="100%" align="{S_CONTENT_FLOW_END}" nowrap="nowrap"><!-- INCLUDE pagination.html --></td>
+		<!-- ENDIF -->
+	</tr>
+	</table>
+<!-- ENDIF -->
+			
+<table class="tablebg" width="100%" cellspacing="1">
+<tr>
+	<td class="cat" colspan="7">&nbsp;</td>
+</tr>
+<tr>
+	<th colspan="3">&nbsp;{L_ARTICLES}&nbsp;</th>
+	<th>&nbsp;{L_AUTHOR}&nbsp;</th>
+	<th>&nbsp;{L_COMMENTS}&nbsp;</th>
+	<th>&nbsp;{L_VIEWS}&nbsp;</th>
+	<th>&nbsp;{L_ARTICLE_TIME}&nbsp;</th>
+</tr>
+<!-- BEGIN articlerow -->
+<tr>
+	<td class="row1" width="25" align="center">{articlerow.ARTICLE_FOLDER_IMG}</td>
+	<td class="row1" width="25" align="center"><!-- IF articlerow.ARTICLE_TYPE_IMG --><img src="{articlerow.ARTICLE_TYPE_IMG}" width="{articlerow.ARTICLE_TYPE_IMG_WIDTH}" height="{articlerow.ARTICLE_TYPE_IMG_HEIGHT}" alt="" /><!-- ENDIF --></td>
+	<td class="row1">
+		<a href="{articlerow.U_VIEW_ARTICLE}" class="topictitle">{articlerow.ARTICLE_TITLE}</a>
+		<!-- IF articlerow.ARTICLE_UNAPPROVED --><a href="{articlerow.U_MCP_QUEUE}">{UNAPPROVED_IMG}</a><!-- ENDIF -->
+		<br /><!-- IF articlerow.ARTICLE_DESC -->{articlerow.ARTICLE_DESC}<!-- ENDIF -->
+	</td>
+	<td class="row2" width="130" align="center"><p class="topicauthor">{articlerow.ARTICLE_AUTHOR_FULL}</p></td>
+	<td class="row1" width="50" align="center"><p class="topicdetails">{articlerow.COMMENTS}</p></td>
+	<td class="row2" width="50" align="center"><p class="topicdetails">{articlerow.VIEWS}</p></td>
+	<td class="row1" width="140" align="center">
+		<p class="topicdetails" style="white-space: nowrap;">{topicrow.LAST_POST_TIME}</p>
+		<p class="topicdetails"><!-- IF articlerow.ATTACH_ICON_IMG -->{articlerow.ATTACH_ICON_IMG} <!-- ENDIF -->{articlerow.FIRST_POST_TIME}</p>
+	</td>
+</tr>	
+<!-- BEGINELSE -->
+<tr>
+	<td class="row1" colspan="7" height="30" align="center" valign="middle"><span class="gen">{L_NO_ARTICLES}</span></td>
+</tr>
+<!-- END articlerow -->	
+<tr>
+	<td class="cat" colspan="7" align="center">
+			<form method="post" action="{S_ARTICLE_ACTION}">
+				<!-- IF not S_IS_BOT -->
+				{L_KB_SORT_BY} {S_SORT_OPTIONS} {S_SORT_DIRECTION} <input type="submit" name="gosort" value="{L_GO}" class="button2" />
+				<!-- ENDIF -->
+			</form>
+	</td>
+</tr>
+</table>
+
+<!-- IF U_ADD_NEW_ARTICLE or TOTAL_ARTICLES -->
+	<table width="100%" cellspacing="1">
+	<tr>
+		<!-- IF U_ADD_NEW_ARTICLE -->
+			<td align="{S_CONTENT_FLOW_BEGIN}" valign="middle"><a href="{U_ADD_NEW_ARTICLE}" title="{L_KB_ADD_ARTICLE}">{NEW_ARTICLE_IMG}</a></td>
+		<!-- ENDIF -->
+		<!-- IF TOTAL_ARTICLES -->
+			<td class="nav" valign="middle" nowrap="nowrap">&nbsp;{PAGE_NUMBER}<br /></td>
+			<td class="gensmall" nowrap="nowrap">&nbsp;[ {TOTAL_ARTICLES} {L_ARTICLES_LC} ]&nbsp;</td>
+			<td class="gensmall" width="100%" align="{S_CONTENT_FLOW_END}" nowrap="nowrap"><!-- INCLUDE pagination.html --></td>
+		<!-- ENDIF -->
+	</tr>
+	</table>
+<!-- ENDIF -->
+<!-- ENDIF -->
+<!-- INCLUDE kb/kb_footer.html -->

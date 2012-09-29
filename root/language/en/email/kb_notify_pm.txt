@@ -1,0 +1,6 @@
+Greetings,
+
+The article {ARTICLE_TITLE} has been updated and you have now been notified according to your notification settings and you are therefore recieving this private message.
+Please click the following link to go to the article:
+
+{U_ARTICLE}

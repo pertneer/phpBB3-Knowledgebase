@@ -1,0 +1,258 @@
+<!-- INCLUDE kb/kb_header.html -->
+			<h2><a href="{U_VIEW_FORUM}">{CAT_NAME}</a></h2>
+			<form id="postform" method="post" action="{S_POST_ACTION}"{S_FORM_ENCTYPE}>
+			<!-- IF not S_IS_UCP && not S_IS_MCP -->
+			<!-- IF S_DISPLAY_PREVIEW --><!-- INCLUDE posting_preview.html --><!-- ENDIF -->
+			<!-- ENDIF -->
+			<div class="panel" id="postingbox">
+				<div class="inner"><span class="corners-top"><span></span></span>
+				
+				<h3>{L_POST_A}</h3>
+			
+				<fieldset class="fields1">
+				<!-- IF ERROR --><p class="error">{ERROR}</p><!-- ENDIF -->
+				
+				<!-- IF S_SHOW_USERNAME_FIELD -->
+				<dl style="clear: left;">
+					<dt><label for="guest_username">{L_USERNAME}:</label></dt>
+					<dd><input type="text" tabindex="1" name="guest_username" id="guest_username" size="25" value="{USERNAME}" class="inputbox" /></dd>
+				</dl>
+				<!-- ENDIF -->
+				
+				<!-- IF S_POST_ACTION -->
+				<dl style="clear: left;">
+					<dt><label for="title">{L_ARTICLE_TITLE}:</label></dt>
+					<dd><input type="text" name="title" id="title" size="45" maxlength="64" tabindex="2" value="{ARTICLE_TITLE}" class="inputbox autowidth" /></dd>
+				</dl>
+				<!-- ENDIF -->
+				
+				<!-- IF S_SHOW_ARTICLE_TYPES -->
+				<dl>
+					<dt><label for="type">{L_ARTICLE_TYPE}:</label></dt>
+					<dd><select name="type" id="type">{S_SHOW_ARTICLE_TYPES}</select></dd>
+				</dl>
+				<!-- ENDIF -->
+				
+				<!-- IF S_IS_ARTICLE -->
+				<dl>
+					<dt><label for="c">{L_ARTICLE_CAT}</label></dt>
+					<dd><select name="c" id="c">{S_CAT_SELECT}</select></dd>
+				</dl>
+				
+				<!-- IF S_SHOW_DESC_FIELD -->
+				<dl style="clear: left;">
+					<dt><label for="desc">{L_ARTICLE_DESC}:</label><br /><span class="gensmall">{L_ARTICLE_DESC_EXPLAIN}</span></dt>
+					<dd><textarea name="desc" id="desc" rows="10" cols="45" tabindex="3" class="inputbox desc" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);">{DESC}</textarea></dd>
+				</dl>
+				<!-- ENDIF -->
+				<!-- ENDIF -->
+				
+				<!-- IF S_CAN_MOD_TIME -->
+				<dl style="clear: left;">
+					<dt><label for="time">{L_ARTICLE_TIME}:</label><br /><span class="gensmall">{L_ARTICLE_TIME_EXPLAIN}</span></dt>
+					<dd><label><input type="radio" name="time" id="time" value="0" checked="checked" /> {L_USE_ORIGINAL_TIME}</label><br /><label><input type="radio" name="time" value="1" /> {L_USE_CURRENT_TIME}</label><br /><label><input type="radio" name="time" value="2" /> {L_USE_CUSTOM_TIME}:</label><select name="day">{DATE_OPTIONS}</select> <select name="month">{MONTH_OPTIONS}</select> <select name="year">{YEAR_OPTIONS}</select> <select name="hour">{HOUR_OPTIONS}</select>:<select name="min">{MIN_OPTIONS}</select> </dd>
+				</dl>
+				<!-- ENDIF -->
+				
+				<!-- IF S_CAN_MOD_AUTHOR -->
+				<dl style="clear: left;">
+					<dt><label for="author">{L_ARTICLE_AUTHOR}:</label><br /><span class="gensmall">{L_ARTICLE_AUTHOR_EXPLAIN}</span></dt>
+					<dd><label><input type="radio" name="author" id="author" value="0" checked="checked" /> {L_USE_ORIGINAL_AUTHOR}</label><br /><label><input type="radio" name="author" value="1" /> {L_USE_THIS_AUTHOR}</label><br /><label><input type="radio" name="author" value="2" /> {L_USE_CUSTOM_AUTHOR}:</label> <input type="text" class="text medium" id="username" name="username" /> [ <a href="{U_FIND_USERNAME}" onclick="find_username(this.href); return false;">{L_FIND_USERNAME}</a> ]</dd>
+				</dl>
+				<!-- ENDIF -->
+				
+				<!-- IF S_REQUEST_OPTIONS -->
+				<dl style="clear: left;">
+					<dt><label for="r">{L_ARTICLE_ADD_REQ}</label></dt>
+					<dd><select name="r" id="r">{S_REQUEST_OPTIONS}</select></dd>
+				</dl>
+				<!-- ENDIF -->
+				<!-- INCLUDE kb/posting_buttons.html -->
+			
+				<div id="smiley-box">
+					<!-- IF S_SMILIES_ALLOWED and .smiley -->
+						<strong>{L_SMILIES}</strong><br />
+						<!-- BEGIN smiley -->
+							<a href="#" onclick="insert_text('{smiley.A_SMILEY_CODE}', true); return false;"><img src="{smiley.SMILEY_IMG}" width="{smiley.SMILEY_WIDTH}" height="{smiley.SMILEY_HEIGHT}" alt="{smiley.SMILEY_CODE}" title="{smiley.SMILEY_DESC}" /></a>
+						<!-- END smiley -->
+					<!-- ENDIF -->
+					<!-- IF S_SHOW_SMILEY_LINK and S_SMILIES_ALLOWED-->
+						<br /><a href="{U_MORE_SMILIES}" onclick="popup(this.href, 300, 350, '_phpbbsmilies'); return false;">{L_MORE_SMILIES}</a>
+					<!-- ENDIF -->
+			
+					<!-- IF BBCODE_STATUS -->
+					<!-- IF .smiley --><hr /><!-- ENDIF -->
+					{BBCODE_STATUS}<br />
+					<!-- IF S_BBCODE_ALLOWED -->
+						{IMG_STATUS}<br />
+						{FLASH_STATUS}<br />
+						{URL_STATUS}<br />
+						{SMILIES_STATUS}
+					<!-- ENDIF -->
+					<!-- ENDIF -->
+				</div>
+			
+				<div id="message-box">
+					<textarea name="message" id="message" rows="15" cols="76" tabindex="3" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" class="inputbox">{TEXT_MESSAGE}</textarea>
+				</div>
+				</fieldset>
+				
+					<span class="corners-bottom"><span></span></span></div>
+				</div>
+				
+				<!-- IF S_HAS_ATTACHMENTS -->
+					<div class="panel bg2">
+						<div class="inner"><span class="corners-top"><span></span></span>
+						<h3>{L_POSTED_ATTACHMENTS}</h3>
+			
+						<fieldset class="fields2">
+			
+						<!-- BEGIN attach_row -->
+						<dl>
+			
+							<dt><label for="comment_list[{attach_row.ASSOC_INDEX}]">{L_FILE_COMMENT}:</label></dt>
+							<dd><textarea name="comment_list[{attach_row.ASSOC_INDEX}]" id="comment_list[{attach_row.ASSOC_INDEX}]" rows="1" cols="35" class="inputbox">{attach_row.FILE_COMMENT}</textarea></dd>
+							<dd><a href="{attach_row.U_VIEW_ATTACHMENT}" class="{S_CONTENT_FLOW_END}">{attach_row.FILENAME}</a></dd>
+							<dd style="margin-top: 5px;">
+								<!-- IF S_INLINE_ATTACHMENT_OPTIONS --><input type="button" value="{L_PLACE_INLINE}" onclick="attach_inline({attach_row.ASSOC_INDEX}, '{attach_row.A_FILENAME}');" class="button2" />&nbsp; <!-- ENDIF -->
+								<input type="submit" name="delete_file[{attach_row.ASSOC_INDEX}]" value="{L_DELETE_FILE}" class="button2" />
+							</dd>
+						</dl>
+						{attach_row.S_HIDDEN}
+							<!-- IF not attach_row.S_LAST_ROW --><hr class="dashed" /><!-- ENDIF -->
+						<!-- END attach_row -->
+			
+						</fieldset>
+			
+						<span class="corners-bottom"><span></span></span></div>
+					</div>
+				<!-- ENDIF -->
+				
+				<div class="panel bg2">
+					<div class="inner"><span class="corners-top"><span></span></span>
+					<fieldset class="submit-buttons">
+						{S_HIDDEN_ADDRESS_FIELD}
+						{S_HIDDEN_FIELDS}
+						<input type="submit" tabindex="5" name="preview" value="{L_PREVIEW}" class="button1" onclick="document.getElementById('postform').action += '#preview';" />&nbsp;
+						<input type="submit" accesskey="s" tabindex="6" name="post" value="{L_SUBMIT}" class="button1" />&nbsp;
+			
+					</fieldset>
+			
+					<span class="corners-bottom"><span></span></span></div>
+				</div>
+				
+				<!-- IF S_IS_UCP || S_IS_MCP -->
+				<!-- IF S_DISPLAY_PREVIEW --><!-- INCLUDE posting_preview.html --><!-- ENDIF -->
+				<!-- ENDIF -->
+				
+				<!-- IF not S_IS_UCP && not S_IS_MCP -->
+				<div id="tabs">
+					<ul>
+						<li id="options-panel-tab" class="activetab"><a href="#tabs" onclick="subPanels('options-panel'); return false;"><span>{L_OPTIONS}</span></a></li>
+						<!-- IF S_SHOW_ATTACH_BOX --><li id="attach-panel-tab"><a href="#tabs" onclick="subPanels('attach-panel'); return false;"><span>{L_ADD_ATTACHMENT}</span></a></li><!-- ENDIF -->
+						<!-- IF S_IS_ARTICLE --><li id="tags-panel-tab"><a href="#tabs" onclick="subPanels('tags-panel'); return false;"><span>{L_TAGS}</span></a></li><!-- ENDIF -->
+					</ul>
+				</div>
+			
+				<div class="panel bg3" id="options-panel">
+					<div class="inner"><span class="corners-top"><span></span></span>
+			
+					<fieldset class="fields1">
+						<!-- IF S_OPEN_ALLOWED -->
+							<div><label for="article_open"><input type="checkbox" name="article_open" id="article_open"{S_OPEN_CHECKED} /> {L_ARTICLE_OPEN}</label></div>
+						<!-- ENDIF -->
+						<!-- IF S_CONTRIB_ALLOWED -->
+							<div><label for="article_contribution"><input type="checkbox" name="article_contribution" id="article_contribution"{S_CONTRIB_CHECKED} /> {L_ARTICLE_CONTRIBUTE}</label></div>
+						<!-- ENDIF -->
+						<!-- IF S_BBCODE_ALLOWED -->
+							<div><label for="disable_bbcode"><input type="checkbox" name="disable_bbcode" id="disable_bbcode"{S_BBCODE_CHECKED} /> {L_DISABLE_BBCODE}</label></div>
+						<!-- ENDIF -->
+						<!-- IF S_SMILIES_ALLOWED -->
+							<div><label for="disable_smilies"><input type="checkbox" name="disable_smilies" id="disable_smilies"{S_SMILIES_CHECKED} /> {L_DISABLE_SMILIES}</label></div>
+						<!-- ENDIF -->
+						<!-- IF S_LINKS_ALLOWED -->
+							<div><label for="disable_magic_url"><input type="checkbox" name="disable_magic_url" id="disable_magic_url"{S_MAGIC_URL_CHECKED} /> {L_DISABLE_MAGIC_URL}</label></div>
+						<!-- ENDIF -->
+						<!-- IF S_SIG_ALLOWED -->
+							<div><label for="attach_sig"><input type="checkbox" name="attach_sig" id="attach_sig"{S_SIGNATURE_CHECKED} /> {L_ATTACH_SIG}</label></div>
+						<!-- ENDIF -->
+						<!-- IF S_IS_ARTICLE and S_EDIT_REASON -->
+						<dl>
+							<dt><label for="reason">{L_EDIT_REASON_ARTICLE}:</label></dt>
+							<dd><input type="text" name="reason" id="reason" value="{EDIT_REASON}" class="inputbox" /></dd>
+						</dl>
+						<dl>
+							<dt><label for="reason_global">{L_EDIT_REASON_GLOBAL}:</label></dt>
+							<dd><input type="checkbox" {REASON_GLOBAL}name="reason_global" id="reason_global" value="1" class="inputbox" /></dd>
+						</dl>
+						<!-- ENDIF -->
+					</fieldset>
+					{S_FORM_TOKEN}
+					<span class="corners-bottom"><span></span></span></div>
+				</div>
+			
+			
+			<!-- IF S_SHOW_ATTACH_BOX --><!-- INCLUDE posting_attach_body.html --><!-- ENDIF -->
+			<!-- IF S_IS_ARTICLE -->
+				<div class="panel bg3" id="tags-panel">
+					<div class="inner"><span class="corners-top"><span></span></span>
+					<fieldset class="fields1">
+					{L_TAGS_EXPLAIN}
+					<dl>
+						<dt><label for="tags">{L_TAGS}:</label></dt>
+						<dd><input type="text" name="tags" id="tags" value="{TAGS}" class="inputbox" size="65" maxlength="255" /></dd>
+					</dl>
+					</fieldset>
+					<span class="corners-bottom"><span></span></span></div>
+				</div>
+			<!-- ENDIF -->
+			</form>
+			<script type="text/javascript">
+			// <![CDATA[
+				subPanels(show_panel);
+			// ]]>
+			</script>
+			<!-- ELSE -->
+			<div class="panel bg3">
+				<div class="inner"><span class="corners-top"><span></span></span>
+			
+				<fieldset class="fields1">
+					<!-- IF S_BBCODE_ALLOWED -->
+						<div><label for="disable_bbcode"><input type="checkbox" name="disable_bbcode" id="disable_bbcode"{S_BBCODE_CHECKED} /> {L_DISABLE_BBCODE}</label></div>
+					<!-- ENDIF -->
+					<!-- IF S_SMILIES_ALLOWED -->
+						<div><label for="disable_smilies"><input type="checkbox" name="disable_smilies" id="disable_smilies"{S_SMILIES_CHECKED} /> {L_DISABLE_SMILIES}</label></div>
+					<!-- ENDIF -->
+					<!-- IF S_LINKS_ALLOWED -->
+						<div><label for="disable_magic_url"><input type="checkbox" name="disable_magic_url" id="disable_magic_url"{S_MAGIC_URL_CHECKED} /> {L_DISABLE_MAGIC_URL}</label></div>
+					<!-- ENDIF -->
+					<!-- IF S_SIG_ALLOWED -->
+						<div><label for="attach_sig"><input type="checkbox" name="attach_sig" id="attach_sig"{S_SIGNATURE_CHECKED} /> {L_ATTACH_SIG}</label></div>
+					<!-- ENDIF -->
+				</fieldset>
+				{S_FORM_TOKEN}
+				<span class="corners-bottom"><span></span></span></div>
+			</div>
+			<div class="panel bg3">
+				<div class="inner"><span class="corners-top"><span></span></span>
+			
+				<p>{L_ADD_ATTACHMENT_EXPLAIN}</p>
+				
+				<fieldset class="fields2">
+				<dl>
+					<dt><label for="fileupload">{L_FILENAME}:</label></dt>
+					<dd>
+						<input type="file" name="fileupload" id="fileupload" maxlength="{FILESIZE}" value="" class="inputbox autowidth" /> 
+						<input type="submit" name="add_file" value="{L_ADD_FILE}" class="button2" onclick="upload = true;" />
+					</dd>
+				</dl>
+				<dl>
+					<dt><label for="filecomment">{L_FILE_COMMENT}:</label></dt>
+					<dd><textarea name="filecomment" id="filecomment" rows="1" cols="40" class="inputbox autowidth">{FILE_COMMENT}</textarea></dd>
+				</dl>
+				</fieldset>
+			
+				<span class="corners-bottom"><span></span></span></div>
+			</div>
+			<!-- ENDIF -->
+<!-- INCLUDE kb/kb_footer.html -->

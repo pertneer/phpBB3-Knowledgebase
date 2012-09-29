@@ -1,0 +1,23 @@
+<!-- IF S_RELATED_ARTICLES -->
+<div class="post bg3">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<div class="left_menu_title">{L_RELATED_ARTICLES}</div>
+		<div style="padding-bottom: 3px;">
+			<div>
+			<!-- BEGIN related_articles -->
+				<a href="{related_articles.U_VIEW_ARTICLE}">{related_articles.TITLE}</a><br />
+			<!-- BEGINELSE -->
+				{L_NO_RELATED_ARTICLES}
+			<!-- END related_articles -->	
+				<!-- IF .related_articles -->
+				<div class="pagination">
+					{KB_TOTAL_RA} {KB_S_TOTAL_RA} <!-- IF KB_PAGE_NUMBER --><!-- IF KB_PAGINATION --> &bull; {KB_PAGE_NUMBER} <span>{KB_PAGINATION}</span><!-- ELSE --> &bull; {KB_PAGE_NUMBER}<!-- ENDIF --><!-- ENDIF -->
+				</div>
+				<!-- ENDIF -->
+			</div>
+		</div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<!-- ENDIF -->

@@ -1,0 +1,39 @@
+<table class="tablebg" cellspacing="1" width="100%">
+<tr>
+	<td class="cat" colspan="5" align="{S_CONTENT_FLOW_END}"><!-- IF not S_IS_BOT and U_MARK_FORUMS --><a class="nav" href="{U_MARK_FORUMS}">{L_MARK_FORUMS_READ}</a><!-- ENDIF -->&nbsp;</td>
+</tr>
+<tr>
+	<th colspan="2">&nbsp;{L_KB_CATS}&nbsp;</th>
+	<th width="50">&nbsp;{L_KB_FEED_CAT}&nbsp;</th>
+	<th width="50">&nbsp;{L_ARTICLES}&nbsp;</th>
+	<th>&nbsp;{L_LATEST_ARTICLES}&nbsp;</th>
+</tr>
+	<!-- BEGIN catrow -->
+	<!-- BEGIN cat -->
+	<tr>
+		<td class="row1" width="50" align="center">{catrow.cat.CAT_FOLDER_IMG}</td>
+		<td class="row1" width="100%">
+			<!-- IF catrow.cat.CAT_IMAGE -->
+				<div style="float: {S_CONTENT_FLOW_BEGIN}; margin-{S_CONTENT_FLOW_END}: 5px;">{catrow.cat.CAT_IMAGE}</div>
+			<!-- ENDIF -->
+			<a class="forumlink" href="{catrow.cat.U_VIEWCAT}">{catrow.cat.CAT_NAME}</a>
+			<!-- IF catrow.cat.CAT_DESC} --><p class="forumdesc">{catrow.cat.CAT_DESC}</p><!-- ENDIF -->
+			<!-- IF catrow.cat.SUBCATS --> 
+				<p class="forumdesc"><strong>{catrow.cat.L_SUBCAT}:</strong> {catrow.cat.SUBCATS}</p>
+			<!-- ENDIF -->
+		</td>
+		<td class="row2" align="center"><p class="topicdetails"><a href="{catrow.cat.U_RSS_CAT}"><img src="{T_THEME_PATH}/images/feed.gif" width="14" height="14" alt="{L_RSS_CAT}" title="{L_RSS_CAT}" /></a></p></td>
+		<td class="row1" align="center"><p class="topicdetails">{catrow.cat.ARTICLES}</p></td>
+		<td class="row2" align="center" nowrap="nowrap">
+			<!-- IF catrow.cat.LATEST_ARTICLE -->
+				<p class="topicdetails"><strong>{L_LATEST_ARTICLES}:</strong> {catrow.cat.LATEST_ARTICLE}</p>
+			<!-- ELSE -->
+				<p class="topicdetails">{L_KB_NO_LATEST}</p>
+			<!-- ENDIF -->
+		</td>
+	</tr>
+	<!-- END cat -->
+	<!-- END catrow -->
+</table>
+
+<br clear="all" />

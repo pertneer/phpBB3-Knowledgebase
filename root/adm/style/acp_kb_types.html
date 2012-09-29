@@ -1,0 +1,104 @@
+<!-- INCLUDE overall_header.html -->
+
+<a name="maincontent"></a>
+
+<!-- IF S_EDIT_CAT -->
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+
+	<h1>{L_TITLE} <!-- IF TYPE_TITLE -->:: {TYPE_TITLE}<!-- ENDIF --></h1>
+
+	<!-- IF S_ERROR -->
+		<div class="errorbox">
+			<h3>{L_WARNING}</h3>
+			<p>{ERROR_MSG}</p>
+		</div>
+	<!-- ENDIF -->
+
+	<form id="forumedit" method="post" action="{U_EDIT_ACTION}">
+
+	<fieldset>
+		<legend>{L_TYPE_SETTINGS}</legend>
+	<dl>
+		<dt><label for="title">{L_TYPE_TITLE}:</label></dt>
+		<dd><input class="text medium" type="text" id="title" name="title" value="{TYPE_TITLE}" maxlength="255" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="title">{L_TYPE_BEFORE}:</label></dt>
+		<dd><input class="text medium" type="text" id="prefix" name="prefix" value="{TYPE_BEFORE}" maxlength="255" /></dd>
+	</dl>
+	<dl>
+		<dt><label for="title">{L_TYPE_AFTER}:</label></dt>
+		<dd><input class="text medium" type="text" id="suffix" name="suffix" value="{TYPE_AFTER}" maxlength="255" /></dd>
+	</dl>
+	<dl>
+		<dt><input type="radio" class="inputbox" name="img_type" id="img_type1" value="icon"{S_ICON_CHECKED}>&nbsp;&nbsp;<label for="img_type1">{L_TYPE_ICON}:</label><br /><span>{L_TYPE_ICON_EXPLAIN}</span></dt>
+		<dd><!-- BEGIN topic_icon --><label for="icon-{topic_icon.ICON_ID}"><input type="radio" name="icon" id="icon-{topic_icon.ICON_ID}" value="{topic_icon.ICON_ID}" {topic_icon.S_ICON_CHECKED} /><img src="{topic_icon.ICON_IMG}" width="{topic_icon.ICON_WIDTH}" height="{topic_icon.ICON_HEIGHT}" alt="" title="" /></label> <!-- END topic_icon --></dd>
+	</dl>
+	<dl>
+		<dt><input type="radio" class="inputbox" name="img_type" id="img_type2" value="custom"{S_CUSTOM_CHECKED}>&nbsp;&nbsp;<label for="img_type2">{L_TYPE_IMAGE}:</label><br /><span>{L_TYPE_IMAGE_EXPLAIN}</span></dt>
+		<dd><input class="text medium" type="text" id="image" name="image" value="{TYPE_IMAGE}" maxlength="255" /></dd>		
+		<!-- IF TYPE_IMAGE_SRC -->
+			<dd><img src="{TYPE_IMAGE_SRC}" alt="{L_TYPE_IMAGE}" /></dd>
+		<!-- ENDIF -->
+	</dl>	
+	</fieldset>	
+
+	<fieldset class="submit-buttons">
+		<legend>{L_SUBMIT}</legend>
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ELSE -->
+	<h1>{L_TYPE_ADMIN}</h1>
+
+	<!-- IF .types -->
+		<table cellspacing="1">
+			<col class="row1" /><col class="row1" /><col class="row2" />
+		<tbody>
+		<!-- BEGIN types -->
+			<tr>
+				<td style="width: 5%; text-align: center;">{types.FOLDER_IMAGE}</td>
+				<td>
+					<!-- IF types.TYPE_IMAGE --><div style="float: {S_CONTENT_FLOW_BEGIN}; margin-right: 5px;">{types.TYPE_IMAGE}</div><!-- ENDIF -->
+					<strong><a href="{types.U_EDIT}">{types.TYPE_TITLE}</a></strong>
+				</td>
+				<td style="vertical-align: top; width: 100px; text-align: right; white-space: nowrap;">
+					<!-- IF types.S_FIRST_ROW && not types.S_LAST_ROW -->
+						{ICON_MOVE_UP_DISABLED}
+						<a href="{types.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+					<!-- ELSEIF not cats.S_FIRST_ROW && not cats.S_LAST_ROW -->
+						<a href="{types.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+						<a href="{types.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+					<!-- ELSEIF cats.S_LAST_ROW && not cats.S_FIRST_ROW -->
+						<a href="{types.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+						{ICON_MOVE_DOWN_DISABLED}
+					<!-- ELSE -->
+						{ICON_MOVE_UP_DISABLED}
+						{ICON_MOVE_DOWN_DISABLED}
+					<!-- ENDIF -->
+					<a href="{types.U_EDIT}">{ICON_EDIT}</a>
+					<a href="{types.U_DELETE}">{ICON_DELETE}</a>
+				</td>
+			</tr>
+		<!-- END types -->
+		</tbody>
+		</table>
+	<!-- ENDIF -->
+
+	<form id="forums" method="post" action="{U_ACTION}">
+
+	<fieldset class="quick">
+		<input type="hidden" name="action" value="add" />
+
+		<input type="text" name="title" value="" maxlength="255" />
+		<input class="button2" name="addtype" type="submit" value="{L_CREATE_TYPE}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+	</form>
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

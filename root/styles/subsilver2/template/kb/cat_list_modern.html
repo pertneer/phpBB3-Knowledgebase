@@ -1,0 +1,36 @@
+<table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+	<!-- BEGIN catrow -->
+	<tr>
+		<!-- BEGIN cat -->
+		<td style="vertical-align: top; width: {S_COL_WIDTH}%;">
+			<table class="tablebg" cellspacing="1" style="width: 100%;">
+				<tr>
+					<th><a href="{catrow.cat.U_VIEWCAT}">{catrow.cat.CAT_NAME} ({catrow.cat.ARTICLES})</a> <a href="{catrow.cat.U_RSS_CAT}"><img src="{T_THEME_PATH}/images/feed.gif" width="14" height="14" alt="{L_RSS_CAT}" title="{L_RSS_CAT}" /></a></th>
+				</tr>
+				<!-- IF catrow.cat.CAT_IMAGE -->
+				<tr>
+					<td class="row1" align="center">{catrow.cat.CAT_IMAGE}</td>
+				</tr>
+				<!-- ENDIF -->
+				<!-- IF catrow.cat.CAT_DESC} -->
+				<tr>
+					<td class="row1"><span class="genmed">{catrow.cat.CAT_DESC}</span></td>
+				</tr>
+				<!-- ENDIF -->
+				<tr>
+					<td class="row2">
+							<!-- IF catrow.cat.LATEST_ARTICLE --><strong>{L_LATEST_ARTICLES}:</strong> {catrow.cat.LATEST_ARTICLE}<!-- ENDIF -->
+							<!-- IF catrow.cat.SUBCATS --><!-- IF catrow.cat.LATEST_ARTICLE --><br /><!-- ENDIF --><strong>{catrow.cat.L_SUBCAT}:</strong> {catrow.cat.SUBCATS}<!-- ENDIF -->
+					</td>
+				</tr>
+			</table>
+		</td>
+		<!-- END cat -->
+		<!-- BEGIN dummy --> 
+		<td style="vertical-align: top; width: {S_COL_WIDTH}%;">&nbsp;</td> 
+		<!-- END dummy -->
+	</tr>	
+	<!-- END catrow -->
+</table>
+
+<br clear="all" />

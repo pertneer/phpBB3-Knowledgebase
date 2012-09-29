@@ -1,0 +1,62 @@
+<!-- INCLUDE ucp_header.html -->
+
+<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+<table width="100%" class="tablebg" cellspacing="1" cellpadding="4" border="0">
+<!-- IF S_SHOW_FORM -->
+	<tr>
+		<th colspan="2">{L_TITLE}</th>
+	</tr>
+	<tr>
+		<td colspan="2" class="row3">{L_KB_SUBSCRIBE_EXPLAIN}<br /><b>{L_STATUS_STRING}</b></td>
+	</tr>
+	<tr>
+		<td width="45%" valign="top" class="row1"><b>{L_NOTIFY_ON}:</b></td>
+		<td class="row2"><select name="notify_on">{NOTIFY_ON_OPTIONS}</select></td>
+	</tr>
+	<tr>
+		<td valign="top" class="row1"><b>{L_NOTIFY_BY}:</b></td>
+		<td class="row2"><select name="notify_by">{NOTIFY_BY_OPTIONS}</select></td>
+	</tr>
+	<tr>
+		<td class="cat" colspan="2" align="center">{S_HIDDEN_FIELDS}<input type="submit" name="submit" value="{L_SUBMIT}" class="btnmain" /></td>
+	</tr>
+</table>
+<!-- ELSE -->
+	<tr> 
+		<th colspan="2">&nbsp;{L_SUBSCRIBED_ARTICLES}&nbsp;</th>
+		<th>&nbsp;{L_AUTHOR}&nbsp;</th>
+		<th>&nbsp;{L_ARTICLE_TIME}&nbsp;</th>
+		<th width="5%">&nbsp;{L_MARK}&nbsp;</th>
+	</tr>
+	<tr>
+		<td colspan="5" class="row3">{L_KB_SUBSCRIBE_EXPLAIN}</td>
+	</tr>
+	<!-- BEGIN articlerow -->
+		<!-- IF articlerow.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+			<td class="row1" align="center" width="25"><!-- IF articlerow.ARTICLE_TYPE_IMG --><img src="{articlerow.ARTICLE_TYPE_IMG}" width="{articlerow.ARTICLE_TYPE_IMG_WIDTH}" height="{articlerow.ARTICLE_TYPE_IMG_HEIGHT}" alt="" /><!-- ENDIF --></td>
+			<td style="padding: 4px;">
+				<p class="topictitle"><a href="{articlerow.U_VIEW_ARTICLE}" class="topictitle">{articlerow.ARTICLE_TITLE}</a></p>
+				<!-- IF articlerow.ARTICLE_LAST_EDIT --><span class="gensmall">{articlerow.ARTICLE_LAST_EDIT}</span><!-- ENDIF -->
+			</td>
+			<td style="padding: 4px;" align="center" valign="middle" nowrap="nowrap"><span class="gen">{articlerow.ARTICLE_AUTHOR_FULL}</span></td>
+			<td class="postdetails" style="padding: 4px;" align="center	" valign="middle" nowrap="nowrap"><!-- IF articlerow.ATTACH_ICON_IMG -->{articlerow.ATTACH_ICON_IMG} <!-- ENDIF -->{articlerow.FIRST_POST_TIME}</td>
+			<td align="center"><input type="checkbox" class="radio" name="a[{articlerow.ARTICLE_ID}]" id="a{articlerow.ARTICLE_ID}" /></td>
+		</tr>
+	<!-- END articlerow -->
+	<!-- IF .articlerow -->
+	<tr>
+		<td class="cat" colspan="5" align="center">{S_HIDDEN_FIELDS}<input type="submit" name="submit" value="{L_UNSUBSCRIBE_MARKED}" class="btnmain" /></td>
+	</tr>
+	<!-- ELSE -->
+	<tr>
+		<td class="row1" colspan="5" height="30" align="center" valign="middle"><span class="gen">{L_NO_SUBSCRIBED_ARTICLES}</span></td>
+	</tr>
+	<!-- ENDIF -->
+	</table>
+	<div style="float: right;"><b class="gensmall"><a href="#" onclick="marklist('ucp', 'a', true); return false;">{L_MARK_ALL}</a> :: <a href="#" onclick="marklist('ucp', 'a', false); return false;">{L_UNMARK_ALL}</a></b></div>
+<!-- ENDIF -->
+{S_FORM_TOKEN}
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,30 @@
+<!-- INCLUDE overall_header.html -->
+
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	<ul class="linklist navlinks">
+		<li>{STEPS}</li>	
+	</ul
+	><span class="corners-bottom"><span></span></span></div>
+</div>
+
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	<h3>{TITLE}</h3>
+	{MESSAGE}
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+
+<!-- IF SHOW_SUBMIT -->
+<form method="post" action="{U_NEXT_STEP}">
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+	<fieldset class="submit-buttons">
+		<input name="submit" value="{L_SUBMIT}" class="button1" type="submit">
+	</fieldset>
+	<span class="corners-bottom"><span></span></span></div>
+</div>
+</form>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http
+://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		<title lang="en">PhpBB Kb update from 1.0.1 to 1.0.2RC1</title>
+		<description lang="en">This is the update file for 1.0.1 to 1.0.2RC1</description>
+		<author-notes lang="en">This mod is a work in progress, so if you encounter any bugs or you have any features you want implemented, please do not hesitate to go to our website and tell us. This mod should be combitable with most other modifications, however, there are exceptions.</author-notes>
+		<author-group>
+			<author>
+				<realname>Andreas Nexmann</realname>
+				<email>softphp@gmail.com</email>
+				<username>Imladris</username>
+				<homepage>http://kb.softphp.dk</homepage>
+				<contributions-group>
+      		 		<contributions status="current" from="2009-05-01" position="Developer"/>
+      			</contributions-group>
+			</author>
+			<author>
+				<realname>Tom Martin</realname>
+				<email>tom.martin60@btinternet.com</email>
+				<username>Poppertom69</username>
+				<homepage></homepage>
+				<contributions-group>
+      		  		<contributions status="current" from="2009-05-01" position="Developer"/>
+      			</contributions-group>
+			</author>
+			<author>
+				<realname>C1</realname>
+				<email>C1WebDesign@gmail.com</email>
+				<username>thecharmed01</username>
+				<homepage></homepage>
+				<contributions-group>
+      		  		<contributions status="past" from="2009-08-01" to="2009-11-16" position="Stylist"/>
+      			</contributions-group>
+			</author>
+		</author-group>
+		<mod-version>1.0.2RC1</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.7-PL1</target-version>
+		</installation>
+		<link-group>
+			<link type="parent" realname="Main Install File" href="./../install.xml" lang="en">Parent Install</link>
+		</link-group>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/adm/style/acp_kb_types.html" to="adm/style/acp_kb_types.html" />
+			<file from="root/includes/acp/acp_kb.php" to="includes/acp/acp_kb.php" />
+			<file from="root/includes/acp/acp_kb_permissions.php" to="includes/acp/acp_kb_permissions.php" />
+			<file from="root/includes/constants_kb.php" to="includes/constants_kb.php" />
+			<file from="root/includes/functions_kb.php" to="includes/functions_kb.php" />
+			<file from="root/includes/functions_install_kb.php" to="includes/functions_install_kb.php" />
+			<file from="root/includes/functions_plugins_kb.php" to="includes/functions_plugins_kb.php" />
+			<file from="root/includes/kb.php" to="includes/kb.php" />	
+			<file from="root/includes/kb_auth.php" to="includes/kb_auth.php" />	
+			<file from="root/includes/mcp/mcp_kb.php" to="includes/mcp/mcp_kb.php" />
+			<file from="root/includes/kb_plugins/kb_forum_bot.php" to="includes/kb_plugins/kb_forum_bot.php" />		
+			<file from="root/language/en/mods/permissions_kb.php" to="language/en/mods/permissions_kb.php" />
+			<file from="root/language/en/mods/kb.php" to="language/en/mods/kb.php" />
+			<file from="root/styles/prosilver/template/kb/view_article.html" to="styles/prosilver/template/kb/view_article.html" />
+		</copy>
+		<open src="includes/acp/auth.php">
+							<edit>
+								<find><![CDATA[global $template, $user, $db, $phpbb_root_path, $phpEx;]]></find>
+								<action type="after-add"><![CDATA[		if($cat_data)
+		{
+			global $kb_auth;
+		}]]></action>
+							</edit>
+							<edit>
+								<find><![CDATA[$cur_roles = $this->acl_role_data($user_mode, $permission_type, array_keys($hold_ary));]]></find>
+								<inline-edit>
+									<inline-find><![CDATA[$this]]></inline-find>
+									<inline-action type="before-add"><![CDATA[ ($cat_data) ? $kb_auth->acl_role_data($user_mode, $permission_type, array_keys($hold_ary)) : ]]></inline-action>
+								</inline-edit>
+							</edit>
+						</open>			
+		<diy-instructions lang="en"><![CDATA[After completing this guide, login as admin and direct your browser to kb.php to update the mod.]]></diy-instructions>
+	</action-group>
+</mod>

@@ -1,0 +1,18 @@
+<!-- IF S_IS_MCP -->
+<!-- INCLUDE mcp_header.html -->
+<!-- ELSEIF S_IS_UCP -->
+<!-- INCLUDE ucp_header.html -->
+<!-- ELSE -->
+<!-- INCLUDE overall_header.html -->
+<!-- ENDIF -->
+<!-- IF not S_IS_MCP and not S_IS_UCP -->
+<table style="width: 100%">
+	<tr>
+		<!-- IF .left_menu -->
+		<td id="left_menu" style="width: {LEFT_MENU_WIDTH}; vertical-align: top;">
+			<!-- BEGIN left_menu -->
+			{left_menu.CONTENT}
+			<!-- END left_menu -->
+		</td>
+		<!-- ENDIF -->
+		<td style="vertical-align: top;<!-- IF .left_menu --> padding-left: 10px;<!-- ENDIF --><!-- IF .right_menu --> padding-right: 20px;<!-- ENDIF -->"><!-- ENDIF -->

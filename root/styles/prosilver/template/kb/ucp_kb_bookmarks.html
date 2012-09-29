@@ -1,0 +1,50 @@
+<!-- INCLUDE ucp_header.html -->
+
+<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+<h2>{L_TITLE}</h2>
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+
+	<p>{L_KB_BOOKMARKS_EXPLAIN}</p>
+	
+	<!-- IF .articlerow -->
+		<ul class="topiclist">
+			<li class="header">
+				<dl class="icon">
+					<dt>{L_BOOKMARKED_ARTICLES}</dt>
+					<dd class="lastpost">{L_AUTHOR}</dd>
+					<dd class="mark">{L_MARK}</dd>
+				</dl>
+			</li>
+		</ul>
+		<ul class="topiclist cplist">
+	
+		<!-- BEGIN articlerow -->
+			<li class="row<!-- IF articlerow.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
+				<dl class="icon" style="background-image: url({articlerow.ARTICLE_FOLDER_IMG_SRC}); background-repeat: no-repeat;">
+					<dt><!-- IF articlerow.ARTICLE_TYPE_IMG --><img src="{articlerow.ARTICLE_TYPE_IMG}" width="{articlerow.ARTICLE_TYPE_IMG_WIDTH}" height="{articlerow.ARTICLE_TYPE_IMG_HEIGHT}" alt="" /><!-- ENDIF --><a href="{articlerow.U_VIEW_ARTICLE}" class="topictitle">{articlerow.ARTICLE_TITLE}</a>
+						<!-- IF articlerow.ARTICLE_LAST_EDIT --><br />{articlerow.ARTICLE_LAST_EDIT}<!-- ENDIF -->
+					</dt>
+					<dd class="lastpost"><span>{L_POST_BY_AUTHOR} {articlerow.ARTICLE_AUTHOR_FULL}<br /><!-- IF articlerow.ATTACH_ICON_IMG -->{articlerow.ATTACH_ICON_IMG} <!-- ENDIF -->{articlerow.FIRST_POST_TIME}	</span>
+					</dd>
+					<dd class="mark"><input type="checkbox" name="a[{articlerow.ARTICLE_ID}]" id="a{articlerow.ARTICLE_ID}" /></dd>
+				</dl>
+			</li>
+		<!-- END articlerow -->
+		</ul>
+	<!-- ELSE -->
+		<p><strong>{L_NO_BOOKMARKED_ARTICLES}</strong></p>
+	<!-- ENDIF -->
+	
+<span class="corners-bottom"><span></span></span></div>
+</div>
+
+<fieldset class="display-actions">
+	<input type="submit" name="submit" value="{L_UNBOOKMARK_MARKED}" class="button2" />
+	<div><a href="#" onclick="marklist('ucp', 'a', true); return false;">{L_MARK_ALL}</a> &bull; <a href="#" onclick="marklist('ucp', 'a', false); return false;">{L_UNMARK_ALL}</a></div>
+	{S_FORM_TOKEN}{S_HIDDEN_FIELDS}
+</fieldset>
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

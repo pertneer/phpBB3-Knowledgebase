@@ -1,0 +1,21 @@
+<!-- INCLUDE overall_header.html -->
+<!-- IF SHOW_SUBMIT -->
+<form method="post" action="{U_NEXT_STEP}">
+<!-- ENDIF -->
+<table class="tablebg" width="100%" cellspacing="1">
+<tr>
+	<th>{TITLE}</th>
+</tr>
+<tr>
+	<td class="row1" align="center"><p class="breadcrumbs">{STEPS}</p></td>
+</tr>
+<tr> 
+	<td class="row1" align="center"><br /><p class="gen">{MESSAGE}</p><!-- IF SHOW_SUBMIT --><br /><input name="submit" value="{L_SUBMIT}" class="btnmain" type="submit"><!-- ENDIF --></td>
+</tr>
+</table>
+<!-- IF SHOW_SUBMIT -->
+</form>
+<!-- ENDIF -->
+<br clear="all" />
+
+<!-- INCLUDE overall_footer.html -->

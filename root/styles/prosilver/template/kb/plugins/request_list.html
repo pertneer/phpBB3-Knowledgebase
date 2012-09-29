@@ -1,0 +1,23 @@
+<!-- IF S_SHOW_REQ_LIST -->
+<div class="post bg3">
+	<div class="inner">
+		<span class="corners-top"><span></span></span>
+		<div class="left_menu_title">{L_KB_REQS}</div>
+		
+		<div style="padding-bottom: 3px;" class="user_menu">
+		<!-- IF .req_list -->
+			<hr />
+			<!-- BEGIN req_list -->
+				<a href="{req_list.U_VIEW_REQ}">{req_list.REQ_TITLE}</a><br />
+			<!-- END req_list -->
+		<!-- ELSE -->
+		<strong>{L_KB_NO_REQS}</strong>
+		<!-- ENDIF -->
+		<!-- IF U_ADD_REQ or U_VIEW_ALL -->
+			<hr /><!-- IF U_ADD_REQ --><a href="{U_ADD_REQ}" title="{L_KB_ADD_REQUEST}">{L_KB_ADD_REQUEST}</a><!-- IF U_VIEW_ALL --> || <!-- ENDIF -->	<!-- ENDIF --><!-- IF U_VIEW_ALL --><a href="{U_VIEW_ALL}" title="{L_VIEW_ALL}">{L_VIEW_ALL}</a><!-- ENDIF -->
+		<!-- ENDIF -->
+		</div>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+</div>
+<!-- ENDIF -->

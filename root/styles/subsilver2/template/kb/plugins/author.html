@@ -1,0 +1,47 @@
+<table class="tablebg" width="100%" cellspacing="1">
+<tr>
+	<th>{L_AUTHOR}</th>
+</tr>
+<tr class="row1">
+	<td valign="top" class="profile">
+		<table cellspacing="4" align="center" width="150">
+		<!-- IF ONLINE_IMG -->
+			<tr>
+				<td>{ONLINE_IMG}</td>
+			</tr>
+		<!-- ENDIF -->
+		<!-- IF RANK_TITLE -->
+			<tr>
+				<td class="postdetails">{RANK_TITLE}</td>
+			</tr>
+		<!-- ENDIF -->
+		<!-- IF RANK_IMG -->
+			<tr>
+				<td>{RANK_IMG}</td>
+			</tr>
+		<!-- ENDIF -->
+		<!-- IF POSTER_AVATAR -->
+			<tr>
+				<td>{POSTER_AVATAR}</td>
+			</tr>
+		<!-- ENDIF -->
+		<!-- IF not (ONLINE_IMG or RANK_TITLE or RANK_IMG or POSTER_AVATAR) -->
+			<tr>
+				<td></td>
+			</tr>
+		<!-- ENDIF -->
+		</table>
+
+		<span class="postdetails">
+			<!-- IF POSTER_ARTICLES > 0 --><br /><b>{L_ARTICLES}:</b> <a href="{U_POSTER_ARTICLES}" title="{L_SAME_AUTHOR_ARTICLES}">{POSTER_ARTICLES}</a></dd><!-- ENDIF -->
+			<!-- IF POSTER_JOINED --><br /><b>{L_JOINED}:</b> {POSTER_JOINED}<!-- ENDIF -->
+			<!-- IF POSTER_FROM --><br /><b>{L_LOCATION}:</b> {POSTER_FROM}<!-- ENDIF -->
+	
+			<!-- BEGIN custom_fields -->
+				<br /><b>{custom_fields.PROFILE_FIELD_NAME}:</b> {custom_fields.PROFILE_FIELD_VALUE}
+			<!-- END custom_fields -->
+		</span>
+	</td>
+</tr>
+</table>
+<br />

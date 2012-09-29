@@ -1,0 +1,32 @@
+<!-- INCLUDE kb/kb_header.html -->
+<div id="pagecontent">
+	<table class="tablebg" width="100%" cellspacing="1">
+	<tr>
+		<td class="cat">&nbsp;</td>
+	</tr>
+	<tr>
+		<th>{L_REQUEST}</th>
+	</tr>
+	<tr class="row1">
+		<td class="row1">
+			<table width="100%" cellspacing="0">
+				<tr>
+					<td class="gensmall" valign="middle"><a href="{U_VIEW}">{REQUEST_TITLE}</a>&nbsp;{L_POST_BY_AUTHOR} <strong>{POST_AUTHOR_FULL}</strong> {L_POSTED_ON_DATE} {POST_DATE}</td>
+					<td width="50%" align="right"><!-- IF U_EDIT --><a href="{U_EDIT}" title="{L_KB_EDIT_REQUEST}">{EDIT_IMG}</a> <!-- ENDIF --><!-- IF U_DELETE --><a href="{U_DELETE}" title="{L_KB_DELETE_REQUEST}">{DELETE_IMG}</a><!-- ENDIF --></td>
+				</tr>
+				
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td class="row2"><div class="gen">{EXPLAIN}</div></td>
+	</tr>
+	<tr>
+		<td class="row1"><div class="postbody">{MESSAGE}</div></td>
+	</tr>
+	<tr>
+		<td class="cat">&nbsp;</td>
+	</tr>
+	</table>
+</div>
+<!-- INCLUDE kb/kb_footer.html -->

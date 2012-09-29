@@ -1,0 +1,30 @@
+<!-- IF S_RELATED_ARTICLES -->
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_RELATED_ARTICLES}</th>
+	</tr>
+	<tr>
+		<td class="row1">
+		<!-- IF .related_articles -->
+			<p class="genmed">
+				<!-- BEGIN related_articles -->
+					<a href="{related_articles.U_VIEW_ARTICLE}">{related_articles.TITLE}</a><br />
+				<!-- END related_articles -->
+			</p>
+		<!-- ELSE -->
+		<p class="genmed">{L_NO_RELATED_ARTICLES}</p>
+		<!-- ENDIF -->
+		</td>
+	</tr>
+</table>
+<!-- IF KB_TOTAL_RA -->
+	<table width="100%" cellspacing="1">
+	<tr>
+		<td class="nav" valign="middle" nowrap="nowrap">&nbsp;{KB_PAGE_NUMBER}<br /></td>
+		<td class="gensmall" nowrap="nowrap">&nbsp;[ {KB_TOTAL_RA} {KB_S_TOTAL_RA} ]&nbsp;</td>
+		<td class="gensmall" width="100%" align="{S_CONTENT_FLOW_END}" nowrap="nowrap"><!-- IF KB_PAGINATION --><b><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{L_GOTO_PAGE}</a> <!-- IF KB_PREVIOUS_PAGE --><a href="{KB_PREVIOUS_PAGE}">{L_PREVIOUS}</a>&nbsp;&nbsp;<!-- ENDIF -->{KB_PAGINATION}<!-- IF KB_NEXT_PAGE --> &nbsp;<a href="{KB_NEXT_PAGE}">{L_NEXT}</a><!-- ENDIF --></b><!-- ENDIF --></td>
+	</tr>
+	</table>
+<!-- ENDIF -->
+<br />
+<!-- ENDIF -->

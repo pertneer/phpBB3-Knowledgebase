@@ -1,0 +1,10 @@
+Subject: Notification from the Knowledge Base
+
+Greetings {USERNAME},
+
+The article {ARTICLE_TITLE} has been updated and you have now been notified according to your notification settings.
+Please click the following link to go to the article:
+
+{U_ARTICLE}
+
+{EMAIL_SIG} 

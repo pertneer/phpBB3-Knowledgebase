@@ -1,0 +1,13 @@
+<form method="post" action="{U_KB_SEARCH}">
+<table class="tablebg" cellspacing="1" width="100%">
+	<tr>
+		<th>{L_SEARCH_ARTICLES}</th>
+	</tr>
+	<tr>
+		<td class="row1"><input name="q" id="kb_keywords" type="text" style="width: 128px" maxlength="128" title="{L_SEARCH_KEYWORDS}" class="post" value="<!-- IF SEARCH_WORDS-->{SEARCH_WORDS}<!-- ELSE -->{L_SEARCH_MINI}<!-- ENDIF -->" onclick="if(this.value=='{LA_SEARCH_MINI}')this.value='';" onblur="if(this.value=='')this.value='{LA_SEARCH_MINI}';" />&nbsp;<input class="btnlite" value="{L_SEARCH}" type="submit" /><br />
+						{S_HIDDEN_FIELDS}<a class="genmed" href="{U_KB_SEARCH_ADV}" title="{L_SEARCH_ADV_EXPLAIN}">{L_SEARCH_ADV}</a>
+		</td>
+	</tr>
+</table>
+</form>
+<br />

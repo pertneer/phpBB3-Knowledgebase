@@ -1,0 +1,199 @@
+<script type="text/javascript">
+// <![CDATA[
+	// Rating Stuff
+	<!-- IF UA_GREY_STAR_SRC -->
+		var grey_star = new Image(16,16);
+		grey_star.src = "{UA_GREY_STAR_SRC}";
+		var green_star= new Image(16,16);
+		green_star.src = "{UA_GREEN_STAR_SRC}";
+		var red_star= new Image(16,16);
+		red_star.src = "{UA_RED_STAR_SRC}";
+		var orange_star= new Image(16,16);
+		orange_star.src = "{UA_ORANGE_STAR_SRC}";
+		var max_rating = "{UA_MAX_RATING}";
+		<!-- BEGIN reset_stars -->
+		var org_star_{reset_stars.RATING} = {reset_stars.JS_VAR};
+		<!-- END reset_stars -->
+	<!-- ENDIF -->
+
+	// Rating hover functions
+	$(document).ready(function(){
+		$("ul.rating li a").hover(
+			function(){
+				// Over function. This will change the stars up to the point that was hovered on to red
+	
+				// Get the child img id which holds some info we need.
+				var child = $(this).children().attr('id');
+	
+				// Child contains the object_id and the star number.
+				var object = child.split('_');
+	
+				// Set all the stars to grey first
+				$('#rating_' + object[1] + " li a img").each(function() {
+					$(this).attr({src: grey_star.src});
+				});
+	
+				// Set the red stars that we neeed to.
+				for (i = 1; i <= object[2]; i++)
+				{
+					$('#rating_' + object[1] + '_' + i).attr({src: red_star.src});
+				}
+			},
+			function(){
+				// Out function. Reset to default stars
+				$("ul.rating li a img.green").each(function() {
+					$(this).attr({src: green_star.src});
+				});
+	
+				$("ul.rating li a img.orange").each(function() {
+					$(this).attr({src: orange_star.src});
+				});
+	
+				$("ul.rating li a img.grey").each(function() {
+					$(this).attr({src: grey_star.src});
+				});
+			}
+		);
+	});
+// ]]>
+
+// <![CDATA[
+// Credits: http://yvoschaap.com/rating.js
+function datosServidor() {
+};
+datosServidor.prototype.iniciar = function() {
+	try {
+		// Mozilla / Safari
+		this._xh = new XMLHttpRequest();
+	} catch (e) {
+		// Explorer
+		var _ieModelos = new Array(
+		'MSXML2.XMLHTTP.5.0',
+		'MSXML2.XMLHTTP.4.0',
+		'MSXML2.XMLHTTP.3.0',
+		'MSXML2.XMLHTTP',
+		'Microsoft.XMLHTTP'
+		);
+		var success = false;
+		for (var i=0;i < _ieModelos.length && !success; i++) {
+			try {
+				this._xh = new ActiveXObject(_ieModelos[i]);
+				success = true;
+			} catch (e) {
+				// Implementar manejo de excepciones
+			}
+		}
+		if ( !success ) {
+			// Implementar manejo de excepciones, mientras alerta.
+			return false;
+		}
+		return true;
+	}
+}
+
+datosServidor.prototype.ocupado = function() {
+	estadoActual = this._xh.readyState;
+	return (estadoActual && (estadoActual < 4));
+}
+
+datosServidor.prototype.procesa = function() {
+	if (this._xh.readyState == 4 && this._xh.status == 200) {
+		this.procesado = true;
+	}
+}
+
+datosServidor.prototype.enviar = function(urlget,datos) {
+	if (!this._xh) {
+		this.iniciar();
+	}
+	if (!this.ocupado()) {
+		this._xh.open("GET",urlget,false);
+		this._xh.send(datos);
+		if (this._xh.readyState == 4 && this._xh.status == 200) {
+			return this._xh.responseText;
+		}
+		
+	}
+	return false;
+}
+
+
+// Este es un acceso rapido, le paso la url y el div a cambiar
+function _gr(reqseccion,divcont) {
+	remotos = new datosServidor;
+	nt = remotos.enviar(reqseccion,"");
+	document.getElementById(divcont).innerHTML = nt;
+}
+
+function rateArticle(rating)  {
+	remotos = new datosServidor;
+	nt = remotos.enviar('{RATE_URL}&rating='+rating);
+	document.getElementById('ratingtext').innerHTML = '{LA_RATED_THANKS}';
+	
+	if(rating == 0)
+	{
+		document.getElementById('rating_{ARTICLE_ID}_1').src = org_star_1;
+		document.getElementById('rating_{ARTICLE_ID}_2').src = org_star_2;
+		document.getElementById('rating_{ARTICLE_ID}_3').src = org_star_3;
+		document.getElementById('rating_{ARTICLE_ID}_4').src = org_star_4;
+		document.getElementById('rating_{ARTICLE_ID}_5').src = org_star_5;
+		document.getElementById('rating_{ARTICLE_ID}_6').src = org_star_6;
+	}
+	else if(rating == 1)
+	{
+		document.getElementById('rating_{ARTICLE_ID}_1').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_2').src = org_star_2;
+		document.getElementById('rating_{ARTICLE_ID}_3').src = org_star_3;
+		document.getElementById('rating_{ARTICLE_ID}_4').src = org_star_4;
+		document.getElementById('rating_{ARTICLE_ID}_5').src = org_star_5;
+		document.getElementById('rating_{ARTICLE_ID}_6').src = org_star_6;
+	}
+	else if(rating == 2)
+	{
+		document.getElementById('rating_{ARTICLE_ID}_1').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_2').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_3').src = org_star_3;
+		document.getElementById('rating_{ARTICLE_ID}_4').src = org_star_4;
+		document.getElementById('rating_{ARTICLE_ID}_5').src = org_star_5;
+		document.getElementById('rating_{ARTICLE_ID}_6').src = org_star_6;
+	}
+	else if(rating == 3)
+	{
+		document.getElementById('rating_{ARTICLE_ID}_1').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_2').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_3').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_4').src = org_star_4;
+		document.getElementById('rating_{ARTICLE_ID}_5').src = org_star_5;
+		document.getElementById('rating_{ARTICLE_ID}_6').src = org_star_6;
+	}
+	else if(rating == 4)
+	{
+		document.getElementById('rating_{ARTICLE_ID}_1').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_2').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_3').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_4').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_5').src = org_star_5;
+		document.getElementById('rating_{ARTICLE_ID}_6').src = org_star_6;
+	}
+	else if(rating == 5)
+	{
+		document.getElementById('rating_{ARTICLE_ID}_1').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_2').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_3').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_4').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_5').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_6').src = org_star_6;
+	}
+	else if(rating == 6)
+	{
+		document.getElementById('rating_{ARTICLE_ID}_1').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_2').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_3').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_4').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_5').src = green_star.src;
+		document.getElementById('rating_{ARTICLE_ID}_6').src = green_star.src;
+	}
+}
+
+// ]]>
+</script>

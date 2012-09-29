@@ -1,0 +1,41 @@
+<!-- INCLUDE mcp_header.html -->
+
+<h2>{L_TITLE}</h2>
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+
+	<p>{L_KB_ARTICLES_EXPLAIN}</p>
+	
+	<!-- IF .articlerow -->
+		<ul class="topiclist">
+			<li class="header">
+				<dl class="icon">
+					<dt>{L_APPROVED_ARTICLES}</dt>
+					<dd class="lastpost">{L_AUTHOR}</dd>
+					<dd class="mark">{L_ARTICLE_STATUS}</dd>
+				</dl>
+			</li>
+		</ul>
+		<ul class="topiclist cplist">
+	
+		<!-- BEGIN articlerow -->
+			<li class="row<!-- IF articlerow.S_ROW_COUNT is even --> bg1<!-- ELSE --> bg2<!-- ENDIF -->">
+				<dl class="icon" style="background-image: url({articlerow.ARTICLE_FOLDER_IMG_SRC}); background-repeat: no-repeat;">
+					<dt><!-- IF articlerow.ARTICLE_TYPE_IMG --><img src="{articlerow.ARTICLE_TYPE_IMG}" width="{articlerow.ARTICLE_TYPE_IMG_WIDTH}" height="{articlerow.ARTICLE_TYPE_IMG_HEIGHT}" alt="" /><!-- ENDIF --><a href="{articlerow.U_VIEW_ARTICLE}" class="topictitle">{articlerow.ARTICLE_TITLE}</a>
+						<!-- IF articlerow.ARTICLE_LAST_EDIT --><br />{articlerow.ARTICLE_LAST_EDIT}<!-- ENDIF -->
+					</dt>
+					<dd class="lastpost"><span>{L_POST_BY_AUTHOR} {articlerow.ARTICLE_AUTHOR_FULL}<br /><!-- IF articlerow.ATTACH_ICON_IMG -->{articlerow.ATTACH_ICON_IMG} <!-- ENDIF -->{articlerow.FIRST_POST_TIME}	</span>
+					</dd>
+					<dd class="mark"><a href="{articlerow.U_STATUS}" title="{L_ALTER_STATUS}">{L_ALTER_STATUS}</a></dd>
+				</dl>
+			</li>
+		<!-- END articlerow -->
+		</ul>
+	<!-- ELSE -->
+		<p><strong>{L_NO_APPROVED_ARTICLES}</strong></p>
+	<!-- ENDIF -->
+	
+<span class="corners-bottom"><span></span></span></div>
+</div>
+
+<!-- INCLUDE mcp_footer.html -->
