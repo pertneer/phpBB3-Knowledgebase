@@ -942,7 +942,6 @@ class knowledge_base
 			'L_HISTORY'				=> $user->lang['ARTICLE_HISTORY'],
 			'L_CONTENT' 			=> $user->lang['ARTICLE_CONTENT'],
 			'U_PERM_LINK'			=> generate_board_url() . '/' . kb_append_sid('article', array('id' => $this->article_id, 'title' => $article_type['article_title']), true),			
-			'U_LOCAL_PERM_LINK'		=> '[kb]'. $this->article_id . ', ' . $article_type['article_title'].'[/kb]',			
 			
 			'U_DLOAD_WORD'			=> append_sid("{$phpbb_root_path}kb.$phpEx", 'i=export&amp;a=' . $this->article_id),
 			'POSTER_ARTICLES' 		=> $article_data['user_articles'],
@@ -4133,11 +4132,11 @@ class knowledge_base
 			{
 				// Build them into rowset for use when listing them
 				$row['edit_type'] = unserialize($row['edit_type']);
-				$row['no_diff'] = true;
+				$row['nodiff'] = true;
 				
 				if(in_array(EDIT_TYPE_CONTENT, $row['edit_type']))
 				{
-					$row['no_diff'] = false;
+					$row['nodiff'] = false;
 					$diff_from_old = true;
 				}
 				
@@ -4200,8 +4199,8 @@ class knowledge_base
 					'ARTICLE_TITLE'		=> censor_text($article_type['article_title']),
 					'EDIT_BY'			=> sprintf($user->lang['EDITED_BY'], get_username_string('full', $edit['edit_user_id'], $edit['edit_user_name'], $edit['edit_user_color'])),
 					'S_IS_CONTRIB'		=> ($edit['edit_contribution']) ? true : false,
-					'S_CAN_DIFF_F'		=> ($can_diff_from && (!$rowset[$parent_id - 1]['no_diff'] || ($diff_from_old && $num == $total_edits))) ? true : false,
-					'S_CAN_DIFF_T'		=> ($rowset[$parent_id - 1]['no_diff'] || $num == $total_edits) ? false : true,
+					'S_CAN_DIFF_F'		=> ($can_diff_from && (!$rowset[$parent_id - 1]['nodiff'] || ($diff_from_old && $num == $total_edits))) ? true : false,
+					'S_CAN_DIFF_T'		=> ($rowset[$parent_id - 1]['nodiff'] || $num == $total_edits) ? false : true,
 					'S_ORG'				=> ($num == $total_edits) ? true : false,
 					'EDIT_TIME'			=> $user->format_date($edit['edit_time'], false, true),
 					'EDIT_ID'			=> $edit['edit_id'],
@@ -4215,7 +4214,7 @@ class knowledge_base
 					'NUM_PLUS'			=> $num + 1,
 				));
 				
-				if($rowset[$parent_id - 1]['no_diff'] && $can_diff_from)
+				if($rowset[$parent_id - 1]['nodiff'] && $can_diff_from)
 				{
 					$can_diff_from = false;
 				}

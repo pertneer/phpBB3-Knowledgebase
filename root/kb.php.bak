@@ -16,7 +16,6 @@ define('IN_PHPBB', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
-include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 include($phpbb_root_path . 'includes/kb.' . $phpEx);
 include($phpbb_root_path . 'includes/kb_auth.' . $phpEx);
 include($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
@@ -27,8 +26,6 @@ include($phpbb_root_path . 'includes/functions_plugins_kb.' . $phpEx);
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/kb');
-
-display_forums('', $config['load_moderators']);
 
 // Lets start the install/update of the kb
 // Automatically install or update if required
@@ -75,7 +72,7 @@ $cat_search = ($cat_id == 0) ? '' : '&amp;cat_ids[]=' . $cat_id;
 
 // Some default template variables
 $template->assign_vars(array(
-	'U_MCP'				=> ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=kb', true, $user->session_id) : '',
+	'U_MCP'				=> ($auth->acl_get('m_kb')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=kb') : false,
 ));
 
 // Handle all knowledge base related stuff, this file is only to call it, makes the user able to move it around

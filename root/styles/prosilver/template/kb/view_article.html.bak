@@ -30,24 +30,17 @@
 										<!-- IF S_ARTICLE_UNAPPROVED -->{UNAPPROVED_IMG} <a href="{U_STATUS}"><strong>{L_ARTICLE_UNAPPROVED}</strong></a><!-- ENDIF -->
 									</p>
 								<!-- ENDIF -->
-									<h2 class="kb">Knowledge Base</h2>						
-							<span class="error" style="font-size: 120%">{ARTICLE_TITLE}</span><br/>
+																
+							<h3 class="first"><a href="{U_VIEW_ARTICLE}	">{ARTICLE_TITLE}</a></h3>
 							<!-- IF S_EXTENDED_HEADER -->
 							<strong>{L_ARTICLE_ID}:</strong> {ARTICLE_ID}<br />
 							<strong>{L_WRITTEN_BY}:</strong> {POST_AUTHOR_FULL}<br />
 							<strong>{L_WRITTEN_ON}:</strong> {ARTICLE_TIME}<br />
 							<!-- IF ARTICLE_DESC --><strong>{L_DESCRIPTION}:</strong> {ARTICLE_DESC}<br /><!-- ENDIF -->
-							{ARTICLE_VIEWS}<br/>
 							
 							<div class="content">
 								<dl class="codebox">
-                                	<dt>{L_LOCAL_LINK_TO_THIS}: <a href="#" onclick="selectCode(this); return false;">Select all</a></dt>
-									<dd>
-										<code>{U_LOCAL_PERM_LINK}</code>
-									</dd>
-                                    </dl>
-                                    <dl class="codebox">
-									<dt>{L_LINK_TO_THIS}: <a href="#" onclick="selectCode(this); return false;">Select all</a></dt>
+									<dt>{L_LINK_TO_THIS}:</dt>
 									<dd>
 										<code>{U_PERM_LINK}</code>
 									</dd>
@@ -62,7 +55,9 @@
 							<span class="genmed"><strong>{L_DESCRIPTION}:</strong> {ARTICLE_DESC}</span>
 							<!-- ENDIF -->
 							<hr />
-							
+							<div class="pagination">
+								{ARTICLE_VIEWS}
+							</div>
 							<div class="content">{ARTICLE_MESSAGE}</div>
 
 							<!-- IF S_HAS_ATTACHMENTS -->

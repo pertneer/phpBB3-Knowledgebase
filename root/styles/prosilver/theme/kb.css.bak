@@ -80,20 +80,3 @@ ul.rating li, ul.rated li {
 .hidden {
 	display: none !important;
 }
-
-.error {
-color: #BC2A4D;
-font-weight: bold;
-	font-size: 1em;
-}
-
-.kb{
-	color: #4f84ad;
-	font-size: 2.8em;
-	font-weight: 900;
-	font-family: Helvetica,Arial,sans-serif;
-	margin-top: .5em;
-	margin-right: 0em;
-	margin-bottom: 0.25em;
-	margin-left: 0em;
-}
