@@ -75,6 +75,8 @@ $lang = array_merge($lang, array(
 {DESC}
 
 Here is a link to the article - {LINK}',
+	//'ARTICLE_CHECKSUM'					=>	'MD5 Checksum',
+	//<strong>{L_ARTICLE_CHECKSUM}:</strong> {ARTICLE_CHECKSUM}<br /> added to template/kb/view_article.html line 40
 	'ARTICLE_POST_BOT_MSG_EXPLAIN'		=> 'The message you want for your post, you may use the variables below.',
 	'ARTICLE_POST_BOT_SUB'				=> 'Post Subject',
 	'ARTICLE_POST_BOT_SUB_EX'			=> 'New Article - {TITLE}',
@@ -360,6 +362,7 @@ Here is a link to the article - {LINK}',
 	'KB_SUCCESS_SUBSCRIBE_ADD'			=> 'You have successfully marked the article for notification with the specified settings.',
 	'KB_SUCCESS_SUBSCRIBE_DELETE'		=> 'You have successfully deleted the notification settings for the specified article.',
 	'KB_SUCCESS_SUBSCRIBE_EDIT'			=> 'You have successfully edited the notification settings for the article.',
+	'KB_TITLE_DESC'						=>	'This section contains detailed articles elaborating on some of the common issues phpBB users encounter while using this Knowledge Base.</p><p>Below is a list of active articles currently in the Knowledge Base. ',
 	'KB_TOO_FEW_CHARS_ARTICLE'			=> 'Your article contains too few characters.',
 	'KB_TOO_FEW_CHARS_COMMENT'			=> 'Your comment contains too few characters.',
 	'KB_TOO_FEW_CHARS_DESC'				=> 'Your description contains too few characters.',

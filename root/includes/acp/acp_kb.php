@@ -319,7 +319,7 @@ class acp_kb
 				$errstr = '';
 				$errno = 0;
 
-				$info = get_remote_file('www.kb.softphp.dk', '/version_check', 'kb.txt', $errstr, $errno);
+				$info = get_remote_file('kb.pertneer.net', '/mods', 'knowledgebase.txt', $errstr, $errno);
 
 				if ($info === false)
 				{

@@ -26,7 +26,7 @@ class acp_kb_permissions_info
 		return array(
 			'filename'	=> 'acp_kb_permissions',
 			'title'		=> 'ACP_KB_PERMISSIONS',
-			'version'	=> '1.0.1',
+			'version'	=> '1.0.3',
 			'modes'		=> array(
 				'set_permissions'	=> array('title' => 'ACP_KB_PERMISSIONS',	'auth' => 'acl_a_board',	'cat' => array('ACP_KB')),
 				'set_roles'			=> array('title' => 'ACP_KB_ROLES',	'auth' => 'acl_a_board',	'cat' => array('ACP_KB')),
