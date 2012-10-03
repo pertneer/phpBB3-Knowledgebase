@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
-<!--For security purposes, please check: http
-://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
 	<header>
-		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-		<title lang="en">PhpBB3 Knowledge Base Mod</title>
-		<description lang="en">This mod adds a Knowledge Base to your forum, which is fully integrated with phpBB's core system. It is fully manageable through a ACP system found under the .MODS tab.</description>
-		<author-notes lang="en">This mod is a work in progress, so if you encounter any bugs or you have any features you want implemented, please do not hesitate to go to our website and tell us. This mod should be combitable with most other modifications, however, there are exceptions.</author-notes>
+		<meta name="generator" content="MODX file generated with PP MODX Creator 1.0.1 by tumba25 (offline version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[PhpBB3 Knowledge Base Mod]]></title>
+		<description lang="en"><![CDATA[This mod adds a Knowledge Base to your forum, which is fully integrated with phpBB's core system. It is fully manageable through a ACP system found under the .MODS tab.]]></description>
+		<author-notes lang="en"><![CDATA[This mod is a work in progress, so if you encounter any bugs or you have any features you want implemented, please do not hesitate to go to our website and tell us. This mod should be combitable with most other modifications, however, there are exceptions.]]></author-notes>
 		<author-group>
 			<author>
 				<realname><![CDATA[Tim Portner]]></realname>
@@ -19,31 +20,29 @@
 				</contributions-group>
 			</author>
 			<author>
-				<realname>Andreas Nexmann</realname>
-				<email>softphp@gmail.com</email>
-				<username>Imladris</username>
-				<homepage>http://kb.softphp.dk</homepage>
+				<realname><![CDATA[Andreas Nexmann]]></realname>
+				<username><![CDATA[Imladris]]></username>
+				<homepage><![CDATA[http://kb.softphp.dk]]></homepage>
+				<email><![CDATA[softphp@gmail.com]]></email>
 				<contributions-group>
-      		 		<contributions status="current" from="2009-05-01" position="Developer"/>
-      			</contributions-group>
+					<contributions status="past" from="2009-05-01" position="Developer"/>
+				</contributions-group>
 			</author>
 			<author>
-				<realname>Tom Martin</realname>
-				<email>tom.martin60@btinternet.com</email>
-				<username>Poppertom69</username>
-				<homepage></homepage>
+				<realname><![CDATA[Tom Martin]]></realname>
+				<username><![CDATA[Poppertom69]]></username>
+				<email><![CDATA[tom.martin60@btinternet.com]]></email>
 				<contributions-group>
-      		  		<contributions status="current" from="2009-05-01" position="Developer"/>
-      			</contributions-group>
+					<contributions status="past" from="2009-05-01" position="Developer"/>
+				</contributions-group>
 			</author>
 			<author>
-				<realname>C1</realname>
-				<email>C1WebDesign@gmail.com</email>
-				<username>thecharmed01</username>
-				<homepage></homepage>
+				<realname><![CDATA[C1]]></realname>
+				<username><![CDATA[thecharmed01]]></username>
+				<email><![CDATA[C1WebDesign@gmail.com]]></email>
 				<contributions-group>
-      		  		<contributions status="past" from="2009-08-01" to="2009-11-16" position="Stylist"/>
-      			</contributions-group>
+					<contributions status="past" from="2009-08-01" to="2009-11-16" position="Stylist"/>
+				</contributions-group>
 			</author>
 		</author-group>
 		<mod-version>1.0.3</mod-version>
@@ -54,227 +53,227 @@
 		</installation>
 		<history>
 			<entry>
-				<date>2010-06-21</date>
-				<rev-version>1.0.2</rev-version>
+				<date>2009-05-31</date>
+				<rev-version>0.0.7</rev-version>
 				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Fixed small language bug</change>
-					<change>Fixed XHTML validation errors</change>
-					<change>Added username change support</change>
-					<change>Added user deletion support</change>
-					<change>Fixed article description not showing on view article</change>
-					<change>Fixed comments pagination</change>
-					<change>Added user articles on viewtopic</change>
-					<change>Fixed several cosmetic things</change>
-					<change>Added subsilver2</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2010-04-14</date>
-				<rev-version>1.0.2RC3</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Fixed article counting problems</change>
-					<change>Fixed latest article plugin always appearing on post article</change>
-					<change>Fixed plugin cache cleaning problems</change>
-					<change>Added additional language support</change>
-					<change>Added 'Welcome to KB' article on fresh install</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2010-04-05</date>
-				<rev-version>1.0.2RC2</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Request article bug</change>
-					<change>Several small typos</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2010-02-11</date>
-				<rev-version>1.0.2RC1</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Fixed cosmetic bugs</change>
-					<change>Permission system fixed</change>
-					<change>Post bot fixed</change>
-					<change>New features:</change>
-					<change>Copyright line added</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2010-01-20</date>
-				<rev-version>1.0.1</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Code optimized in many places</change>
-					<change>Permission system fixed</change>
-					<change>Installation remade into steps</change>
-					<change>Various other cosmetic faults</change>
-					<change>New features:</change>
-					<change>SEO plugin added</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-11-19</date>
-				<rev-version>1.0.0</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Could not remove group permissions if role is assigned</change>
-					<change>Could not change assigned role for group</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-11-16</date>
-				<rev-version>1.0.0RC3</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Latest articles bug when moving article</change>
-					<change>No link for the MCP in KB</change>
-					<change>New KB icon on navbar</change>
-					<change>Headers in normal permission missing</change>
-					<change>Jumping to top in IE7</change>
-					<change>Adding user based cat permissions doesn't work</change>
-					<change>Notice error when approving article</change>
-					<change>Not included plugins file in ucp</change>
-					<change>Several smaller bugs in Post Bot Plugin</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-11-10</date>
-				<rev-version>1.0.0RC2</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Notice errors in functions_plugins_kb.php</change>
-					<change>Export word doesn't show</change>
-					<change>Rating stars not working anymore</change>
-					<change>Fatal Error when writing article as user</change>
-					<change>A/N on being logged out when clicking forum bot link:</change>
-					<change>This is unfortunately a "flaw" in the phpBB system and not in the mod itself. We just use a simple [url] bbcode to create the link and as the phpBB system doesn't use append_sid on it, some users will experience being logged out when the link is clicked.</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-22</date>
-				<rev-version>1.0.0RC1</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Email article field doesn't resize</change>
-					<change>Redo a bit of style when disabling menus</change>
-					<change>The no categories bar removed for subcats</change>
-					<change>Not rate own article</change>
-					<change>Reduce comments count on article delete</change>
-					<change>Related articles not working</change> 
-					<change>Special characters bug on search</change>
-					<change>Fix related articles show count</change>
-					<change>Add page specific plugins</change>
-					<change>Case sensitive search</change>
-					<change>Fix redirection when rating without ajax</change>
-					<change>Fix MPV bugs</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-20</date>
-				<rev-version>0.4.6</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Fixing some styling issues</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-17</date>
-				<rev-version>0.4.5</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Introducing modern and classic theme in an attempt to accommodate fixed width styles</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-13</date>
-				<rev-version>0.4.4</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Introducing a lot of new acp options for more customization</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-13</date>
-				<rev-version>0.4.3</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Adding ability to turn off menus</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-13</date>
-				<rev-version>0.4.2</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Ajax rating can be disabled</change>
-					<change>Fix article count for users</change>
-					<change>Fix article history bugs</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-09-14</date>
-				<rev-version>0.4.1</rev-version>
-				<changelog lang="en">
-					<change>Fixed large amount of bugs</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-08-31</date>
-				<rev-version>0.4.0</rev-version>
-				<changelog lang="en">
-					<change>Third and last BETA release</change>
-					<change>Added feature: Expansion of moderator permissions</change>
-					<change>Added feature: Open articles where all users can make contributions</change>
-					<change>Changed feature: The history section has been expanded and changed radically.</change>
-					<change>Fixed a decent amount of bugs</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-08-04</date>
-				<rev-version>0.3.0</rev-version>
-				<changelog lang="en">
-					<change>Second BETA release</change>
-					<change>Added feature: Pluginsystem that completely customizes your KB</change>
-					<change>Added feature: Localized category permissions that allow for integration with the above</change>
-					<change>Fixed a large number of bugs and added a couple of lesser features as well</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-06-18</date>
-				<rev-version>0.1.0</rev-version>
-				<changelog lang="en">
-					<change>First BETA release of KB mod available</change>
-					<change>Fixed quite a number of bugs</change>
-					<change>Added feature: Article types</change>
-					<change>Added feature: Article requests</change>
-					<change>Added feature: E-mail article to friend</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-06-07</date>
-				<rev-version>0.0.11</rev-version>
-				<changelog lang="en">
-					<change>Added feature: Article history</change>
-					<change>Added feature: Permission to post without needing approval</change>
+					<change><![CDATA[Initial Alpha release]]></change>
 				</changelog>
 			</entry>
 			<entry>
 				<date>2009-06-04</date>
 				<rev-version>0.0.10</rev-version>
 				<changelog lang="en">
-					<change>Added feature: MCP KB module</change>
-					<change>Added feature: Latest articles</change>
-					<change>Added feature: KB extension support</change>
+					<change><![CDATA[Added feature: MCP KB module]]></change>
+					<change><![CDATA[Added feature: Latest articles]]></change>
+					<change><![CDATA[Added feature: KB extension support]]></change>
 				</changelog>
 			</entry>
 			<entry>
-				<date>2009-05-31</date>
-				<rev-version>0.0.7</rev-version>
+				<date>2009-06-07</date>
+				<rev-version>0.0.11</rev-version>
 				<changelog lang="en">
-					<change>Initial Alpha release</change>
+					<change><![CDATA[Added feature: Article history]]></change>
+					<change><![CDATA[Added feature: Permission to post without needing approval]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-06-18</date>
+				<rev-version>0.1.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[First BETA release of KB mod available]]></change>
+					<change><![CDATA[Fixed quite a number of bugs]]></change>
+					<change><![CDATA[Added feature: Article types]]></change>
+					<change><![CDATA[Added feature: Article requests]]></change>
+					<change><![CDATA[Added feature: E-mail article to friend]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-08-04</date>
+				<rev-version>0.3.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Second BETA release]]></change>
+					<change><![CDATA[Added feature: Pluginsystem that completely customizes your KB]]></change>
+					<change><![CDATA[Added feature: Localized category permissions that allow for integration with the above]]></change>
+					<change><![CDATA[Fixed a large number of bugs and added a couple of lesser features as well]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-08-31</date>
+				<rev-version>0.4.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Third and last BETA release]]></change>
+					<change><![CDATA[Added feature: Expansion of moderator permissions]]></change>
+					<change><![CDATA[Added feature: Open articles where all users can make contributions]]></change>
+					<change><![CDATA[Changed feature: The history section has been expanded and changed radically.]]></change>
+					<change><![CDATA[Fixed a decent amount of bugs]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-09-14</date>
+				<rev-version>0.4.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Fixed large amount of bugs]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-13</date>
+				<rev-version>0.4.2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Ajax rating can be disabled]]></change>
+					<change><![CDATA[Fix article count for users]]></change>
+					<change><![CDATA[Fix article history bugs]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-13</date>
+				<rev-version>0.4.3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Adding ability to turn off menus]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-13</date>
+				<rev-version>0.4.4</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Introducing a lot of new acp options for more customization]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-17</date>
+				<rev-version>0.4.5</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Introducing modern and classic theme in an attempt to accommodate fixed width styles]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-20</date>
+				<rev-version>0.4.6</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Fixing some styling issues]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-22</date>
+				<rev-version>1.0.0RC1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Email article field doesn't resize]]></change>
+					<change><![CDATA[Redo a bit of style when disabling menus]]></change>
+					<change><![CDATA[The no categories bar removed for subcats]]></change>
+					<change><![CDATA[Not rate own article]]></change>
+					<change><![CDATA[Reduce comments count on article delete]]></change>
+					<change><![CDATA[Related articles not working]]></change>
+					<change><![CDATA[Special characters bug on search]]></change>
+					<change><![CDATA[Fix related articles show count]]></change>
+					<change><![CDATA[Add page specific plugins]]></change>
+					<change><![CDATA[Case sensitive search]]></change>
+					<change><![CDATA[Fix redirection when rating without ajax]]></change>
+					<change><![CDATA[Fix MPV bugs]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-11-10</date>
+				<rev-version>1.0.0RC2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Notice errors in functions_plugins_kb.php]]></change>
+					<change><![CDATA[Export word doesn't show]]></change>
+					<change><![CDATA[Rating stars not working anymore]]></change>
+					<change><![CDATA[Fatal Error when writing article as user]]></change>
+					<change><![CDATA[A/N on being logged out when clicking forum bot link:]]></change>
+					<change><![CDATA[This is unfortunately a "flaw" in the phpBB system and not in the mod itself. We just use a simple [url] bbcode to create the link and as the phpBB system doesn't use append_sid on it, some users will experience being logged out when the link is clicked.]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-11-16</date>
+				<rev-version>1.0.0RC3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Latest articles bug when moving article]]></change>
+					<change><![CDATA[No link for the MCP in KB]]></change>
+					<change><![CDATA[New KB icon on navbar]]></change>
+					<change><![CDATA[Headers in normal permission missing]]></change>
+					<change><![CDATA[Jumping to top in IE7]]></change>
+					<change><![CDATA[Adding user based cat permissions doesn't work]]></change>
+					<change><![CDATA[Notice error when approving article]]></change>
+					<change><![CDATA[Not included plugins file in ucp]]></change>
+					<change><![CDATA[Several smaller bugs in Post Bot Plugin]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-11-19</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Could not remove group permissions if role is assigned]]></change>
+					<change><![CDATA[Could not change assigned role for group]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-01-20</date>
+				<rev-version>1.0.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Code optimized in many places]]></change>
+					<change><![CDATA[Permission system fixed]]></change>
+					<change><![CDATA[Installation remade into steps]]></change>
+					<change><![CDATA[Various other cosmetic faults]]></change>
+					<change><![CDATA[New features:]]></change>
+					<change><![CDATA[SEO plugin added]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-02-11</date>
+				<rev-version>1.0.2RC1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Fixed cosmetic bugs]]></change>
+					<change><![CDATA[Permission system fixed]]></change>
+					<change><![CDATA[Post bot fixed]]></change>
+					<change><![CDATA[New features:]]></change>
+					<change><![CDATA[Copyright line added]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-04-05</date>
+				<rev-version>1.0.2RC2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Request article bug]]></change>
+					<change><![CDATA[Several small typos]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-04-14</date>
+				<rev-version>1.0.2RC3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Fixed article counting problems]]></change>
+					<change><![CDATA[Fixed latest article plugin always appearing on post article]]></change>
+					<change><![CDATA[Fixed plugin cache cleaning problems]]></change>
+					<change><![CDATA[Added additional language support]]></change>
+					<change><![CDATA[Added 'Welcome to KB' article on fresh install]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-06-21</date>
+				<rev-version>1.0.2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Fixed small language bug]]></change>
+					<change><![CDATA[Fixed XHTML validation errors]]></change>
+					<change><![CDATA[Added username change support]]></change>
+					<change><![CDATA[Added user deletion support]]></change>
+					<change><![CDATA[Fixed article description not showing on view article]]></change>
+					<change><![CDATA[Fixed comments pagination]]></change>
+					<change><![CDATA[Added user articles on viewtopic]]></change>
+					<change><![CDATA[Fixed several cosmetic things]]></change>
+					<change><![CDATA[Added subsilver2]]></change>
 				</changelog>
 			</entry>
 			<entry>
@@ -291,54 +290,53 @@
 				</changelog>
 			</entry>
 		</history>
-
 	</header>
 	<action-group>
-					<copy>
-									<file from="root/kb.php" to="kb.php" />
-									<file from="root/adm/style/acp_kb_cat.html" to="adm/style/acp_kb_cat.html" />
-									<file from="root/adm/style/acp_kb_health.html" to="adm/style/acp_kb_health.html" />
-									<file from="root/adm/style/acp_kb.html" to="adm/style/acp_kb.html" />
-									<file from="root/adm/style/acp_kb_types.html" to="adm/style/acp_kb_types.html" />
-									<file from="root/adm/style/acp_kb_plugins.html" to="adm/style/acp_kb_plugins.html" />
-									<file from="root/includes/acp/acp_kb_cats.php" to="includes/acp/acp_kb_cats.php" />
-									<file from="root/includes/acp/acp_kb_types.php" to="includes/acp/acp_kb_types.php" />
-									<file from="root/includes/acp/acp_kb.php" to="includes/acp/acp_kb.php" />
-									<file from="root/includes/acp/acp_kb_permissions.php" to="includes/acp/acp_kb_permissions.php" />
-									<file from="root/includes/acp/info/acp_kb_cats.php" to="includes/acp/info/acp_kb_cats.php" />
-									<file from="root/includes/acp/info/acp_kb_types.php" to="includes/acp/info/acp_kb_types.php" />
-									<file from="root/includes/acp/info/acp_kb.php" to="includes/acp/info/acp_kb.php" />
-									<file from="root/includes/acp/info/acp_kb_permissions.php" to="includes/acp/info/acp_kb_permissions.php" />
-									<file from="root/includes/constants_kb.php" to="includes/constants_kb.php" />
-									<file from="root/includes/functions_kb.php" to="includes/functions_kb.php" />
-									<file from="root/includes/kb_auth.php" to="includes/kb_auth.php" />
-									<file from="root/includes/functions_install_kb.php" to="includes/functions_install_kb.php" />
-									<file from="root/includes/functions_plugins_kb.php" to="includes/functions_plugins_kb.php" />
-									<file from="root/includes/kb.php" to="includes/kb.php" />
-									<file from="root/includes/kb_plugins/*.*" to="includes/kb_plugins/*.*" />
-									<file from="root/includes/ucp/ucp_kb.php" to="includes/ucp/ucp_kb.php" />
-									<file from="root/includes/ucp/info/ucp_kb.php" to="includes/ucp/info/ucp_kb.php" />
-									<file from="root/includes/mcp/mcp_kb.php" to="includes/mcp/mcp_kb.php" />
-									<file from="root/includes/mcp/info/mcp_kb.php" to="includes/mcp/info/mcp_kb.php" />
-									<file from="root/js/jquery-1.3.2.min.js" to="js/jquery-1.3.2.min.js" />
-									<file from="root/language/en/email/kb_email_notify.txt" to="language/en/email/kb_email_notify.txt" />
-									<file from="root/language/en/email/kb_notify_email.txt" to="language/en/email/kb_notify_email.txt" />
-									<file from="root/language/en/email/kb_notify_pm.txt" to="language/en/email/kb_notify_pm.txt" />
-									<file from="root/language/en/mods/info_acp_kb.php" to="language/en/mods/info_acp_kb.php" />
-									<file from="root/language/en/mods/info_acp_kb_permissions.php" to="language/en/mods/info_acp_kb_permissions.php" />
-									<file from="root/language/en/mods/info_ucp_kb.php" to="language/en/mods/info_ucp_kb.php" />
-									<file from="root/language/en/mods/info_mcp_kb.php" to="language/en/mods/info_mcp_kb.php" />
-									<file from="root/language/en/mods/kb.php" to="language/en/mods/kb.php" />
-									<file from="root/language/en/mods/permissions_kb.php" to="language/en/mods/permissions_kb.php" />
-									<file from="root/styles/prosilver/imageset/en/button_article_new.gif" to="styles/prosilver/imageset/en/button_article_new.gif" />
-									<file from="root/styles/prosilver/imageset/en/button_comment_new.gif" to="styles/prosilver/imageset/en/button_comment_new.gif" />
-									<file from="root/styles/prosilver/imageset/en/button_request_new.gif" to="styles/prosilver/imageset/en/button_request_new.gif" />
-									<file from="root/styles/prosilver/template/kb/*.*" to="styles/prosilver/template/kb/*.*" />
-									<file from="root/styles/prosilver/theme/kb.css" to="styles/prosilver/theme/kb.css" />
-									<file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*" />
-									<file from="root/umil/umil.php" to="umil/umil.php" />
-							</copy>
-					<open src=".htaccess">
+		<copy>
+			<file from="root/kb.php" to="kb.php"/>
+			<file from="root/adm/style/acp_kb_cat.html" to="adm/style/acp_kb_cat.html"/>
+			<file from="root/adm/style/acp_kb_health.html" to="adm/style/acp_kb_health.html"/>
+			<file from="root/adm/style/acp_kb.html" to="adm/style/acp_kb.html"/>
+			<file from="root/adm/style/acp_kb_types.html" to="adm/style/acp_kb_types.html"/>
+			<file from="root/adm/style/acp_kb_plugins.html" to="adm/style/acp_kb_plugins.html"/>
+			<file from="root/includes/acp/acp_kb_cats.php" to="includes/acp/acp_kb_cats.php"/>
+			<file from="root/includes/acp/acp_kb_types.php" to="includes/acp/acp_kb_types.php"/>
+			<file from="root/includes/acp/acp_kb.php" to="includes/acp/acp_kb.php"/>
+			<file from="root/includes/acp/acp_kb_permissions.php" to="includes/acp/acp_kb_permissions.php"/>
+			<file from="root/includes/acp/info/acp_kb_cats.php" to="includes/acp/info/acp_kb_cats.php"/>
+			<file from="root/includes/acp/info/acp_kb_types.php" to="includes/acp/info/acp_kb_types.php"/>
+			<file from="root/includes/acp/info/acp_kb.php" to="includes/acp/info/acp_kb.php"/>
+			<file from="root/includes/acp/info/acp_kb_permissions.php" to="includes/acp/info/acp_kb_permissions.php"/>
+			<file from="root/includes/constants_kb.php" to="includes/constants_kb.php"/>
+			<file from="root/includes/functions_kb.php" to="includes/functions_kb.php"/>
+			<file from="root/includes/kb_auth.php" to="includes/kb_auth.php"/>
+			<file from="root/includes/functions_install_kb.php" to="includes/functions_install_kb.php"/>
+			<file from="root/includes/functions_plugins_kb.php" to="includes/functions_plugins_kb.php"/>
+			<file from="root/includes/kb.php" to="includes/kb.php"/>
+			<file from="root/includes/kb_plugins/*.*" to="includes/kb_plugins/*.*"/>
+			<file from="root/includes/ucp/ucp_kb.php" to="includes/ucp/ucp_kb.php"/>
+			<file from="root/includes/ucp/info/ucp_kb.php" to="includes/ucp/info/ucp_kb.php"/>
+			<file from="root/includes/mcp/mcp_kb.php" to="includes/mcp/mcp_kb.php"/>
+			<file from="root/includes/mcp/info/mcp_kb.php" to="includes/mcp/info/mcp_kb.php"/>
+			<file from="root/js/jquery-1.3.2.min.js" to="js/jquery-1.3.2.min.js"/>
+			<file from="root/language/en/email/kb_email_notify.txt" to="language/en/email/kb_email_notify.txt"/>
+			<file from="root/language/en/email/kb_notify_email.txt" to="language/en/email/kb_notify_email.txt"/>
+			<file from="root/language/en/email/kb_notify_pm.txt" to="language/en/email/kb_notify_pm.txt"/>
+			<file from="root/language/en/mods/info_acp_kb.php" to="language/en/mods/info_acp_kb.php"/>
+			<file from="root/language/en/mods/info_acp_kb_permissions.php" to="language/en/mods/info_acp_kb_permissions.php"/>
+			<file from="root/language/en/mods/info_ucp_kb.php" to="language/en/mods/info_ucp_kb.php"/>
+			<file from="root/language/en/mods/info_mcp_kb.php" to="language/en/mods/info_mcp_kb.php"/>
+			<file from="root/language/en/mods/kb.php" to="language/en/mods/kb.php"/>
+			<file from="root/language/en/mods/permissions_kb.php" to="language/en/mods/permissions_kb.php"/>
+			<file from="root/styles/prosilver/imageset/en/button_article_new.gif" to="styles/prosilver/imageset/en/button_article_new.gif"/>
+			<file from="root/styles/prosilver/imageset/en/button_comment_new.gif" to="styles/prosilver/imageset/en/button_comment_new.gif"/>
+			<file from="root/styles/prosilver/imageset/en/button_request_new.gif" to="styles/prosilver/imageset/en/button_request_new.gif"/>
+			<file from="root/styles/prosilver/template/kb/*.*" to="styles/prosilver/template/kb/*.*"/>
+			<file from="root/styles/prosilver/theme/kb.css" to="styles/prosilver/theme/kb.css"/>
+			<file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*"/>
+			<file from="root/umil/umil.php" to="umil/umil.php"/>
+		</copy>
+		<open src=".htaccess">
 			<edit>
 				<find><![CDATA[<Files "common.php">
 Order Allow,Deny
@@ -877,6 +875,24 @@ img_button_request_new = button_request_new.gif*25*116]]></action>
 			<edit>
 				<find><![CDATA[<!-- IF postrow.POSTER_POSTS != '' --><dd><strong>{L_POSTS}:</strong> {postrow.POSTER_POSTS}</dd><!-- ENDIF -->]]></find>
 				<action type="after-add"><![CDATA[<!-- IF postrow.POSTER_ARTICLES > 0 --><dd><strong>{L_POSTS}:</strong> <a href="{postrow.U_POSTER_ARTICLES}">{postrow.POSTER_ARTICLES}</a></dd><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/links.css">
+			<edit>
+				<find><![CDATA[/* Post body links */
+.postlink {
+	text-decoration: none;
+	color: #d2d2d2;
+	border-bottom: 1px solid #d2d2d2;
+	padding-bottom: 0;
+}]]></find>
+				<action type="after-add"><![CDATA[
+/* kb link */
+a.kblink {
+	background: url("./images/kb_badge.gif") center right no-repeat;
+	padding-right: 34px;
+	zoom: 1; /* IE6/IE7 Wrapping fix */
+}]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/theme/stylesheet.css">
