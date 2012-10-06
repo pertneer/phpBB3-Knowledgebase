@@ -6,7 +6,7 @@
 	<header>
 		<meta name="generator" content="MODX file generated with PP MODX Creator 1.0.1 by tumba25 (offline version)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
-		<title lang="en"><![CDATA[PhpBB3 Knowledge Base Mod]]></title>
+		<title lang="en"><![CDATA[phpBB3-Knowledgebase]]></title>
 		<description lang="en"><![CDATA[This mod adds a Knowledge Base to your forum, which is fully integrated with phpBB's core system. It is fully manageable through a ACP system found under the .MODS tab.]]></description>
 		<author-notes lang="en"><![CDATA[This mod is a work in progress, so if you encounter any bugs or you have any features you want implemented, please do not hesitate to go to our website and tell us. This mod should be combitable with most other modifications, however, there are exceptions.]]></author-notes>
 		<author-group>
@@ -874,7 +874,7 @@ img_button_request_new = button_request_new.gif*25*116]]></action>
 		<open src="styles/prosilver/template/viewtopic_body.html">
 			<edit>
 				<find><![CDATA[<!-- IF postrow.POSTER_POSTS != '' --><dd><strong>{L_POSTS}:</strong> {postrow.POSTER_POSTS}</dd><!-- ENDIF -->]]></find>
-				<action type="after-add"><![CDATA[<!-- IF postrow.POSTER_ARTICLES > 0 --><dd><strong>{L_POSTS}:</strong> <a href="{postrow.U_POSTER_ARTICLES}">{postrow.POSTER_ARTICLES}</a></dd><!-- ENDIF -->]]></action>
+				<action type="after-add"><![CDATA[<!-- IF postrow.POSTER_ARTICLES > 0 --><dd><strong>{L_ARTICLES}:</strong> <a href="{postrow.U_POSTER_ARTICLES}">{postrow.POSTER_ARTICLES}</a></dd><!-- ENDIF -->]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/theme/links.css">
@@ -886,8 +886,7 @@ img_button_request_new = button_request_new.gif*25*116]]></action>
 	border-bottom: 1px solid #d2d2d2;
 	padding-bottom: 0;
 }]]></find>
-				<action type="after-add"><![CDATA[
-/* kb link */
+				<action type="after-add"><![CDATA[/* kb link */
 a.kblink {
 	background: url("./images/kb_badge.gif") center right no-repeat;
 	padding-right: 34px;
