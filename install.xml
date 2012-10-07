@@ -287,54 +287,14 @@
 					<change><![CDATA[changed classic look to be more like phpBB.com knowledgebase]]></change>
 					<change><![CDATA[removed upgrade files]]></change>
 					<change><![CDATA[temporaraly removed support for subsilver]]></change>
+					<change><![CDATA[added moderator notification to headers]]></change>
 				</changelog>
 			</entry>
 		</history>
 	</header>
 	<action-group>
 		<copy>
-			<file from="root/kb.php" to="kb.php"/>
-			<file from="root/adm/style/acp_kb_cat.html" to="adm/style/acp_kb_cat.html"/>
-			<file from="root/adm/style/acp_kb_health.html" to="adm/style/acp_kb_health.html"/>
-			<file from="root/adm/style/acp_kb.html" to="adm/style/acp_kb.html"/>
-			<file from="root/adm/style/acp_kb_types.html" to="adm/style/acp_kb_types.html"/>
-			<file from="root/adm/style/acp_kb_plugins.html" to="adm/style/acp_kb_plugins.html"/>
-			<file from="root/includes/acp/acp_kb_cats.php" to="includes/acp/acp_kb_cats.php"/>
-			<file from="root/includes/acp/acp_kb_types.php" to="includes/acp/acp_kb_types.php"/>
-			<file from="root/includes/acp/acp_kb.php" to="includes/acp/acp_kb.php"/>
-			<file from="root/includes/acp/acp_kb_permissions.php" to="includes/acp/acp_kb_permissions.php"/>
-			<file from="root/includes/acp/info/acp_kb_cats.php" to="includes/acp/info/acp_kb_cats.php"/>
-			<file from="root/includes/acp/info/acp_kb_types.php" to="includes/acp/info/acp_kb_types.php"/>
-			<file from="root/includes/acp/info/acp_kb.php" to="includes/acp/info/acp_kb.php"/>
-			<file from="root/includes/acp/info/acp_kb_permissions.php" to="includes/acp/info/acp_kb_permissions.php"/>
-			<file from="root/includes/constants_kb.php" to="includes/constants_kb.php"/>
-			<file from="root/includes/functions_kb.php" to="includes/functions_kb.php"/>
-			<file from="root/includes/kb_auth.php" to="includes/kb_auth.php"/>
-			<file from="root/includes/functions_install_kb.php" to="includes/functions_install_kb.php"/>
-			<file from="root/includes/functions_plugins_kb.php" to="includes/functions_plugins_kb.php"/>
-			<file from="root/includes/kb.php" to="includes/kb.php"/>
-			<file from="root/includes/kb_plugins/*.*" to="includes/kb_plugins/*.*"/>
-			<file from="root/includes/ucp/ucp_kb.php" to="includes/ucp/ucp_kb.php"/>
-			<file from="root/includes/ucp/info/ucp_kb.php" to="includes/ucp/info/ucp_kb.php"/>
-			<file from="root/includes/mcp/mcp_kb.php" to="includes/mcp/mcp_kb.php"/>
-			<file from="root/includes/mcp/info/mcp_kb.php" to="includes/mcp/info/mcp_kb.php"/>
-			<file from="root/js/jquery-1.3.2.min.js" to="js/jquery-1.3.2.min.js"/>
-			<file from="root/language/en/email/kb_email_notify.txt" to="language/en/email/kb_email_notify.txt"/>
-			<file from="root/language/en/email/kb_notify_email.txt" to="language/en/email/kb_notify_email.txt"/>
-			<file from="root/language/en/email/kb_notify_pm.txt" to="language/en/email/kb_notify_pm.txt"/>
-			<file from="root/language/en/mods/info_acp_kb.php" to="language/en/mods/info_acp_kb.php"/>
-			<file from="root/language/en/mods/info_acp_kb_permissions.php" to="language/en/mods/info_acp_kb_permissions.php"/>
-			<file from="root/language/en/mods/info_ucp_kb.php" to="language/en/mods/info_ucp_kb.php"/>
-			<file from="root/language/en/mods/info_mcp_kb.php" to="language/en/mods/info_mcp_kb.php"/>
-			<file from="root/language/en/mods/kb.php" to="language/en/mods/kb.php"/>
-			<file from="root/language/en/mods/permissions_kb.php" to="language/en/mods/permissions_kb.php"/>
-			<file from="root/styles/prosilver/imageset/en/button_article_new.gif" to="styles/prosilver/imageset/en/button_article_new.gif"/>
-			<file from="root/styles/prosilver/imageset/en/button_comment_new.gif" to="styles/prosilver/imageset/en/button_comment_new.gif"/>
-			<file from="root/styles/prosilver/imageset/en/button_request_new.gif" to="styles/prosilver/imageset/en/button_request_new.gif"/>
-			<file from="root/styles/prosilver/template/kb/*.*" to="styles/prosilver/template/kb/*.*"/>
-			<file from="root/styles/prosilver/theme/kb.css" to="styles/prosilver/theme/kb.css"/>
-			<file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*"/>
-			<file from="root/umil/umil.php" to="umil/umil.php"/>
+			<file from="root/*.*" to="*.*"/>
 		</copy>
 		<open src=".htaccess">
 			<edit>
@@ -856,6 +816,24 @@ img_button_comment_new = button_comment_new.gif*25*121
 img_button_request_new = button_request_new.gif*25*116]]></action>
 			</edit>
 		</open>
+		<open src="styles/prosilver/template/forum_body.html">
+			<edit>
+				<find><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a>&nbsp;]</p><!-- ENDIF -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --> ]</p><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/index_body.html">
+			<edit>
+				<find><![CDATA[<!-- IF U_MCP --><p>{CURRENT_TIME} <br />[&nbsp;<a href="{U_MCP}">{L_MCP}</a>&nbsp;]</p><!-- ELSEIF S_USER_LOGGED_IN --><p>{CURRENT_TIME}</p><!-- ENDIF -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>{CURRENT_TIME} <br />[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --> ]</p><!-- ELSEIF S_USER_LOGGED_IN --><p>{CURRENT_TIME}</p><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/mcp_header.html">
+			<edit>
+				<find><![CDATA[[ <a href="{U_MCP}">{L_MCP}</a><!-- IF U_MCP_FORUM --> | <a href="{U_MCP_FORUM}">{L_MODERATE_FORUM}</a><!-- ENDIF -->]]></find>
+				<action type="replace-with"><![CDATA[[ <a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> | <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --> <!-- IF U_MCP_FORUM --> | <a href="{U_MCP_FORUM}">{L_MODERATE_FORUM}</a><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
 		<open src="styles/prosilver/template/overall_header.html">
 			<edit>
 				<find><![CDATA[<script type="text/javascript">
@@ -869,6 +847,12 @@ img_button_request_new = button_request_new.gif*25*116]]></action>
 			<edit>
 				<find><![CDATA[<li class="icon-faq"><a href="{U_FAQ}" title="{L_FAQ_EXPLAIN}">{L_FAQ}</a></li>]]></find>
 				<action type="before-add"><![CDATA[<li class="icon-kb"> <a href="{U_KB}" title="{L_KB_EXPLAIN}">{L_KB}</a></li>]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/topic_body.html">
+			<edit>
+				<find><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a>&nbsp;]</p><!-- ENDIF -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --> ]</p><!-- ENDIF -->]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/viewtopic_body.html">
