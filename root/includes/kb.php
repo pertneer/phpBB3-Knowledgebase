@@ -1050,7 +1050,7 @@ class knowledge_base
 			*/
 			// New rating var (moved to functions powered by customization db code)
 			'RATING_STARS'			=> get_rating_stars($this->article_id, $this->cat_id, $has_rated, $can_rate, $article_data['article_rating'], $article_data['article_votes']),
-			'L_CURRENT_RATING' 		=> sprintf(($article_data['article_votes'] == 1) ? $user->lang['CURRENT_RATING_S'] : $user->lang['CURRENT_RATING_P'], (($article_data['article_votes'] == 0) ? 3 : $article_data['article_rating']), $article_data['article_votes']),
+			'L_CURRENT_RATING' 		=> sprintf(($article_data['article_votes'] == 1) ? $user->lang['CURRENT_RATING_S'] : $user->lang['CURRENT_RATING_P'], (($article_data['article_votes'] == 0) ? 0 : $article_data['article_rating']), $article_data['article_votes']),
 			
 			'DISABLE_LEFT_MENU'		=> ($config['kb_disable_left_menu']) ? true : false,
 			'DISABLE_RIGHT_MENU'	=> ($config['kb_disable_right_menu']) ? true : false,

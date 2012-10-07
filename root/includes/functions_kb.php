@@ -3221,6 +3221,7 @@ function get_rating_stars($article_id, $cat_id, $has_rated, $can_rate, $rating, 
 	// If it has not had any ratings yet, give it 1/2 the max for the rating
 	if ($votes == 0)
 	{
+		// Change default rating
 		$rating = 3;
 	}
 
