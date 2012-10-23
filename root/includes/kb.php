@@ -472,6 +472,7 @@ class knowledge_base
 				'ARTICLE_TYPE_IMG_WIDTH'	=> $article_type['type_image']['width'],
 				'ARTICLE_TYPE_IMG_HEIGHT'	=> $article_type['type_image']['height'],
 				'ATTACH_ICON_IMG'			=> ($auth->acl_get('u_kb_download', $this->cat_id) && $row['article_attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
+				
 				'U_VIEW_ARTICLE'			=> kb_append_sid('article', array('id' => $row['article_id'], 'title' => censor_text($article_type['article_title']))),
 			));
 		}
@@ -935,7 +936,6 @@ class knowledge_base
 			'ARTICLE_TITLE' 		=> $article_type['article_title'],
 			'ARTICLE_TITLE_CLEAN' 	=> strip_tags($article_type['article_title']),
 			'ARTICLE_POSTER'		=> $article_data['article_user_id'],
-			//'ARTICLE_CHECKSUM'		=>	$article_data['article_checksum'],
 			
 			'L_EDIT_ARTICLE'		=> $user->lang['KB_EDIT_ARTICLE'],
 			'L_DELETE_ARTICLE'		=> $user->lang['KB_DELETE_ARTICLE'],
@@ -1050,7 +1050,7 @@ class knowledge_base
 			*/
 			// New rating var (moved to functions powered by customization db code)
 			'RATING_STARS'			=> get_rating_stars($this->article_id, $this->cat_id, $has_rated, $can_rate, $article_data['article_rating'], $article_data['article_votes']),
-			'L_CURRENT_RATING' 		=> sprintf(($article_data['article_votes'] == 1) ? $user->lang['CURRENT_RATING_S'] : $user->lang['CURRENT_RATING_P'], (($article_data['article_votes'] == 0) ? 0 : $article_data['article_rating']), $article_data['article_votes']),
+			'L_CURRENT_RATING' 		=> sprintf(($article_data['article_votes'] == 1) ? $user->lang['CURRENT_RATING_S'] : $user->lang['CURRENT_RATING_P'], (($article_data['article_votes'] == 0) ? $config['kb_default_rating'] : $article_data['article_rating']), $article_data['article_votes']),
 			
 			'DISABLE_LEFT_MENU'		=> ($config['kb_disable_left_menu']) ? true : false,
 			'DISABLE_RIGHT_MENU'	=> ($config['kb_disable_right_menu']) ? true : false,
@@ -4464,8 +4464,7 @@ class knowledge_base
 						WHERE u.user_id = r.request_user_id
 						AND r.request_id = ' . $request_id;
 			break;
-		// add case for completing the article
-		//this will need to mark topic complete and provide a link to new article
+		
 			default:
 				$sql = '';
 			break;
