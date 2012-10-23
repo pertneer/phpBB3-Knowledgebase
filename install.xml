@@ -293,6 +293,43 @@
 		</history>
 	</header>
 	<action-group>
+		<sql><![CDATA[CREATE TABLE IF NOT EXISTS `phpbb_articles` (
+  `article_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `cat_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_title_clean` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_desc` text COLLATE utf8_bin NOT NULL,
+  `article_desc_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_desc_options` int(11) unsigned NOT NULL DEFAULT '7',
+  `article_desc_uid` varchar(8) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_text` mediumtext COLLATE utf8_bin NOT NULL,
+  `article_checksum` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_status` tinyint(1) NOT NULL DEFAULT '0',
+  `article_attachment` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `article_views` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_comments` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_user_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_user_color` varchar(6) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_time` int(11) unsigned NOT NULL DEFAULT '0',
+  `article_tags` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_type` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_votes` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `enable_bbcode` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `enable_smilies` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `enable_magic_url` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `enable_sig` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `bbcode_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `bbcode_uid` varchar(8) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_open` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `article_last_edit_time` int(11) unsigned NOT NULL DEFAULT '0',
+  `article_last_edit_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_edit_reason` mediumtext COLLATE utf8_bin NOT NULL,
+  `article_edit_reason_global` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `article_edit_type` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT 'a:0:{}',
+  `article_edit_contribution` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`article_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=0 ;]]></sql>
 		<copy>
 			<file from="root/*.*" to="/*.*"/>
 		</copy>
