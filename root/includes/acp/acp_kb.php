@@ -81,7 +81,7 @@ class acp_kb
 						'kb_enable'				=> array('lang' => 'KB_ENABLE',			'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false),						
 						'kb_link_name'			=> array('lang' => 'KB_LINK_NAME',		'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),						
 						'kb_copyright'			=> array('lang' => 'KB_PER_COPYRIGHT',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),	
-						'kb_default_rating'		=> array('lang' => 'KB_DEFAULT_RATING',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => false),						
+						'kb_default_rating'		=> array('lang' => 'KB_DEFAULT_RATING',	'validate' => 'int',	'type' => 'select', 'method' => 'select_default_rating', 'explain' => false),						
 						'kb_articles_per_page'	=> array('lang' => 'KB_ART_PER_PAGE',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => false),
 						'kb_comments_per_page'	=> array('lang' => 'KB_COM_PER_PAGE',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => false),
 						'kb_seo'				=> array('lang' => 'KB_SEO_ENABLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => true),
@@ -573,6 +573,20 @@ class acp_kb
 		global $user;
 		
 		return '<option value="0"' . (($value == 0) ? ' selected="selected"' : '') . '>' . $user->lang['KB_CLASSIC_LOOK'] . ' </option><option value="1"' . (($value == 1) ? ' selected="selected"' : '') . '>' . $user->lang['KB_MODERN_LOOK'] . '</option>';
+	}
+	
+	/**
+	* Select default rating
+	*/
+	function select_default_rating($value, $key = '')
+	{
+		global $user;
+		$default_rating = '';
+		$ratings = array('0','1','2','3','4','5','6');
+		foreach($ratings as $rating){
+			$default_rating .= '<option value="'.$rating.'"'.(($rating == $value) ? ' selected="selected"' : '').'>'.$rating.'</option>';
+		}
+		return $default_rating;
 	}
 }
 
