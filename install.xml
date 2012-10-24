@@ -856,13 +856,13 @@ img_button_request_new = button_request_new.gif*25*116]]></action>
 		<open src="styles/prosilver/template/index_body.html">
 			<edit>
 				<find><![CDATA[<!-- IF U_MCP --><p>{CURRENT_TIME} <br />[&nbsp;<a href="{U_MCP}">{L_MCP}</a>&nbsp;]</p><!-- ELSEIF S_USER_LOGGED_IN --><p>{CURRENT_TIME}</p><!-- ENDIF -->]]></find>
-				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>{CURRENT_TIME} <br />[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --> ]</p><!-- ELSEIF S_USER_LOGGED_IN --><p>{CURRENT_TIME}</p><!-- ENDIF -->]]></action>
+				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>{CURRENT_TIME} <br />[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --><!-- IF U_TOTAL_KB_REQUEST --> &bull; <a href="{U_KB_REQUEST}">{U_TOTAL_KB_REQUEST}</a><!-- ENDIF --> ]</p><!-- ELSEIF S_USER_LOGGED_IN --><p>{CURRENT_TIME}</p><!-- ENDIF -->]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/mcp_header.html">
 			<edit>
 				<find><![CDATA[[ <a href="{U_MCP}">{L_MCP}</a><!-- IF U_MCP_FORUM --> | <a href="{U_MCP_FORUM}">{L_MODERATE_FORUM}</a><!-- ENDIF -->]]></find>
-				<action type="replace-with"><![CDATA[[ <a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> | <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --> <!-- IF U_MCP_FORUM --> | <a href="{U_MCP_FORUM}">{L_MODERATE_FORUM}</a><!-- ENDIF -->]]></action>
+				<action type="replace-with"><![CDATA[[ <a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> | <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --><!-- IF U_TOTAL_KB_REQUEST --> | <a href="{U_KB_REQUEST}">{U_TOTAL_KB_REQUEST}</a><!-- ENDIF --> <!-- IF U_MCP_FORUM --> | <a href="{U_MCP_FORUM}">{L_MODERATE_FORUM}</a><!-- ENDIF -->]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/overall_header.html">
@@ -883,13 +883,13 @@ img_button_request_new = button_request_new.gif*25*116]]></action>
 		<open src="styles/prosilver/template/viewforum_body.html">
 			<edit>
 				<find><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a>&nbsp;]</p><!-- ENDIF -->]]></find>
-				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --> ]</p><!-- ENDIF -->]]></action>
+				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --><!-- IF U_TOTAL_KB_REQUEST --> &bull; <a href="{U_KB_REQUEST}">{U_TOTAL_KB_REQUEST}</a><!-- ENDIF --> ]</p><!-- ENDIF -->]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/viewtopic_body.html">
 			<edit>
 				<find><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a>&nbsp;]</p><!-- ENDIF -->]]></find>
-				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --> ]</p><!-- ENDIF -->]]></action>
+				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --><!-- IF U_TOTAL_KB_REQUEST --> &bull; <a href="{U_KB_REQUEST}">{U_TOTAL_KB_REQUEST}</a><!-- ENDIF --> ]</p><!-- ENDIF -->]]></action>
 			</edit>
 			<edit>
 				<find><![CDATA[<!-- IF postrow.POSTER_POSTS != '' --><dd><strong>{L_POSTS}:</strong> {postrow.POSTER_POSTS}</dd><!-- ENDIF -->]]></find>
