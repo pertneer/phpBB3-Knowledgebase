@@ -40,7 +40,9 @@ $lang = array_merge($lang, array(
     'MODERATOR_NEEDED_APPROVE_KB'      => '<strong style="color:#FF0000;">%d</strong> Article needs approval',
     'MODERATOR_NEEDED_APPROVE_KBS'      => '<strong style="color:#FF0000;">%d</strong> Articles need approval',
     'MODERATOR_NEEDED_REPORTED_KB'       => '<strong style="color:#FF0000;">%d</strong> Article is reported',
-    'MODERATOR_NEEDED_REPORTED_KBS'      => '<strong style="color:#FF0000;">%d</strong> Articles are reported',   
+    'MODERATOR_NEEDED_REPORTED_KBS'      => '<strong style="color:#FF0000;">%d</strong> Articles are reported',
+	'MODERATOR_NEEDED_REQUESTED_KB'       => '<strong style="color:#FF0000;">%d</strong> Article Request',
+    'MODERATOR_NEEDED_REQUESTED_KBS'      => '<strong style="color:#FF0000;">%d</strong> Articles Requested',		
 ));
 
 ?>
