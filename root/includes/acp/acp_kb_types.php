@@ -200,6 +200,7 @@ class acp_kb_types
 				// Pass template variables
 				$template->assign_vars(array(
 					'S_EDIT_CAT'		=> true,
+					'U_BACK'			=> $this->u_action ,
 					'L_TITLE'			=> ($action == 'add') ? $user->lang['TYPE_ADD'] : $user->lang['TYPE_EDIT'],
 					'TYPE_TITLE'		=> $type_data['type_title'],
 					'TYPE_BEFORE'		=> $type_data['type_before'],
