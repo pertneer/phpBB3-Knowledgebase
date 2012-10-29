@@ -16,7 +16,7 @@
 				<homepage><![CDATA[http://kb.pertneer.net]]></homepage>
 				<email><![CDATA[pertneer@pertneer.net]]></email>
 				<contributions-group>
-					<contributions status="current" from="2009-05-01" position="Developer"/>
+					<contributions status="current" from="2012-10-1" position="Developer"/>
 				</contributions-group>
 			</author>
 			<author>
@@ -25,7 +25,7 @@
 				<homepage><![CDATA[http://kb.softphp.dk]]></homepage>
 				<email><![CDATA[softphp@gmail.com]]></email>
 				<contributions-group>
-					<contributions status="past" from="2009-05-01" position="Developer"/>
+					<contributions status="past" from="2009-05-01" to="2012-10-1" position="Developer"/>
 				</contributions-group>
 			</author>
 			<author>
@@ -33,7 +33,7 @@
 				<username><![CDATA[Poppertom69]]></username>
 				<email><![CDATA[tom.martin60@btinternet.com]]></email>
 				<contributions-group>
-					<contributions status="past" from="2009-05-01" position="Developer"/>
+					<contributions status="past" from="2009-05-01" to="2012-10-1" position="Developer"/>
 				</contributions-group>
 			</author>
 			<author>
@@ -344,6 +344,26 @@ Deny from All
 Rewriterule ^(.+)/(.+)/a([0-9]*).html					./includes/kb_plugins/seo.php?a=$3&%{QUERY_STRING} [L]
 Rewriterule ^(.+)/(.+)/c([0-9]*).html					./includes/kb_plugins/seo.php?c=$3&%{QUERY_STRING} [L]
 Rewriterule ^tag/(.+)/									./includes/kb_plugins/seo.php?t=$1&%{QUERY_STRING} [L]]]></action>
+			</edit>
+		</open>
+		<open src="memberlist.php">
+			<edit>
+				<find><![CDATA[$percentage = ($config['num_posts']) ? min(100, ($member['user_posts'] / $config['num_posts']) * 100) : 0;]]></find>
+				<action type="after-add"><![CDATA[		$article_per_day = $member['user_articles'] / $memberdays;
+		$article_percentage = ($config['kb_total_articles']) ? min(100, ($member['user_articles'] / $config['kb_total_articles']) * 100) : 0;]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['POSTS_PCT'			=> sprintf($user->lang['POST_PCT'], $percentage),]]></find>
+				<action type="after-add"><![CDATA[			'ARTICLES_DAY'			=> sprintf($user->lang['ARTICLES_DAY'], $article_per_day),
+			'ARTICLES_PCT'			=> sprintf($user->lang['ARTICLES_PCT'], $article_percentage),]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['AGE'			=> $age,]]></find>
+				<action type="after-add"><![CDATA[		'ARTICLES'		=> ($data['user_articles']) ? $data['user_articles'] : 0,]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['U_SEARCH_USER'	=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", "author_id=$user_id&amp;sr=posts") : '',]]></find>
+				<action type="after-add"><![CDATA[		'U_SEARCH_USER_ARTICLES'	=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}kb.$phpEx", "author_id=$user_id&amp;i=search") : '',]]></action>
 			</edit>
 		</open>
 		<open src="viewonline.php">
@@ -821,10 +841,23 @@ else
 		</open>
 		<open src="language/en/common.php">
 			<edit>
+				<find><![CDATA['ASCENDING'						=> 'Ascending',]]></find>
+				<action type="before-add"><![CDATA[	'ARTICLES_DAY'					=> '%.2f articles per day',
+	'ARTICLES_PCT'					=> '%.2f%% of all articles',]]></action>
+			</edit>
+			<edit>
 				<find><![CDATA[	'KIB'					=> 'KiB',]]></find>
 				<action type="after-add"><![CDATA[	'KNOWLEDGE_BASE'		=> 'Knowledge Base',
 	'KB_EXPLAIN'			=> 'Knowledge Base',
 	'ARTICLES'			=> 'Articles',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['SEARCH_UNREAD'				=> 'View unread posts',]]></find>
+				<action type="after-add"><![CDATA[	'SEARCH_USER_ARTICLES'		=> 'Search user’s articles',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['TOPIC_UNAPPROVED'	=> 'This topic has not been approved',]]></find>
+				<action type="after-add"><![CDATA[	'TOTAL_ARTICLES'	=> 'Total Articles',]]></action>
 			</edit>
 		</open>
 		<open src="language/en/acp/attachments.php">
@@ -863,6 +896,15 @@ img_button_request_new = button_request_new.gif*25*116]]></action>
 			<edit>
 				<find><![CDATA[[ <a href="{U_MCP}">{L_MCP}</a><!-- IF U_MCP_FORUM --> | <a href="{U_MCP_FORUM}">{L_MODERATE_FORUM}</a><!-- ENDIF -->]]></find>
 				<action type="replace-with"><![CDATA[[ <a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> | <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --><!-- IF U_TOTAL_KB_REQUEST --> | <a href="{U_KB_REQUEST}">{U_TOTAL_KB_REQUEST}</a><!-- ENDIF --> <!-- IF U_MCP_FORUM --> | <a href="{U_MCP_FORUM}">{L_MODERATE_FORUM}</a><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/memberlist_view.html">
+			<edit>
+				<find><![CDATA[<dt>{L_TOTAL_POSTS}:</dt>]]></find>
+				<action type="before-add"><![CDATA[			<dt>{L_TOTAL_ARTICLES}:</dt>
+				<dd>{ARTICLES} <!-- IF S_DISPLAY_SEARCH -->| <strong><a href="{U_SEARCH_USER_ARTICLES}">{L_SEARCH_USER_ARTICLES}</a></strong><!-- ENDIF -->
+					<!-- IF POSTS_PCT --><br />({ARTICLES_PCT} / {ARTICLES_DAY})<!-- ENDIF -->
+				</dd>]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/overall_header.html">
