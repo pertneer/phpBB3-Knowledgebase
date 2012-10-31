@@ -1865,7 +1865,8 @@ class knowledge_base
 		$img_status		= ($bbcode_status && $auth->acl_get('u_kb_img', $this->cat_id)) ? true : false;
 		$url_status		= ($config['kb_allow_post_links']) ? true : false;
 		$flash_status	= ($bbcode_status && $auth->acl_get('u_kb_flash', $this->cat_id) && $config['kb_allow_post_flash']) ? true : false;
-																								 
+		$edit_data = array();
+		
 		if ($submit || $preview || $refresh)
 		{
 			// Create old data for edit type check
