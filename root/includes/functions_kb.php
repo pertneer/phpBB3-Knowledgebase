@@ -2206,13 +2206,14 @@ function handle_related_articles($article_id, $article_title, $article_title_cle
 	
 	$related_articles = $articles_found = array();
 	$shown = $article_count = 0;
+	
 	while($row = $db->sql_fetchrow($result))
 	{
-		if($shown < $show_num && $shown >= $ra_start)
+		if($shown < $show_num + $ra_start && $shown >= $ra_start)
 		{
 			$related_articles[$row['article_id']] = $row['article_title'];
-			$shown++;
 		}
+		$shown++;
 		$articles_found[] = $row['article_id'];
 	}
 	$db->sql_freeresult($result);
@@ -2346,7 +2347,7 @@ function handle_latest_articles($mode, $cat_id, $data, $show)
 		break;
 		
 		case 'delete':
-			// Call delete here only used it article id thats getting deleted is is recent articles for that cat
+			// Call delete here only used if article id thats getting deleted is in recent articles for that cat
 			$sql = $db->sql_build_query('SELECT', array(
 				'SELECT'	=> 'c.latest_ids',
 				'FROM'		=> array(
