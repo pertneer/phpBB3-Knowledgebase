@@ -277,7 +277,7 @@
 				</changelog>
 			</entry>
 			<entry>
-				<date>2012-09-29</date>
+				<date>2012-11-02</date>
 				<rev-version>1.0.3</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[updated version to reflect taking over mod]]></change>
@@ -288,6 +288,13 @@
 					<change><![CDATA[removed upgrade files]]></change>
 					<change><![CDATA[temporaraly removed support for subsilver]]></change>
 					<change><![CDATA[added moderator notification to headers]]></change>
+					<change><![CDATA[Added article information to memberlist]]></change>
+					<change><![CDATA[Bugfix #5 latest article plugin shows no article after deleting most recent article]]></change>
+					<change><![CDATA[Bugfix #8 Updating plugin crashes]]></change>
+					<change><![CDATA[Bugfix #7 related article pagination error]]></change>
+					<change><![CDATA[bugfix #3 submission of new article error: undefined variable: edit_data]]></change>
+					<change><![CDATA[add Total article information to memberlist_view]]></change>
+					<change><![CDATA[Bugfix #1 acp_kb_types.php back button error]]></change>
 				</changelog>
 			</entry>
 		</history>
