@@ -358,6 +358,24 @@ Rewriterule ^tag/(.+)/									./includes/kb_plugins/seo.php?t=$1&%{QUERY_STRING
 			'ARTICLES_PCT'			=> sprintf($user->lang['ARTICLES_PCT'], $article_percentage),]]></action>
 			</edit>
 			<edit>
+				<find><![CDATA[$sort_key_text = array('a' => $user->lang['SORT_USERNAME'], 'b' => $user->lang['SORT_LOCATION'], 'c' => $user->lang['SORT_JOINED'], 'd' => $user->lang['SORT_POST_COUNT'], 'f' => $user->lang['WEBSITE'], 'g' => $user->lang['ICQ'], 'h' => $user->lang['AIM'], 'i' => $user->lang['MSNM'], 'j' => $user->lang['YIM'], 'k' => $user->lang['JABBER']);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA['d' => $user->lang['SORT_POST_COUNT'],]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ 'n' => $user->lang['SORT_ARTICLE_COUNT'],]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$sort_key_sql = array('a' => 'u.username_clean', 'b' => 'u.user_from', 'c' => 'u.user_regdate', 'd' => 'u.user_posts', 'f' => 'u.user_website', 'g' => 'u.user_icq', 'h' => 'u.user_aim', 'i' => 'u.user_msnm', 'j' => 'u.user_yim', 'k' => 'u.user_jabber');]]></find>
+				<inline-edit>
+					<inline-find><![CDATA['d' => 'u.user_posts',]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ 'n' => 'u.user_articles',]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['U_SORT_POSTS'			=> $sort_url . '&amp;sk=d&amp;sd=' . (($sort_key == 'd' && $sort_dir == 'a') ? 'd' : 'a'),]]></find>
+				<action type="before-add"><![CDATA[			'U_SORT_ARTICLES'		=> $sort_url . '&amp;sk=n&amp;sd=' . (($sort_key == 'n' && $sort_dir == 'a') ? 'd' : 'a'),]]></action>
+			</edit>
+			<edit>
 				<find><![CDATA['AGE'			=> $age,]]></find>
 				<action type="after-add"><![CDATA[		'ARTICLES'		=> ($data['user_articles']) ? $data['user_articles'] : 0,]]></action>
 			</edit>
@@ -896,6 +914,32 @@ img_button_request_new = button_request_new.gif*25*116]]></action>
 			<edit>
 				<find><![CDATA[[ <a href="{U_MCP}">{L_MCP}</a><!-- IF U_MCP_FORUM --> | <a href="{U_MCP_FORUM}">{L_MODERATE_FORUM}</a><!-- ENDIF -->]]></find>
 				<action type="replace-with"><![CDATA[[ <a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> | <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --><!-- IF U_TOTAL_KB_REQUEST --> | <a href="{U_KB_REQUEST}">{U_TOTAL_KB_REQUEST}</a><!-- ENDIF --> <!-- IF U_MCP_FORUM --> | <a href="{U_MCP_FORUM}">{L_MODERATE_FORUM}</a><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/memberlist_body.html">
+			<edit>
+				<find><![CDATA[<th class="posts"><a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a></th>]]></find>
+				<action type="after-add"><![CDATA[			<th class="posts"><a href="{U_SORT_ARTICLES}#memberlist">{L_ARTICLES}</a></th>]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<td colspan="<!-- IF U_SORT_ACTIVE -->5<!-- ELSE -->4<!-- ENDIF -->">&nbsp;</td>]]></find>
+				<action type="replace-with"><![CDATA[<td colspan="<!-- IF U_SORT_ACTIVE -->6<!-- ELSE -->5<!-- ENDIF -->">&nbsp;</td>]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<th class="posts"><a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a></th>]]></find>
+				<action type="after-add"><![CDATA[			<th class="posts"><a href="{U_SORT_ARTICLES}#memberlist">{L_ARTICLES}</a></th>]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<th class="posts">&nbsp;</th>]]></find>
+				<action type="after-add"><![CDATA[		<th class="posts">&nbsp;</th>]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<td class="posts"><!-- IF memberrow.POSTS and S_DISPLAY_SEARCH --><a href="{memberrow.U_SEARCH_USER}" title="{L_SEARCH_USER_POSTS}">{memberrow.POSTS}</a><!-- ELSE -->{memberrow.POSTS}<!-- ENDIF --></td>]]></find>
+				<action type="after-add"><![CDATA[		<td class="posts"><!-- IF memberrow.ARTICLES and S_DISPLAY_SEARCH --><a href="{memberrow.U_SEARCH_USER_ARTICLES}" title="{L_SEARCH_USER_ARTICLES}">{memberrow.ARTICLES}</a><!-- ELSE -->{memberrow.ARTICLES}<!-- ENDIF --></td>]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<td colspan="<!-- IF S_VIEWONLINE -->5<!-- ELSE -->4<!-- ENDIF -->">{L_NO_MEMBERS}</td>]]></find>
+				<action type="replace-with"><![CDATA[<td colspan="<!-- IF S_VIEWONLINE -->6<!-- ELSE -->5<!-- ENDIF -->">{L_NO_MEMBERS}</td>]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/memberlist_view.html">
