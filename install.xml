@@ -288,13 +288,6 @@
 					<change><![CDATA[removed upgrade files]]></change>
 					<change><![CDATA[temporaraly removed support for subsilver]]></change>
 					<change><![CDATA[added moderator notification to headers]]></change>
-					<change><![CDATA[Added article information to memberlist]]></change>
-					<change><![CDATA[Bugfix #5 latest article plugin shows no article after deleting most recent article]]></change>
-					<change><![CDATA[Bugfix #8 Updating plugin crashes]]></change>
-					<change><![CDATA[Bugfix #7 related article pagination error]]></change>
-					<change><![CDATA[bugfix #3 submission of new article error: undefined variable: edit_data]]></change>
-					<change><![CDATA[add Total article information to memberlist_view]]></change>
-					<change><![CDATA[Bugfix #1 acp_kb_types.php back button error]]></change>
 				</changelog>
 			</entry>
 		</history>
@@ -883,6 +876,12 @@ else
 			<edit>
 				<find><![CDATA['TOPIC_UNAPPROVED'	=> 'This topic has not been approved',]]></find>
 				<action type="after-add"><![CDATA[	'TOTAL_ARTICLES'	=> 'Total Articles',]]></action>
+			</edit>
+		</open>
+		<open src="language/en/memberlist.php">
+			<edit>
+				<find><![CDATA['SORT_POST_COUNT'		=> 'Post count',]]></find>
+				<action type="after-add"><![CDATA[	'SORT_ARTICLE_COUNT'	=> 'Article count',]]></action>
 			</edit>
 		</open>
 		<open src="language/en/acp/attachments.php">
