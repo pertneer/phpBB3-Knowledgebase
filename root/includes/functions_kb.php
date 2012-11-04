@@ -1711,7 +1711,7 @@ function generate_kb_nav($page_title = '', $data = array())
 		'S_IS_CAT'		=> true,
 		'FORUM_NAME'	=> $page_title,
 		'FORUM_ID'		=> 0,
-		'U_VIEW_FORUM'	=> '', // This is for the last page, it will link to the page itself
+		'U_VIEW_FORUM'	=> '#'// This is for the last page, it will link to the page itself
 	));
 	
 	return;
