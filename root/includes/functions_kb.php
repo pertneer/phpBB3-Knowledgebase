@@ -630,6 +630,11 @@ function article_submit($mode, &$data, $update_message = true, $article_id = 0)
 				WHERE cat_articles > 0
 				AND cat_id = ' . (int) $data['old_cat_id'];
 		$db->sql_query($sql);
+		
+		$sql = 'UPDATE ' . KB_TABLE . "
+				SET cat_id = {$data['cat_id']}
+				WHERE article_id = {$data['article_id']}";
+		$db->sql_query($sql);
 	}
 	
 	// Handle tags

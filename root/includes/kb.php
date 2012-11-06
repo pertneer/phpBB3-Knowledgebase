@@ -2270,9 +2270,9 @@ class knowledge_base
 						);
 						handle_latest_articles('edit', $data['cat_id'], $late_articles, $config['kb_latest_articles_c']);
 					
-						if($this->cat_id != $old_cat) // Update latest articles when moving article
+						if($this->cat_id != $data['old_cat_id']) // Update latest articles when moving article
 						{
-							handle_latest_articles('delete', $old_cat, $late_articles, $config['kb_latest_articles_c']);
+							handle_latest_articles('delete', $data['old_cat_id'], $late_articles, $config['kb_latest_articles_c']);
 						}
 						set_config('kb_last_updated', time(), true);
 					}
