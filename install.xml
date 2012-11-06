@@ -442,6 +442,12 @@ Rewriterule ^tag/(.+)/									./includes/kb_plugins/seo.php?t=$1&%{QUERY_STRING
 		'U_POSTER_ARTICLES' => append_sid($phpbb_root_path . 'kb.' . $phpEx, 'i=search&amp;author_id= ' . $poster_id),]]></action>
 			</edit>
 		</open>
+		<open src="adm/index.php">
+			<edit>
+				<find><![CDATA['U_INDEX'				=> append_sid("{$phpbb_root_path}index.$phpEx"),]]></find>
+				<action type="after-add"><![CDATA[		'U_KB_INDEX'			=> append_sid("{$phpbb_root_path}kb.$phpEx"),]]></action>
+			</edit>
+		</open>
 		<open src="adm/style/acp_attachments.html">
 			<edit>
 				<find><![CDATA[		<dl>
@@ -459,6 +465,12 @@ Rewriterule ^tag/(.+)/									./includes/kb_plugins/seo.php?t=$1&%{QUERY_STRING
 					<inline-find><![CDATA[<!-- ENDIF -->]]></inline-find>
 					<inline-action type="after-add"><![CDATA[<br /><span><!-- IF groups.S_ALLOWED_IN_KB -->&raquo; {L_ALLOW_IN_KB}<!-- ELSE -->&raquo; {L_NOT_ALLOWED_IN_KB}<!-- ENDIF --></span>]]></inline-action>
 				</inline-edit>
+			</edit>
+		</open>
+		<open src="adm/style/overall_header.html">
+			<edit>
+				<find><![CDATA[<p><a href="{U_ADM_INDEX}">{L_ADMIN_INDEX}</a> &bull; <a href="{U_INDEX}">{L_FORUM_INDEX}</a></p>]]></find>
+				<action type="replace-with"><![CDATA[<p><a href="{U_ADM_INDEX}">{L_ADMIN_INDEX}</a> &bull; <a href="{U_INDEX}">{L_FORUM_INDEX}</a> &bull; <a href="{U_KB_INDEX}">{L_KB}</a></p>]]></action>
 			</edit>
 		</open>
 		<open src="download/file.php">
