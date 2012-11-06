@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: functions_kb.php 514 2010-06-23 12:32:18Z andreas.nexmann@gmail.com $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: functions_kb.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -628,7 +628,7 @@ function article_submit($mode, &$data, $update_message = true, $article_id = 0)
 		$sql = 'UPDATE ' . KB_CATS_TABLE . '
 				SET cat_articles = cat_articles - 1
 				WHERE cat_articles > 0
-				AND cat_id = ' . (int) $old_data['cat_id'];
+				AND cat_id = ' . (int) $data['old_cat_id'];
 		$db->sql_query($sql);
 	}
 	
@@ -1711,7 +1711,7 @@ function generate_kb_nav($page_title = '', $data = array())
 		'S_IS_CAT'		=> true,
 		'FORUM_NAME'	=> $page_title,
 		'FORUM_ID'		=> 0,
-		'U_VIEW_FORUM'	=> '#'// This is for the last page, it will link to the page itself
+		'U_VIEW_FORUM'	=> '#', // This is for the last page, it will link to the page itself
 	));
 	
 	return;
@@ -3037,7 +3037,7 @@ function fix_error_vars($mode, $error)
 
 function export_data($type = 'word', $article_id)
 {
-	global $db, $phpbb_root_path, $user;
+	global $db, $phpbb_root_path, $user, $config;
 	
 	if(!$article_id)
 	{
@@ -3064,6 +3064,50 @@ function export_data($type = 'word', $article_id)
 	$text = generate_text_for_display($article_data['article_text'], $article_data['bbcode_uid'], $article_data['bbcode_bitfield'], 7);
 	$desc = generate_text_for_display($article_data['article_desc'], $article_data['article_desc_uid'], $article_data['article_desc_bitfield'], 7);
 	
+	$text = str_replace(':' . $article_data['bbcode_uid'], '', $article_data['article_text']);
+	
+	if($article_data['article_attachment'] == 1){
+	require_once 'kb_class_mht.php';
+	date_default_timezone_set('America/Chicago');
+	$kbMhtGenerator = new kbMhtGenerator();
+
+	$kbMhtGenerator->AddFile('phpBBHeaders.html', 'http://mhtfile/phpBBHeaders.htm', NULL);
+	$kbMhtGenerator->AddFile('cj7.bmp', 'http://mhtfile/cj7.bmp', NULL);
+
+	$filename = 'example.mht';
+	$kbMhtGenerator->MakeFile($filename);
+	$extentions = array('jpg','png','bmp');
+	
+	$sql = 'SELECT * FROM '. KB_ATTACHMENTS_TABLE.' 
+		WHERE article_id = '.$article_data['article_id'];
+	$result = $db->sql_query($sql);
+	
+	while($row = $db->sql_fetchrow($result)){
+		if(in_array($row['extention'],$extentions)){
+
+			$filename = $phpbb_root_path . $config['upload_path'] . '/' . $row['physical_filename'];
+
+			//we got the image data ready for .mht inclusion
+			$imageData['data'] = base64_encode(file_get_contents($filename));
+			//$imageData['name'] = $row['real_filename'];
+			//$imageData['mimetype'] = $row['mimetype'];
+			$kbMhtGenerator->AddFile($row['real_filename'], 'http://mhtfile/'.$row['real_filename'], NULL);
+			//try to include data uri: utter fail :(
+			//$src = 'data: '.$row['mimetype'].';base64,'.$imageData;
+			//$text = str_replace($row['real_filename'],$src,$text);
+			
+			
+		}
+	}
+	
+	for($i=0; $i < mysql_num_rows($result); $i++){
+		$text = str_replace('[attachment='.$i.']','<img src="',$text);
+		$text = str_replace('[/attachment]','">',$text);
+		$text = str_replace('<!-- ia'.$i.' -->','',$text);
+		
+	}
+	
+}
 	$output = '';
 	
 	switch ($type)

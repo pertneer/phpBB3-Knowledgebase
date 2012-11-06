@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: kb.php 514 2010-06-23 12:32:18Z andreas.nexmann@gmail.com $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: kb.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -2217,6 +2217,7 @@ class knowledge_base
 				);
 				// Edit type has already been set upon submission
 				$data['edit_type'] = ($this->mode == 'edit') ? check_edit_type($data, $edit_data, $update_message) : array();
+				$data['old_cat_id'] = $edit_data['cat_id'];
 				$article_id = article_submit($this->mode, $data, $update_message, $this->article_id);
 				
 				// Update table info for posting without approval
