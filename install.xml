@@ -718,7 +718,7 @@ else
 			<edit>
 				<find><![CDATA[		'U_RESTORE_PERMISSIONS'	=> ($user->data['user_perm_from'] && $auth->acl_get('a_switchperm')) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=restore_perm') : '',]]></find>
 				<action type="after-add"><![CDATA['U_KB'					=> append_sid("{$phpbb_root_path}kb.$phpEx"),
-'L_KB'					=> (isset($config['kb_link_name']) && $config['kb_link_name'] != '') ? $config['kb_link_name'] : $user->lang['KB'],]]></action>
+'L_KB'					=> (isset($config['kb_link_name']) && $config['kb_link_name'] != '') ? $config['kb_link_name'] : $user->lang['KB_NAME'],]]></action>
 			</edit>
 		</open>
 		<open src="includes/functions_user.php">
