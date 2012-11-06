@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: kb.php 504 2010-06-21 14:38:48Z andreas.nexmann@gmail.com $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: kb.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -64,6 +64,7 @@ $lang = array_merge($lang, array(
 	'ARTICLE_HISTORY'					=> 'View article history',
 	'ARTICLE_ID'						=> 'Article ID',
 	'ARTICLE_LINK'						=> 'Article Link',
+	'ARTICLE_LINK_LOCAL'				=> 'Local Article Link',
 	'ARTICLE_OPEN'						=> 'Open this article for others contribution',
 	'ARTICLE_POST_BOT'					=> 'Article post bot',
 	'ARTICLE_POST_BOT_MSG'				=> 'Post Message',
@@ -71,7 +72,7 @@ $lang = array_merge($lang, array(
 
 {AUTHOR} has written a new article called \'{TITLE}\'
 
-[b]It is about:[/b]
+[b]Article Description:[/b]
 {DESC}
 
 Here is a link to the article - {LINK}',
@@ -189,8 +190,8 @@ Here is a link to the article - {LINK}',
 	'INSTALL_DATA_TEXT'					=> 'The installer have inserted some default data into the new database tables. Press submit to continue.',
 	'INSTALL_DB'						=> 'Update database',
 	'INSTALL_DB_TEXT'					=> 'The installer have now created new database tables and updated the already existing ones. Press submit to continue.',
-	'INSTALL_KB'						=> 'Install Knowledge Base Mod',
-	'INSTALL_KB_CONFIRM'				=> 'Please confirm that you want to install the Knowledge Base Mod. Before starting the installation please take a full backup of your forum and please make sure you have downloaded the latest version of this mod. <br />This installation script uses the latest version of UMIL (Unified Mod Install Library), please make sure you have this installed in /phpbb root/umil/umil.php on your server. The script can be found at <a href=\'http://www.phpbb.com/mods/umil/\'>phpBB.com/mods/umil</a>. <br /><br /><b>For a detailed installation guide please see our <a href="http://kb.softphp.dk">website</a>.</b>',
+	'INSTALL_KB'						=> 'Install phpBB3-Knowledgebase Mod',
+	'INSTALL_KB_CONFIRM'				=> 'Please confirm that you want to install the phpBB3-Knowledgebase Mod. Before starting the installation please take a full backup of your forum and please make sure you have downloaded the latest version of this mod. <br />This installation script uses the latest version of UMIL (Unified Mod Install Library), please make sure you have this installed in /phpbb root/umil/umil.php on your server. The script can be found at <a href=\'http://www.phpbb.com/mods/umil/\'>phpBB.com/mods/umil</a>. <br /><br /><b>For a detailed installation guide please see our <a href="http://kb.pertneer.net">website</a>.</b>',
 	'INSTALL_MODULES'					=> 'Install modules',
 	'INSTALL_MODULES_TEXT'				=> 'The installer have now added the new modules for UCP, MCP and ACP. Press submit to continue.',
 	'INSTALL_PERMS'						=> 'Add permissions',
@@ -225,7 +226,7 @@ Here is a link to the article - {LINK}',
 	'KB_COMMENT_EDITED'					=> 'The comment has been successfully edited and you can now view the updated comment %shere%s.',
 	'KB_COMMENT_EDITED_BY'				=> 'This comment was last edited by %1$s on %2$s',
 	'KB_COM_PER_PAGE'					=> 'How many comments per page',
-	'KB_COPYRIGHT'						=> '&copy; PhpBB %1$sKnowledge Base Mod%2$s version %3$s',
+	'KB_COPYRIGHT'						=> '&copy; PhpBB %1$sphpBB3-Knowledgebase Mod%2$s version %3$s',
 	'KB_DELETED'						=> 'The article has been successfully deleted along with all the accompanying article data',
 	'KB_DELETE_ARTICLE'					=> 'Delete article',
 	'KB_DELETE_BOOKMARK'				=> 'Remove bookmark',
@@ -252,7 +253,7 @@ Here is a link to the article - {LINK}',
 	'KB_ICON'							=> 'Article Icon',
 	'KB_INDEX'							=> 'Knowledge Base Index',
 	'KB_INSTALLED'						=> 'Finish installation',
-	'KB_INSTALLED_TEXT'					=> 'Knowledge Base Mod version %1$s has been successfully installed, you may now proceed to the ACP to setup the mod. For a more detailed guide on how to setup the mod please visit our <a href="http://kb.softphp.dk">website</a>.',
+	'KB_INSTALLED_TEXT'					=> 'Knowledgebase Mod version %1$s has been successfully installed, you may now proceed to the ACP to setup the mod. For a more detailed guide on how to setup the mod please visit our <a href="http://kb.pertneer.net">website</a>.',
 	'KB_KEYWORDS_EXPLAIN'				=> 'Type in the keywords you want to search for here. Use a space to search for more keywords and decide if you want to search for all terms or just some of them. Special characters like + and - is not supported in this search.',
 	'KB_LAST_UPDATE'					=> 'Last updated',
 	'KB_LATEST'							=> 'Latest Article',
@@ -373,9 +374,9 @@ Here is a link to the article - {LINK}',
 	'KB_TOO_MANY_CHARS_REQUEST'			=> 'Your request contains %1$d characters. The maximum number of allowed characters is %2$d.',
 	'KB_TRANSLATION'					=> '',
 	'KB_UNBOOKMARK_MARKED'				=> 'Remove bookmarks',
-	'KB_UNINSTALLED'					=> 'Knowledge Base Mod has been successfully uninstalled',
+	'KB_UNINSTALLED'					=> 'phpBB3-Knowledgebase Mod has been successfully uninstalled',
 	'KB_UNSUBSCRIBE_MARKED'				=> 'Unsubscribe marked',
-	'KB_UPDATED'						=> 'Your Knowledge Base Mod has been updated to version %1$s, check the ACP for confirmation of this.',
+	'KB_UPDATED'						=> 'Your phpBB3-Knowledgebase Mod has been updated to version %1$s, check the ACP for confirmation of this.',
 	'KB_UPDATE_UMIL'					=> 'Please download the latest UMIL (Unified MOD Install Library) from: <a href=\'http://www.phpbb.com/mods/umil/\'>phpBB.com/mods/umil</a>',
 	'KB_USER_CANNOT_ADD'				=> 'You are not allowed to add an article.',
 	'KB_USER_CANNOT_COMMENT_ADD'		=> 'You are not allowed to add a comment.',
@@ -411,7 +412,7 @@ Here is a link to the article - {LINK}',
 	'NAME'								=> 'Name',
 	'NETVIBES'							=> 'Netvibes',
 	'NEWEST'							=> 'Newest',
-	'NOTIFY_PM_SUBJECT'					=> 'Notification from Knowledge Base Mod',
+	'NOTIFY_PM_SUBJECT'					=> 'Notification from phpBB3-Knowledgebase Mod',
 	'NO_ARTICLES'						=> 'There are no articles in this category.',
 	'NO_ARTICLES_CREATED'				=> 'No articles have been created yet!',
 	'NO_ARTICLES_REVISIONS'				=> 'No article revisions available yet',
@@ -559,8 +560,8 @@ Here is a link to the article - {LINK}',
 
 	'UNINSTALL'							=> 'Uninstall',
 	'UNINSTALLED_PLUGINS'				=> 'Uninstalled Plugins',
-	'UNINSTALL_KB'						=> 'Uninstall Knowledge Base Mod',
-	'UNINSTALL_KB_CONFIRM'				=> 'Please confirm that you want to uninstall the Knowledge Base Mod.',
+	'UNINSTALL_KB'						=> 'Uninstall phpBB3-Knowledgebase Mod',
+	'UNINSTALL_KB_CONFIRM'				=> 'Please confirm that you want to uninstall the phpBB3-Knowledgebase Mod.',
 	'UNINSTALL_PLUGIN'					=> 'Uninstall This Plugin',
 	'UNINSTALL_PLUGIN_CONFIRM'			=> 'are you sure you want to uninstall this plugin',
 	'UPDATE_INSTRUCTIONS'				=> '
@@ -587,8 +588,8 @@ Here is a link to the article - {LINK}',
 		You will then be guided through the update process. You will be notified once the update is complete.
 		</p>
 	',
-	'UPDATE_KB'							=> 'Update Knowledge Base Mod',
-	'UPDATE_KB_CONFIRM'					=> 'Please confirm that you want to update the Knowledge Base Mod to the latest version. Make sure that your phpBB is also updated to the latest version, or this version of KB Mod might not work. Furthermore you should make sure that you have a complete backup of your forum before you begin. Like the installer, this script uses the latest version of UMIL (Unified Mod Install Library), so please make sure you have this installed in /phpbb root/umil/umil.php on your server. The script can be found at <a href=\'http://www.phpbb.com/mods/umil/\'>phpBB.com/mods/umil</a>. <br /><br /><b>For a more detailed guide on how to update please visit our <a href="http://kb.softphp.dk">website</a>.</b>',
+	'UPDATE_KB'							=> 'Update phpBB3-Knowledgebase Mod',
+	'UPDATE_KB_CONFIRM'					=> 'Please confirm that you want to update the phpBB3-Knowledgebase Mod to the latest version. Make sure that your phpBB is also updated to the latest version, or this version of KB Mod might not work. Furthermore you should make sure that you have a complete backup of your forum before you begin. Like the installer, this script uses the latest version of UMIL (Unified Mod Install Library), so please make sure you have this installed in /phpbb root/umil/umil.php on your server. The script can be found at <a href=\'http://www.phpbb.com/mods/umil/\'>phpBB.com/mods/umil</a>. <br /><br /><b>For a more detailed guide on how to update please visit our <a href="http://kb.pertneer.net">website</a>.</b>',
 	'USE_CURRENT_TIME'					=> 'Use current time',
 	'USE_CUSTOM_AUTHOR'					=> 'Define another user as author',
 	'USE_CUSTOM_TIME'					=> 'Define custom time',
@@ -635,21 +636,21 @@ Here is a link to the article - {LINK}',
 	'ROLE_KB_GUEST'						=> 'Guests',
 	'ROLE_KB_GUEST_DESC'				=> 'This is a KB role with permissions suited for guests.',
 	'KB_FIRST_CAT'						=> 'Your First Category',
-	'KB_FIRST_CAT_DESC'					=> 'Welcome to the Knowledge Base Mod, this is an example of how a category looks like. Inside you will find an introduction article.',
+	'KB_FIRST_CAT_DESC'					=> 'Welcome to the phpBB3-Knowledgebase Mod, this is an example of how a category looks like. Inside you will find an introduction article.',
 	'KB_FIRST_ARTICLE_TITLE'			=> 'Your First Article',
-	'KB_FIRST_ARTICLE_DESC'				=> 'You have successfully installed Knowledge Base Mod and this is your first article, containing information on what to do after installing and other hints.',
-	'KB_FIRST_ARTICLE_TEXT'				=> '[color=purple][size=120][b]Welcome to Knowledge Base Mod![/b][/size][/color]
-Congratulations you have successfully installed the Knowledge Base Mod. If everything seems to be working fine, then continue down this article and see what you can do now to setup your new mod. If you had any problems during installation, or experience any problems in the future, do not hesitate to visit [url=http://kb.softphp.dk]kb.softphp.dk[/url], and report any bugs or ask for support. You can also find information on additional plugins, translations, styles and new versions there. 
-The team behind Knowledge Base Mod hopes you will find this mod useful as well as user friendly, happy article composing!  :D 
+	'KB_FIRST_ARTICLE_DESC'				=> 'You have successfully installed phpBB3-Knowledgebase Mod and this is your first article, containing information on what to do after installing and other hints.',
+	'KB_FIRST_ARTICLE_TEXT'				=> '[color=purple][size=120][b]Welcome to phpBB3-Knowledgebase Mod![/b][/size][/color]
+Congratulations you have successfully installed the phpBB3-Knowledgebase Mod. If everything seems to be working fine, then continue down this article and see what you can do now to setup your new mod. If you had any problems during installation, or experience any problems in the future, do not hesitate to visit [url=http://kb.pertneer.net]kb.pertneer.net[/url], and report any bugs or ask for support. You can also find information on additional plugins, translations, styles and new versions there. 
+The team behind phpBB3-Knowledgebase Mod hopes you will find this mod useful as well as user friendly, happy article composing!  :D 
 
-[url=http://kb.softphp.dk/kb.php?a=14]What to do after installing[/url]:
+[url=http://kb.pertneer.net/kb.php?a=13]What to do after installing[/url]:
 [list=1]
 [*]Setup the general settings the way you want them
-[*]Create your own categories - [url=http://kb.softphp.dk/kb.php?a=9]Videoguide[/url]
-[*]Set permissions for your categories - [url=http://kb.softphp.dk/kb.php?a=13]Videoguide[/url]
-[*]Configure the plugins - [url=http://kb.softphp.dk/kb.php?a=10]Videoguide[/url]
-[*]Create article types - [url=http://kb.softphp.dk/kb.php?a=11]Videoguide[/url]
-[*]Setup attachment extensions for the kb - [url=http://kb.softphp.dk/kb.php?a=12]Tutorial[/url][/list]',
+[*]Create your own categories - [url=http://kb.pertneer.net/kb.php?a=9]Categories[/url]
+[*]Set permission roles - [url=http://kb.pertneer.net/kb.php?a=12]Roles[/url]
+[*]Configure the plugins - [url=http://kb.pertneer.net/kb.php?a=10]Plugins[/url]
+[*]Create article types - [url=http://kb.pertneer.net/kb.php?a=8]Types[/url]
+[*]Setup attachment extensions for the kb - [url=http://kb.pertneer.net/kb.php?a=11]Extensions[/url][/list]',
 ));
 
 ?>

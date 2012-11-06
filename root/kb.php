@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: kb.php 410 2009-12-18 21:29:30Z tom.martin60@btinternet.com $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: kb.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -61,7 +61,7 @@ $kb_auth = new kb_auth;
 $kb_auth->acl($user->data, $auth);
 
 $copyright = '';
-$copyright .= sprintf($user->lang['KB_COPYRIGHT'], '<a href="http://kb.softphp.dk">', '</a>', KB_VERSION);
+$copyright .= sprintf($user->lang['KB_COPYRIGHT'], '<a href="http://kb.pertneer.net">', '</a>', KB_VERSION);
 $copyright .= ($user->lang['KB_TRANSLATION'] != '') ? '&nbsp;&bull;&nbsp;' . $user->lang['KB_TRANSLATION'] : '';
 $copyright .= ($user->lang['TRANSLATION_INFO'] != '') ? '<br />' . $user->lang['TRANSLATION_INFO'] : '';
 
