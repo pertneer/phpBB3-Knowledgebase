@@ -3119,7 +3119,8 @@ function export_data($type = 'word', $article_id)
 	switch ($type)
 	{
 		case 'word':
-			require_once 'kb_class_mht.php';
+			require_once ('kb_class_mht.' . $phpEx);
+			require_once('functions_posting.' . $phpEx);
 			date_default_timezone_set('America/Chicago');
 			$kbMhtGenerator = new kbMhtGenerator();
 			
@@ -3148,7 +3149,10 @@ function export_data($type = 'word', $article_id)
 						$filename = $phpbb_root_path . $config['upload_path'] . '/' . $row['physical_filename'];
 						$row['real_filename'] = strtolower($row['real_filename']);
 						//we got the image data ready for .mht inclusion
-						$imageData['data'] = file_get_contents($filename);
+						$save_as = str_replace(' ', '_', $article_data['article_title']);
+						$location = $phpbb_root_path . 'store/' . $save_as . $row['extension'];
+						$thumb = create_thumbnail($filename, $location, $row['mimetype']);
+						$imageData['data'] = file_get_contents($location);
 						//$imageData['name'] = $row['real_filename'];
 						//$imageData['mimetype'] = $row['mimetype'];
 						$kbMhtGenerator->AddContents( 'http://mhtfile/' . $row['real_filename'], $row['mimetype'], $imageData['data'], NULL);
@@ -3156,18 +3160,18 @@ function export_data($type = 'word', $article_id)
 						//$src = 'data: '.$row['mimetype'].';base64,'.$imageData;
 						//$text = str_replace($row['real_filename'],$src,$text);
 						$message = str_replace('<div class="inline-attachment">', '<img src="', $message);
-						$message = str_replace($row['real_filename'] . '</div>', $row['real_filename'] . '">', strtolower($message));
+						$message = str_replace($row['real_filename'] . '</div>', $row['real_filename'] . '"></div>', strtolower($message));
 					}
 				}
 			}
 			$message = censor_text($message);
-			
+			$message = str_replace('<img', '<div class="inline-attachment"><img', $message);
 			//$text = str_replace('[/list:u]', '</ul>',$text);
 			//$text = str_replace('[/*:m]', '</li>',$text);
 			//$text = str_replace('[*]', '<li>',$text);
 			//$text = str_replace('[list]', '<ul>',$text);
 			
-			$output .= "<html><head>
+			$output .= "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head>
 							<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
 							<style>
 							
@@ -3253,6 +3257,15 @@ function export_data($type = 'word', $article_id)
 								hr.dashed {
 									border-top: 1px dashed #CCCCCC;
 									margin: 10px 0;
+								}
+								/* Inline image thumbnails */
+								div.inline-attachment dl.thumbnail, div.inline-attachment dl.file {
+									display: block;
+									margin-bottom: 4px;
+								}
+
+								div.inline-attachment p {
+									font-size: 100%;
 								}
 
 
@@ -3521,20 +3534,30 @@ function export_data($type = 'word', $article_id)
 
 							</style>
 						</head>
-						<body id=\"phpbb\" class=\"section-kb ltr\">
+						<body id=\"phpbb\" class=\"section-kb ltr\" >
+						<!--[if gte mso 9]><xml>
+<w:WordDocument>
+<w:View>Print</w:View>
+<w:Zoom>90</w:Zoom> 
+<w:DoNotOptimizeForBrowser/>
+</w:WordDocument>
+</xml><![endif]-->
 						<div id=\"wrap\">
 						<div id=\"a\" class=\"post bg1\">
 					<div class=\"inner\">
 						<span class=\"corners-top\"><span></span></span>
 							<div class=\"postbody\" style=\"width: 100%;\">";
-			$output .= "<span style=\"font-weight: bold; text-align: center; font-size: 150%; \">" . $article_data['article_title'] . "</span><br /><br />";
+			$output .= "<h2 class=\"kb\">Knowledge Base</h2>";
+			$output .= "<span class=\"error\" style=\"font-size: 150%\">" . $article_data['article_title'] . "</span><br />";
 			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['ARTICLE_ID'] . ": </span>" . $article_data['article_id'] . "<br />";
 			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['WRITTEN_BY'] . ": </span>" . $article_data['article_user_name'] . "<br />";
 			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['WRITTEN_ON'] . ": </span>" . $user->format_date($article_data['article_time']) . "<br />";
 			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['DESCRIPTION'] . ": </span>" . $desc . "<hr /><br />";
 			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['ARTICLE_CONTENT'] . "</span><br />";
 			$output .= $message;
-			$output .= "</div><span class=\"corners-bottom\"><span></span></span></div></div></div></body></html>";
+			$output .= "<br><strong>";
+			$output .= ($config['kb_copyright'] != '') ? '&copy; ' . $config['kb_copyright'] : '';
+			$output .= "</strong></div><span class=\"corners-bottom\"><span></span></span></div></div></div></body></html>";
 			
 		//Set some formal stuff
 			$extension = '.doc';
