@@ -202,7 +202,6 @@ Here is a link to the article - {LINK}',
 	'INSTALL_UPDATE_TEXT'				=> 'The installer have now updated the mod to the latest version since the main installation script. Press submit to continue.',
 	'INSTALL_WELCOME'					=> 'Welcome screen',
 
-	'KB'								=> 'Knowledge Base',
 	'KB_ADDED'							=> 'The article has been successfully added and is now awaiting approval by a moderator. In the meantime, you can view your article %shere%s.',
 	'KB_ADDED_WA'						=> 'The article has been successfully added and can now be found in the category you chose. You can view it %shere%s.',
 	'KB_ADD_ARTICLE'					=> 'Add article',

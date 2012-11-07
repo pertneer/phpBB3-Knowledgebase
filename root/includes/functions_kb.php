@@ -1676,7 +1676,7 @@ function generate_kb_nav($page_title = '', $data = array())
 	// Knowledge Base link
 	$template->assign_block_vars('navlinks', array(
 		'S_IS_CAT'		=> true,
-		'FORUM_NAME'	=> $config['kb_link_name'],
+		'FORUM_NAME'	=> (isset($config['kb_link_name']) && $config['kb_link_name'] != '') ? $config['kb_link_name'] : $user->lang['KB_NAME'],
 		'FORUM_ID'		=> 0,
 		'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}kb.$phpEx"))
 	);

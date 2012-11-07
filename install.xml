@@ -877,9 +877,9 @@ else
 			</edit>
 			<edit>
 				<find><![CDATA[	'KIB'					=> 'KiB',]]></find>
-				<action type="after-add"><![CDATA[	'KNOWLEDGE_BASE'		=> 'Knowledge Base',
-	'KB_EXPLAIN'			=> 'Knowledge Base',
-	'ARTICLES'			=> 'Articles',]]></action>
+				<action type="after-add"><![CDATA[	'KB_NAME'				=> 'Knowledge Base',
+	'KB_EXPLAIN'			=> 'phpBB3-KnowledgeBase',
+	'ARTICLES'				=> 'Articles',]]></action>
 			</edit>
 			<edit>
 				<find><![CDATA['SEARCH_UNREAD'				=> 'View unread posts',]]></find>
