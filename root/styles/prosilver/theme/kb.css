@@ -2,16 +2,18 @@
 textarea.desc {
 	width: 40%;
 }
-
+ .inner hr{
+	clear:none;
+}
 /**
 * Left menu
 */
 #left_menu {
-	vertical-align: top;
+	float:left;
 }
 
 #right_menu {
-	vertical-align: top;
+	float:right;
 }
 
 .left_menu_title {
@@ -64,6 +66,7 @@ textarea.desc {
 	background-position: 0 50%;
 	background-repeat: no-repeat;
 	padding: 1px 0 0 23px;
+
 }
 
 /* Rating Code */
@@ -87,6 +90,13 @@ font-weight: bold;
 	font-size: 1em;
 }
 
+/* kb link */
+a.kblink {
+	background: url("./images/kb_badge.gif") center right no-repeat;
+	padding-right: 34px;
+	zoom: 1; /* IE6/IE7 Wrapping fix */
+}
+
 .kb{
 	color: #4f84ad;
 	font-size: 2.8em;
@@ -96,4 +106,28 @@ font-weight: bold;
 	margin-right: 0em;
 	margin-bottom: 0.25em;
 	margin-left: 0em;
+}
+
+/* Positioning of moderator icons */
+.kb_postbody ul.profile-icons {
+	float: right;
+	width: auto;
+	padding: 0;
+}
+
+.kb_postbody ul.profile-icons li {
+	margin: 0 3px;
+}
+#kb_postbody{
+	padding: 0 1em 0 1em; /* padding here creates white space "inside the box." */
+}
+
+.forabg span.corners-bottom{
+	clear:none;
+}
+.clearfloat { /* this class should be placed on a div or break element and should be the final element before the close of a container that should fully contain a float */
+	clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
 }

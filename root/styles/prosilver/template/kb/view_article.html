@@ -1,12 +1,12 @@
 <!-- INCLUDE kb/kb_header.html -->
-				<!-- IF U_MODCP -->&nbsp;<!-- ENDIF -->
+				
 				<!-- IF .changerow -->
 				<div class="panel">
 					<div class="inner">
 						<span class="corners-top"><span></span></span>
-							<div class="postbody" style="width: 100%;">
+							<div class="postbody">
 							<h4>{L_REV_CHANGES}:</h4>
-							<p><!-- BEGIN changerow -->{changerow.CHANGE}<br /><!-- END changerow --></p>
+							<!-- BEGIN changerow --><p>{changerow.CHANGE}<br />STUFF</p><!-- END changerow -->
 							</div>
 						<span class="corners-bottom"><span></span></span>
 					</div>
@@ -15,7 +15,7 @@
 				<div id="a" class="<!-- IF S_IS_MCP or S_IS_UCP -->panel<!-- ELSE -->post bg1<!-- ENDIF -->">
 					<div class="inner">
 						<span class="corners-top"><span></span></span>
-							<div class="postbody" style="width: 100%;">
+							<div class="kb_postbody">
 								<!-- IF U_STATUS or U_DELETE or U_EDIT or U_HISTORY and not S_IS_BOT -->
 									<ul class="profile-icons">
 										<!-- IF U_EDIT --><li class="edit-icon"><a href="{U_EDIT}" title="{L_EDIT_ARTICLE}"><span>{L_EDIT_ARTICLE}</span></a></li><!-- ENDIF -->
@@ -109,7 +109,7 @@
 				<!-- BEGIN postrow -->
 					<div id="p{postrow.ID}" class="post <!-- IF S_IS_MCP or S_IS_UCP -->pm<!-- ELSE --><!-- IF postrow.S_ROW_COUNT is odd -->bg1<!-- ELSE -->bg2<!-- ENDIF --><!-- ENDIF --><!-- IF postrow.S_REPORTED or postrow.S_UNAPPROVED --> reported<!-- ENDIF --><!-- IF postrow.USER_FOE --> foe<!-- ENDIF --><!-- IF postrow.S_DELETED --> deleted<!-- ENDIF --><!-- IF postrow.S_ONLINE --> online<!-- ENDIF -->" style="<!-- IF postrow.S_DELETED or postrow.USER_FOE --> display: none;<!-- ENDIF -->">
 						<div class="inner"><span class="corners-top"><span></span></span>
-							<div class="postbody<!-- IF S_IS_MCP or S_IS_UCP --> kb-mcp-postbody<!-- ENDIF -->">
+							<div class="kb_postbody<!-- IF S_IS_MCP or S_IS_UCP --> kb-mcp-postbody<!-- ENDIF -->">
 								<!-- IF postrow.U_QUOTE or postrow.U_INFO or postrow.U_DELETE or postrow.U_EDIT -->
 									<ul class="profile-icons">
 										<!-- IF postrow.U_EDIT --><li class="edit-icon"><a href="{postrow.U_EDIT}" title="{L_EDIT_POST}"><span>{L_EDIT_POST}</span></a></li><!-- ENDIF -->
@@ -192,7 +192,7 @@
 		
 			</form>
 			<!-- ENDIF -->
-			<hr />
+			
 
 			<div class="topic-actions">
 				<!-- IF U_ADD_COMMENT -->

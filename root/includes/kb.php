@@ -332,6 +332,8 @@ class knowledge_base
 		$template->assign_vars(array(
 			'LEFT_MENU_WIDTH'	=> $config['kb_left_menu_width'] . (($config['kb_left_menu_type'] == 0) ? 'px' : '%'),
 			'RIGHT_MENU_WIDTH'	=> $config['kb_right_menu_width'] . (($config['kb_right_menu_type'] == 0) ? 'px' : '%'),
+			'MAIN_CONTENT_LEFT_MARGIN'	=> $config['kb_left_menu_width'] . (($config['kb_left_menu_type'] == 0) ? 'px' : '%'),
+			'MAIN_CONTENT_RIGHT_MARGIN'	=> $config['kb_right_menu_width'] . (($config['kb_right_menu_type'] == 0) ? 'px' : '%'),
 		));
 	}
 	
