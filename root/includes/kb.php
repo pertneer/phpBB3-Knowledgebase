@@ -2219,7 +2219,12 @@ class knowledge_base
 				);
 				// Edit type has already been set upon submission
 				$data['edit_type'] = ($this->mode == 'edit') ? check_edit_type($data, $edit_data, $update_message) : array();
-				$data['old_cat_id'] = $edit_data['cat_id'];
+				if($this->mode == 'edit')
+				{
+					$data['old_cat_id'] = $edit_data['cat_id'];
+				}else{
+					$data['old_cat_id'] = (int) $this->cat_id;
+				}
 				$article_id = article_submit($this->mode, $data, $update_message, $this->article_id);
 				
 				// Update table info for posting without approval
