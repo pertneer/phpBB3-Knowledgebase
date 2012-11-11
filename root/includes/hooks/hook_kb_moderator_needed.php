@@ -16,73 +16,74 @@ if (!defined('IN_PHPBB'))
 /**
  * This hook displays moderator messages to moderators
  *
- * @param hook_kb_moderator_needed $hook
+ * @param hook_kbmoderator_needed $hook
  * @return void
  */
 function hook_kb_moderator_needed(&$hook)
 {
-	global $auth, $cache, $db, $template, $user, $phpEx, $phpbb_root_path;
+	global $auth, $cache, $db, $template, $user, $phpEx, $phpbb_root_path, $table_prefix;
+	
+	     
+		   
+	if ($auth->acl_getf_global('m_'))
+	{
+		// needed language 
+		$user->add_lang('mods/kb_moderator_needed');
+		include_once($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
+
+		if ($auth->acl_getf_global('m_approve') || $auth->acl_getf_global('m_report'))
+		{
+			if (!function_exists('get_forum_list'))
+			{
+				include($phpbb_root_path . 'includes/functions_admin.' . $phpEx);
+			}
+			// we need global announcements which don't have any forum id assigned to them
+			$global_forum = array(0);
 			
-		// Submitted by victory1
-	    // KB addon  - Start
-       if ($auth->acl_get('m_report_kb'))
-       {
-          // Reportered KB articles - Start
-          $sql = 'SELECT COUNT(report_id) AS total_reports
-             FROM ' . KB_REPORTS_TABLE . '
-             WHERE report_closed = ' . 0;
-          $result = $db->sql_query($sql);
-          $total_kbreports = (int) $db->sql_fetchfield('total_reports');
-          $db->sql_freeresult($result);
+			 // Unapproved KB articles - Start
+              $sql = 'SELECT COUNT(article_id) AS total_articles
+                 FROM ' . KB_TABLE . "
+                 WHERE article_status = '0'";
+              $result = $db->sql_query($sql);
+              $total_kbunapproved = (int) $db->sql_fetchfield('total_articles');
+              $db->sql_freeresult($result);
 
-          $l_reported_kbs_count = $total_kbreports ? (($total_kbreports == 1) ? $user->lang['MODERATOR_NEEDED_REPORTED_KB'] : $user->lang['MODERATOR_NEEDED_REPORTED_KBS']) : '';
-          $l_reported_kbs = sprintf($l_reported_kbs_count, $total_kbreports);
-          // Reportered KB articles - End
+              $l_unapproved_kbs_count = $total_kbunapproved ? (($total_kbunapproved == 1) ? $user->lang['MODERATOR_NEEDED_APPROVE_KB'] : $user->lang['MODERATOR_NEEDED_APPROVE_KBS']) : '';
+              $l_unapproved_kbs = sprintf($l_unapproved_kbs_count, $total_kbunapproved);
+              // Unapproved KB articles - End
+			  
+			   // Requested KB articles - Start
+			  $sql = 'SELECT COUNT(article_id) AS total_articles
+				 FROM ' . KB_REQ_TABLE . "
+				 WHERE request_status = '0'";
+			  $result = $db->sql_query($sql);
+			  $total_kbrequested = (int) $db->sql_fetchfield('total_articles');
+			  $db->sql_freeresult($result);
 
-          // Unapproved KB articles - Start
-          $sql = 'SELECT COUNT(article_id) AS total_articles
-             FROM ' . KB_ARTICLE_TABLE . "
-             WHERE activ = '0'";
-          $result = $db->sql_query($sql);
-          $total_kbunapproved = (int) $db->sql_fetchfield('total_articles');
-          $db->sql_freeresult($result);
+			  $l_requested_kbs_count = $total_kbrequested ? (($total_kbrequested == 1) ? $user->lang['MODERATOR_NEEDED_REQUESTED_KB'] : $user->lang['MODERATOR_NEEDED_REQUESTED_KBS']) : '';
+			  $l_requested_kbs = sprintf($l_requested_kbs_count, $total_kbrequested);
+			  // Requested KB articles - End
 
-          $l_unapproved_kbs_count = $total_kbunapproved ? (($total_kbunapproved == 1) ? $user->lang['MODERATOR_NEEDED_APPROVE_KB'] : $user->lang['MODERATOR_NEEDED_APPROVE_KBS']) : '';
-          $l_unapproved_kbs = sprintf($l_unapproved_kbs_count, $total_kbunapproved);
-          // Unapproved KB articles - End
-		  
-		  // Requested KB articles - Start
-          $sql = 'SELECT COUNT(article_id) AS total_articles
-             FROM ' . KB_REQ_TABLE . "
-             WHERE request_status = '0'";
-          $result = $db->sql_query($sql);
-          $total_kbrequested = (int) $db->sql_fetchfield('total_articles');
-          $db->sql_freeresult($result);
-
-          $l_requested_kbs_count = $total_kbrequested ? (($total_kbrequested == 1) ? $user->lang['MODERATOR_NEEDED_APPROVE_KB'] : $user->lang['MODERATOR_NEEDED_APPROVE_KBS']) : '';
-          $l_requested_kbs = sprintf($l_requested_kbs_count, $total_kbrequested);
-          // Requested KB articles - End
-
-          $template->assign_vars(array(
-          // Reportered KB articles - Start
-          //   <!-- IF TOTAL_KB_REPORTS --> &bull; <a href="{U_KB_REPORTS}">{TOTAL_KB_REPORTS}</a><!-- ENDIF -->
-             'TOTAL_KB_REPORTS'   => $l_reported_kbs,
-             'U_KB_REPORTS'      => append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=kb&amp;mode=kb_reports', true, $user->session_id),
-          // Reportered KB articles - End
-          // Unapproved KB articles - Start
-          //   <!-- IF TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{TOTAL_KB_APPROVE}</a><!-- ENDIF -->
-             'TOTAL_KB_APPROVE'   => $l_unapproved_kbs,
-             'U_KB_APPROVE'      => append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=kb&amp;mode=kb_activate', true, $user->session_id),
-          // Unapproved KB articles - End
-		  // Requested KB articles - Start
+              $template->assign_vars(array(
+              // Unapproved KB articles - Start
+              //   <!-- IF TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{TOTAL_KB_APPROVE}</a><!-- ENDIF -->
+                 'U_TOTAL_KB_APPROVE'   => $l_unapproved_kbs,
+                 'U_KB_APPROVE'      => append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=kb&amp;mode=queue', true, $user->session_id),
+              // Unapproved KB articles - End
+			  
+			  // Requested KB articles - Start
           //   <!-- IF TOTAL_KB_REQUEST --> &bull; <a href="{U_KB_REQUEST}">{TOTAL_KB_REQUEST}</a><!-- ENDIF -->
-             'TOTAL_KB_REQUEST'   => $l_requested_kbs,
+             'U_TOTAL_KB_REQUEST'   => $l_requested_kbs,
              'U_KB_REQUEST'      => append_sid("{$phpbb_root_path}kb.$phpEx", 'i=request&amp;action=list', true, $user->session_id),
           // Requested KB articles - End
-          ));
-       }
-       // KB addon  - End
-
+              ));
+		}
+	}
+	else
+	{
+		return;
+	}
+}
 
 /**
  * Only register the hook for normal pages, not administration pages.
