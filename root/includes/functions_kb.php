@@ -3136,40 +3136,47 @@ function export_data($type = 'word', $article_id)
 					WHERE article_id = ' . $article_data['article_id'];
 				$result = $db->sql_query($sql);
 
-				for($i=0; $i < mysql_num_rows($result); $i++){
+				for($i=0; $i < mysql_num_rows($result); $i++)
+				{
 					$message = str_replace('<!-- ia'.$i.' -->','',$message);
 				}
-
-				while($row = $db->sql_fetchrow($result)){
-				
+				$save_as = str_replace(' ', '_', $article_data['article_title']);
+				while($row = $db->sql_fetchrow($result))
+				{
 					$row['extension'] = strtolower($row['extension']);
 					
-					if(in_array($row['extension'], $extensions)){
-
-						$filename = $phpbb_root_path . $config['upload_path'] . '/' . $row['physical_filename'];
+					if(in_array($row['extension'], $extensions))
+					{
+						//filename stored by phpbb
+						
+						//real filename all lower case
 						$row['real_filename'] = strtolower($row['real_filename']);
-						//we got the image data ready for .mht inclusion
-						$save_as = str_replace(' ', '_', $article_data['article_title']);
-						$location = $phpbb_root_path . 'store/' . $save_as . $row['extension'];
-						$thumb = create_thumbnail($filename, $location, $row['mimetype']);
-						$imageData['data'] = file_get_contents($location);
-						//$imageData['name'] = $row['real_filename'];
-						//$imageData['mimetype'] = $row['mimetype'];
+				
+						$image_location = $phpbb_root_path .  $config['upload_path'] . '/'. $row['physical_filename'];
+						//if board configuration already creates a thumbnail let skip that process
+						if($row['thumbnail'] == 1)
+						{
+							$filename = $phpbb_root_path . $config['upload_path'] . '/' . 'thumb_' . $row['physical_filename'];
+						}else{
+							$filename = $phpbb_root_path . $config['upload_path'] . '/' . $row['physical_filename'];
+							//create a thumbnail
+							create_thumbnail($filename, $image_location, $row['mimetype']);
+						}
+						
+						//we get the image data ready for .mht inclusion
+						$imageData['data'] = file_get_contents($filename);
+						//add the image to the .mht file
 						$kbMhtGenerator->AddContents( 'http://mhtfile/' . $row['real_filename'], $row['mimetype'], $imageData['data'], NULL);
-						//try to include data uri: utter fail :(
-						//$src = 'data: '.$row['mimetype'].';base64,'.$imageData;
-						//$text = str_replace($row['real_filename'],$src,$text);
+						//do some replacing to make it html correct
 						$message = str_replace('<div class="inline-attachment">', '<img src="', $message);
 						$message = str_replace($row['real_filename'] . '</div>', $row['real_filename'] . '"></div>', strtolower($message));
 					}
 				}
 			}
+			//lets censor it just in case
 			$message = censor_text($message);
+			//i'm being lazy here from removing it above while inside the loop
 			$message = str_replace('<img', '<div class="inline-attachment"><img', $message);
-			//$text = str_replace('[/list:u]', '</ul>',$text);
-			//$text = str_replace('[/*:m]', '</li>',$text);
-			//$text = str_replace('[*]', '<li>',$text);
-			//$text = str_replace('[list]', '<ul>',$text);
 			
 			$output .= "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head>
 							<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
@@ -3290,11 +3297,6 @@ function export_data($type = 'word', $article_id)
 								.post:target h3 a {
 									color: #000000;
 								}
-
-								.bg1	{ background-color: #f7f7f7;}
-								.bg2	{ background-color: #f2f2f2; }
-								.bg3	{ background-color: #ebebeb; }
-
 
 								span.corners-top, span.corners-bottom, span.corners-top span, span.corners-bottom span {
 									font-size: 1px;
