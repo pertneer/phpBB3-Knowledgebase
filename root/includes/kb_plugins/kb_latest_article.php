@@ -68,6 +68,11 @@ function latest_article($cat_id = 0)
 	}
 	$db->sql_freeresult($result);
 	
+	if($config['kb_latest_article'] == '')
+	{
+		$config['kb_latest_article'] = 0;
+	}
+	
 	$sql = 'SELECT article_title, article_desc, article_desc_bitfield, article_desc_options, article_desc_uid, article_views, article_comments 
 		FROM ' . KB_TABLE . '
 		WHERE article_id = ' . $config['kb_latest_article'] . '
