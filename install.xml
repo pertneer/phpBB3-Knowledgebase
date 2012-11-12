@@ -288,6 +288,7 @@
 					<change><![CDATA[removed upgrade files]]></change>
 					<change><![CDATA[temporaraly removed support for subsilver]]></change>
 					<change><![CDATA[added moderator notification to headers]]></change>
+					<change><![CDATA[Added ability to change article Header name]]></change>
 				</changelog>
 			</entry>
 		</history>
@@ -878,6 +879,7 @@ else
 			<edit>
 				<find><![CDATA[	'KIB'					=> 'KiB',]]></find>
 				<action type="after-add"><![CDATA[	'KB_NAME'				=> 'Knowledge Base',
+	'KB_HEADER'				=> 'Knowledge Base',
 	'KB_EXPLAIN'			=> 'phpBB3-KnowledgeBase',
 	'ARTICLES'				=> 'Articles',]]></action>
 			</edit>

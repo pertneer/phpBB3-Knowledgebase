@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: acp_kb.php 441 2010-02-03 19:28:02Z tom.martin60@btinternet.com $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: acp_kb.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -80,6 +80,7 @@ class acp_kb
 						'legend1'				=> 'ACP_KB_SETTINGS',
 						'kb_enable'				=> array('lang' => 'KB_ENABLE',			'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false),						
 						'kb_link_name'			=> array('lang' => 'KB_LINK_NAME',		'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),						
+						'kb_header_name'		=> array('lang' => 'KB_HEADER_NAME',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),						
 						'kb_copyright'			=> array('lang' => 'KB_PER_COPYRIGHT',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),	
 						'kb_default_rating'		=> array('lang' => 'KB_DEFAULT_RATING',	'validate' => 'int',	'type' => 'select', 'method' => 'select_default_rating', 'explain' => false),						
 						'kb_articles_per_page'	=> array('lang' => 'KB_ART_PER_PAGE',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => false),
@@ -321,12 +322,15 @@ class acp_kb
 				$errno = 0;
 
 				$info = get_remote_file('kb.pertneer.net', '/mods', 'knowledgebase.txt', $errstr, $errno);
-
+				//git repo ssl location
+				//https://raw.github.com/pertneer/VersionCheck/master/phpBB3_KB/knowledgebase.txt
+				//$info = get_remote_file('raw.github.com', '/pertneer/VersionCheck/master/phpBB3_KB', 'knowledgebase.txt', $errstr, $errno, 443);
+				
 				if ($info === false)
 				{
 					trigger_error($errstr, E_USER_WARNING);
 				}
-
+				
 				$info = explode("\n", $info);
 				
 				// Update vars
