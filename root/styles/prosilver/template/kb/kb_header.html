@@ -6,13 +6,20 @@
 <!-- INCLUDE overall_header.html -->
 <!-- ENDIF -->
 <!-- IF not S_IS_MCP and not S_IS_UCP -->
-<table style="width: 100%">
-	<tr>
+<div><p><!-- IF U_MCP -->[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --><!-- IF U_TOTAL_KB_REQUEST --> &bull; <a href="{U_KB_REQUEST}">{U_TOTAL_KB_REQUEST}</a><!-- ENDIF --> ]<!-- ENDIF --><p></div>
+
 		<!-- IF .left_menu -->
-		<td id="left_menu" style="width: {LEFT_MENU_WIDTH}; vertical-align: top;">
+		<div id="left_menu" style="width: {LEFT_MENU_WIDTH};">
 			<!-- BEGIN left_menu -->
 			{left_menu.CONTENT}
 			<!-- END left_menu -->
-		</td>
+		</div>
 		<!-- ENDIF -->
-		<td style="vertical-align: top;<!-- IF .left_menu --> padding-left: 10px;<!-- ENDIF --><!-- IF .right_menu --> padding-right: 20px;<!-- ENDIF -->"><!-- ENDIF -->
+		<!-- IF .right_menu -->
+		<div id="right_menu" style="width: {RIGHT_MENU_WIDTH};">
+			<!-- BEGIN right_menu -->
+			{right_menu.CONTENT}
+			<!-- END right_menu -->
+		</div>
+		<!-- ENDIF -->
+		<div id="kb_postbody" <!-- IF .left_menu -->style="margin-left: {MAIN_CONTENT_LEFT_MARGIN};<!-- ENDIF --><!-- IF .right_menu -->margin-right: {MAIN_CONTENT_RIGHT_MARGIN};<!-- ENDIF -->"><!-- ENDIF -->

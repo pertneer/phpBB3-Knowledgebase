@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: functions_kb.php 514 2010-06-23 12:32:18Z andreas.nexmann@gmail.com $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: functions_kb.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -628,7 +628,12 @@ function article_submit($mode, &$data, $update_message = true, $article_id = 0)
 		$sql = 'UPDATE ' . KB_CATS_TABLE . '
 				SET cat_articles = cat_articles - 1
 				WHERE cat_articles > 0
-				AND cat_id = ' . (int) $old_data['cat_id'];
+				AND cat_id = ' . (int) $data['old_cat_id'];
+		$db->sql_query($sql);
+		
+		$sql = 'UPDATE ' . KB_TABLE . "
+				SET cat_id = {$data['cat_id']}
+				WHERE article_id = {$data['article_id']}";
 		$db->sql_query($sql);
 	}
 	
@@ -1671,7 +1676,7 @@ function generate_kb_nav($page_title = '', $data = array())
 	// Knowledge Base link
 	$template->assign_block_vars('navlinks', array(
 		'S_IS_CAT'		=> true,
-		'FORUM_NAME'	=> $config['kb_link_name'],
+		'FORUM_NAME'	=> (isset($config['kb_link_name']) && $config['kb_link_name'] != '') ? $config['kb_link_name'] : $user->lang['KB_NAME'],
 		'FORUM_ID'		=> 0,
 		'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}kb.$phpEx"))
 	);
@@ -1711,7 +1716,7 @@ function generate_kb_nav($page_title = '', $data = array())
 		'S_IS_CAT'		=> true,
 		'FORUM_NAME'	=> $page_title,
 		'FORUM_ID'		=> 0,
-		'U_VIEW_FORUM'	=> '', // This is for the last page, it will link to the page itself
+		'U_VIEW_FORUM'	=> '#', // This is for the last page, it will link to the page itself
 	));
 	
 	return;
@@ -2206,13 +2211,14 @@ function handle_related_articles($article_id, $article_title, $article_title_cle
 	
 	$related_articles = $articles_found = array();
 	$shown = $article_count = 0;
+	
 	while($row = $db->sql_fetchrow($result))
 	{
-		if($shown < $show_num && $shown >= $ra_start)
+		if($shown < $show_num + $ra_start && $shown >= $ra_start)
 		{
 			$related_articles[$row['article_id']] = $row['article_title'];
-			$shown++;
 		}
+		$shown++;
 		$articles_found[] = $row['article_id'];
 	}
 	$db->sql_freeresult($result);
@@ -2346,7 +2352,7 @@ function handle_latest_articles($mode, $cat_id, $data, $show)
 		break;
 		
 		case 'delete':
-			// Call delete here only used it article id thats getting deleted is is recent articles for that cat
+			// Call delete here only used if article id thats getting deleted is in recent articles for that cat
 			$sql = $db->sql_build_query('SELECT', array(
 				'SELECT'	=> 'c.latest_ids',
 				'FROM'		=> array(
@@ -3036,7 +3042,7 @@ function fix_error_vars($mode, $error)
 
 function export_data($type = 'word', $article_id)
 {
-	global $db, $phpbb_root_path, $user;
+	global $db, $phpbb_root_path, $user, $config, $phpEx;
 	
 	if(!$article_id)
 	{
@@ -3059,45 +3065,515 @@ function export_data($type = 'word', $article_id)
 	{
 		trigger_error('KB_NO_ARTICLE');
 	}
+	$bbcode_bitfield = base64_decode($article_data['bbcode_bitfield']);
+		
+	// Desc
+		if ($article_data['article_desc'] != '')
+		{
+			$bbcode_bitfield = $bbcode_bitfield | base64_decode($article_data['article_desc_bitfield']);
+		}
+		
+		// Instantiate BBCode if need be
+		if ($bbcode_bitfield !== '')
+		{
+			include_once($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+			//$this->finclude('bbcode', 'c:bbcode');
+			$bbcode = new bbcode(base64_encode($bbcode_bitfield));
+		}
+		
+		
+	if($article_data['article_desc'] != '')
+		{
+			$article_desc = censor_text($article_data['article_desc']);
 	
-	$text = generate_text_for_display($article_data['article_text'], $article_data['bbcode_uid'], $article_data['bbcode_bitfield'], 7);
+			if ($article_data['article_desc_bitfield'])
+			{
+				$bbcode->bbcode_second_pass($article_desc, $article_data['article_desc_uid'], $article_data['article_desc_bitfield']);
+			}
+	
+			$article_desc = bbcode_nl2br($article_desc);
+			$article_data['article_desc'] = smiley_text($article_desc);
+		}
+		
+		// Parse the message and subject
+		$message = censor_text($article_data['article_text']);
+		
+		// Second parse bbcode here
+		if ($article_data['bbcode_bitfield'])
+		{
+			$bbcode->bbcode_second_pass($message, $article_data['bbcode_uid'], $article_data['bbcode_bitfield']);
+		}
+	
+		$message = bbcode_nl2br($message);
+		$message = smiley_text($message);
+	$article_data['article_title'] = censor_text($article_data['article_title']);
+	
+	
+	//$text = generate_text_for_display($article_data['article_text'], $article_data['bbcode_uid'], $article_data['bbcode_bitfield'], 7);
 	$desc = generate_text_for_display($article_data['article_desc'], $article_data['article_desc_uid'], $article_data['article_desc_bitfield'], 7);
+	
+	//$text = str_replace(':' . $article_data['bbcode_uid'], '', $article_data['article_text']);
 	
 	$output = '';
 	
 	switch ($type)
 	{
 		case 'word':
-			$output .= "<html xmlns:o=\"urn:schemas-microsoft-com:office:office\"";
-			$output .= "   xmlns:w=\"urn:schemas-microsoft-com:office:word\"";
-			$output .= "   xmlns=\"http://www.w3.org/TR/REC-html40\">";
-			$output .= "<head>
+			require_once ('kb_class_mht.' . $phpEx);
+			require_once('functions_posting.' . $phpEx);
+			date_default_timezone_set('America/Chicago');
+			$kbMhtGenerator = new kbMhtGenerator();
+			
+			if($article_data['article_attachment'] == 1)
+			{
+				//$kbMhtGenerator->AddFile('phpBBHeaders.html', 'http://mhtfile/phpBBHeaders.htm', NULL);
+				//$kbMhtGenerator->AddFile('cj7.bmp', 'http://mhtfile/cj7.bmp', NULL);
+
+				$extensions = array('jpg','png','bmp','jpeg');
+				
+				
+				$sql = 'SELECT * FROM ' . KB_ATTACHMENTS_TABLE.' 
+					WHERE article_id = ' . $article_data['article_id'];
+				$result = $db->sql_query($sql);
+
+				for($i=0; $i < mysql_num_rows($result); $i++)
+				{
+					$message = str_replace('<!-- ia'.$i.' -->','',$message);
+				}
+				$save_as = str_replace(' ', '_', $article_data['article_title']);
+				while($row = $db->sql_fetchrow($result))
+				{
+					$row['extension'] = strtolower($row['extension']);
+					
+					if(in_array($row['extension'], $extensions))
+					{
+						//filename stored by phpbb
+						
+						//real filename all lower case
+						$row['real_filename'] = strtolower($row['real_filename']);
+				
+						$image_location = $phpbb_root_path .  $config['upload_path'] . '/'. $row['physical_filename'];
+						//if board configuration already creates a thumbnail let skip that process
+						if($row['thumbnail'] == 1)
+						{
+							$filename = $phpbb_root_path . $config['upload_path'] . '/' . 'thumb_' . $row['physical_filename'];
+						}else{
+							$filename = $phpbb_root_path . $config['upload_path'] . '/' . $row['physical_filename'];
+							//create a thumbnail
+							create_thumbnail($filename, $image_location, $row['mimetype']);
+						}
+						
+						//we get the image data ready for .mht inclusion
+						$imageData['data'] = file_get_contents($filename);
+						//add the image to the .mht file
+						$kbMhtGenerator->AddContents( 'http://mhtfile/' . $row['real_filename'], $row['mimetype'], $imageData['data'], NULL);
+						//do some replacing to make it html correct
+						$message = str_replace('<div class="inline-attachment">', '<img src="', $message);
+						$message = str_replace($row['real_filename'] . '</div>', $row['real_filename'] . '"></div>', strtolower($message));
+					}
+				}
+			}
+			//lets censor it just in case
+			$message = censor_text($message);
+			//i'm being lazy here from removing it above while inside the loop
+			$message = str_replace('<img', '<div class="inline-attachment"><img', $message);
+			
+			$output .= "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head>
 							<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
-							<meta name=\"ProgId\" content=\"Word.Document\">
 							<style>
-							@page Section1
-							{
-								mso-page-orientation: portrait;
-								margin: 3cm 2.5cm 3cm 2.5cm;
-								mso-header-margin: 36pt;
-								mso-footer-margin: 36pt;
-								mso-paper-source: 0;
-							}
+							
+								* {
+									/* Reset browsers default margin, padding and font sizes */
+									margin: 0;
+									padding: 0;
+								}
+
+								html {
+									font-size: 100%;
+									/* Always show a scrollbar for short pages - stops the jump when the scrollbar appears. non-IE browsers */
+									height: 101%;
+								}
+
+								body {
+									/* Text-Sizing with ems: http://www.clagnut.com/blog/348/ */
+									font-family: Verdana, Helvetica, Arial, sans-serif;
+									color: #828282;
+									background-color: #FFFFFF;
+									/*font-size: 62.5%;			 This sets the default font size to be equivalent to 10px */
+									font-size: 10px;
+									margin: 0;
+									padding: 12px 0;
+								}
+
+								h1 {
+									/* Forum name */
+									font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;
+									margin-right: 200px;
+									color: #FFFFFF;
+									margin-top: 15px;
+									font-weight: bold;
+									font-size: 2em;
+								}
+
+								h2 {
+									/* Forum header titles */
+									font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;
+									font-weight: normal;
+									color: #3f3f3f;
+									font-size: 2em;
+									margin: 0.8em 0 0.2em 0;
+								}
+
+
+								h3 {
+									/* Sub-headers (also used as post headers, but defined later) */
+									font-family: Arial, Helvetica, sans-serif;
+									font-weight: bold;
+									text-transform: uppercase;
+									border-bottom: 1px solid #CCCCCC;
+									margin-bottom: 3px;
+									padding-bottom: 2px;
+									font-size: 1.05em;
+									color: #989898;
+									margin-top: 20px;
+								}
+
+								h4 {
+									/* Forum and topic list titles */
+									font-family: \"Trebuchet MS\", Verdana, Helvetica, Arial, Sans-serif;
+									font-size: 1.3em;
+								}
+
+								p {
+									line-height: 1.3em;
+									font-size: 1.1em;
+									margin-bottom: 1.5em;
+								}
+
+
+								hr {
+									/* Also see tweaks.css */
+									border: 0 none #FFFFFF;
+									border-top: 1px solid #CCCCCC;
+									height: 1px;
+									margin: 5px 0;
+									display: block;
+									clear: both;
+								}
+
+								hr.dashed {
+									border-top: 1px dashed #CCCCCC;
+									margin: 10px 0;
+								}
+								/* Inline image thumbnails */
+								div.inline-attachment dl.thumbnail, div.inline-attachment dl.file {
+									display: block;
+									margin-bottom: 4px;
+								}
+
+								div.inline-attachment p {
+									font-size: 100%;
+								}
+
+
+								/* Main blocks
+								---------------------------------------- */
+								#wrap {
+									padding: 0 20px;
+									min-width: 650px;
+								}
+
+								.post {
+									padding: 0 10px;
+									margin-bottom: 4px;
+									background-repeat: no-repeat;
+									background-position: 100% 0;
+								}
+
+								.post:target .content {
+									color: #000000;
+								}
+
+								.post:target h3 a {
+									color: #000000;
+								}
+
+								span.corners-top, span.corners-bottom, span.corners-top span, span.corners-bottom span {
+									font-size: 1px;
+									line-height: 1px;
+									display: block;
+									height: 5px;
+									background-repeat: no-repeat;
+								}
+
+								span.corners-top {
+									background-image: none;
+									background-position: 0 0;
+									margin: 0 -5px;
+								}
+
+								span.corners-top span {
+									background-image: none;
+									background-position: 100% 0;
+								}
+
+								span.corners-bottom {
+									background-image: none;
+									background-position: 0 100%;
+									margin: 0 -5px;
+									clear: both;
+								}
+
+								span.corners-bottom span {
+									background-image: none;
+									background-position: 100% 100%;
+								}
+
+								.copyright {
+									padding: 5px;
+									text-align: center;
+									color: #555555;
+								}
+
+								.small {
+									font-size: 0.9em !important;
+								}
+
+								/* Coloured usernames */
+								.username-coloured {
+									font-weight: bold;
+									display: inline !important;
+									padding: 0 !important;
+								}
+
+								.postbody {
+									padding: 0;
+									line-height: 1.48em;
+									color: #333333;
+									width: 76%;
+									float: left;
+									clear: both;
+								}
+
+								.notice {
+									font-family: \"Lucida Grande\", Verdana, Helvetica, Arial, sans-serif;
+									width: auto;
+									margin-top: 1.5em;
+									padding-top: 0.2em;
+									font-size: 1em;
+									border-top: 1px dashed #CCCCCC;
+									clear: left;
+									line-height: 130%;
+								}
+
+								dl.codebox {
+									padding: 3px;
+									background-color: #FFFFFF;
+									border: 1px solid #d8d8d8;
+									font-size: 1em;
+								}
+
+								dl.codebox dt {
+									text-transform: uppercase;
+									border-bottom: 1px solid #CCCCCC;
+									margin-bottom: 3px;
+									font-size: 0.8em;
+									font-weight: bold;
+									display: block;
+								}
+
+								blockquote dl.codebox {
+									margin-left: 0;
+								}
+
+								dl.codebox code {
+									/* Also see tweaks.css */
+									overflow: auto;
+									display: block;
+									height: auto;
+									max-height: 200px;
+									white-space: normal;
+									padding-top: 5px;
+									font: 0.9em Monaco, \"Andale Mono\",\"Courier New\", Courier, mono;
+									line-height: 1.3em;
+									color: #8b8b8b;
+									margin: 2px 0;
+								}
+
+								.attachbox {
+									float: left;
+									width: auto; 
+									margin: 5px 5px 5px 0;
+									padding: 6px;
+									background-color: #FFFFFF;
+									border: 1px dashed #d8d8d8;
+									clear: left;
+								}
+
+								.attachbox dt {
+									font-family: Arial, Helvetica, sans-serif;
+									text-transform: uppercase;
+								}
+
+								.attachbox dd {
+									margin-top: 4px;
+									padding-top: 4px;
+									clear: left;
+									border-top: 1px solid #d8d8d8;
+								}
+
+								.attachbox dd dd {
+									border: none;
+								}
+
+								.attachbox p {
+									line-height: 110%;
+									color: #666666;
+									font-weight: normal;
+									clear: left;
+								}
+
+								.bg1	{ background-color: #ECF3F7; }
+								.bg2	{ background-color: #e1ebf2;  }
+								.bg3	{ background-color: #cadceb; }
+
+								.copyright {
+									color: #555555;
+								}
+
+								.error {
+									color: #BC2A4D;
+								}
+
+
+								div.rules {
+									background-color: #ECD5D8;
+									color: #BC2A4D;
+								}
+
+								p.rules {
+									background-color: #ECD5D8;
+									background-image: none;
+								}
+
+								a:link	{ color: #105289; }
+								a:visited	{ color: #105289; }
+								a:hover	{ color: #D31141; }
+								a:active	{ color: #368AD2; }
+
+								.notice {
+									border-top-color:  #CCCCCC;
+								}
+
+								dl.codebox {
+									background-color: #FFFFFF;
+									border-color: #C9D2D8;
+								}
+
+								dl.codebox dt {
+									border-bottom-color:  #CCCCCC;
+								}
+
+								dl.codebox code {
+									color: #2E8B57;
+								}
+
+								.attachbox {
+									background-color: #FFFFFF;
+									border-color:  #C9D2D8;
+								}
+
+								.pm-message .attachbox {
+									background-color: #F2F3F3;
+								}
+
+								.attachbox dd {
+									border-top-color: #C9D2D8;
+								}
+
+								.attachbox p {
+									color: #666666;
+								}
+
+								.attachbox p.stats {
+									color: #666666;
+								}
+
+								.attach-image img {
+									border-color: #999999;
+								}
+
+
+								label {
+									color: #425067;
+								}
+
+								textarea.desc {
+									width: 40%;
+								}
+
+								.hidden {
+									display: none !important;
+								}
+
+								.error {
+								color: #BC2A4D;
+								font-weight: bold;
+									font-size: 1em;
+								}
+
+
+								.kb{
+									color: #4f84ad;
+									font-size: 2.8em;
+									font-weight: 900;
+									font-family: Helvetica,Arial,sans-serif;
+									margin-top: .5em;
+									margin-right: 0em;
+									margin-bottom: 0.25em;
+									margin-left: 0em;
+								} 
+
 							</style>
 						</head>
-						<body>
-						<div class=\"Section1\">";
-			$output .= "<span style=\"font-weight: bold; text-align: center; font-size: 150%; \">" . $article_data['article_title'] . "</span><br /><br />";
+						<body id=\"phpbb\" class=\"section-kb ltr\" >
+						<!--[if gte mso 9]><xml>
+<w:WordDocument>
+<w:View>Print</w:View>
+<w:Zoom>90</w:Zoom> 
+<w:DoNotOptimizeForBrowser/>
+</w:WordDocument>
+</xml><![endif]-->
+						<div id=\"wrap\">
+						<div id=\"a\" class=\"post bg1\">
+					<div class=\"inner\">
+						<span class=\"corners-top\"><span></span></span>
+							<div class=\"postbody\" style=\"width: 100%;\">";
+			$output .= "<h2 class=\"kb\">Knowledge Base</h2>";
+			$output .= "<span class=\"error\" style=\"font-size: 150%\">" . $article_data['article_title'] . "</span><br />";
 			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['ARTICLE_ID'] . ": </span>" . $article_data['article_id'] . "<br />";
 			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['WRITTEN_BY'] . ": </span>" . $article_data['article_user_name'] . "<br />";
 			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['WRITTEN_ON'] . ": </span>" . $user->format_date($article_data['article_time']) . "<br />";
 			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['DESCRIPTION'] . ": </span>" . $desc . "<hr /><br />";
 			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['ARTICLE_CONTENT'] . "</span><br />";
-			$output .= $text;
-			$output .= "</div></body></html>";
+			$output .= $message;
+			$output .= "<br><strong>";
+			$output .= ($config['kb_copyright'] != '') ? '&copy; ' . $config['kb_copyright'] : '';
+			$output .= "</strong></div><span class=\"corners-bottom\"><span></span></span></div></div></div></body></html>";
 			
-			//Set some formal stuff
+		//Set some formal stuff
 			$extension = '.doc';
+				
+			$save_as = str_replace(' ', '_', $article_data['article_title']);
+			$location = $phpbb_root_path . 'store/' . $save_as . '.html';
+		
+			$fp = fopen($location, 'w+'); 
+			fwrite($fp, $output);
+			fclose($fp);
+			$kbMhtGenerator->AddFile($location, 'http://mhtfile/' . $save_as . '.html', NULL);
+			$filename = 'example.mht';
+			$kbMhtGenerator->MakeFile($filename);
+			
 		break;
 		
 		// not working need to find a new way of doing this or just leave it as word?
@@ -3127,20 +3603,20 @@ function export_data($type = 'word', $article_id)
 			
 			//Set some formal stuff
 			$extension = '.pdf';
+			
+			$save_as = str_replace(' ', '_', $article_data['article_title']);
+			$location = $phpbb_root_path . 'store/' . $save_as . $extension;
+			
+			$fp = fopen($location, 'w+'); 
+			fwrite($fp, $output);
+			fclose($fp);
 		break;
 		*/
 	}
 	
-	$save_as = str_replace(' ', '_', $article_data['article_title']);
-	$location = $phpbb_root_path . 'store/' . $save_as . $extension;
-	
-	$fp = fopen($location, 'w+'); 
-	fwrite($fp, $output);
-    fclose($fp);
-	
-	set_download($save_as, $location, $extension);
-	
+	set_download($save_as, $filename, $extension);
 	unlink($location);
+	unlink($filename);
 }
 
 function set_download($filename, $location, $extension)
@@ -3221,7 +3697,7 @@ function get_rating_stars($article_id, $cat_id, $has_rated, $can_rate, $rating, 
 	// If it has not had any ratings yet, give it 1/2 the max for the rating
 	if ($votes == 0)
 	{
-		$rating = 3;
+		$rating = $config['kb_default_rating'];
 	}
 
 	$template->set_filenames(array(

@@ -66,6 +66,7 @@ $lang = array_merge($lang, array(
 	'KB_CATS_PER_ROW'						=> 'Categories per row',
 	'KB_CATS_PER_ROW_EXPLAIN'				=> 'Determine how many categories you want per row when using the modern look.',
 	'KB_CLASSIC_LOOK'						=> 'Classic look',
+	'KB_DEFAULT_RATING'						=> 'Default article rating',
 	'KB_DESC_ART'							=> 'Show description on article page',
 	'KB_DESC_CAT'							=> 'Show description when listing articles',
 	'KB_DESC_MAX_CHARS'						=> 'Article description maximum length',

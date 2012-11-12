@@ -309,7 +309,7 @@ function add_plugin($filename, $details, $plugin_pages = array())
 */
 function update_plugin_table($filename, $details)
 {
-	global $db, $cache;
+	global $db, $cache, $user;
 	
 	$data = array(
 		'plugin_name'		=> $user->lang[$details['PLUGIN_NAME']],

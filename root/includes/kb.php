@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: kb.php 514 2010-06-23 12:32:18Z andreas.nexmann@gmail.com $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: kb.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -332,6 +332,8 @@ class knowledge_base
 		$template->assign_vars(array(
 			'LEFT_MENU_WIDTH'	=> $config['kb_left_menu_width'] . (($config['kb_left_menu_type'] == 0) ? 'px' : '%'),
 			'RIGHT_MENU_WIDTH'	=> $config['kb_right_menu_width'] . (($config['kb_right_menu_type'] == 0) ? 'px' : '%'),
+			'MAIN_CONTENT_LEFT_MARGIN'	=> $config['kb_left_menu_width'] . (($config['kb_left_menu_type'] == 0) ? 'px' : '%'),
+			'MAIN_CONTENT_RIGHT_MARGIN'	=> $config['kb_right_menu_width'] . (($config['kb_right_menu_type'] == 0) ? 'px' : '%'),
 		));
 	}
 	
@@ -484,6 +486,7 @@ class knowledge_base
 		$template->assign_vars(array(
 			'L_AUTHOR'			=> $user->lang['ARTICLE_AUTHOR'],
 			'L_ARTICLES_LC' 	=> utf8_strtolower($user->lang['ARTICLES']),
+			'L_KB_HEADER'		=> ($config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
 			'S_HAS_SUBCATS' 	=> ($cat_data['left_id'] != $cat_data['right_id'] - 1) ? true : false,
 			'PAGINATION'		=> generate_pagination(kb_append_sid('cat', array('id' => $this->cat_id, 'title' => $cat_data['cat_name'], 'extra' => ((strlen($this->sort)) ? "sort=$this->sort" : ''))), $articles_count, $config['kb_articles_per_page'], $this->start),
 			'PAGE_NUMBER'		=> on_page($articles_count, $config['kb_articles_per_page'], $this->start),
@@ -933,6 +936,7 @@ class knowledge_base
 			'ARTICLE_DESC_CLEAN'	=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? strip_tags($article_desc_re) : '',
 			'ARTICLE_DESC'			=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? $article_desc_re : '',
 			'ARTICLE_ID' 			=> $this->article_id,
+			'L_KB_HEADER'			=> ($config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
 			'ARTICLE_TITLE' 		=> $article_type['article_title'],
 			'ARTICLE_TITLE_CLEAN' 	=> strip_tags($article_type['article_title']),
 			'ARTICLE_POSTER'		=> $article_data['article_user_id'],
@@ -942,6 +946,7 @@ class knowledge_base
 			'L_HISTORY'				=> $user->lang['ARTICLE_HISTORY'],
 			'L_CONTENT' 			=> $user->lang['ARTICLE_CONTENT'],
 			'U_PERM_LINK'			=> generate_board_url() . '/' . kb_append_sid('article', array('id' => $this->article_id, 'title' => $article_type['article_title']), true),			
+			'U_LOCAL_PERM_LINK'		=> '[kb]'. $this->article_id . ', ' . $article_type['article_title'].'[/kb]',			
 			
 			'U_DLOAD_WORD'			=> append_sid("{$phpbb_root_path}kb.$phpEx", 'i=export&amp;a=' . $this->article_id),
 			'POSTER_ARTICLES' 		=> $article_data['user_articles'],
@@ -1049,7 +1054,7 @@ class knowledge_base
 			*/
 			// New rating var (moved to functions powered by customization db code)
 			'RATING_STARS'			=> get_rating_stars($this->article_id, $this->cat_id, $has_rated, $can_rate, $article_data['article_rating'], $article_data['article_votes']),
-			'L_CURRENT_RATING' 		=> sprintf(($article_data['article_votes'] == 1) ? $user->lang['CURRENT_RATING_S'] : $user->lang['CURRENT_RATING_P'], (($article_data['article_votes'] == 0) ? 3 : $article_data['article_rating']), $article_data['article_votes']),
+			'L_CURRENT_RATING' 		=> sprintf(($article_data['article_votes'] == 1) ? $user->lang['CURRENT_RATING_S'] : $user->lang['CURRENT_RATING_P'], (($article_data['article_votes'] == 0) ? $config['kb_default_rating'] : $article_data['article_rating']), $article_data['article_votes']),
 			
 			'DISABLE_LEFT_MENU'		=> ($config['kb_disable_left_menu']) ? true : false,
 			'DISABLE_RIGHT_MENU'	=> ($config['kb_disable_right_menu']) ? true : false,
@@ -1621,6 +1626,7 @@ class knowledge_base
 			'S_ON_INDEX'	=> true,
 			'S_CAT_STYLE'	=> ($config['kb_layout_style']) ? true : false, // IF 1 then set to true bc. style = special
 			'S_COL_WIDTH'	=> ($config['kb_layout_style']) ? (100 / $config['kb_cats_per_row']) : 0,
+			'L_KB_HEADER'	=> ($config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
 		));
 		
 		// Output the page
@@ -1864,7 +1870,8 @@ class knowledge_base
 		$img_status		= ($bbcode_status && $auth->acl_get('u_kb_img', $this->cat_id)) ? true : false;
 		$url_status		= ($config['kb_allow_post_links']) ? true : false;
 		$flash_status	= ($bbcode_status && $auth->acl_get('u_kb_flash', $this->cat_id) && $config['kb_allow_post_flash']) ? true : false;
-																								 
+		$edit_data = array();
+		
 		if ($submit || $preview || $refresh)
 		{
 			// Create old data for edit type check
@@ -2215,6 +2222,12 @@ class knowledge_base
 				);
 				// Edit type has already been set upon submission
 				$data['edit_type'] = ($this->mode == 'edit') ? check_edit_type($data, $edit_data, $update_message) : array();
+				if($this->mode == 'edit')
+				{
+					$data['old_cat_id'] = $edit_data['cat_id'];
+				}else{
+					$data['old_cat_id'] = (int) $this->cat_id;
+				}
 				$article_id = article_submit($this->mode, $data, $update_message, $this->article_id);
 				
 				// Update table info for posting without approval
@@ -2267,9 +2280,9 @@ class knowledge_base
 						);
 						handle_latest_articles('edit', $data['cat_id'], $late_articles, $config['kb_latest_articles_c']);
 					
-						if($this->cat_id != $old_cat) // Update latest articles when moving article
+						if($this->cat_id != $data['old_cat_id']) // Update latest articles when moving article
 						{
-							handle_latest_articles('delete', $old_cat, $late_articles, $config['kb_latest_articles_c']);
+							handle_latest_articles('delete', $data['old_cat_id'], $late_articles, $config['kb_latest_articles_c']);
 						}
 						set_config('kb_last_updated', time(), true);
 					}
@@ -4132,11 +4145,11 @@ class knowledge_base
 			{
 				// Build them into rowset for use when listing them
 				$row['edit_type'] = unserialize($row['edit_type']);
-				$row['nodiff'] = true;
+				$row['no_diff'] = true;
 				
 				if(in_array(EDIT_TYPE_CONTENT, $row['edit_type']))
 				{
-					$row['nodiff'] = false;
+					$row['no_diff'] = false;
 					$diff_from_old = true;
 				}
 				
@@ -4199,8 +4212,8 @@ class knowledge_base
 					'ARTICLE_TITLE'		=> censor_text($article_type['article_title']),
 					'EDIT_BY'			=> sprintf($user->lang['EDITED_BY'], get_username_string('full', $edit['edit_user_id'], $edit['edit_user_name'], $edit['edit_user_color'])),
 					'S_IS_CONTRIB'		=> ($edit['edit_contribution']) ? true : false,
-					'S_CAN_DIFF_F'		=> ($can_diff_from && (!$rowset[$parent_id - 1]['nodiff'] || ($diff_from_old && $num == $total_edits))) ? true : false,
-					'S_CAN_DIFF_T'		=> ($rowset[$parent_id - 1]['nodiff'] || $num == $total_edits) ? false : true,
+					'S_CAN_DIFF_F'		=> ($can_diff_from && (!$rowset[$parent_id - 1]['no_diff'] || ($diff_from_old && $num == $total_edits))) ? true : false,
+					'S_CAN_DIFF_T'		=> ($rowset[$parent_id - 1]['no_diff'] || $num == $total_edits) ? false : true,
 					'S_ORG'				=> ($num == $total_edits) ? true : false,
 					'EDIT_TIME'			=> $user->format_date($edit['edit_time'], false, true),
 					'EDIT_ID'			=> $edit['edit_id'],
@@ -4214,7 +4227,7 @@ class knowledge_base
 					'NUM_PLUS'			=> $num + 1,
 				));
 				
-				if($rowset[$parent_id - 1]['nodiff'] && $can_diff_from)
+				if($rowset[$parent_id - 1]['no_diff'] && $can_diff_from)
 				{
 					$can_diff_from = false;
 				}

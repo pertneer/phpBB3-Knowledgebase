@@ -171,7 +171,7 @@ class mcp_kb
 					// Notify on status change
 					$notify_on = array(NOTIFY_STATUS_CHANGE);
 					kb_handle_notification($article_id, $article_data['article_title'], $notify_on);
-					
+					//$cache->purge('_approve_kbs');
 					$url = $this->u_action;
 					$message = $user->lang['KB_SUCCESS_STATUS'] . '<br /><br />' . sprintf($user->lang['RETURN_PAGE'], '<a href="' . $url . '">', '</a>');
 					meta_refresh(5, $url);

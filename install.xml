@@ -1,370 +1,499 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
-<!--For security purposes, please check: http
-://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
 	<header>
-		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-		<title lang="en">PhpBB3 Knowledge Base Mod</title>
-		<description lang="en">This mod adds a Knowledge Base to your forum, which is fully integrated with phpBB's core system. It is fully manageable through a ACP system found under the .MODS tab.</description>
-		<author-notes lang="en">This mod is a work in progress, so if you encounter any bugs or you have any features you want implemented, please do not hesitate to go to our website and tell us. This mod should be combitable with most other modifications, however, there are exceptions.</author-notes>
+		<meta name="generator" content="MODX file generated with PP MODX Creator 1.0.1 by tumba25 (offline version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[phpBB3-Knowledgebase]]></title>
+		<description lang="en"><![CDATA[This mod adds a Knowledge Base to your forum, which is fully integrated with phpBB's core system. It is fully manageable through a ACP system found under the .MODS tab.]]></description>
+		<author-notes lang="en"><![CDATA[This mod is a work in progress, so if you encounter any bugs or you have any features you want implemented, please do not hesitate to go to our website and tell us. This mod should be combitable with most other modifications, however, there are exceptions.]]></author-notes>
 		<author-group>
 			<author>
-				<realname>Andreas Nexmann</realname>
-				<email>softphp@gmail.com</email>
-				<username>Imladris</username>
-				<homepage>http://kb.softphp.dk</homepage>
+				<realname><![CDATA[Tim Portner]]></realname>
+				<username><![CDATA[Pertneer]]></username>
+				<homepage><![CDATA[http://kb.pertneer.net]]></homepage>
+				<email><![CDATA[pertneer@pertneer.net]]></email>
 				<contributions-group>
-      		 		<contributions status="current" from="2009-05-01" position="Developer"/>
-      			</contributions-group>
+					<contributions status="current" from="2012-10-1" position="Developer"/>
+				</contributions-group>
 			</author>
 			<author>
-				<realname>Tom Martin</realname>
-				<email>tom.martin60@btinternet.com</email>
-				<username>Poppertom69</username>
-				<homepage></homepage>
+				<realname><![CDATA[Andreas Nexmann]]></realname>
+				<username><![CDATA[Imladris]]></username>
+				<homepage><![CDATA[http://kb.softphp.dk]]></homepage>
+				<email><![CDATA[softphp@gmail.com]]></email>
 				<contributions-group>
-      		  		<contributions status="current" from="2009-05-01" position="Developer"/>
-      			</contributions-group>
+					<contributions status="past" from="2009-05-01" to="2012-10-1" position="Developer"/>
+				</contributions-group>
 			</author>
 			<author>
-				<realname>C1</realname>
-				<email>C1WebDesign@gmail.com</email>
-				<username>thecharmed01</username>
-				<homepage></homepage>
+				<realname><![CDATA[Tom Martin]]></realname>
+				<username><![CDATA[Poppertom69]]></username>
+				<email><![CDATA[tom.martin60@btinternet.com]]></email>
 				<contributions-group>
-      		  		<contributions status="past" from="2009-08-01" to="2009-11-16" position="Stylist"/>
-      			</contributions-group>
+					<contributions status="past" from="2009-05-01" to="2012-10-1" position="Developer"/>
+				</contributions-group>
+			</author>
+			<author>
+				<realname><![CDATA[C1]]></realname>
+				<username><![CDATA[thecharmed01]]></username>
+				<email><![CDATA[C1WebDesign@gmail.com]]></email>
+				<contributions-group>
+					<contributions status="past" from="2009-08-01" to="2009-11-16" position="Stylist"/>
+				</contributions-group>
 			</author>
 		</author-group>
-		<mod-version>1.0.2</mod-version>
+		<mod-version>1.0.3</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>2400</time>
-			<target-version>3.0.7-PL1</target-version>
+			<target-version>3.0.11</target-version>
 		</installation>
 		<history>
 			<entry>
-				<date>2010-06-21</date>
-				<rev-version>1.0.2</rev-version>
+				<date>2009-05-31</date>
+				<rev-version>0.0.7</rev-version>
 				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Fixed small language bug</change>
-					<change>Fixed XHTML validation errors</change>
-					<change>Added username change support</change>
-					<change>Added user deletion support</change>
-					<change>Fixed article description not showing on view article</change>
-					<change>Fixed comments pagination</change>
-					<change>Added user articles on viewtopic</change>
-					<change>Fixed several cosmetic things</change>
-					<change>Added subsilver2</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2010-04-14</date>
-				<rev-version>1.0.2RC3</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Fixed article counting problems</change>
-					<change>Fixed latest article plugin always appearing on post article</change>
-					<change>Fixed plugin cache cleaning problems</change>
-					<change>Added additional language support</change>
-					<change>Added 'Welcome to KB' article on fresh install</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2010-04-05</date>
-				<rev-version>1.0.2RC2</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Request article bug</change>
-					<change>Several small typos</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2010-02-11</date>
-				<rev-version>1.0.2RC1</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Fixed cosmetic bugs</change>
-					<change>Permission system fixed</change>
-					<change>Post bot fixed</change>
-					<change>New features:</change>
-					<change>Copyright line added</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2010-01-20</date>
-				<rev-version>1.0.1</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Code optimized in many places</change>
-					<change>Permission system fixed</change>
-					<change>Installation remade into steps</change>
-					<change>Various other cosmetic faults</change>
-					<change>New features:</change>
-					<change>SEO plugin added</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-11-19</date>
-				<rev-version>1.0.0</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Could not remove group permissions if role is assigned</change>
-					<change>Could not change assigned role for group</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-11-16</date>
-				<rev-version>1.0.0RC3</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Latest articles bug when moving article</change>
-					<change>No link for the MCP in KB</change>
-					<change>New KB icon on navbar</change>
-					<change>Headers in normal permission missing</change>
-					<change>Jumping to top in IE7</change>
-					<change>Adding user based cat permissions doesn't work</change>
-					<change>Notice error when approving article</change>
-					<change>Not included plugins file in ucp</change>
-					<change>Several smaller bugs in Post Bot Plugin</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-11-10</date>
-				<rev-version>1.0.0RC2</rev-version>
-				<changelog lang="en">
-					<change>Issues fixed:</change>
-					<change>Notice errors in functions_plugins_kb.php</change>
-					<change>Export word doesn't show</change>
-					<change>Rating stars not working anymore</change>
-					<change>Fatal Error when writing article as user</change>
-					<change>A/N on being logged out when clicking forum bot link:</change>
-					<change>This is unfortunately a "flaw" in the phpBB system and not in the mod itself. We just use a simple [url] bbcode to create the link and as the phpBB system doesn't use append_sid on it, some users will experience being logged out when the link is clicked.</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-22</date>
-				<rev-version>1.0.0RC1</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Email article field doesn't resize</change>
-					<change>Redo a bit of style when disabling menus</change>
-					<change>The no categories bar removed for subcats</change>
-					<change>Not rate own article</change>
-					<change>Reduce comments count on article delete</change>
-					<change>Related articles not working</change> 
-					<change>Special characters bug on search</change>
-					<change>Fix related articles show count</change>
-					<change>Add page specific plugins</change>
-					<change>Case sensitive search</change>
-					<change>Fix redirection when rating without ajax</change>
-					<change>Fix MPV bugs</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-20</date>
-				<rev-version>0.4.6</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Fixing some styling issues</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-17</date>
-				<rev-version>0.4.5</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Introducing modern and classic theme in an attempt to accommodate fixed width styles</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-13</date>
-				<rev-version>0.4.4</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Introducing a lot of new acp options for more customization</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-13</date>
-				<rev-version>0.4.3</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Adding ability to turn off menus</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-10-13</date>
-				<rev-version>0.4.2</rev-version>
-				<changelog lang="en">
-					<change>Bugfixes:</change>
-					<change>Ajax rating can be disabled</change>
-					<change>Fix article count for users</change>
-					<change>Fix article history bugs</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-09-14</date>
-				<rev-version>0.4.1</rev-version>
-				<changelog lang="en">
-					<change>Fixed large amount of bugs</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-08-31</date>
-				<rev-version>0.4.0</rev-version>
-				<changelog lang="en">
-					<change>Third and last BETA release</change>
-					<change>Added feature: Expansion of moderator permissions</change>
-					<change>Added feature: Open articles where all users can make contributions</change>
-					<change>Changed feature: The history section has been expanded and changed radically.</change>
-					<change>Fixed a decent amount of bugs</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-08-04</date>
-				<rev-version>0.3.0</rev-version>
-				<changelog lang="en">
-					<change>Second BETA release</change>
-					<change>Added feature: Pluginsystem that completely customizes your KB</change>
-					<change>Added feature: Localized category permissions that allow for integration with the above</change>
-					<change>Fixed a large number of bugs and added a couple of lesser features as well</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-06-18</date>
-				<rev-version>0.1.0</rev-version>
-				<changelog lang="en">
-					<change>First BETA release of KB mod available</change>
-					<change>Fixed quite a number of bugs</change>
-					<change>Added feature: Article types</change>
-					<change>Added feature: Article requests</change>
-					<change>Added feature: E-mail article to friend</change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2009-06-07</date>
-				<rev-version>0.0.11</rev-version>
-				<changelog lang="en">
-					<change>Added feature: Article history</change>
-					<change>Added feature: Permission to post without needing approval</change>
+					<change><![CDATA[Initial Alpha release]]></change>
 				</changelog>
 			</entry>
 			<entry>
 				<date>2009-06-04</date>
 				<rev-version>0.0.10</rev-version>
 				<changelog lang="en">
-					<change>Added feature: MCP KB module</change>
-					<change>Added feature: Latest articles</change>
-					<change>Added feature: KB extension support</change>
+					<change><![CDATA[Added feature: MCP KB module]]></change>
+					<change><![CDATA[Added feature: Latest articles]]></change>
+					<change><![CDATA[Added feature: KB extension support]]></change>
 				</changelog>
 			</entry>
 			<entry>
-				<date>2009-05-31</date>
-				<rev-version>0.0.7</rev-version>
+				<date>2009-06-07</date>
+				<rev-version>0.0.11</rev-version>
 				<changelog lang="en">
-					<change>Initial Alpha release</change>
+					<change><![CDATA[Added feature: Article history]]></change>
+					<change><![CDATA[Added feature: Permission to post without needing approval]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-06-18</date>
+				<rev-version>0.1.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[First BETA release of KB mod available]]></change>
+					<change><![CDATA[Fixed quite a number of bugs]]></change>
+					<change><![CDATA[Added feature: Article types]]></change>
+					<change><![CDATA[Added feature: Article requests]]></change>
+					<change><![CDATA[Added feature: E-mail article to friend]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-08-04</date>
+				<rev-version>0.3.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Second BETA release]]></change>
+					<change><![CDATA[Added feature: Pluginsystem that completely customizes your KB]]></change>
+					<change><![CDATA[Added feature: Localized category permissions that allow for integration with the above]]></change>
+					<change><![CDATA[Fixed a large number of bugs and added a couple of lesser features as well]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-08-31</date>
+				<rev-version>0.4.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Third and last BETA release]]></change>
+					<change><![CDATA[Added feature: Expansion of moderator permissions]]></change>
+					<change><![CDATA[Added feature: Open articles where all users can make contributions]]></change>
+					<change><![CDATA[Changed feature: The history section has been expanded and changed radically.]]></change>
+					<change><![CDATA[Fixed a decent amount of bugs]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-09-14</date>
+				<rev-version>0.4.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Fixed large amount of bugs]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-13</date>
+				<rev-version>0.4.2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Ajax rating can be disabled]]></change>
+					<change><![CDATA[Fix article count for users]]></change>
+					<change><![CDATA[Fix article history bugs]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-13</date>
+				<rev-version>0.4.3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Adding ability to turn off menus]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-13</date>
+				<rev-version>0.4.4</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Introducing a lot of new acp options for more customization]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-17</date>
+				<rev-version>0.4.5</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Introducing modern and classic theme in an attempt to accommodate fixed width styles]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-20</date>
+				<rev-version>0.4.6</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Fixing some styling issues]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-10-22</date>
+				<rev-version>1.0.0RC1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfixes:]]></change>
+					<change><![CDATA[Email article field doesn't resize]]></change>
+					<change><![CDATA[Redo a bit of style when disabling menus]]></change>
+					<change><![CDATA[The no categories bar removed for subcats]]></change>
+					<change><![CDATA[Not rate own article]]></change>
+					<change><![CDATA[Reduce comments count on article delete]]></change>
+					<change><![CDATA[Related articles not working]]></change>
+					<change><![CDATA[Special characters bug on search]]></change>
+					<change><![CDATA[Fix related articles show count]]></change>
+					<change><![CDATA[Add page specific plugins]]></change>
+					<change><![CDATA[Case sensitive search]]></change>
+					<change><![CDATA[Fix redirection when rating without ajax]]></change>
+					<change><![CDATA[Fix MPV bugs]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-11-10</date>
+				<rev-version>1.0.0RC2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Notice errors in functions_plugins_kb.php]]></change>
+					<change><![CDATA[Export word doesn't show]]></change>
+					<change><![CDATA[Rating stars not working anymore]]></change>
+					<change><![CDATA[Fatal Error when writing article as user]]></change>
+					<change><![CDATA[A/N on being logged out when clicking forum bot link:]]></change>
+					<change><![CDATA[This is unfortunately a "flaw" in the phpBB system and not in the mod itself. We just use a simple [url] bbcode to create the link and as the phpBB system doesn't use append_sid on it, some users will experience being logged out when the link is clicked.]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-11-16</date>
+				<rev-version>1.0.0RC3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Latest articles bug when moving article]]></change>
+					<change><![CDATA[No link for the MCP in KB]]></change>
+					<change><![CDATA[New KB icon on navbar]]></change>
+					<change><![CDATA[Headers in normal permission missing]]></change>
+					<change><![CDATA[Jumping to top in IE7]]></change>
+					<change><![CDATA[Adding user based cat permissions doesn't work]]></change>
+					<change><![CDATA[Notice error when approving article]]></change>
+					<change><![CDATA[Not included plugins file in ucp]]></change>
+					<change><![CDATA[Several smaller bugs in Post Bot Plugin]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2009-11-19</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Could not remove group permissions if role is assigned]]></change>
+					<change><![CDATA[Could not change assigned role for group]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-01-20</date>
+				<rev-version>1.0.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Code optimized in many places]]></change>
+					<change><![CDATA[Permission system fixed]]></change>
+					<change><![CDATA[Installation remade into steps]]></change>
+					<change><![CDATA[Various other cosmetic faults]]></change>
+					<change><![CDATA[New features:]]></change>
+					<change><![CDATA[SEO plugin added]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-02-11</date>
+				<rev-version>1.0.2RC1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Fixed cosmetic bugs]]></change>
+					<change><![CDATA[Permission system fixed]]></change>
+					<change><![CDATA[Post bot fixed]]></change>
+					<change><![CDATA[New features:]]></change>
+					<change><![CDATA[Copyright line added]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-04-05</date>
+				<rev-version>1.0.2RC2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Request article bug]]></change>
+					<change><![CDATA[Several small typos]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-04-14</date>
+				<rev-version>1.0.2RC3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Fixed article counting problems]]></change>
+					<change><![CDATA[Fixed latest article plugin always appearing on post article]]></change>
+					<change><![CDATA[Fixed plugin cache cleaning problems]]></change>
+					<change><![CDATA[Added additional language support]]></change>
+					<change><![CDATA[Added 'Welcome to KB' article on fresh install]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2010-06-21</date>
+				<rev-version>1.0.2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Issues fixed:]]></change>
+					<change><![CDATA[Fixed small language bug]]></change>
+					<change><![CDATA[Fixed XHTML validation errors]]></change>
+					<change><![CDATA[Added username change support]]></change>
+					<change><![CDATA[Added user deletion support]]></change>
+					<change><![CDATA[Fixed article description not showing on view article]]></change>
+					<change><![CDATA[Fixed comments pagination]]></change>
+					<change><![CDATA[Added user articles on viewtopic]]></change>
+					<change><![CDATA[Fixed several cosmetic things]]></change>
+					<change><![CDATA[Added subsilver2]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-11-02</date>
+				<rev-version>1.0.3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[updated version to reflect taking over mod]]></change>
+					<change><![CDATA[fixed some styling issues]]></change>
+					<change><![CDATA[fixed some language issues]]></change>
+					<change><![CDATA[fixed some spelling errors]]></change>
+					<change><![CDATA[changed classic look to be more like phpBB.com knowledgebase]]></change>
+					<change><![CDATA[removed upgrade files]]></change>
+					<change><![CDATA[temporaraly removed support for subsilver]]></change>
+					<change><![CDATA[added moderator notification to headers]]></change>
+					<change><![CDATA[Added ability to change article Header name]]></change>
 				</changelog>
 			</entry>
 		</history>
-		<link-group>
-			<link type="contrib" realname="Update 1.0.0RC3 to 1.0.0" href="./contrib/update_1.0.0RC3_to_1.0.0.xml" lang="en">Update from 1.0.0RC3 to 1.0.0</link>
-			<link type="contrib" realname="Update 1.0.0 to 1.0.1" href="./contrib/update_1.0.0_to_1.0.1.xml" lang="en">Update from 1.0.0 to 1.0.1</link>
-			<link type="contrib" realname="Update 1.0.1 to 1.0.2RC1" href="./contrib/update_1.0.1_to_1.0.2RC1.xml" lang="en">Update from 1.0.1 to 1.0.2RC1</link>
-			<link type="contrib" realname="Update 1.0.2RC1 to 1.0.2RC2" href="./contrib/update_1.0.2RC1_to_1.0.2RC2.xml" lang="en">Update from 1.0.2RC1 to 1.0.2RC2</link>
-			<link type="contrib" realname="Update 1.0.2RC2 to 1.0.2RC3" href="./contrib/update_1.0.2RC2_to_1.0.2RC3.xml" lang="en">Update from 1.0.2RC2 to 1.0.2RC3</link>
-			<link type="contrib" realname="Update 1.0.2RC3 to 1.0.2" href="./contrib/update_1.0.2RC3_to_1.0.2.xml" lang="en">Update from 1.0.2RC3 to 1.0.2</link>
-			<link type="template" realname="Subsilver2 Template" lang="en" href="./subsilver2.xml">Subsilver2 Template</link>
-		</link-group>
-
 	</header>
 	<action-group>
-					<copy>
-									<file from="root/kb.php" to="kb.php" />
-									<file from="root/adm/style/acp_kb_cat.html" to="adm/style/acp_kb_cat.html" />
-									<file from="root/adm/style/acp_kb_health.html" to="adm/style/acp_kb_health.html" />
-									<file from="root/adm/style/acp_kb.html" to="adm/style/acp_kb.html" />
-									<file from="root/adm/style/acp_kb_types.html" to="adm/style/acp_kb_types.html" />
-									<file from="root/adm/style/acp_kb_plugins.html" to="adm/style/acp_kb_plugins.html" />
-									<file from="root/includes/acp/acp_kb_cats.php" to="includes/acp/acp_kb_cats.php" />
-									<file from="root/includes/acp/acp_kb_types.php" to="includes/acp/acp_kb_types.php" />
-									<file from="root/includes/acp/acp_kb.php" to="includes/acp/acp_kb.php" />
-									<file from="root/includes/acp/acp_kb_permissions.php" to="includes/acp/acp_kb_permissions.php" />
-									<file from="root/includes/acp/info/acp_kb_cats.php" to="includes/acp/info/acp_kb_cats.php" />
-									<file from="root/includes/acp/info/acp_kb_types.php" to="includes/acp/info/acp_kb_types.php" />
-									<file from="root/includes/acp/info/acp_kb.php" to="includes/acp/info/acp_kb.php" />
-									<file from="root/includes/acp/info/acp_kb_permissions.php" to="includes/acp/info/acp_kb_permissions.php" />
-									<file from="root/includes/constants_kb.php" to="includes/constants_kb.php" />
-									<file from="root/includes/functions_kb.php" to="includes/functions_kb.php" />
-									<file from="root/includes/kb_auth.php" to="includes/kb_auth.php" />
-									<file from="root/includes/functions_install_kb.php" to="includes/functions_install_kb.php" />
-									<file from="root/includes/functions_plugins_kb.php" to="includes/functions_plugins_kb.php" />
-									<file from="root/includes/kb.php" to="includes/kb.php" />
-									<file from="root/includes/kb_plugins/*.*" to="includes/kb_plugins/*.*" />
-									<file from="root/includes/ucp/ucp_kb.php" to="includes/ucp/ucp_kb.php" />
-									<file from="root/includes/ucp/info/ucp_kb.php" to="includes/ucp/info/ucp_kb.php" />
-									<file from="root/includes/mcp/mcp_kb.php" to="includes/mcp/mcp_kb.php" />
-									<file from="root/includes/mcp/info/mcp_kb.php" to="includes/mcp/info/mcp_kb.php" />
-									<file from="root/js/jquery-1.3.2.min.js" to="js/jquery-1.3.2.min.js" />
-									<file from="root/language/en/email/kb_email_notify.txt" to="language/en/email/kb_email_notify.txt" />
-									<file from="root/language/en/email/kb_notify_email.txt" to="language/en/email/kb_notify_email.txt" />
-									<file from="root/language/en/email/kb_notify_pm.txt" to="language/en/email/kb_notify_pm.txt" />
-									<file from="root/language/en/mods/info_acp_kb.php" to="language/en/mods/info_acp_kb.php" />
-									<file from="root/language/en/mods/info_acp_kb_permissions.php" to="language/en/mods/info_acp_kb_permissions.php" />
-									<file from="root/language/en/mods/info_ucp_kb.php" to="language/en/mods/info_ucp_kb.php" />
-									<file from="root/language/en/mods/info_mcp_kb.php" to="language/en/mods/info_mcp_kb.php" />
-									<file from="root/language/en/mods/kb.php" to="language/en/mods/kb.php" />
-									<file from="root/language/en/mods/permissions_kb.php" to="language/en/mods/permissions_kb.php" />
-									<file from="root/styles/prosilver/imageset/en/button_article_new.gif" to="styles/prosilver/imageset/en/button_article_new.gif" />
-									<file from="root/styles/prosilver/imageset/en/button_comment_new.gif" to="styles/prosilver/imageset/en/button_comment_new.gif" />
-									<file from="root/styles/prosilver/imageset/en/button_request_new.gif" to="styles/prosilver/imageset/en/button_request_new.gif" />
-									<file from="root/styles/prosilver/template/kb/*.*" to="styles/prosilver/template/kb/*.*" />
-									<file from="root/styles/prosilver/theme/kb.css" to="styles/prosilver/theme/kb.css" />
-									<file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*" />
-									<file from="root/umil/umil.php" to="umil/umil.php" />
-							</copy>
-						<open src="adm/style/acp_attachments.html">
-							<edit>
-								<find><![CDATA[		<dl>
+		<sql><![CDATA[CREATE TABLE IF NOT EXISTS `phpbb_articles` (
+  `article_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `cat_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_title_clean` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_desc` text COLLATE utf8_bin NOT NULL,
+  `article_desc_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_desc_options` int(11) unsigned NOT NULL DEFAULT '7',
+  `article_desc_uid` varchar(8) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_text` mediumtext COLLATE utf8_bin NOT NULL,
+  `article_checksum` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_status` tinyint(1) NOT NULL DEFAULT '0',
+  `article_attachment` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `article_views` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_comments` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_user_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_user_color` varchar(6) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_time` int(11) unsigned NOT NULL DEFAULT '0',
+  `article_tags` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_type` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_votes` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `enable_bbcode` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `enable_smilies` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `enable_magic_url` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `enable_sig` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `bbcode_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `bbcode_uid` varchar(8) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `article_open` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `article_last_edit_time` int(11) unsigned NOT NULL DEFAULT '0',
+  `article_last_edit_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `article_edit_reason` mediumtext COLLATE utf8_bin NOT NULL,
+  `article_edit_reason_global` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `article_edit_type` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT 'a:0:{}',
+  `article_edit_contribution` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`article_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=0 ;]]></sql>
+		<copy>
+			<file from="root/*.*" to="*.*"/>
+		</copy>
+		<open src=".htaccess">
+			<edit>
+				<find><![CDATA[<Files "common.php">
+Order Allow,Deny
+Deny from All
+</Files>]]></find>
+				<action type="after-add"><![CDATA[RewriteEngine on
+
+Rewriterule ^(.+)/(.+)/a([0-9]*).html					./includes/kb_plugins/seo.php?a=$3&%{QUERY_STRING} [L]
+Rewriterule ^(.+)/(.+)/c([0-9]*).html					./includes/kb_plugins/seo.php?c=$3&%{QUERY_STRING} [L]
+Rewriterule ^tag/(.+)/									./includes/kb_plugins/seo.php?t=$1&%{QUERY_STRING} [L]]]></action>
+			</edit>
+		</open>
+		<open src="memberlist.php">
+			<edit>
+				<find><![CDATA[$percentage = ($config['num_posts']) ? min(100, ($member['user_posts'] / $config['num_posts']) * 100) : 0;]]></find>
+				<action type="after-add"><![CDATA[		$article_per_day = $member['user_articles'] / $memberdays;
+		$article_percentage = ($config['kb_total_articles']) ? min(100, ($member['user_articles'] / $config['kb_total_articles']) * 100) : 0;]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['POSTS_PCT'			=> sprintf($user->lang['POST_PCT'], $percentage),]]></find>
+				<action type="after-add"><![CDATA[			'ARTICLES_DAY'			=> sprintf($user->lang['ARTICLES_DAY'], $article_per_day),
+			'ARTICLES_PCT'			=> sprintf($user->lang['ARTICLES_PCT'], $article_percentage),]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$sort_key_text = array('a' => $user->lang['SORT_USERNAME'], 'b' => $user->lang['SORT_LOCATION'], 'c' => $user->lang['SORT_JOINED'], 'd' => $user->lang['SORT_POST_COUNT'], 'f' => $user->lang['WEBSITE'], 'g' => $user->lang['ICQ'], 'h' => $user->lang['AIM'], 'i' => $user->lang['MSNM'], 'j' => $user->lang['YIM'], 'k' => $user->lang['JABBER']);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA['d' => $user->lang['SORT_POST_COUNT'],]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ 'n' => $user->lang['SORT_ARTICLE_COUNT'],]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$sort_key_sql = array('a' => 'u.username_clean', 'b' => 'u.user_from', 'c' => 'u.user_regdate', 'd' => 'u.user_posts', 'f' => 'u.user_website', 'g' => 'u.user_icq', 'h' => 'u.user_aim', 'i' => 'u.user_msnm', 'j' => 'u.user_yim', 'k' => 'u.user_jabber');]]></find>
+				<inline-edit>
+					<inline-find><![CDATA['d' => 'u.user_posts',]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ 'n' => 'u.user_articles',]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA['U_SORT_POSTS'			=> $sort_url . '&amp;sk=d&amp;sd=' . (($sort_key == 'd' && $sort_dir == 'a') ? 'd' : 'a'),]]></find>
+				<action type="before-add"><![CDATA[			'U_SORT_ARTICLES'		=> $sort_url . '&amp;sk=n&amp;sd=' . (($sort_key == 'n' && $sort_dir == 'a') ? 'd' : 'a'),]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['AGE'			=> $age,]]></find>
+				<action type="after-add"><![CDATA[		'ARTICLES'		=> ($data['user_articles']) ? $data['user_articles'] : 0,]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['U_SEARCH_USER'	=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", "author_id=$user_id&amp;sr=posts") : '',]]></find>
+				<action type="after-add"><![CDATA[		'U_SEARCH_USER_ARTICLES'	=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}kb.$phpEx", "author_id=$user_id&amp;i=search") : '',]]></action>
+			</edit>
+		</open>
+		<open src="viewonline.php">
+			<edit>
+				<find><![CDATA[case 'report':
+			$location = $user->lang['REPORTING_POST'];
+			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
+		break;]]></find>
+				<action type="after-add"><![CDATA[		case 'kb':
+			// Save editing default lang file
+			if (!defined('KB_LANG_INCLUDE'))
+			{
+				$user->add_lang('mods/kb');
+			}
+			
+			define('KB_LANG_INCLUDE', true);
+		
+			$location = $user->lang['VIEWING_KB'];
+
+			// Grab some common modules
+			$url_params = array(
+				'c='						=> 'VIEWING_CAT',
+				'a='						=> 'VIEWING_ARTICLE',
+				'i=history&a='				=> 'VIEWING_ARTICLE_HISTORY',
+				'i=comment&action=add&a='	=> 'ADDING_COMMENT',
+				'&i=add'					=> 'ADDING_ARTICLE',
+			);
+
+			foreach ($url_params as $param => $lang)
+			{
+				if (strpos($row['session_page'], $param) !== false)
+				{
+					$location = $user->lang[$lang];
+				}
+			}
+
+			$location_url = append_sid("{$phpbb_root_path}kb.$phpEx");
+		break;]]></action>
+			</edit>
+		</open>
+		<open src="viewtopic.php">
+			<edit>
+				<find><![CDATA[$user_cache[$poster_id] = array(
+				'joined'		=> '',
+				'posts'			=> '',]]></find>
+				<action type="after-add"><![CDATA[			'articles'		=> '',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[$user_cache[$poster_id] = array(
+				'joined'		=> $user->format_date($row['user_regdate']),
+				'posts'			=> $row['user_posts'],]]></find>
+				<action type="after-add"><![CDATA[			'articles'		=> $row['user_articles'],]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	'POSTER_JOINED'		=> $user_cache[$poster_id]['joined'],
+		'POSTER_POSTS'		=> $user_cache[$poster_id]['posts'],]]></find>
+				<action type="after-add"><![CDATA[		'POSTER_ARTICLES'	=> $user_cache[$poster_id]['articles'],
+		'U_POSTER_ARTICLES' => append_sid($phpbb_root_path . 'kb.' . $phpEx, 'i=search&amp;author_id= ' . $poster_id),]]></action>
+			</edit>
+		</open>
+		<open src="adm/index.php">
+			<edit>
+				<find><![CDATA['U_INDEX'				=> append_sid("{$phpbb_root_path}index.$phpEx"),]]></find>
+				<action type="after-add"><![CDATA[		'U_KB_INDEX'			=> append_sid("{$phpbb_root_path}kb.$phpEx"),]]></action>
+			</edit>
+		</open>
+		<open src="adm/style/acp_attachments.html">
+			<edit>
+				<find><![CDATA[		<dl>
 			<dt><label for="allow_in_pm">{L_ALLOW_IN_PM}:</label></dt>
 			<dd><input type="checkbox" class="radio" id="allow_in_pm" name="allow_in_pm" value="1"<!-- IF ALLOW_IN_PM --> checked="checked"<!-- ENDIF --> /></dd>
 		</dl>]]></find>
-								<action type="after-add"><![CDATA[		<dl>
-			<dt><label for="allow_in_pm">{L_ALLOW_IN_KB}:</label></dt>
+				<action type="after-add"><![CDATA[		<dl>
+			<dt><label for="allow_in_kb">{L_ALLOW_IN_KB}:</label></dt>
 			<dd><input type="checkbox" class="radio" id="allow_in_kb" name="allow_in_kb" value="1"<!-- IF ALLOW_IN_KB --> checked="checked"<!-- ENDIF --> /></dd>
 		</dl>]]></action>
-							</edit>
-							
-							<edit>
-								<find><![CDATA[<!-- ELSE --><br /><span>&raquo; {L_ALLOWED_IN_PM_POST}</span><!-- ENDIF -->]]></find>
-								<inline-edit>
-									<inline-find><![CDATA[<!-- ENDIF -->]]></inline-find>
-									<inline-action type="after-add"><![CDATA[<br /><span><!-- IF groups.S_ALLOWED_IN_KB -->&raquo; {L_ALLOW_IN_KB}<!-- ELSE -->&raquo; {L_NOT_ALLOWED_IN_KB}<!-- ENDIF --></span>]]></inline-action>
-								</inline-edit>
-							</edit>
-						</open>
-						<open src="download/file.php">
-							<edit>
-								<find><![CDATA[$thumbnail = request_var('t', false);]]></find>
-								<action type="after-add"><![CDATA[$in_kb = request_var('kb', false);]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[if (!$config['allow_attachments'] && !$config['allow_pm_attach'])]]></find>
-								<inline-edit>
-									<inline-find><![CDATA[)]]></inline-find>
-									<inline-action type="before-add"><![CDATA[ && !$config['kb_allow_attachments']]]></inline-action>
-								</inline-edit>
-							</edit>
-							<edit>
-								<find><![CDATA[$sql = 'SELECT attach_id, in_message, post_msg_id, extension, is_orphan, poster_id, filetime
+			</edit>
+			<edit>
+				<find><![CDATA[<!-- ELSE --><br /><span>&raquo; {L_ALLOWED_IN_PM_POST}</span><!-- ENDIF -->]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[<!-- ENDIF -->]]></inline-find>
+					<inline-action type="after-add"><![CDATA[<br /><span><!-- IF groups.S_ALLOWED_IN_KB -->&raquo; {L_ALLOW_IN_KB}<!-- ELSE -->&raquo; {L_NOT_ALLOWED_IN_KB}<!-- ENDIF --></span>]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="adm/style/overall_header.html">
+			<edit>
+				<find><![CDATA[<p><a href="{U_ADM_INDEX}">{L_ADMIN_INDEX}</a> &bull; <a href="{U_INDEX}">{L_FORUM_INDEX}</a></p>]]></find>
+				<action type="replace-with"><![CDATA[<p><a href="{U_ADM_INDEX}">{L_ADMIN_INDEX}</a> &bull; <a href="{U_INDEX}">{L_FORUM_INDEX}</a> &bull; <a href="{U_KB_INDEX}">{L_KB}</a></p>]]></action>
+			</edit>
+		</open>
+		<open src="download/file.php">
+			<edit>
+				<find><![CDATA[$thumbnail = request_var('t', false);]]></find>
+				<action type="after-add"><![CDATA[$in_kb = request_var('kb', false);]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[if (!$config['allow_attachments'] && !$config['allow_pm_attach'])]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[)]]></inline-find>
+					<inline-action type="before-add"><![CDATA[ && !$config['kb_allow_attachments']]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$sql = 'SELECT attach_id, in_message, post_msg_id, extension, is_orphan, poster_id, filetime
 	FROM ' . ATTACHMENTS_TABLE . "
 	WHERE attach_id = $download_id";
 $result = $db->sql_query_limit($sql, 1);
 $attachment = $db->sql_fetchrow($result);
 $db->sql_freeresult($result);]]></find>
-								<action type="replace-with"><![CDATA[if($in_kb)
+				<action type="replace-with"><![CDATA[if($in_kb)
 {
 	include($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
 	include($phpbb_root_path . 'includes/kb_auth.' . $phpEx);
@@ -397,17 +526,17 @@ else
 	$attachment = $db->sql_fetchrow($result);
 	$db->sql_freeresult($result);
 }]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[$extensions = $cache->obtain_attach_extensions(true);]]></find>
-								<inline-edit>
-									<inline-find><![CDATA[= ]]></inline-find>
-									<inline-action type="after-add"><![CDATA[($in_kb) ? $cache->obtain_attach_extensions('kb') : ]]></inline-action>
-								</inline-edit>
-							</edit>
-							<edit>
-								<find><![CDATA[if (!$attachment['in_message'])]]></find>
-								<action type="replace-with"><![CDATA[if($in_kb)
+			</edit>
+			<edit>
+				<find><![CDATA[$extensions = $cache->obtain_attach_extensions(true);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[= ]]></inline-find>
+					<inline-action type="after-add"><![CDATA[($in_kb) ? $cache->obtain_attach_extensions('kb') : ]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[if (!$attachment['in_message'])]]></find>
+				<action type="replace-with"><![CDATA[if($in_kb)
 	{
 		$row['forum_id'] = false;
 		
@@ -435,20 +564,20 @@ else
 		}
 	}
 	else if (!$attachment['in_message'])]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[$extensions = array();]]></find>
-								<inline-edit>
-									<inline-find><![CDATA[= ]]></inline-find>
-									<inline-action type="after-add"><![CDATA[($in_kb) ? $cache->obtain_attach_extensions('kb') : ]]></inline-action>
-								</inline-edit>
-							</edit>
-							<edit>
-								<find><![CDATA[// Fetching filename here to prevent sniffing of filename
+			</edit>
+			<edit>
+				<find><![CDATA[$extensions = array();]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[= ]]></inline-find>
+					<inline-action type="after-add"><![CDATA[($in_kb) ? $cache->obtain_attach_extensions('kb') : ]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[// Fetching filename here to prevent sniffing of filename
 $sql = 'SELECT attach_id, is_orphan, in_message, post_msg_id, extension, physical_filename, real_filename, mimetype, filetime
 	FROM ' . ATTACHMENTS_TABLE . "
 	WHERE attach_id = $download_id";]]></find>
-								<action type="replace-with"><![CDATA[if($in_kb)
+				<action type="replace-with"><![CDATA[if($in_kb)
 {
 	// Fetching filename here to prevent sniffing of filename
 	$sql = 'SELECT attach_id, is_orphan, article_id, comment_id, extension, physical_filename, real_filename, mimetype, filetime
@@ -462,34 +591,34 @@ else
 		FROM ' . ATTACHMENTS_TABLE . "
 		WHERE attach_id = $download_id";
 }]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[$sql = 'UPDATE ' . ATTACHMENTS_TABLE . ']]></find>
-								<action type="replace-with"><![CDATA[$table = ($in_kb) ? KB_ATTACHMENTS_TABLE : ATTACHMENTS_TABLE;
+			</edit>
+			<edit>
+				<find><![CDATA[$sql = 'UPDATE ' . ATTACHMENTS_TABLE . ']]></find>
+				<action type="replace-with"><![CDATA[$table = ($in_kb) ? KB_ATTACHMENTS_TABLE : ATTACHMENTS_TABLE;
 	$sql = 'UPDATE ' . $table . ']]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[wrap_img_in_html(append_sid($phpbb_root_path . 'download/file.' . $phpEx, 'id=' . $attachment['attach_id']), $attachment['real_filename']);]]></find>
-								<action type="replace-with"><![CDATA[$kb_link = ($in_kb) ? '&amp;kb=1' : '';
+			</edit>
+			<edit>
+				<find><![CDATA[wrap_img_in_html(append_sid($phpbb_root_path . 'download/file.' . $phpEx, 'id=' . $attachment['attach_id']), $attachment['real_filename']);]]></find>
+				<action type="replace-with"><![CDATA[$kb_link = ($in_kb) ? '&amp;kb=1' : '';
 	wrap_img_in_html(append_sid($phpbb_root_path . 'download/file.' . $phpEx, 'id=' . $attachment['attach_id'] . $kb_link), $attachment['real_filename']);]]></action>
-							</edit>
-						</open>
-						<open src="includes/auth.php">
-							<edit>
-								<find><![CDATA[SET user_permissions = '',]]></find>
-								<inline-edit>
-									<inline-find><![CDATA[,]]></inline-find>
-									<inline-action type="after-add"><![CDATA[ user_kb_permissions = '',]]></inline-action>
-								</inline-edit>
-							</edit>
-						</open>
-						<open src="includes/cache.php">
-							<edit>
-								<find><![CDATA[		}
+			</edit>
+		</open>
+		<open src="includes/auth.php">
+			<edit>
+				<find><![CDATA[SET user_permissions = '',]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[,]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ user_kb_permissions = '',]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="includes/cache.php">
+			<edit>
+				<find><![CDATA[		}
 
 		return $icons;
 	}]]></find>
-								<action type="after-add"><![CDATA[	// Mod KB Begin
+				<action type="after-add"><![CDATA[	// Mod KB Begin
 	/**
 	* Obtain article types
 	*/
@@ -526,50 +655,50 @@ else
 		return $types;
 	}
 	// Mod KB End]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[			$extensions = array(
+			</edit>
+			<edit>
+				<find><![CDATA[			$extensions = array(
 				'_allowed_post'	=> array(),
 				'_allowed_pm'	=> array(),
 ]]></find>
-								<action type="after-add"><![CDATA[				// Mod KB Begin
+				<action type="after-add"><![CDATA[				// Mod KB Begin
 				'_allowed_kb'	=> array(),
 				// Mod KB End]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[AND (g.allow_group = 1 OR g.allow_in_pm = 1)';]]></find>
-								<inline-edit>
-									<inline-find><![CDATA[)]]></inline-find>
-									<inline-action type="before-add"><![CDATA[ OR g.allow_in_kb = 1]]></inline-action>
-								</inline-edit>
-							</edit>
-							<edit>
-								<find><![CDATA[					'max_filesize'	=> (int) $row['max_filesize'],
+			</edit>
+			<edit>
+				<find><![CDATA[AND (g.allow_group = 1 OR g.allow_in_pm = 1)';]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[)]]></inline-find>
+					<inline-action type="before-add"><![CDATA[ OR g.allow_in_kb = 1]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[					'max_filesize'	=> (int) $row['max_filesize'],
 					'allow_group'	=> $row['allow_group'],
 					'allow_in_pm'	=> $row['allow_in_pm'],]]></find>
-								<action type="after-add"><![CDATA[					// Mod KB Begin
+				<action type="after-add"><![CDATA[					// Mod KB Begin
 					'allow_in_kb'	=> $row['allow_in_kb'],
 					// Mod KB End]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[				if ($row['allow_in_pm'])
+			</edit>
+			<edit>
+				<find><![CDATA[				if ($row['allow_in_pm'])
 				{
 					$extensions['_allowed_pm'][$extension] = 0;
 				}]]></find>
-								<action type="after-add"><![CDATA[				
+				<action type="after-add"><![CDATA[				
 				// Mod KB Begin
 				if ($row['allow_in_kb'])
 				{
 					$extensions['_allowed_kb'][$extension] = 0;
 				}
 				// Mod KB End]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[		else if ($forum_id === true)
+			</edit>
+			<edit>
+				<find><![CDATA[		else if ($forum_id === true)
 		{
 			return $extensions;
 		}]]></find>
-								<action type="after-add"><![CDATA[		// Mod KB Begin
+				<action type="after-add"><![CDATA[		// Mod KB Begin
 		else if($forum_id == 'kb')
 		{
 			// We are checking for the knowledge base, therefore we only need to get the kb extensions...
@@ -584,60 +713,61 @@ else
 			$extensions = $return;
 		}
 		// Mod KB End]]></action>
-							</edit>
-						</open>
-						<open src="includes/functions.php">
-											<edit>
-							<find><![CDATA[		'U_RESTORE_PERMISSIONS'	=> ($user->data['user_perm_from'] && $auth->acl_get('a_switchperm')) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=restore_perm') : '',]]></find>
-															<action type="after-add"><![CDATA[
-'U_KB'					=> append_sid("{$phpbb_root_path}kb.$phpEx"),
-'L_KB'					=> (isset($config['kb_link_name']) && $config['kb_link_name'] != '') ? $config['kb_link_name'] : $user->lang['KB'],]]></action>
-													</edit>
-									</open>
-						<open src="includes/functions_user.php">
-							<edit>
-								<find><![CDATA[function user_update_name($old_name, $new_name)
+			</edit>
+		</open>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[		'U_RESTORE_PERMISSIONS'	=> ($user->data['user_perm_from'] && $auth->acl_get('a_switchperm')) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=restore_perm') : '',]]></find>
+				<action type="after-add"><![CDATA['U_KB'					=> append_sid("{$phpbb_root_path}kb.$phpEx"),
+'L_KB'					=> (isset($config['kb_link_name']) && $config['kb_link_name'] != '') ? $config['kb_link_name'] : $user->lang['KB_NAME'],]]></action>
+			</edit>
+		</open>
+		<open src="includes/functions_user.php">
+			<edit>
+				<find><![CDATA[function user_update_name($old_name, $new_name)
 {
 	global $config, $db, $cache;]]></find>
-								<action type="after-add"><![CDATA[if(!defined('KB_TABLE'))
+				<action type="after-add"><![CDATA[if(!defined('KB_TABLE'))
 	{
 		global $phpbb_root_path, $phpEx, $table_prefix;
 		include($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
 	}]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[TOPICS_TABLE			=> array('topic_first_poster_name', 'topic_last_poster_name'),]]></find>
-								<action type="after-add"><![CDATA[KB_TABLE				=> array('article_user_name'),
+			</edit>
+			<edit>
+				<find><![CDATA[TOPICS_TABLE			=> array('topic_first_poster_name', 'topic_last_poster_name'),]]></find>
+				<action type="after-add"><![CDATA[KB_TABLE				=> array('article_user_name'),
 		KB_COMMENTS_TABLE		=> array('comment_user_name', 'comment_edit_name'),
 		KB_EDITS_TABLE			=> array('edit_user_name'),
 		KB_REQ_TABLE			=> array('request_user_name'),]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA['user_sig'					=> '',
+			</edit>
+			<edit>
+				<find><![CDATA['user_sig'					=> '',
 		'user_sig_bbcode_uid'		=> '',
 		'user_sig_bbcode_bitfield'	=> '',
 
 		'user_form_salt'			=> unique_id(),]]></find>
-								<action type="after-add"><![CDATA[		'user_kb_permissions'		=> '',]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[$sql = 'UPDATE ' . USERS_TABLE . '
-			SET user_new_privmsg = user_new_privmsg - ' . sizeof($ary) . ',
-				user_unread_privmsg = user_unread_privmsg - ' . sizeof($ary) . '
-			WHERE user_id = ' . $_user_id;
-		$db->sql_query($sql);
-	}]]></find>
-								<action type="after-add"><![CDATA[if(!function_exists('kb_user_delete'))
+				<action type="after-add"><![CDATA[		'user_kb_permissions'		=> '',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[// Update the post count for the anonymous user
+				if ($user_row['user_posts'])
+				{
+					$sql = 'UPDATE ' . USERS_TABLE . '
+						SET user_posts = user_posts + ' . $user_row['user_posts'] . '
+						WHERE user_id = ' . ANONYMOUS;
+					$db->sql_query($sql);
+				}]]></find>
+				<action type="after-add"><![CDATA[if(!function_exists('kb_user_delete'))
 	{
 		include($phpbb_root_path . 'includes/functions_kb.' . $phpEx);
 	}
 	kb_user_delete($mode, $user_id, $post_username);]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[$sql = 'UPDATE ' . TOPICS_TABLE . " SET topic_last_poster_colour = '" . $db->sql_escape($sql_ary['user_colour']) . "'
+			</edit>
+			<edit>
+				<find><![CDATA[$sql = 'UPDATE ' . TOPICS_TABLE . " SET topic_last_poster_colour = '" . $db->sql_escape($sql_ary['user_colour']) . "'
 			WHERE " . $db->sql_in_set('topic_last_poster_id', $user_id_ary);
 		$db->sql_query($sql);]]></find>
-								<action type="after-add"><![CDATA[if(!defined('KB_TABLE'))
+				<action type="after-add"><![CDATA[if(!defined('KB_TABLE'))
 		{
 			global $phpbb_root_path, $phpEx, $table_prefix;
 			include($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
@@ -662,219 +792,248 @@ else
 		$sql = 'UPDATE ' . KB_REQ_TABLE . " SET request_user_color = '" . $db->sql_escape($sql_ary['user_colour']) . "'
 				WHERE " . $db->sql_in_set('request_user_id', $user_id_ary);
 		$db->sql_query($sql);]]></action>
-							</edit>
-						</open>
-						<open src="includes/acp/acp_attachments.php">
-							<edit>
-								<find><![CDATA[						$allowed_forums	= request_var('allowed_forums', array(0));
+			</edit>
+		</open>
+		<open src="includes/acp/acp_attachments.php">
+			<edit>
+				<find><![CDATA[						$allowed_forums	= request_var('allowed_forums', array(0));
 						$allow_in_pm	= (isset($_POST['allow_in_pm'])) ? true : false;]]></find>
-								<action type="after-add"><![CDATA[						// Mod KB Begin
+				<action type="after-add"><![CDATA[						// Mod KB Begin
 						$allow_in_kb	= (isset($_POST['allow_in_kb'])) ? true : false;
 						// Mod KB End]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[							'allowed_forums'=> ($forum_select) ? serialize($allowed_forums) : '',
+			</edit>
+			<edit>
+				<find><![CDATA[							'allowed_forums'=> ($forum_select) ? serialize($allowed_forums) : '',
 							'allow_in_pm'	=> ($allow_in_pm) ? 1 : 0,]]></find>
-								<action type="after-add"><![CDATA[							// Mod KB Begin
+				<action type="after-add"><![CDATA[							// Mod KB Begin
 							'allow_in_kb'	=> ($allow_in_kb) ? 1 : 0,
 							// Mod KB End]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[								'allow_group'	=> 1,
+			</edit>
+			<edit>
+				<find><![CDATA[								'allow_group'	=> 1,
 								'allow_in_pm'	=> 1,]]></find>
-								<action type="after-add"><![CDATA[								// Mod KB Begin
+				<action type="after-add"><![CDATA[								// Mod KB Begin
 								'allow_in_kb'	=> 1,
 								// Mod KB End]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[							'ALLOW_GROUP'			=> $ext_group_row['allow_group'],
+			</edit>
+			<edit>
+				<find><![CDATA[							'ALLOW_GROUP'			=> $ext_group_row['allow_group'],
 							'ALLOW_IN_PM'			=> $ext_group_row['allow_in_pm'],]]></find>
-								<action type="after-add"><![CDATA[							// KB Mod Begin
+				<action type="after-add"><![CDATA[							// KB Mod Begin
 							'ALLOW_IN_KB'			=> $ext_group_row['allow_in_kb'],
 							// KB Mod End]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[						'S_ADD_SPACER'		=> $s_add_spacer,
+			</edit>
+			<edit>
+				<find><![CDATA[						'S_ADD_SPACER'		=> $s_add_spacer,
 						'S_ALLOWED_IN_PM'	=> ($row['allow_in_pm']) ? true : false,]]></find>
-								<action type="after-add"><![CDATA[						// Mod KB Begin
+				<action type="after-add"><![CDATA[						// Mod KB Begin
 						'S_ALLOWED_IN_KB'	=> ($row['allow_in_kb']) ? true : false,
 						// Mod KB End]]></action>
-							</edit>
-						</open>
-						<open src="includes/acp/acp_styles.php">
-							<edit>
-								<find><![CDATA['icon_back_top', 'icon_contact_aim', 'icon_contact_email', 'icon_contact_icq', 'icon_contact_jabber', 'icon_contact_msnm', 'icon_contact_pm', 'icon_contact_yahoo', 'icon_contact_www', 'icon_post_delete', 'icon_post_edit', 'icon_post_info', 'icon_post_quote', 'icon_post_report', 'icon_user_online', 'icon_user_offline', 'icon_user_profile', 'icon_user_search', 'icon_user_warn', 'button_pm_forward', 'button_pm_new', 'button_pm_reply', 'button_topic_locked', 'button_topic_new', 'button_topic_reply',]]></find>
-								<inline-edit>
-									<inline-find><![CDATA['button_topic_reply',]]></inline-find>
-									<inline-action type="after-add"><![CDATA[ 'button_article_new', 'button_comment_new', 'button_request_new']]></inline-action>
-								</inline-edit>
-							</edit>
-						</open>
-						<open src="includes/acp/auth.php">
-							<edit>
-								<find><![CDATA[function display_mask($mode, $permission_type, &$hold_ary, $user_mode = 'user', $local = false, $group_display = true)]]></find>
-								<inline-edit>
-									<inline-find><![CDATA[)]]></inline-find>
-									<inline-action type="before-add"><![CDATA[, $cat_data = false]]></inline-action>
-								</inline-edit>
-							</edit>
-							<edit>
-								<find><![CDATA[global $template, $user, $db, $phpbb_root_path, $phpEx;]]></find>
-								<action type="after-add"><![CDATA[		if($cat_data)
+			</edit>
+		</open>
+		<open src="includes/acp/acp_styles.php">
+			<edit>
+				<find><![CDATA['icon_back_top', 'icon_contact_aim', 'icon_contact_email', 'icon_contact_icq', 'icon_contact_jabber', 'icon_contact_msnm', 'icon_contact_pm', 'icon_contact_yahoo', 'icon_contact_www', 'icon_post_delete', 'icon_post_edit', 'icon_post_info', 'icon_post_quote', 'icon_post_report', 'icon_user_online', 'icon_user_offline', 'icon_user_profile', 'icon_user_search', 'icon_user_warn', 'button_pm_forward', 'button_pm_new', 'button_pm_reply', 'button_topic_locked', 'button_topic_new', 'button_topic_reply',]]></find>
+				<inline-edit>
+					<inline-find><![CDATA['button_topic_reply',]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ 'button_article_new', 'button_comment_new', 'button_request_new',]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="includes/acp/auth.php">
+			<edit>
+				<find><![CDATA[function display_mask($mode, $permission_type, &$hold_ary, $user_mode = 'user', $local = false, $group_display = true)]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[)]]></inline-find>
+					<inline-action type="before-add"><![CDATA[, $cat_data = false]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[global $template, $user, $db, $phpbb_root_path, $phpEx;]]></find>
+				<action type="after-add"><![CDATA[		if($cat_data)
 		{
 			global $kb_auth;
 		}]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[$forum_names_ary = make_forum_select(false, false, true, false, false, false, true);]]></find>
-								<inline-edit>
-									<inline-find><![CDATA[make]]></inline-find>
-									<inline-action type="before-add"><![CDATA[ ($cat_data) ? $cat_data : ]]></inline-action>
-								</inline-edit>
-							</edit>
-							<edit>
-								<find><![CDATA[$cur_roles = $this->acl_role_data($user_mode, $permission_type, array_keys($hold_ary));]]></find>
-								<inline-edit>
-									<inline-find><![CDATA[$this]]></inline-find>
-									<inline-action type="before-add"><![CDATA[ ($cat_data) ? $kb_auth->acl_role_data($user_mode, $permission_type, array_keys($hold_ary)) : ]]></inline-action>
-								</inline-edit>
-							</edit>
-						</open>
-							<open src="language/en/common.php">
-											<edit>
-							<find><![CDATA[	'KIB'					=> 'KiB',]]></find>
-															<action type="after-add"><![CDATA[	'KNOWLEDGE_BASE'		=> 'Knowledge Base',
-	'KB_EXPLAIN'			=> 'Knowledge Base',
-	'ARTICLES'			=> 'Articles',]]></action>
-													</edit>
-									</open>
-							<open src="language/en/acp/attachments.php">
-								<edit>
-									<find><![CDATA[	'ALLOW_IN_PM'						=> 'Allowed in private messaging',]]></find>
-									<action type="after-add"><![CDATA[	// Mod KB Begin
+			</edit>
+			<edit>
+				<find><![CDATA[$forum_names_ary = make_forum_select(false, false, true, false, false, false, true);]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[make]]></inline-find>
+					<inline-action type="before-add"><![CDATA[ ($cat_data) ? $cat_data : ]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$cur_roles = $this->acl_role_data($user_mode, $permission_type, array_keys($hold_ary));]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$this]]></inline-find>
+					<inline-action type="before-add"><![CDATA[ ($cat_data) ? $kb_auth->acl_role_data($user_mode, $permission_type, array_keys($hold_ary)) : ]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
+		<open src="language/en/common.php">
+			<edit>
+				<find><![CDATA['ASCENDING'						=> 'Ascending',]]></find>
+				<action type="before-add"><![CDATA[	'ARTICLES_DAY'					=> '%.2f articles per day',
+	'ARTICLES_PCT'					=> '%.2f%% of all articles',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	'KIB'					=> 'KiB',]]></find>
+				<action type="after-add"><![CDATA[	'KB_NAME'				=> 'Knowledge Base',
+	'KB_HEADER'				=> 'Knowledge Base',
+	'KB_EXPLAIN'			=> 'phpBB3-KnowledgeBase',
+	'ARTICLES'				=> 'Articles',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['SEARCH_UNREAD'				=> 'View unread posts',]]></find>
+				<action type="after-add"><![CDATA[	'SEARCH_USER_ARTICLES'		=> 'Search user’s articles',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA['TOPIC_UNAPPROVED'	=> 'This topic has not been approved',]]></find>
+				<action type="after-add"><![CDATA[	'TOTAL_ARTICLES'	=> 'Total Articles',]]></action>
+			</edit>
+		</open>
+		<open src="language/en/memberlist.php">
+			<edit>
+				<find><![CDATA['SORT_POST_COUNT'		=> 'Post count',]]></find>
+				<action type="after-add"><![CDATA[	'SORT_ARTICLE_COUNT'	=> 'Article count',]]></action>
+			</edit>
+		</open>
+		<open src="language/en/acp/attachments.php">
+			<edit>
+				<find><![CDATA[	'ALLOW_IN_PM'						=> 'Allowed in private messaging',]]></find>
+				<action type="after-add"><![CDATA[	// Mod KB Begin
 	'ALLOW_IN_KB'						=> 'Allowed in the Knowledge Base',
 	'NOT_ALLOWED_IN_KB'					=> 'Not allowed in the Knowledge Base',
 	// Mod KB End]]></action>
-								</edit>
-							</open>	
-							<open src="language/en/acp/styles.php">
-								<edit>
-									<find><![CDATA[	'IMG_BUTTON_TOPIC_NEW'		=> 'New topic',
+			</edit>
+		</open>
+		<open src="language/en/acp/styles.php">
+			<edit>
+				<find><![CDATA[	'IMG_BUTTON_TOPIC_NEW'		=> 'New topic',
 	'IMG_BUTTON_TOPIC_REPLY'	=> 'Reply topic',]]></find>
-									<action type="after-add"><![CDATA[	'IMG_BUTTON_ARTICLE_NEW'	=> 'New article',
+				<action type="after-add"><![CDATA[	'IMG_BUTTON_ARTICLE_NEW'	=> 'New article',
 	'IMG_BUTTON_COMMENT_NEW'	=> 'New comment',
 	'IMG_BUTTON_REQUEST_NEW'	=> 'New request',]]></action>
-								</edit>
-							</open>
-							<open src="styles/prosilver/imageset/en/imageset.cfg">
-								<edit>
-									<find><![CDATA[img_button_topic_reply = button_topic_reply.gif*25*96]]></find>
-									<action type="after-add"><![CDATA[img_button_article_new = button_article_new.gif*25*107
+			</edit>
+		</open>
+		<open src="styles/prosilver/imageset/en/imageset.cfg">
+			<edit>
+				<find><![CDATA[img_button_topic_reply = button_topic_reply.gif*25*96]]></find>
+				<action type="after-add"><![CDATA[img_button_article_new = button_article_new.gif*25*107
 img_button_comment_new = button_comment_new.gif*25*121
 img_button_request_new = button_request_new.gif*25*116]]></action>
-								</edit>
-							</open>
-							<open src="styles/prosilver/template/overall_header.html">
-											<edit>
-							<find><![CDATA[<script type="text/javascript">
-// <![CDATA[
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/index_body.html">
+			<edit>
+				<find><![CDATA[<!-- IF U_MCP --><p>{CURRENT_TIME} <br />[&nbsp;<a href="{U_MCP}">{L_MCP}</a>&nbsp;]</p><!-- ELSEIF S_USER_LOGGED_IN --><p>{CURRENT_TIME}</p><!-- ENDIF -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>{CURRENT_TIME} <br />[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --><!-- IF U_TOTAL_KB_REQUEST --> &bull; <a href="{U_KB_REQUEST}">{U_TOTAL_KB_REQUEST}</a><!-- ENDIF --> ]</p><!-- ELSEIF S_USER_LOGGED_IN --><p>{CURRENT_TIME}</p><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/mcp_header.html">
+			<edit>
+				<find><![CDATA[[ <a href="{U_MCP}">{L_MCP}</a><!-- IF U_MCP_FORUM --> | <a href="{U_MCP_FORUM}">{L_MODERATE_FORUM}</a><!-- ENDIF -->]]></find>
+				<action type="replace-with"><![CDATA[[ <a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> | <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --><!-- IF U_TOTAL_KB_REQUEST --> | <a href="{U_KB_REQUEST}">{U_TOTAL_KB_REQUEST}</a><!-- ENDIF --> <!-- IF U_MCP_FORUM --> | <a href="{U_MCP_FORUM}">{L_MODERATE_FORUM}</a><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/memberlist_body.html">
+			<edit>
+				<find><![CDATA[<th class="posts"><a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a></th>]]></find>
+				<action type="after-add"><![CDATA[			<th class="posts"><a href="{U_SORT_ARTICLES}#memberlist">{L_ARTICLES}</a></th>]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<td colspan="<!-- IF U_SORT_ACTIVE -->5<!-- ELSE -->4<!-- ENDIF -->">&nbsp;</td>]]></find>
+				<action type="replace-with"><![CDATA[<td colspan="<!-- IF U_SORT_ACTIVE -->6<!-- ELSE -->5<!-- ENDIF -->">&nbsp;</td>]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<th class="posts"><a href="{U_SORT_POSTS}#memberlist">{L_POSTS}</a></th>]]></find>
+				<action type="after-add"><![CDATA[			<th class="posts"><a href="{U_SORT_ARTICLES}#memberlist">{L_ARTICLES}</a></th>]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<th class="posts">&nbsp;</th>]]></find>
+				<action type="after-add"><![CDATA[		<th class="posts">&nbsp;</th>]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<td class="posts"><!-- IF memberrow.POSTS and S_DISPLAY_SEARCH --><a href="{memberrow.U_SEARCH_USER}" title="{L_SEARCH_USER_POSTS}">{memberrow.POSTS}</a><!-- ELSE -->{memberrow.POSTS}<!-- ENDIF --></td>]]></find>
+				<action type="after-add"><![CDATA[		<td class="posts"><!-- IF memberrow.ARTICLES and S_DISPLAY_SEARCH --><a href="{memberrow.U_SEARCH_USER_ARTICLES}" title="{L_SEARCH_USER_ARTICLES}">{memberrow.ARTICLES}</a><!-- ELSE -->{memberrow.ARTICLES}<!-- ENDIF --></td>]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<td colspan="<!-- IF S_VIEWONLINE -->5<!-- ELSE -->4<!-- ENDIF -->">{L_NO_MEMBERS}</td>]]></find>
+				<action type="replace-with"><![CDATA[<td colspan="<!-- IF S_VIEWONLINE -->6<!-- ELSE -->5<!-- ENDIF -->">{L_NO_MEMBERS}</td>]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/memberlist_view.html">
+			<edit>
+				<find><![CDATA[<dt>{L_TOTAL_POSTS}:</dt>]]></find>
+				<action type="before-add"><![CDATA[			<dt>{L_TOTAL_ARTICLES}:</dt>
+				<dd>{ARTICLES} <!-- IF S_DISPLAY_SEARCH -->| <strong><a href="{U_SEARCH_USER_ARTICLES}">{L_SEARCH_USER_ARTICLES}</a></strong><!-- ENDIF -->
+					<!-- IF POSTS_PCT --><br />({ARTICLES_PCT} / {ARTICLES_DAY})<!-- ENDIF -->
+				</dd>]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/overall_header.html">
+			<edit>
+				<find><![CDATA[<script type="text/javascript">
+// ]]>&lt;![CDATA[<![CDATA[
 	var jump_page = '{LA_JUMP_PAGE}:';]]></find>
-															<action type="before-add"><![CDATA[<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+				<action type="before-add"><![CDATA[<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 <!-- IF UA_GREY_STAR_SRC -->
 <!-- INCLUDE kb/rating_js.html -->
 <!-- ENDIF -->]]></action>
-													</edit>
-											<edit>
-							<find><![CDATA[<li class="icon-faq"><a href="{U_FAQ}" title="{L_FAQ_EXPLAIN}">{L_FAQ}</a></li>]]></find>
-															<action type="before-add"><![CDATA[<li class="icon-kb"><a href="{U_KB}" title="{L_KB_EXPLAIN}">{L_KB}</a></li>]]></action>
-													</edit>
-									</open>
-							<open src="styles/prosilver/template/viewtopic_body.html">
-								<edit>
-									<find><![CDATA[<!-- IF postrow.POSTER_POSTS != '' --><dd><strong>{L_POSTS}:</strong> {postrow.POSTER_POSTS}</dd><!-- ENDIF -->]]></find>
-									<action type="after-add"><![CDATA[<!-- IF postrow.POSTER_ARTICLES > 0 --><dd><strong>{L_POSTS}:</strong> <a href="{postrow.U_POSTER_ARTICLES}">{postrow.POSTER_ARTICLES}</a></dd><!-- ENDIF -->]]></action>
-								</edit>
-							</open>
-							<open src="styles/prosilver/theme/stylesheet.css">
-											<edit>
-							<find><![CDATA[@import url("colours.css");]]></find>
-															<action type="after-add"><![CDATA[@import url("kb.css");]]></action>
-													</edit>
-									</open>
-							<open src=".htaccess">
-							<edit>
-								<find><![CDATA[<Files "common.php">
-Order Allow,Deny
-Deny from All
-</Files>]]></find>
-								<action type="after-add"><![CDATA[
-RewriteEngine on
+			</edit>
+			<edit>
+				<find><![CDATA[<li class="icon-faq"><a href="{U_FAQ}" title="{L_FAQ_EXPLAIN}">{L_FAQ}</a></li>]]></find>
+				<action type="before-add"><![CDATA[<li class="icon-kb"> <a href="{U_KB}" title="{L_KB_EXPLAIN}">{L_KB}</a></li>]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/viewforum_body.html">
+			<edit>
+				<find><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a>&nbsp;]</p><!-- ENDIF -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --><!-- IF U_TOTAL_KB_REQUEST --> &bull; <a href="{U_KB_REQUEST}">{U_TOTAL_KB_REQUEST}</a><!-- ENDIF --> ]</p><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/viewtopic_body.html">
+			<edit>
+				<find><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a>&nbsp;]</p><!-- ENDIF -->]]></find>
+				<action type="replace-with"><![CDATA[<!-- IF U_MCP --><p>[&nbsp;<a href="{U_MCP}">{L_MCP}</a><!-- IF U_TOTAL_KB_APPROVE --> &bull; <a href="{U_KB_APPROVE}">{U_TOTAL_KB_APPROVE}</a><!-- ENDIF --><!-- IF U_TOTAL_KB_REQUEST --> &bull; <a href="{U_KB_REQUEST}">{U_TOTAL_KB_REQUEST}</a><!-- ENDIF --> ]</p><!-- ENDIF -->]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[<!-- IF postrow.POSTER_POSTS != '' --><dd><strong>{L_POSTS}:</strong> {postrow.POSTER_POSTS}</dd><!-- ENDIF -->]]></find>
+				<action type="after-add"><![CDATA[<!-- IF postrow.POSTER_ARTICLES > 0 --><dd><strong>{L_ARTICLES}:</strong> <a href="{postrow.U_POSTER_ARTICLES}">{postrow.POSTER_ARTICLES}</a></dd><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/links.css">
+			<edit>
+				<find><![CDATA[/* Post body links */
+.postlink {
+	text-decoration: none;
+	color: #d2d2d2;
+	border-bottom: 1px solid #d2d2d2;
+	padding-bottom: 0;
+}]]></find>
+				<action type="after-add"><![CDATA[/* kb link */
+a.kblink {
+	background: url("./images/kb_badge.gif") center right no-repeat;
+	padding-right: 34px;
+	zoom: 1; /* IE6/IE7 Wrapping fix */
+}]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/stylesheet.css">
+			<edit>
+				<find><![CDATA[@import url("colours.css");]]></find>
+				<action type="after-add"><![CDATA[@import url("kb.css");]]></action>
+			</edit>
+		</open>
+		<php-installer><![CDATA[kb.php]]></php-installer>
+		<diy-instructions lang="en"><![CDATA[After completing this guide, login as admin and direct your browser to kb.php to install the mod. To make attachments work in the KB, go to ACP -> Posting -> Manage Extension Groups. Then edit the extension groups and tick the box that allows you to use them in the KB. For a more thorough guide on how to setup and use this mod, please turn to our website.
 
-Rewriterule ^(.+)/(.+)/a([0-9]*).html					./includes/kb_plugins/seo.php?a=$3&%{QUERY_STRING} [L]
-Rewriterule ^(.+)/(.+)/c([0-9]*).html					./includes/kb_plugins/seo.php?c=$3&%{QUERY_STRING} [L]
-Rewriterule ^tag/(.+)/									./includes/kb_plugins/seo.php?t=$1&%{QUERY_STRING} [L]]]></action>
-							</edit>
-						</open>
-						<open src="viewonline.php">
-							<edit>
-								<find><![CDATA[case 'report':
-			$location = $user->lang['REPORTING_POST'];
-			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
-		break;]]></find>
-								<action type="after-add"><![CDATA[		case 'kb':
-			// Save editing default lang file
-			if (!defined('KB_LANG_INCLUDE'))
-			{
-				$user->add_lang('mods/kb');
-			}
-			
-			define('KB_LANG_INCLUDE', true);
-		
-			$location = $user->lang['VIEWING_KB'];
-
-			// Grab some common modules
-			$url_params = array(
-				'c='						=> 'VIEWING_CAT',
-				'a='						=> 'VIEWING_ARTICLE',
-				'i=history&a='				=> 'VIEWING_ARTICLE_HISTORY',
-				'i=comment&action=add&a='	=> 'ADDING_COMMENT',
-				'&i=add'					=> 'ADDING_ARTICLE',
-			);
-
-			foreach ($url_params as $param => $lang)
-			{
-				if (strpos($row['session_page'], $param) !== false)
-				{
-					$location = $user->lang[$lang];
-				}
-			}
-
-			$location_url = append_sid("{$phpbb_root_path}kb.$phpEx");
-		break;]]></action>
-							</edit>
-							
-						</open>
-						<open src="viewtopic.php">
-							<edit>
-								<find><![CDATA[$user_cache[$poster_id] = array(
-				'joined'		=> '',
-				'posts'			=> '',]]></find>
-								<action type="after-add"><![CDATA[			'articles'		=> '',]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[$user_cache[$poster_id] = array(
-				'joined'		=> $user->format_date($row['user_regdate']),
-				'posts'			=> $row['user_posts'],]]></find>
-								<action type="after-add"><![CDATA[			'articles'		=> $row['user_articles'],]]></action>
-							</edit>
-							<edit>
-								<find><![CDATA[	'POSTER_JOINED'		=> $user_cache[$poster_id]['joined'],
-		'POSTER_POSTS'		=> $user_cache[$poster_id]['posts'],]]></find>
-								<action type="after-add"><![CDATA[		'POSTER_ARTICLES'	=> $user_cache[$poster_id]['articles'],
-		'U_POSTER_ARTICLES' => append_sid($phpbb_root_path . 'kb.' . $phpEx, 'i=search&amp;author_id= ' . $poster_id),]]></action>
-							</edit>
-						</open>
-							<php-installer>kb.php</php-installer>
-							<diy-instructions lang="en"><![CDATA[After completing this guide, login as admin and direct your browser to kb.php to install the mod. To make attachments work in the KB, go to ACP -> Posting -> Manage Extension Groups. Then edit the extension groups and tick the box that allows you to use them in the KB. For a more thorough guide on how to setup and use this mod, please turn to our website.]]></diy-instructions>
-				</action-group>
+the following bbcode must be installed on your site for local article links to work correctly
+bbCode usage:
+[kb]{INTTEXT},{TEXT}[/kb]
+html replacement:
+<a href="kb.php?a={INTTEXT}">{TEXT}</a>
+helpline:
+[kb]article id number, article name[/kb]]]></diy-instructions>
+	</action-group>
 </mod>

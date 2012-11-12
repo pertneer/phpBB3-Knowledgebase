@@ -2,8 +2,8 @@
 /**
 *
 * @package phpBB Knowledge Base Mod (KB)
-* @version $Id: kb_latest_article.php 504 2010-06-21 14:38:48Z andreas.nexmann@gmail.com $
-* @copyright (c) 2009 Andreas Nexmann, Tom Martin
+* @version $Id: kb_latest_article.php $
+* @copyright (c) 2009 Andreas Nexmann, Tom Martin, Tim Portner
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
@@ -27,7 +27,7 @@ if (defined('IN_KB_PLUGIN'))
 		'PLUGIN_NAME'			=> 'PLUGIN_LATEST',
 		'PLUGIN_DESC'			=> 'PLUGIN_LATEST_DESC',
 		'PLUGIN_COPY'			=> 'PLUGIN_COPY',
-		'PLUGIN_VERSION'		=> '1.0.2',
+		'PLUGIN_VERSION'		=> '1.0.3',
 		'PLUGIN_MENU'			=> LEFT_MENU,
 		'PLUGIN_PAGES'			=> array('all'),
 	);
@@ -48,16 +48,26 @@ function latest_article($cat_id = 0)
 	{
 		return;
 	}
+	$sql = 'SELECT article_id 
+		FROM ' . KB_TABLE . '
+		WHERE article_status = '.STATUS_APPROVED.'
+		ORDER BY article_id DESC';
 	
-	if ($config['kb_latest_article'] == '')
+	$result = $db->sql_query($sql);
+	
+	if ($config['kb_latest_article'] == '' && !$db->sql_fetchrow($result))
 	{
 		$template->assign_vars(array(
 			'NO_LAST_ARTICLE'		=> true,
 		));
 		
 		return;
+	}else{
+		$article_id = $db->sql_fetchrow($result);
+		$config['kb_latest_article'] = $article_id['article_id'];
 	}
-
+	$db->sql_freeresult($result);
+	
 	$sql = 'SELECT article_title, article_desc, article_desc_bitfield, article_desc_options, article_desc_uid, article_views, article_comments 
 		FROM ' . KB_TABLE . '
 		WHERE article_id = ' . $config['kb_latest_article'] . '
@@ -109,6 +119,12 @@ function latest_article_versions()
 		
 		// Just a change to perm pages
 		'1.0.2'	=> array(			
+			array(),
+		),
+		
+		// Fixed latest article bug 
+		// Deletion of latest article resulted in message "No articles have been created yet!"
+		'1.0.3'	=> array(			
 			array(),
 		),
 	);

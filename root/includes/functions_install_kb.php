@@ -108,6 +108,12 @@ function kb_update_versions()
 			// Clear history table
 			'custom'	=> 'kb_update_1_0_2RC3_to_1_0_2',
 		),
+		
+		'1.0.3' => array(
+			'config_add'	=> array(
+				array('kb_default_rating', 3),
+			),
+		)
 	);
 	
 	return $versions;
