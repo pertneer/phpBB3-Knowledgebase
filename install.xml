@@ -45,7 +45,7 @@
 				</contributions-group>
 			</author>
 		</author-group>
-		<mod-version>1.0.3</mod-version>
+		<mod-version>1.0.4a</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>2400</time>
@@ -274,6 +274,15 @@
 					<change><![CDATA[Added user articles on viewtopic]]></change>
 					<change><![CDATA[Fixed several cosmetic things]]></change>
 					<change><![CDATA[Added subsilver2]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-11-13</date>
+				<rev-version>1.0.4a</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfix #20 and Fix for Undefined index: kb_header_name]]></change>
+					<change><![CDATA[Bugfix #22 kb_latest_article.php error when deleting all articles and categories]]></change>
+					<change><![CDATA[Bugfix #23 Language change and style improvement to Email Plugin]]></change>
 				</changelog>
 			</entry>
 			<entry>
