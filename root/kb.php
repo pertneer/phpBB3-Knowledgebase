@@ -32,7 +32,7 @@ display_forums('', $config['load_moderators']);
 
 // Lets start the install/update of the kb
 // Automatically install or update if required
-if(!isset($config['kb_version']) || version_compare($config['kb_version'], KB_VERSION, '<') || isset($config['kb_install_step']))
+if(!isset($config['kb_version']) || version_compare($config['kb_version'], KB_VERSION, '<'))
 {
 	if(!$auth->acl_get('a_') || empty($user->data['is_registered']) || ((int) $user->data['user_type'] !== USER_FOUNDER))
 	{
@@ -40,15 +40,12 @@ if(!isset($config['kb_version']) || version_compare($config['kb_version'], KB_VE
 		trigger_error('KB_NOT_ENABLE');
 	}
 	
-	include($phpbb_root_path . 'includes/functions_install_kb.' . $phpEx);
-	if(!isset($config['kb_version']) || isset($config['kb_install_step']))
+	//include($phpbb_root_path . 'includes/functions_install_kb.' . $phpEx);
+	if(!isset($config['kb_version']))
 	{
-		kb_install();
+		header('Location:' . $phpbb_root_path . 'kb_install/functions_install_kb.' . $phpEx);
 	}
-	else
-	{
-		kb_update($config['kb_version']);
-	}
+	
 }
 
 if (!isset($config['kb_enable']) || !$config['kb_enable'] && !($auth->acl_get('a_') || $auth->acl_get('m_kb')))
