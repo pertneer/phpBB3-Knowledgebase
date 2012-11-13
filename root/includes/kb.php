@@ -486,7 +486,7 @@ class knowledge_base
 		$template->assign_vars(array(
 			'L_AUTHOR'			=> $user->lang['ARTICLE_AUTHOR'],
 			'L_ARTICLES_LC' 	=> utf8_strtolower($user->lang['ARTICLES']),
-			'L_KB_HEADER'		=> ($config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
+			'L_KB_HEADER'		=> (isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
 			'S_HAS_SUBCATS' 	=> ($cat_data['left_id'] != $cat_data['right_id'] - 1) ? true : false,
 			'PAGINATION'		=> generate_pagination(kb_append_sid('cat', array('id' => $this->cat_id, 'title' => $cat_data['cat_name'], 'extra' => ((strlen($this->sort)) ? "sort=$this->sort" : ''))), $articles_count, $config['kb_articles_per_page'], $this->start),
 			'PAGE_NUMBER'		=> on_page($articles_count, $config['kb_articles_per_page'], $this->start),
@@ -936,7 +936,7 @@ class knowledge_base
 			'ARTICLE_DESC_CLEAN'	=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? strip_tags($article_desc_re) : '',
 			'ARTICLE_DESC'			=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? $article_desc_re : '',
 			'ARTICLE_ID' 			=> $this->article_id,
-			'L_KB_HEADER'			=> ($config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
+			'L_KB_HEADER'			=> (isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
 			'ARTICLE_TITLE' 		=> $article_type['article_title'],
 			'ARTICLE_TITLE_CLEAN' 	=> strip_tags($article_type['article_title']),
 			'ARTICLE_POSTER'		=> $article_data['article_user_id'],
@@ -1626,7 +1626,7 @@ class knowledge_base
 			'S_ON_INDEX'	=> true,
 			'S_CAT_STYLE'	=> ($config['kb_layout_style']) ? true : false, // IF 1 then set to true bc. style = special
 			'S_COL_WIDTH'	=> ($config['kb_layout_style']) ? (100 / $config['kb_cats_per_row']) : 0,
-			'L_KB_HEADER'	=> ($config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
+			'L_KB_HEADER'	=> (isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
 		));
 		
 		// Output the page
