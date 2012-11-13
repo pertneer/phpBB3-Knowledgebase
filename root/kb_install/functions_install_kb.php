@@ -43,7 +43,19 @@ $version_config_name = 'kb_version';
 * The language file which will be included when installing
 * Language entries that should exist in the language file for UMIL (replace $mod_name with the mod's name you set to $mod_name above)
 */
-//$language_file = 'mods/info_acp_blog_install';
+$language_file = 'mods/kb';
+
+/*
+* Options to display to the user (this is purely optional, if you do not need the options you do not have to set up this variable at all)
+* Uses the acp_board style of outputting information, with some extras (such as the 'default' and 'select_user' options)
+*/
+/*$options = array(
+	'kb_enable'				=> array('lang' => 'KB_ENABLE',			'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false),
+	'kb_link_name'			=> array('lang' => 'KB_LINK_NAME',		'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),
+	'kb_header_name'		=> array('lang' => 'KB_HEADER_NAME',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),
+	'kb_copyright'			=> array('lang' => 'KB_PER_COPYRIGHT',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),
+);
+*/
 /*
 * Optionally we may specify our own logo image to show in the upper corner instead of the default logo.
 * $phpbb_root_path will get prepended to the path specified
@@ -60,13 +72,19 @@ $logo_img = "{T_THEME_PATH}/kb_bot.png";
 */
 $mod = array(
 	'name'		=> 'phpBB3-Knowledgebase',
-	'version'	=> '1.0.3dev1',
+	'version'	=> '1.0.4a',
 	'config'	=> 'phpbb3_knowledgebase_version',
 	'enable'	=> 'phpbb3_knowledgebase_enable',
+	'kb_header_name'	=> '',
 );
 
 $versions = array(
-	'1.0.3dev1'	=> array(),
+	'1.0.4a'	=>array(),
+	'1.0.3'	=> array(
+		'config_add' => array(
+			array('kb_header_name', ''),
+		),
+	),
 	'1.0.2'	=> array(
 		'table_add'	=> array(
 				array('phpbb_article_attachments', array(
@@ -371,46 +389,47 @@ $versions = array(
 			),
 			
 			'config_add' => array(
+				array('kb_ajax_rating', 1),
 				array('kb_allow_attachments', 1),
+				array('kb_allow_bbcode', 1),
+				array('kb_allow_bookmarks', 1),
+				array('kb_allow_post_flash', 0),
+				array('kb_allow_post_links', 1),
 				array('kb_allow_sig', 1),
 				array('kb_allow_smilies', 1),
-				array('kb_allow_bbcode', 1),
-				array('kb_allow_post_flash', 1),
-				array('kb_allow_post_links', 1),
-				array('kb_enable', 1),
-				array('kb_seo', 0),
-				array('kb_articles_per_page', 25),
-				array('kb_comments_per_page', 25),
 				array('kb_allow_subscribe', 1),
-				array('kb_allow_bookmarks', 1),
+				array('kb_articles_per_page', 25),
+				array('kb_cats_per_row', 3),
+				array('kb_comments_per_page', 25),
+				array('kb_copyright',''),
+				array('kb_desc_max_chars', 0),
+				array('kb_desc_min_chars', 0),
+				array('kb_disable_desc', 0),
+				array('kb_disable_left_menu', 0),
+				array('kb_disable_right_menu', 0),
+				array('kb_email_article', 1),
+				array('kb_enable', 1),
+				array('kb_export_article', 1),
+				array('kb_ext_article_header', 1),
+				array('kb_latest_articles_c', 5),
 				array('kb_last_article', 0, true),
 				array('kb_last_updated', time(), true),
+				array('kb_layout_style'	, 1),
+				array('kb_left_menu_type', 0),
+				array('kb_left_menu_width', 240),
+				array('kb_link_name', $user->lang['KB']),
+				array('kb_list_subcats', 1),
+				array('kb_related_articles', 5),
+				array('kb_right_menu_type', 0),
+				array('kb_right_menu_width', 240),
+				array('kb_seo', 0),
+				array('kb_show_contrib', 1),
+				array('kb_show_desc_article', 1),
+				array('kb_show_desc_cat', 1),
+				array('kb_soc_bookmarks', 1),
 				array('kb_total_articles', 0, true),
 				array('kb_total_comments', 0, true),
 				array('kb_total_cats', 0),
-				array('kb_desc_min_chars', 0),
-				array('kb_desc_max_chars', 0),
-				array('kb_link_name', $user->lang['KB']),
-				array('kb_ajax_rating', 1),
-				array('kb_disable_left_menu', 0),
-				array('kb_disable_right_menu', 0),
-				array('kb_left_menu_width', 240),
-				array('kb_left_menu_type', 0),
-				array('kb_right_menu_width', 240),
-				array('kb_right_menu_type', 0),	
-				array('kb_show_contrib', 1),
-				array('kb_related_articles', 5),
-				array('kb_email_article', 1),
-				array('kb_ext_article_header', 1),
-				array('kb_soc_bookmarks', 1),
-				array('kb_export_article', 1),
-				array('kb_show_desc_cat', 1),
-				array('kb_show_desc_article', 1),
-				array('kb_disable_desc', 0),
-				array('kb_cats_per_row', 3),
-				array('kb_layout_style'	, 1),
-				array('kb_list_subcats', 1),
-				array('kb_latest_articles_c', 5),
 			),
 	)
 	
