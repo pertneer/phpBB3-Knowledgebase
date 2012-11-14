@@ -98,6 +98,10 @@ a.kblink {
 	zoom: 1; /* IE6/IE7 Wrapping fix */
 }
 
+.kb_postbody li {
+	padding-top:4px;	
+}
+
 .kb{
 	color: #4f84ad;
 	font-size: 2.8em;
