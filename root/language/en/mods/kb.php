@@ -397,7 +397,7 @@ Here is a link to the article - {LINK}',
 	'LEFT_MENU'							=> 'Left menu',
 	'LINKED_IN'							=> 'Linked In',
 	'LINK_TO_THIS'						=> 'External link to this article',
-	'LOCAL_LINK_TO_THIS'				=> 'Local Link to this article',
+	'LOCAL_LINK_TO_THIS'				=> 'BBcode link to this article',
 	'LIVE'								=> 'Live',
 	'LOOK_UP_CATEGORY'					=> 'Look up category',
 
