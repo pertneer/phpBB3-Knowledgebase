@@ -102,6 +102,10 @@ a.kblink {
 	padding-top:4px;	
 }
 
+.kb_postbody .profile-icons li {
+	padding-top:0px;
+}
+
 .kb{
 	color: #4f84ad;
 	font-size: 2.8em;
