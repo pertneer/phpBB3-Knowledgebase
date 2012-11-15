@@ -4,7 +4,7 @@ textarea.desc {
 }
 
 /**
-* These make all center items in center column of kb not have to be below the side boxes
+* These make all center column items of kb not have to be below the side boxes
 **/
 .inner hr{
 	clear:none;
@@ -13,9 +13,30 @@ textarea.desc {
 #kb_postbody hr{
 	clear:none;
 }
+#kb_postbody .rev{
+	padding-bottom:5px;
+}
+#kb_postbody .rev .inner {
+	background-color:#F7ECEF;
+	overflow:hidden; 
+	padding-left:5px;
+	padding-right:5px;
+	zoom:1;
+}
+#kb_postbody .rev .inner .postbody{
+	padding:5px;
+}
+
+#a .post .bg1 .inner .postbody{
+	clear:right;
+}
 
 #page-body .inner .user_menu .corners-bottom{
 	clear:both;
+}
+
+#kb_postbody .inner .postbody{
+	clear:none;
 }
 
 .bg1 .inner .corners-bottom{
@@ -118,8 +139,8 @@ ul.rating li, ul.rated li {
 }
 
 .error {
-color: #BC2A4D;
-font-weight: bold;
+	color: #BC2A4D;
+	font-weight: bold;
 	font-size: 1em;
 }
 
