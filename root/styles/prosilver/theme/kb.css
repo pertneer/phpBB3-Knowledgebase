@@ -27,8 +27,9 @@ textarea.desc {
 	padding:5px;
 }
 
-#a .post .bg1 .inner .postbody{
-	clear:right;
+#kb_postbody #a .post .bg1 .inner .postbody .corners-bottom{
+	overflow:hidden;
+	
 }
 
 #page-body .inner .user_menu .corners-bottom{
@@ -39,7 +40,7 @@ textarea.desc {
 	clear:none;
 }
 
-.bg1 .inner .corners-bottom{
+#kb_postbody .post #cat .corners-bottom{
 	clear:none;
 }
 
