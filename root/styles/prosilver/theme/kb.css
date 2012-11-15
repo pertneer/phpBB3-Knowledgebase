@@ -14,7 +14,11 @@ textarea.desc {
 	clear:none;
 }
 
-#page-body .inner .corners-bottom{
+#page-body .inner .user_menu .corners-bottom{
+	clear:both;
+}
+
+.bg1 .inner .corners-bottom{
 	clear:none;
 }
 
@@ -124,6 +128,14 @@ a.kblink {
 	background: url("./images/kb_badge.gif") center right no-repeat;
 	padding-right: 34px;
 	zoom: 1; /* IE6/IE7 Wrapping fix */
+}
+
+.kb_postbody li {
+	padding-top:4px;  
+}
+
+.kb_postbody .profile-icons li {
+	padding-top:0px;
 }
 
 .kb{
