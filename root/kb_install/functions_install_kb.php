@@ -17,11 +17,15 @@ define('IN_INSTALL', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : '../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
+include($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
+include($phpbb_root_path . 'includes/functions_plugins_kb.' . $phpEx);
+include($phpbb_root_path . 'includes/functions_kb.' . $phpEx);
 
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup(); 
 
+$auth_settings = array();
 if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 {
 	trigger_error('Please download the latest UMIL (Unified MOD Install Library) from: <a href="http://www.phpbb.com/mods/umil/">phpBB.com/mods/umil</a>', E_USER_ERROR);
@@ -79,11 +83,20 @@ $mod = array(
 	'kb_header_name'	=> '',
 );
 
+// First article
+$bitfield = $desc_bitfield = $uid = $desc_uid = '';
+$options = $desc_options = 0;
+$desc_text = $user->lang['KB_FIRST_ARTICLE_DESC'];
+$text = $user->lang['KB_FIRST_ARTICLE_TEXT'];
+generate_text_for_storage($desc_text, $desc_uid, $desc_bitfield, $desc_options, true, true, true);
+generate_text_for_storage($text, $uid, $bitfield, $options, true, true, true);
+
 $versions = array(
 	'1.0.4a'	=>array(),
 	'1.0.3'	=> array(
 		'config_add' => array(
 			array('kb_header_name', ''),
+			array('kb_default_rating', 3),
 		),
 	),
 	'1.0.2'	=> array(
@@ -308,7 +321,7 @@ $versions = array(
 				array(USERS_TABLE, 'kb_last_visit', array('TIMESTAMP', 0)),
 				array(USERS_TABLE, 'kb_last_marked', array('TIMESTAMP', 0)),
 			),	
-			'permission_add'	=> array(
+			'permission_add' => array(
 				// Global
 				array('u_kb_request', true),
 				
@@ -344,6 +357,7 @@ $versions = array(
 				array('m_kb_req_edit', true),
 				array('m_kb_status', true),
 			),
+			
 			
 			'module_add' => array(
 				// ACP
@@ -432,9 +446,313 @@ $versions = array(
 				array('kb_total_comments', 0, true),
 				array('kb_total_cats', 0),
 			),
+		
+		'custom'	=> 'kb_install_perm_plugins',//this works
+		
+		'table_row_insert'	=> array(KB_CATS_TABLE, array(
+			'parent_id'		=> 0,
+			'left_id'		=> 1,
+			'right_id'		=> 2,
+			'cat_name'		=> $user->lang['KB_FIRST_CAT'],
+			'cat_desc'		=> $user->lang['KB_FIRST_CAT_DESC'],
+			'cat_desc_bitfield'		=> '',
+			'cat_desc_options'		=> 7,
+			'cat_desc_uid'			=> '',
+			'cat_image'				=> '',
+			'cat_articles'			=> 0,
+			'latest_ids'			=> serialize(array()),
+		)
+		
+		'table_row_insert'	=> array(KB_TABLE, array(
+			'cat_id'						=> 	1,
+			'article_title'					=>	$user->lang['KB_FIRST_ARTICLE_TITLE'],
+			'article_title_clean'			=>  utf8_clean_string($user->lang['KB_FIRST_ARTICLE_TITLE']),
+			'article_desc'					=>	$desc_text,
+			'article_desc_bitfield'			=>	$desc_bitfield,
+			'article_desc_options'			=>	$desc_options,
+			'article_desc_uid'				=>	$desc_uid,
+			'article_checksum'				=>	md5($text),
+			'article_status'				=>	STATUS_APPROVED,
+			'article_attachment'			=>	0,
+			'article_views'					=>	0,
+			'article_user_id'				=>	$user->data['user_id'],
+			'article_user_name'				=>	$user->data['username'],
+			'article_user_color'			=>	$user->data['user_colour'],
+			'article_time'					=>	time(),
+			'article_tags'					=>	'',
+			'article_type'					=>	0,
+			'article_text'					=>  $text,
+			'enable_bbcode'					=>	1,
+			'enable_smilies'				=>	1,
+			'enable_magic_url'				=>	1,
+			'enable_sig'					=>	0,
+			'bbcode_bitfield'				=>	$bitfield,
+			'bbcode_uid'					=>	$uid,
+			'article_last_edit_time'		=>	time(),
+			'article_last_edit_id'			=>	0,
+			'article_edit_reason'			=>	'',
+			'article_edit_reason_global'	=>	0,
+			'article_open'					=>  0,
+			'article_edit_contribution'		=>  0,
+			'article_edit_type'				=>  serialize(array()),
+		)
+		
+		'permission_set'	=> array($auth_settings),//this not working so much
+		
+		// Give permissions to admins to moderate the KB and add requests
+		'permission_set' => array(
+			array('ADMINISTRATORS', array('m_kb_author', 'm_kb_comment', 'm_kb_edit', 'm_kb_delete', 'm_kb_req_edit', 'm_kb_status', 'm_kb_time', 'm_kb_view'), 'group'),
+			array('ADMINISTRATORS', 'u_kb_request', 'group'),
+			array('REGISTERED', 'u_kb_request', 'group'),
+		),
+		
+		'permission_set' => array(
+				// Global Role permissions
+				array('ROLE_ADMIN_FULL', 'a_test_mod'),
+				array('ROLE_USER_FULL', 'u_test_mod'),
+
+				// Global Group permissions
+				array('GUESTS', 'u_test_mod', 'group'),
+
+				// Local Permissions (local permissions can not be set for groups)
+				array('ROLE_FORUM_STANDARD', 'f_test_mod'),
+			),
+			
+		
 	)
 	
 	);
 	
 // Include the UMIF Auto file and everything else will be handled automatically.
 include($phpbb_root_path . 'umil/umil_auto.' . $phpEx);
+
+
+// Install permanent plugins on install or update
+function kb_install_perm_plugins($action = 'install')
+{
+	global $phpbb_root_path;
+
+	if ($action == 'uninstall')
+	{
+		return;
+	}
+	
+	if(!defined('IN_KB_PLUGIN')) // Killing notice when updating through several versions all using this function
+	{
+		define('IN_KB_PLUGIN', true);
+	}
+	
+	$plugin_pages = array();
+	
+	$plugins = array('author', 'contributors', 'rating', 'categories', 'stats', 'search', 'latest_article', 'request_list', 'bookmark', 'email_article', 'export_article', 'related_articles', 'rated_articles', 'random_article');
+	$plugin_pages = array(
+		'author'			=> array('view_article'),
+		'contributors'		=> array('view_article'),
+		'rating'			=> array('view_article'),
+		'categories'		=> array('index', 'view_cat', 'view_tag', 'request', 'search', 'history'),
+		'stats'				=> array('index', 'view_cat', 'view_tag', 'request', 'search', 'history'),
+		'search'			=> array('index', 'view_cat', 'view_tag', 'request', 'view_article', 'history'),
+		'latest_article'	=> array('index', 'view_cat', 'view_tag', 'request', 'search'),
+		'request_list'		=> array('index', 'view_cat', 'view_tag', 'view_article', 'search'),
+		'bookmark'			=> array('view_article'),
+		'email_article'		=> array('view_article'),
+		'export_article'	=> array('view_article'),
+		'related_articles'	=> array('view_article'),
+		'rated_articles'	=> array('index', 'view_cat', 'view_tag', 'request'),
+		'random_article'	=> array('index', 'view_cat', 'view_tag'),
+	);
+	
+	if (empty($plugins))
+	{
+		return;
+	}
+	
+	foreach ($plugins as $plugin)
+	{
+		if(isset($plugin_pages[$plugin]))
+		{
+			install_plugin($plugin, $phpbb_root_path . 'includes/kb_plugins/', false, $plugin_pages[$plugin]);
+		}
+		else
+		{
+			install_plugin($plugin, $phpbb_root_path . 'includes/kb_plugins/');
+		}
+	}
+}
+
+function kb_install_first_information()
+{
+	global $db, $config, $user, $phpbb_root_path, $phpEx, $template, $auth_settings;
+	
+	
+	// Data to insert:
+	// First category
+	$sql_ary = array(
+		'parent_id'		=> 0,
+		'left_id'		=> 1,
+		'right_id'		=> 2,
+		'cat_name'		=> $user->lang['KB_FIRST_CAT'],
+		'cat_desc'		=> $user->lang['KB_FIRST_CAT_DESC'],
+		'cat_desc_bitfield'		=> '',
+		'cat_desc_options'		=> 7,
+		'cat_desc_uid'			=> '',
+		'cat_image'				=> '',
+		'cat_articles'			=> 0,
+		'latest_ids'			=> serialize(array()),
+	);
+	$sql = 'INSERT INTO ' . KB_CATS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
+	$db->sql_query($sql);
+	$cat_id = $db->sql_nextid();
+	set_config('kb_total_cats', 1);
+	
+	// First article
+	$bitfield = $desc_bitfield = $uid = $desc_uid = '';
+	$options = $desc_options = 0;
+	$desc_text = $user->lang['KB_FIRST_ARTICLE_DESC'];
+	$text = $user->lang['KB_FIRST_ARTICLE_TEXT'];
+	generate_text_for_storage($desc_text, $desc_uid, $desc_bitfield, $desc_options, true, true, true);
+	generate_text_for_storage($text, $uid, $bitfield, $options, true, true, true);
+	
+	$sql_ary = array(
+		'cat_id'						=> 	$cat_id,
+		'article_title'					=>	$user->lang['KB_FIRST_ARTICLE_TITLE'],
+		'article_title_clean'			=>  utf8_clean_string($user->lang['KB_FIRST_ARTICLE_TITLE']),
+		'article_desc'					=>	$desc_text,
+		'article_desc_bitfield'			=>	$desc_bitfield,
+		'article_desc_options'			=>	$desc_options,
+		'article_desc_uid'				=>	$desc_uid,
+		'article_checksum'				=>	md5($text),
+		'article_status'				=>	STATUS_APPROVED,
+		'article_attachment'			=>	0,
+		'article_views'					=>	0,
+		'article_user_id'				=>	$user->data['user_id'],
+		'article_user_name'				=>	$user->data['username'],
+		'article_user_color'			=>	$user->data['user_colour'],
+		'article_time'					=>	time(),
+		'article_tags'					=>	'',
+		'article_type'					=>	0,
+		'article_text'					=>  $text,
+		'enable_bbcode'					=>	1,
+		'enable_smilies'				=>	1,
+		'enable_magic_url'				=>	1,
+		'enable_sig'					=>	0,
+		'bbcode_bitfield'				=>	$bitfield,
+		'bbcode_uid'					=>	$uid,
+		'article_last_edit_time'		=>	time(),
+		'article_last_edit_id'			=>	0,
+		'article_edit_reason'			=>	'',
+		'article_edit_reason_global'	=>	0,
+		'article_open'					=>  0,
+		'article_edit_contribution'		=>  0,
+		'article_edit_type'				=>  serialize(array()),
+	);
+	$sql = 'INSERT INTO ' . KB_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
+	$db->sql_query($sql);
+	$article_id = $db->sql_nextid();
+	
+	$late_articles = array(
+		'article_id'		=> $article_id,
+		'article_title'		=> $user->lang['KB_FIRST_ARTICLE_TITLE'],
+	);
+	handle_latest_articles('add', $cat_id, $late_articles, $config['kb_latest_articles_c']);
+	
+	set_config('kb_last_updated', time(), true);
+	
+	$sql = 'UPDATE ' . KB_CATS_TABLE . '
+			SET cat_articles = cat_articles + 1
+			WHERE cat_id = ' . $cat_id;
+	$db->sql_query($sql);
+	
+	$sql = 'UPDATE ' . USERS_TABLE . '
+			SET user_articles = user_articles + 1
+			WHERE user_id = ' . $user->data['user_id'];
+	$db->sql_query($sql);
+	
+	set_config('kb_last_article', $article_id, true);
+	set_config('kb_total_articles', $config['kb_total_articles'] + 1, true);
+	
+	// Add basic KB roles
+	$roles = get_roles();
+	$db->sql_multi_insert(ACL_ROLES_TABLE, $roles['roles']);
+	
+	$auth_settings = array();
+	foreach($roles['auth'] as $role_name => $auth_ary)
+	{
+		$auth_settings[] = array('ROLE_KB_' . $role_name, $auth_ary);
+	}
+	
+	
+	$sql = 'SELECT role_id, role_name
+			FROM ' . ACL_ROLES_TABLE . '
+			WHERE ' . $db->sql_in_set('role_name', array('ROLE_KB_MOD', 'ROLE_KB_USER', 'ROLE_KB_GUEST'));
+	$result = $db->sql_query($sql);
+	
+	$sql_ary = array();
+	while($row = $db->sql_fetchrow($result))
+	{
+		switch($row['role_name'])
+		{
+			case 'ROLE_KB_MOD':
+				$groups = array(5);
+			break;
+			
+			case 'ROLE_KB_USER':
+				$groups = array(2, 3);
+			break;
+			
+			case 'ROLE_KB_GUEST':
+				$groups = array(1, 6);
+			break;
+		}
+		
+		foreach($groups as $group_id)
+		{
+			$sql_ary[] = array(
+				'group_id'			=> $group_id,
+				'forum_id'			=> 1,
+				'auth_option_id'	=> 0,
+				'auth_role_id'		=> $row['role_id'],
+				'auth_setting'		=> 0,
+			);
+		}
+	}
+	$db->sql_freeresult($result);
+	$db->sql_multi_insert(KB_ACL_GROUPS_TABLE, $sql_ary);
+	
+	
+	
+	// Finish screen
+	add_log('admin', 'LOG_KB_INSTALL', KB_VERSION);
+	
+}
+
+function get_roles(){
+	$permission_type = 'u_kb_';
+	$roles = array(
+		array(
+			'role_name'			=> 'ROLE_KB_GUEST',
+			'role_description'	=> 'ROLE_KB_GUEST_DESC',
+			'role_type'			=> $permission_type,
+		),
+		
+		array(
+			'role_name'			=> 'ROLE_KB_USER',
+			'role_description'	=> 'ROLE_KB_USER_DESC',
+			'role_type'			=> $permission_type,
+		),
+		
+		array(
+			'role_name'			=> 'ROLE_KB_MOD',
+			'role_description'	=> 'ROLE_KB_MOD_DESC',
+			'role_type'			=> $permission_type,
+		),
+	);
+	
+	$roles_auth = array(
+		'GUEST'		=> array('u_kb_bbcode', 'u_kb_comment', 'u_kb_download', 'u_kb_img', 'u_kb_read', 'u_kb_search', 'u_kb_smilies', 'u_kb_view'),
+		'USER'		=> array('u_kb_add', 'u_kb_attach', 'u_kb_bbcode', 'u_kb_comment', 'u_kb_delete', 'u_kb_download', 'u_kb_edit', 'u_kb_icons', 'u_kb_img', 'u_kb_rate', 'u_kb_read', 'u_kb_search', 'u_kb_sigs', 'u_kb_smilies', 'u_kb_types', 'u_kb_view'),
+		'MOD'		=> array('u_kb_add', 'u_kb_add_wa', 'u_kb_attach', 'u_kb_bbcode', 'u_kb_comment', 'u_kb_delete', 'u_kb_download', 'u_kb_edit', 'u_kb_icons', 'u_kb_img', 'u_kb_rate', 'u_kb_read', 'u_kb_search', 'u_kb_sigs', 'u_kb_smilies', 'u_kb_types', 'u_kb_view', 'u_kb_viewhistory'),
+	);
+	
+return array('roles' => $roles, 'auth'	=> $roles_auth);
+}
