@@ -3145,7 +3145,7 @@ function export_data($type = 'word', $article_id)
 				{
 					$row['extension'] = strtolower($row['extension']);
 					
-					if(in_array($row['extension'], $extensions))
+					if(in_array($row['extension'], $extensions) && extension_allowed(false, $row['extension'], $extensions))
 					{
 						//filename stored by phpbb
 						
@@ -3170,6 +3170,8 @@ function export_data($type = 'word', $article_id)
 						//do some replacing to make it html correct
 						$message = str_replace('<div class="inline-attachment">', '<img src="', $message);
 						$message = str_replace($row['real_filename'] . '</div>', $row['real_filename'] . '"></div>', strtolower($message));
+					}else{
+						$message = str_replace($row['real_filename'], '[' . sprintf($user->lang['EXTENSION_DISABLED_AFTER_POSTING'], $row['extension']) . ']', strtolower($message));
 					}
 				}
 			}
