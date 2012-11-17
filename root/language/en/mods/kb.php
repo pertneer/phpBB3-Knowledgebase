@@ -247,6 +247,10 @@ Here is a link to the article - {LINK}',
 	'KB_EMPTY_TITLE'					=> 'You have to specify a title for your article.',
 	'KB_ENABLE'							=> 'Enable the Knowledge Base',
 	'KB_FEED_CAT'						=> 'Live feed',
+	//Items for kb.pertneer.net Site
+	//'KB_ENABLE_GIT_LINK'				=> 'Show Git link',
+	//'KB_ENABLE_GIT_LINK_EXPLAIN'		=> 'Show link to phpBB3-Knowledgebase Repository',
+	// end here for kb.pertneer.net Site
 	'KB_HAS_RATED'						=> 'You have already rated this article and cannot rate it twice.',
 	'KB_ICON'							=> 'Article Icon',
 	'KB_INDEX'							=> 'Knowledge Base Index',

@@ -73,9 +73,17 @@ $cat_id = request_var('c', 0);
 // For search
 $cat_search = ($cat_id == 0) ? '' : '&amp;cat_ids[]=' . $cat_id;
 
+//For kb.pertneer.net Site
+//$git = rand(1,20);
+//End here for kb.pertneer.net Site
+
 // Some default template variables
 $template->assign_vars(array(
 	'U_MCP'				=> ($auth->acl_get('m_') || $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=kb', true, $user->session_id) : '',
+	//For kb.pertneer.net Site
+	//'KB_GIT'			=> $config['kb_git_link'],
+	//'L_GIT_IMAGE'		=> './images/forkme_light_background' . $git . '.png',
+	//End Here for kb.pertneer.net Site
 ));
 
 // Handle all knowledge base related stuff, this file is only to call it, makes the user able to move it around

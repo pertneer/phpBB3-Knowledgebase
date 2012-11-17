@@ -78,11 +78,14 @@ class acp_kb
 					'title'	=> 'ACP_KB_SETTINGS',
 					'vars'	=> array(
 						'legend1'				=> 'ACP_KB_SETTINGS',
-						'kb_enable'				=> array('lang' => 'KB_ENABLE',			'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false),						
-						'kb_link_name'			=> array('lang' => 'KB_LINK_NAME',		'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),						
-						'kb_header_name'		=> array('lang' => 'KB_HEADER_NAME',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),						
-						'kb_copyright'			=> array('lang' => 'KB_PER_COPYRIGHT',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),	
-						'kb_default_rating'		=> array('lang' => 'KB_DEFAULT_RATING',	'validate' => 'int',	'type' => 'select', 'method' => 'select_default_rating', 'explain' => false),						
+						'kb_enable'				=> array('lang' => 'KB_ENABLE',			'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false),
+						//Items for kb.pertneer.net Site
+						//'kb_git_link'			=> array('lang' => 'KB_ENABLE_GIT_LINK',	'validate' => 'int',	'type' => 'radio:yes_no', 	'explain' => true),
+						//End here for kb.pertneer.net Site
+						'kb_link_name'			=> array('lang' => 'KB_LINK_NAME',		'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),
+						'kb_header_name'		=> array('lang' => 'KB_HEADER_NAME',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),
+						'kb_copyright'			=> array('lang' => 'KB_PER_COPYRIGHT',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),
+						'kb_default_rating'		=> array('lang' => 'KB_DEFAULT_RATING',	'validate' => 'int',	'type' => 'select', 'method' => 'select_default_rating', 'explain' => false),
 						'kb_articles_per_page'	=> array('lang' => 'KB_ART_PER_PAGE',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => false),
 						'kb_comments_per_page'	=> array('lang' => 'KB_COM_PER_PAGE',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => false),
 						'kb_seo'				=> array('lang' => 'KB_SEO_ENABLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => true),
@@ -321,7 +324,8 @@ class acp_kb
 				$errstr = '';
 				$errno = 0;
 
-				$info = get_remote_file('kb.pertneer.net', '/mods', 'knowledgebase.txt', $errstr, $errno);
+				//$info = get_remote_file('kb.pertneer.net', '/mods', 'knowledgebase.txt', $errstr, $errno);
+				$info = get_remote_file('www.local.com', '/mods', 'knowledgebase.txt', $errstr, $errno);
 				//git repo ssl location
 				//https://raw.github.com/pertneer/VersionCheck/master/phpBB3_KB/knowledgebase.txt
 				//$info = get_remote_file('raw.github.com', '/pertneer/VersionCheck/master/phpBB3_KB', 'knowledgebase.txt', $errstr, $errno, 443);
@@ -504,6 +508,7 @@ class acp_kb
 
 				'S_ERROR'			=> (sizeof($error)) ? true : false,
 				'ERROR_MSG'			=> implode('<br />', $error),
+				'KB_GIT'			=> true,
 
 				'U_ACTION'			=> $this->u_action)
 			);
@@ -605,7 +610,8 @@ function select_menu_check($value, $key = '')
 }
 
 /**
-* Reset KB Database
+* Reset KB Database (more like delete all kb information in db)
+* Reset should put back to installed state
 */
 function reset_db()
 {
@@ -641,6 +647,8 @@ function reset_db()
 	$sql = 'UPDATE ' . EXTENSION_GROUPS_TABLE . '
 			SET allow_in_kb = 0';
 	$db->sql_query($sql);
+	
+	//insert_kb_data();
 }
 
 function reset_perms()
