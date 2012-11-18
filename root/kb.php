@@ -43,7 +43,7 @@ if(!isset($config['kb_version']) || version_compare($config['kb_version'], KB_VE
 	//include($phpbb_root_path . 'includes/functions_install_kb.' . $phpEx);
 	if(!isset($config['kb_version']))
 	{
-		header('Location:' . $phpbb_root_path . 'kb_install/functions_install_kb.' . $phpEx);
+		header('Location:' . $phpbb_root_path . 'kb_install/');//renamed to index.php so I only need to call the folder
 	}
 	
 }

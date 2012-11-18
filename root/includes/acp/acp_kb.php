@@ -362,7 +362,7 @@ class acp_kb
 					{
 						$step = (isset($config['kb_uninstall_step'])) ? $config['kb_uninstall_step'] : 1;
 		
-						include($phpbb_root_path . 'includes/functions_install_kb.' . $phpEx);
+						include($phpbb_root_path . 'kb_install/index.' . $phpEx);//renamed includes/functions_install_kb.php to kb_install/index.php
 						kb_uninstall($step, $this->u_action);
 						
 						if($step == 4)
