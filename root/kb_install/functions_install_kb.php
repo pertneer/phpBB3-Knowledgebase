@@ -66,7 +66,7 @@ $language_file = 'mods/kb';
 * $phpbb_root_path will get prepended to the path specified
 * Image height should be 50px to prevent cut-off or stretching.
 */
-$logo_img = "{T_THEME_PATH}/kb_bot.png";
+$logo_img = "{T_THEME_PATH}/images/kb_bot.png";
 
 /*
 * The array of versions and actions within each.
