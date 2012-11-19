@@ -28,7 +28,7 @@ class kb_version
 			'author'	=> 'Pertneer',
 			'title'		=> 'phpBB3-Knowledgebase',
 			'tag'		=> 'kb',
-			'version'	=> '1.0.3a',
+			'version'	=> '1.0.3',//only changed when releasing new beta or final version
 			'file'		=> array('pertneer.net', 'mods', 'knowledgebase.xml'),
 		);
 	}
