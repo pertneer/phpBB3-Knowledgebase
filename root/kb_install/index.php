@@ -95,7 +95,70 @@ $permission_type = 'u_kb_';
 
 
 $versions = array(
-	'1.0.4a'	=>array(),
+	'1.0.4a'	=>array(
+		'table_add' => array(
+			array('phpbb_articles', array(
+			'COLUMNS'	=> array(
+					'article_id'					=> array('UINT', NULL, 'auto_increment'),
+					'cat_id'						=> array('UINT', 0),
+					'article_title'					=> array('VCHAR', ''),
+					'article_title_clean'			=> array('VCHAR', ''),
+					'article_desc'					=> array('TEXT_UNI', ''),
+					'article_desc_bitfield'			=> array('VCHAR', ''),
+					'article_desc_options'			=> array('UINT:11', 7),
+					'article_desc_uid'				=> array('VCHAR:8', ''),
+					'article_text'					=> array('MTEXT_UNI', ''),
+					'article_checksum'				=> array('VCHAR:32', ''),
+					'article_status'				=> array('TINT:1', 0),
+					'article_attachment'			=> array('BOOL', 0),
+					'article_views'					=> array('UINT', 0),
+					'article_comments'				=> array('UINT', 0),
+					'article_user_id'				=> array('UINT', 0),
+					'article_user_name'				=> array('VCHAR_UNI:255', ''),
+					'article_user_color'			=> array('VCHAR:6', ''),
+					'article_time'					=> array('TIMESTAMP', 0),
+					'article_tags'					=> array('VCHAR', ''),
+					'article_type'					=> array('UINT', 0),
+					'article_votes'					=> array('UINT', 0),
+					'enable_bbcode'					=> array('BOOL', 1),
+					'enable_smilies'				=> array('BOOL', 1),
+					'enable_magic_url'				=> array('BOOL', 1),
+					'enable_sig'					=> array('BOOL', 1),
+					'bbcode_bitfield'				=> array('VCHAR', ''),
+					'bbcode_uid'					=> array('VCHAR:8', ''),
+					'article_open'					=> array('BOOL', 0),
+					'article_last_edit_time'		=> array('TIMESTAMP', 0),
+					'article_last_edit_id'			=> array('UINT', 0),
+					'article_edit_reason'			=> array('MTEXT_UNI', ''),
+					'article_edit_reason_global'	=> array('BOOL', 0),
+					'article_edit_type'				=> array('VCHAR', 'a:0:{}'),
+					'article_edit_contribution'		=> array('BOOL', 0),
+				),
+				'PRIMARY_KEY'	=> 'article_id',
+			)),
+			
+			array('phpbb_article_requests', array(
+					'COLUMNS'		=> array(
+						'request_id'				=> array('UINT', NULL, 'auto_increment'),
+						'article_id'				=> array('UINT', 0),
+						'request_accepted'			=> array('UINT', 0),
+						'request_title'				=> array('VCHAR', ''),
+						'request_text'				=> array('MTEXT_UNI', ''),
+						'request_checksum'			=> array('VCHAR:32', ''),
+						'request_status'			=> array('TINT:1', 0),
+						'request_user_id'			=> array('UINT', 0),
+						'request_user_name'			=> array('VCHAR_UNI:255', ''),
+						'request_user_color'		=> array('VCHAR:6', ''),
+						'request_time'				=> array('TIMESTAMP', 0),
+						'bbcode_bitfield'			=> array('VCHAR', ''),
+						'bbcode_uid'				=> array('VCHAR:8', ''),
+					),
+					'PRIMARY_KEY'	=> 'request_id'
+				)),
+			),
+		),
+		
+	
 	'1.0.3'	=> array(
 		'config_add' => array(
 			array('kb_header_name', ''),
@@ -317,13 +380,15 @@ $versions = array(
 					),
 				),
 			),
+			
 			'table_column_add' => array(
 				array(EXTENSION_GROUPS_TABLE, 'allow_in_kb', array('BOOL', 0)),
 				array(USERS_TABLE, 'user_articles', array('UINT', 0)),
 				array(USERS_TABLE, 'user_kb_permissions', array('MTEXT', '')),
 				array(USERS_TABLE, 'kb_last_visit', array('TIMESTAMP', 0)),
 				array(USERS_TABLE, 'kb_last_marked', array('TIMESTAMP', 0)),
-			),	
+			),
+			
 			'permission_add' => array(
 				// Global
 				array('u_kb_request', true),
@@ -452,8 +517,7 @@ $versions = array(
 		
 		'custom'	=> 'kb_install_perm_plugins',//this works
 		
-		'table_row_insert'	=> array(
-			array($table_prefix . 'article_cats', array(
+		'table_row_insert'	=> array($table_prefix . 'article_cats', array(
 				'parent_id'		=> 0,
 				'left_id'		=> 1,
 				'right_id'		=> 2,
@@ -465,12 +529,11 @@ $versions = array(
 				'cat_image'				=> '',
 				'cat_articles'			=> 0,
 				'latest_ids'			=> serialize(array()),
-			))
+			)
 		),
 		
 		
-		'table_row_insert'	=> array(
-			array($table_prefix . 'articles', array(
+		'table_row_insert'	=> array($table_prefix . 'articles', array(
 				'cat_id'						=> 	1,
 				'article_title'					=>	$user->lang['KB_FIRST_ARTICLE_TITLE'],
 				'article_title_clean'			=>  utf8_clean_string($user->lang['KB_FIRST_ARTICLE_TITLE']),
@@ -502,31 +565,28 @@ $versions = array(
 				'article_open'					=>  0,
 				'article_edit_contribution'		=>  0,
 				'article_edit_type'				=>  serialize(array()),
-			))
+			)
 		),
 		
-		'table_row_insert'	=> array(
-			array(ACL_ROLES_TABLE, array(
+		'table_row_insert'	=> array(ACL_ROLES_TABLE, array(
 				'role_name'			=> 'ROLE_KB_GUEST',
 				'role_description'	=> 'ROLE_KB_GUEST_DESC',
 				'role_type'			=> $permission_type,
-			))
+			)
 		),
 		
-		'table_row_insert'	=> array(
-			array(ACL_ROLES_TABLE, array(
+		'table_row_insert'	=> array(ACL_ROLES_TABLE, array(
 				'role_name'			=> 'ROLE_KB_USER',
 				'role_description'	=> 'ROLE_KB_USER_DESC',
 				'role_type'			=> $permission_type,
-			))
+			)
 		),
 		
-		'table_row_insert'	=> array(
-			array(ACL_ROLES_TABLE, array(
+		'table_row_insert'	=> array(ACL_ROLES_TABLE, array(
 				'role_name'			=> 'ROLE_KB_MOD',
 				'role_description'	=> 'ROLE_KB_MOD_DESC',
 				'role_type'			=> $permission_type,
-			))
+			)
 		),
 		
 		'permission_set'	=> array($auth_settings),//this not working so much
@@ -758,7 +818,8 @@ function kb_install_first_information()
 	
 }
 
-function get_roles(){
+function get_roles()
+{
 	$permission_type = 'u_kb_';
 	$roles = array(
 		array(
