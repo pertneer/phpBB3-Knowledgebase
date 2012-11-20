@@ -113,15 +113,7 @@ function kb_update_versions()
 			'config_add'	=> array(
 				array('kb_default_rating', 3),
 			),
-		),
-		
-		'1.0.4a' => array(
-		
-		),
-		
-		'1.0.4b' => array(
-		
-		),
+		)
 	);
 	
 	return $versions;

@@ -35,6 +35,7 @@ class acp_kb
 		include($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
 		include($phpbb_root_path . 'includes/functions_kb.' . $phpEx);
 		include($phpbb_root_path . 'includes/functions_plugins_kb.' . $phpEx);
+		include($phpbb_root_path . 'includes/functions_install_kb.' . $phpEx);
 
 		$action	= request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;		
@@ -426,6 +427,28 @@ class acp_kb
 						confirm_box(false, 'RESET_PERMS', $hidden_fields);
 					}
 				}
+				
+				$reset_plugins = (isset($_POST['reset_plugins'])) ? true : false;	
+				if ($reset_plugins)
+				{
+					if(confirm_box(true))
+					{
+						$sql = 'TRUNCATE TABLE ' . KB_PLUGIN_TABLE;
+						$db->sql_query($sql);
+						
+						kb_install_perm_plugins('reset', 'install');
+						add_log('admin', 'LOG_KB_RESET_PLUGINS');
+						
+						trigger_error($user->lang['KB_RESET_PLUGINS'] . adm_back_link($this->u_action));
+					}
+					else
+					{
+						$hidden_fields = build_hidden_fields(array(
+							'reset_plugins'	=> true,
+						));
+						confirm_box(false, 'RESET_PLUGINS', $hidden_fields);
+					}
+				}
 			break;
 
 			default:
@@ -508,7 +531,7 @@ class acp_kb
 
 				'S_ERROR'			=> (sizeof($error)) ? true : false,
 				'ERROR_MSG'			=> implode('<br />', $error),
-				'KB_GIT'			=> true,
+				//'KB_GIT'			=> true,
 
 				'U_ACTION'			=> $this->u_action)
 			);

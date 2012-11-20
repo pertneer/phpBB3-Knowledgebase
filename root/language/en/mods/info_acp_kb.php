@@ -89,6 +89,7 @@ $lang = array_merge($lang, array(
 	'KB_PERCENT'							=> 'Percent',
 	'KB_PIXELS'								=> 'Pixels',
 	'KB_RESET_DB'							=> 'The database has been successfully reset.',
+	'KB_RESET_PLUGINS'						=> 'Plugins have been successfully reset',
 	'KB_RESET_PERMS'						=> 'The permissions have successfully been reset.',
 	'KB_RIGHT_MENU_TYPE'					=> 'Width type',
 	'KB_RIGHT_MENU_WIDTH'					=> 'Right menu width',
@@ -126,11 +127,13 @@ $lang = array_merge($lang, array(
 	'LOG_U_KB_ROLE_REMOVED'					=> '<strong>KB role removed</strong><br /> - %1$s',
 
 	'RESET_DB'								=> 'Reset Database',
-	'RESET_DB_CONFIRM'						=> 'This will reset the Knowledge Base database, not removing the tables, but emptying them so you have a fresh install ready to go. It will also remove all attachments associated with the mod. Warning: This cannot be undone.',
+	'RESET_DB_CONFIRM'						=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset the Knowledge Base database, not removing the tables, but emptying them so you have a fresh install ready to go. It will also remove all attachments associated with the mod.',
 	'RESET_PERMS'							=> 'Reset Permissions',
-	'RESET_PERMS_CONFIRM'					=> 'This will reset all Knowledge Base permissions, so that you will have to remake them all from the start. It will also remove Knowledge Base related roles. Warning: This cannot be undone.',
+	'RESET_PERMS_CONFIRM'					=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset all Knowledge Base permissions, so that you will have to remake them all from the start. It will also remove Knowledge Base related roles.',
+	'RESET_PLUGINS'							=> 'Reset Plugins',
+	'RESET_PLUGINS_CONFIRM'					=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset all Knowledge Base plugins back to their original installion settings.',
 
-	'UNINSTALL_CONFIRM'						=> 'This will uninstall the mod completely, removing both data, permissions, configs and tables. Warning: This cannot be undone.',
+	'UNINSTALL_CONFIRM'						=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will uninstall the mod completely, removing both data, permissions, configs and tables.',
 ));
 
 ?>
