@@ -115,6 +115,7 @@ $lang = array_merge($lang, array(
 	'LOG_KB_INSTALL'						=> '<strong>Knowledge Base Mod installed</strong><br /> - Version %1$s',
 	'LOG_KB_RESET_DB'						=> '<strong>Knowledge Base Mod database reset</strong>',
 	'LOG_KB_RESET_PERMS'					=> '<strong>Knowledge Base Mod permissions reset</strong',
+	'LOG_KB_RESET_PLUGINS'					=> '<strong>Knowledge Base Mod Plugins reset</strong>',
 	'LOG_KB_UNINSTALL'						=> '<strong>Knowledge Base Mod removed</strong>',
 	'LOG_KB_UPDATED'						=> '<strong>Knowledge Base Mod updated</strong><br /> - From version %2$s to %1$s',
 	'LOG_TYPE_ADD'							=> '<strong>Article type added</strong><br /> - %1$s ',
