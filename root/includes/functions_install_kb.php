@@ -114,6 +114,12 @@ function kb_update_versions()
 				array('kb_default_rating', 3),
 			),
 		)
+		'1.0.4a' => array(
+			// Nothing here
+		),
+		'1.0.4b' => array(
+			// Nothing here
+		),
 	);
 	
 	return $versions;
