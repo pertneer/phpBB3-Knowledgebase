@@ -372,31 +372,7 @@ class acp_kb
 				$uninstall = (isset($_POST['uninstall']) || isset($_GET['uninstall'])) ? true : false;
 				if ($uninstall)
 				{
-					if(confirm_box(true) || isset($config['kb_uninstall_step']))
-					{
-						$step = (isset($config['kb_uninstall_step'])) ? $config['kb_uninstall_step'] : 1;
-		
-						include($phpbb_root_path . 'includes/functions_install_kb.' . $phpEx);
-						kb_uninstall($step, $this->u_action);
-						
-						if($step == 4)
-						{
-							add_log('admin', 'LOG_KB_UNINSTALL');
-							trigger_error($user->lang['KB_UNINSTALLED'] . adm_back_link(append_sid($phpbb_root_path . 'adm/index.' . $phpEx)));
-						}
-						else
-						{
-							meta_refresh(2, append_sid($this->u_action . '&amp;uninstall=true'));
-							trigger_error(sprintf($user->lang['KB_UNINSTALL_CONTINUE'], '<a href="' . append_sid($this->u_action . '&amp;uninstall=true') . '">', '</a>'));
-						}
-					}
-					else
-					{
-						$hidden_fields = build_hidden_fields(array(
-							'uninstall'	=> true,
-						));
-						confirm_box(false, 'UNINSTALL_KB', $hidden_fields);
-					}
+					header('Location: '. $phpbb_root_path . 'kb_install/' . ' ');//renamed includes/functions_install_kb.php to kb_install/index.php
 				}
 				
 				$reset_db = (isset($_POST['reset_db'])) ? true : false;	

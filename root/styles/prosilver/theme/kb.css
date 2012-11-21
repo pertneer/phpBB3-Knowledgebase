@@ -97,10 +97,10 @@ textarea.desc {
 }
 
 #kb_searchform #button{
-	margin-top:2px;
+	margin-top:5px;
 }
 
-input.inputbox	{ width: 75%; }
+.kb_search input.inputbox	{ width: 75%; }
 
 /* MCP Specific tweaks */
 .mcp-main .kb-mcp-postbody {
@@ -193,6 +193,7 @@ a.kblink {
 .kb_postbody ul.profile-icons li {
 	margin: 0 3px;
 }
+
 #kb_postbody{
 	padding: 0 1em 0 1em; /* padding here creates white space "inside the box." */
 }
