@@ -45,7 +45,7 @@
 				</contributions-group>
 			</author>
 		</author-group>
-		<mod-version>1.0.4b</mod-version>
+		<mod-version>1.0.3.3</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>2400</time>
@@ -277,8 +277,23 @@
 				</changelog>
 			</entry>
 			<entry>
+				<date>2012-11-02</date>
+				<rev-version>1.0.3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[updated version to reflect taking over mod]]></change>
+					<change><![CDATA[fixed some styling issues]]></change>
+					<change><![CDATA[fixed some language issues]]></change>
+					<change><![CDATA[fixed some spelling errors]]></change>
+					<change><![CDATA[changed classic look to be more like phpBB.com knowledgebase]]></change>
+					<change><![CDATA[removed upgrade files]]></change>
+					<change><![CDATA[temporaraly removed support for subsilver]]></change>
+					<change><![CDATA[added moderator notification to headers]]></change>
+					<change><![CDATA[Added ability to change article Header name]]></change>
+				</changelog>
+			</entry>
+			<entry>
 				<date>2012-11-13</date>
-				<rev-version>1.0.4a</rev-version>
+				<rev-version>1.0.3.1</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Bugfix #20 and Fix for Undefined index: kb_header_name]]></change>
 					<change><![CDATA[Bugfix #22 kb_latest_article.php error when deleting all articles and categories]]></change>
@@ -287,7 +302,7 @@
 			</entry>
 			<entry>
 				<date>2012-11-19</date>
-				<rev-version>1.0.4b</rev-version>
+				<rev-version>1.0.3.2</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Bugfix #25 Language string is missing]]></change>
 					<change><![CDATA[Bugfix #29 Profile icons issue]]></change>
@@ -304,77 +319,17 @@
 				</changelog>
 			</entry>
 			<entry>
-				<date>2012-11-02</date>
-				<rev-version>1.0.3</rev-version>
+				<date>2012-11-21</date>
+				<rev-version>1.0.3.3</rev-version>
 				<changelog lang="en">
-					<change><![CDATA[updated version to reflect taking over mod]]></change>
-					<change><![CDATA[fixed some styling issues]]></change>
-					<change><![CDATA[fixed some language issues]]></change>
-					<change><![CDATA[fixed some spelling errors]]></change>
-					<change><![CDATA[changed classic look to be more like phpBB.com knowledgebase]]></change>
-					<change><![CDATA[removed upgrade files]]></change>
-					<change><![CDATA[temporaraly removed support for subsilver]]></change>
-					<change><![CDATA[added moderator notification to headers]]></change>
-					<change><![CDATA[Added ability to change article Header name]]></change>
+					<change><![CDATA[Removed sql from install.xml]]></change>
+					<change><![CDATA[Added new features]]></change>
+					<change><![CDATA[Language Changes]]></change>
 				</changelog>
 			</entry>
 		</history>
 	</header>
 	<action-group>
-		<sql><![CDATA[CREATE TABLE IF NOT EXISTS `phpbb_articles` (
-  `article_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `cat_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_title_clean` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_desc` text COLLATE utf8_bin NOT NULL,
-  `article_desc_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_desc_options` int(11) unsigned NOT NULL DEFAULT '7',
-  `article_desc_uid` varchar(8) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_text` mediumtext COLLATE utf8_bin NOT NULL,
-  `article_checksum` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_status` tinyint(1) NOT NULL DEFAULT '0',
-  `article_attachment` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `article_views` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_comments` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_user_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_user_color` varchar(6) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `article_tags` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_type` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_votes` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `enable_bbcode` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `enable_smilies` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `enable_magic_url` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `enable_sig` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `bbcode_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `bbcode_uid` varchar(8) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_open` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `article_last_edit_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `article_last_edit_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_edit_reason` mediumtext COLLATE utf8_bin NOT NULL,
-  `article_edit_reason_global` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `article_edit_type` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT 'a:0:{}',
-  `article_edit_contribution` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=0 ;
-
-CREATE TABLE IF NOT EXISTS `phpbb_article_requests` (
-  `request_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `article_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `request_accepted` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `request_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `request_text` mediumtext COLLATE utf8_bin NOT NULL,
-  `request_checksum` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `request_status` tinyint(1) NOT NULL DEFAULT '0',
-  `request_user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `request_user_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `request_user_color` varchar(6) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `request_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `bbcode_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `bbcode_uid` varchar(8) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY (`request_id`)
-);]]></sql>
 		<copy>
 			<file from="root/*.*" to="*.*"/>
 		</copy>
