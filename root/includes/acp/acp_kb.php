@@ -38,7 +38,7 @@ class acp_kb
 		include($phpbb_root_path . 'includes/functions_install_kb.' . $phpEx);
 
 		$action	= request_var('action', '');
-		$submit = (isset($_POST['submit'])) ? true : false;		
+		$submit = (isset($_POST['submit'])) ? true : false;
 		$error = array();
 
 		$form_key = 'acp_kb';
@@ -129,7 +129,7 @@ class acp_kb
 				{
 					case 'install':
 						if(confirm_box(true))
-						{						
+						{
 							// Lets install the mod
 							install_plugin($filename, $plugin_loc, $this->u_action);
 							
@@ -157,14 +157,14 @@ class acp_kb
 						$continue = (empty($details['PLUGIN_PERM'])) ? false : $details['PLUGIN_PERM'];
 					
 						if(confirm_box(true))
-						{						
+						{
 							// Uninstall the plugin
 							uninstall_plugin($filename, $plugin_loc, $this->u_action);
 							
 							trigger_error($user->lang['PLUGIN_UNINSTALLED'] . adm_back_link($this->u_action));
 						}
 						else
-						{								
+						{
 							if (!$continue)
 							{
 								$hidden_fields = build_hidden_fields(array(
@@ -225,7 +225,7 @@ class acp_kb
 						if ($action == 'move_up')
 						{
 							sort_plugin_order('update', '', $filename, 'move_up');
-						}						
+						}
 						else if ($action == 'move_down')
 						{
 							sort_plugin_order('update', '', $filename, 'move_down');
@@ -236,7 +236,7 @@ class acp_kb
 						$sql = 'SELECT *
 							FROM ' . KB_PLUGIN_TABLE . ' 
 							ORDER BY plugin_order ASC';
-						$result = $db->sql_query($sql);		
+						$result = $db->sql_query($sql);
 						$rows = $db->sql_fetchrowset($result);
 						$db->sql_freeresult($result);
 						
@@ -288,7 +288,7 @@ class acp_kb
 							}
 						}
 						
-						$all_plugins = available_plugins();				
+						$all_plugins = available_plugins();
 						
 						if (!empty($all_plugins))
 						{
@@ -324,31 +324,40 @@ class acp_kb
 				// Get current and latest version
 				$errstr = '';
 				$errno = 0;
-
-				//$info = get_remote_file('kb.pertneer.net', '/mods', 'knowledgebase.txt', $errstr, $errno);
-				$info = get_remote_file('www.local.com', '/mods', 'knowledgebase.txt', $errstr, $errno);
+				
+				//Let setup some stuff to make sure if version server is unreachable module still loads
+				$latest_version		= $user->lang['KB_NO_INFO'];
+				$announcement_url	= $user->lang['KB_NO_INFO'];
+				$download_url 		= $user->lang['KB_NO_INFO'];
+				$up_to_date			= $user->lang['KB_NO_INFO'];
+				$current_version 	= $config['kb_version'];
+				$kb_path = generate_board_url() . '/kb.' . $phpEx;
+				
+				$info = get_remote_file('kb.pertneer.net', '/mods', 'knowledgebase.txt', $errstr, $errno);
+				//$info = get_remote_file('www.local.com', '/mods', 'knowledgebase.txt', $errstr, $errno);
 				//git repo ssl location
 				//https://raw.github.com/pertneer/VersionCheck/master/phpBB3_KB/knowledgebase.txt
 				//$info = get_remote_file('raw.github.com', '/pertneer/VersionCheck/master/phpBB3_KB', 'knowledgebase.txt', $errstr, $errno, 443);
 				
-				if ($info === false)
+				//if server was contacted we need to use the correct information
+				if ($info)
 				{
-					trigger_error($errstr, E_USER_WARNING);
+				
+					$info = explode("\n", $info);
+					
+					// Update vars
+					$latest_version = trim($info[0]);
+					$announcement_url = trim($info[1]);
+					$download_url = trim($info[2]);
+
+					$current_version = $config['kb_version'];
+					
+					$kb_path = generate_board_url() . '/kb.' . $phpEx;
+
+					$up_to_date = (version_compare(str_replace('rc', 'RC', strtolower($current_version)), str_replace('rc', 'RC', strtolower($latest_version)), '<')) ? false : true;
+
 				}
 				
-				$info = explode("\n", $info);
-				
-				// Update vars
-				$latest_version = trim($info[0]);
-				$announcement_url = trim($info[1]);
-				$download_url = trim($info[2]);
-
-				$current_version = $config['kb_version'];
-				
-				$kb_path = generate_board_url() . '/kb.' . $phpEx;
-
-				$up_to_date = (version_compare(str_replace('rc', 'RC', strtolower($current_version)), str_replace('rc', 'RC', strtolower($latest_version)), '<')) ? false : true;
-
 				$template->assign_vars(array(
 					'S_UP_TO_DATE'		=> $up_to_date,
 					'S_VERSION_CHECK'	=> true,
@@ -360,7 +369,7 @@ class acp_kb
 					'UPDATE_INSTRUCTIONS'	=> sprintf($user->lang['UPDATE_INSTRUCTIONS'], $announcement_url, $download_url, $kb_path),
 				));
 				
-				$uninstall = (isset($_POST['uninstall']) || isset($_GET['uninstall'])) ? true : false;	
+				$uninstall = (isset($_POST['uninstall']) || isset($_GET['uninstall'])) ? true : false;
 				if ($uninstall)
 				{
 					if(confirm_box(true) || isset($config['kb_uninstall_step']))
@@ -409,7 +418,7 @@ class acp_kb
 					}
 				}
 				
-				$reset_perms = (isset($_POST['reset_perms'])) ? true : false;	
+				$reset_perms = (isset($_POST['reset_perms'])) ? true : false;
 				if ($reset_perms)
 				{
 					if(confirm_box(true))
@@ -428,7 +437,7 @@ class acp_kb
 					}
 				}
 				
-				$reset_plugins = (isset($_POST['reset_plugins'])) ? true : false;	
+				$reset_plugins = (isset($_POST['reset_plugins'])) ? true : false;
 				if ($reset_plugins)
 				{
 					if(confirm_box(true))
@@ -490,7 +499,7 @@ class acp_kb
 			}
 
 			// We validate the complete config if whished
-			validate_config_vars($display_vars['vars'], $cfg_array, $error);			
+			validate_config_vars($display_vars['vars'], $cfg_array, $error);
 
 			// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 			foreach ($display_vars['vars'] as $config_name => $null)
