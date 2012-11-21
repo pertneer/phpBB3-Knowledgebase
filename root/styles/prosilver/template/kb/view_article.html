@@ -1,12 +1,12 @@
 <!-- INCLUDE kb/kb_header.html -->
 				
 				<!-- IF .changerow -->
-				<div class="panel">
+				<div class="error">
 					<div class="inner">
 						<span class="corners-top"><span></span></span>
 							<div class="postbody">
 							<h4>{L_REV_CHANGES}:</h4>
-							<!-- BEGIN changerow --><p>{changerow.CHANGE}<br />STUFF</p><!-- END changerow -->
+							<!-- BEGIN changerow --><p>{changerow.CHANGE}</p><!-- END changerow -->
 							</div>
 						<span class="corners-bottom"><span></span></span>
 					</div>
@@ -22,15 +22,15 @@
 										<!-- IF U_DELETE --><li class="delete-icon"><a href="{U_DELETE}" title="{L_DELETE_ARTICLE}"><span>{L_DELETE_ARTICLE}</span></a></li><!-- ENDIF -->
 										<!-- IF U_STATUS --><li class="report-icon"><a href="{U_STATUS}" title="{L_CHANGE_STATUS}"><span>{L_CHANGE_STATUS}</span></a></li><!-- ENDIF -->
 										<!-- IF U_HISTORY --><li class="info-icon"><a href="{U_HISTORY}" title="{L_HISTORY}"><span>{L_HISTORY}</span></a></li><!-- ENDIF -->
-									</ul>								
-								<!-- ENDIF -->								
+									</ul>
+								<!-- ENDIF -->
 
 								<!-- IF S_ARTICLE_UNAPPROVED -->
 									<p class="rules">
 										<!-- IF S_ARTICLE_UNAPPROVED -->{UNAPPROVED_IMG} <a href="{U_STATUS}"><strong>{L_ARTICLE_UNAPPROVED}</strong></a><!-- ENDIF -->
 									</p>
 								<!-- ENDIF -->
-									<h2 class="kb">{L_KB_HEADER}</h2>						
+									<h2 class="kb">{L_KB_HEADER}</h2>
 							<span class="error" style="font-size: 120%">{ARTICLE_TITLE}</span><br/>
 							<!-- IF S_EXTENDED_HEADER -->
 							
