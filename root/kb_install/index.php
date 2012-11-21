@@ -77,7 +77,7 @@ $logo_img = "{T_THEME_PATH}/images/kb_bot.png";
 */
 $mod = array(
 	'name'		=> 'phpBB3-Knowledgebase',
-	'version'	=> '1.0.4a',
+	'version'	=> '1.0.3.3',
 	'config'	=> 'phpbb3_knowledgebase_version',
 	'enable'	=> 'phpbb3_knowledgebase_enable',
 	'kb_header_name'	=> '',
@@ -95,9 +95,28 @@ $permission_type = 'u_kb_';
 
 
 $versions = array(
-	'1.0.4a'	=>array(
-		'table_add' => array(
-			array('phpbb_articles', array(
+	'1.0.3.3'	=> array(
+		'cache_purge' => array(
+			'imageset',
+			'template',
+			'theme'
+		),
+	),
+	
+	'1.0.3.2'	=> array(),
+	
+	'1.0.3.1'	=>array(),
+		
+	
+	'1.0.3'	=> array(
+		'config_add' => array(
+			array('kb_header_name', ''),
+			array('kb_default_rating', 3),
+		),
+	),
+	'1.0.2'	=> array(
+	'table_add'	=> array(
+		array('phpbb_articles', array(
 			'COLUMNS'	=> array(
 					'article_id'					=> array('UINT', NULL, 'auto_increment'),
 					'cat_id'						=> array('UINT', 0),
@@ -154,19 +173,10 @@ $versions = array(
 						'bbcode_uid'				=> array('VCHAR:8', ''),
 					),
 					'PRIMARY_KEY'	=> 'request_id'
-				)),
+				)
 			),
-		),
+			
 		
-	
-	'1.0.3'	=> array(
-		'config_add' => array(
-			array('kb_header_name', ''),
-			array('kb_default_rating', 3),
-		),
-	),
-	'1.0.2'	=> array(
-		'table_add'	=> array(
 				array($table_prefix . 'article_attachments', array(
 					'COLUMNS'		=> array(
 						'attach_id'			=> array('UINT', NULL, 'auto_increment'),
@@ -510,14 +520,15 @@ $versions = array(
 				array('kb_show_desc_article', 1),
 				array('kb_show_desc_cat', 1),
 				array('kb_soc_bookmarks', 1),
-				array('kb_total_articles', 0, true),
+				array('kb_total_articles', 1, true),
 				array('kb_total_comments', 0, true),
-				array('kb_total_cats', 0),
+				array('kb_total_cats', 1),
 			),
 		
-		'custom'	=> 'kb_install_perm_plugins',//this works
 		
-		'table_row_insert'	=> array($table_prefix . 'article_cats', array(
+		//table_row_insert works
+		'table_row_insert'	=> array(
+			array($table_prefix . 'article_cats', array(
 				'parent_id'		=> 0,
 				'left_id'		=> 1,
 				'right_id'		=> 2,
@@ -527,13 +538,11 @@ $versions = array(
 				'cat_desc_options'		=> 7,
 				'cat_desc_uid'			=> '',
 				'cat_image'				=> '',
-				'cat_articles'			=> 0,
+				'cat_articles'			=> 1,
 				'latest_ids'			=> serialize(array()),
-			)
-		),
-		
-		
-		'table_row_insert'	=> array($table_prefix . 'articles', array(
+			)),
+			
+			array($table_prefix . 'articles', array(
 				'cat_id'						=> 	1,
 				'article_title'					=>	$user->lang['KB_FIRST_ARTICLE_TITLE'],
 				'article_title_clean'			=>  utf8_clean_string($user->lang['KB_FIRST_ARTICLE_TITLE']),
@@ -565,40 +574,42 @@ $versions = array(
 				'article_open'					=>  0,
 				'article_edit_contribution'		=>  0,
 				'article_edit_type'				=>  serialize(array()),
-			)
-		),
+			)),
 		
-		'table_row_insert'	=> array(ACL_ROLES_TABLE, array(
+			array(ACL_ROLES_TABLE, array(
 				'role_name'			=> 'ROLE_KB_GUEST',
 				'role_description'	=> 'ROLE_KB_GUEST_DESC',
 				'role_type'			=> $permission_type,
-			)
-		),
-		
-		'table_row_insert'	=> array(ACL_ROLES_TABLE, array(
+				)
+			),
+			array(ACL_ROLES_TABLE, array(
 				'role_name'			=> 'ROLE_KB_USER',
 				'role_description'	=> 'ROLE_KB_USER_DESC',
 				'role_type'			=> $permission_type,
-			)
-		),
-		
-		'table_row_insert'	=> array(ACL_ROLES_TABLE, array(
+				)
+			),
+			array(ACL_ROLES_TABLE, array(
 				'role_name'			=> 'ROLE_KB_MOD',
 				'role_description'	=> 'ROLE_KB_MOD_DESC',
 				'role_type'			=> $permission_type,
-			)
+				)
+			),
 		),
 		
-		'permission_set'	=> array($auth_settings),//this not working so much
-		
+		//these permission set items work
 		// Give permissions to admins to moderate the KB and add requests
-		'permission_set' => array(
-			array('ADMINISTRATORS', array('m_kb_author', 'm_kb_comment', 'm_kb_edit', 'm_kb_delete', 'm_kb_req_edit', 'm_kb_status', 'm_kb_time', 'm_kb_view'), 'group'),
-			array('ADMINISTRATORS', 'u_kb_request', 'group'),
-			array('REGISTERED', 'u_kb_request', 'group'),
-		),
-		
-		'permission_set' => array(
+		'permission_set' =>
+			array(
+				array('ADMINISTRATORS', 'm_kb_author', 'group'),
+				array('ADMINISTRATORS', 'm_kb_comment', 'group'),
+				array('ADMINISTRATORS', 'm_kb_edit', 'group'),
+				array('ADMINISTRATORS', 'm_kb_delete', 'group'),
+				array('ADMINISTRATORS', 'm_kb_req_edit', 'group'),
+				array('ADMINISTRATORS', 'm_kb_status', 'group'),
+				array('ADMINISTRATORS', 'm_kb_time', 'group'),
+				array('ADMINISTRATORS', 'm_kb_view', 'group'),
+				array('ADMINISTRATORS', 'u_kb_request', 'group'),
+				array('REGISTERED', 'u_kb_request', 'group'),
 				// Global Role permissions
 				array('ROLE_ADMIN_FULL', 'a_test_mod'),
 				array('ROLE_USER_FULL', 'u_test_mod'),
@@ -608,9 +619,52 @@ $versions = array(
 
 				// Local Permissions (local permissions can not be set for groups)
 				array('ROLE_FORUM_STANDARD', 'f_test_mod'),
+				
+				array('ROLE_KB_GUEST','u_kb_bbcode'),
+				array('ROLE_KB_GUEST','u_kb_comment'),
+				array('ROLE_KB_GUEST','u_kb_download'),
+				array('ROLE_KB_GUEST','u_kb_img'),
+				array('ROLE_KB_GUEST','u_kb_read'),
+				array('ROLE_KB_GUEST','u_kb_search'),
+				array('ROLE_KB_GUEST','u_kb_smilies'),
+				array('ROLE_KB_GUEST','u_kb_view'),
+				array('ROLE_KB_USER','u_kb_add'),
+				array('ROLE_KB_USER','u_kb_attach'),
+				array('ROLE_KB_USER','u_kb_bbcode'),
+				array('ROLE_KB_USER','u_kb_comment'),
+				array('ROLE_KB_USER','u_kb_delete'),
+				array('ROLE_KB_USER','u_kb_download'),
+				array('ROLE_KB_USER','u_kb_edit'),
+				array('ROLE_KB_USER','u_kb_icons'),
+				array('ROLE_KB_USER','u_kb_img'),
+				array('ROLE_KB_USER','u_kb_rate'),
+				array('ROLE_KB_USER','u_kb_read'),
+				array('ROLE_KB_USER','u_kb_search'),
+				array('ROLE_KB_USER','u_kb_sigs'),
+				array('ROLE_KB_USER','u_kb_smilies'),
+				array('ROLE_KB_USER','u_kb_types'),
+				array('ROLE_KB_USER','u_kb_view'),
+				array('ROLE_KB_MOD','u_kb_add'),
+				array('ROLE_KB_MOD','u_kb_add_wa'),
+				array('ROLE_KB_MOD','u_kb_attach'),
+				array('ROLE_KB_MOD','u_kb_bbcode'),
+				array('ROLE_KB_MOD','u_kb_comment'),
+				array('ROLE_KB_MOD','u_kb_delete'),
+				array('ROLE_KB_MOD','u_kb_download'),
+				array('ROLE_KB_MOD','u_kb_edit'),
+				array('ROLE_KB_MOD','u_kb_icons'),
+				array('ROLE_KB_MOD','u_kb_img'),
+				array('ROLE_KB_MOD','u_kb_rate'),
+				array('ROLE_KB_MOD','u_kb_read'),
+				array('ROLE_KB_MOD','u_kb_search'),
+				array('ROLE_KB_MOD','u_kb_sigs'),
+				array('ROLE_KB_MOD','u_kb_smilies'),
+				array('ROLE_KB_MOD','u_kb_types'),
+				array('ROLE_KB_MOD','u_kb_view'),
+				array('ROLE_KB_MOD','u_kb_viewhistory'),
+				
 			),
-			
-		
+		'custom'	=> 'set_category_perm',
 	)
 	
 	);
@@ -618,6 +672,49 @@ $versions = array(
 // Include the UMIF Auto file and everything else will be handled automatically.
 include($phpbb_root_path . 'umil/umil_auto.' . $phpEx);
 
+function set_category_perm(){
+	
+	global $db, $config, $user, $phpbb_root_path, $phpEx, $template, $auth_settings;
+	
+	$sql = 'SELECT role_id, role_name
+			FROM ' . ACL_ROLES_TABLE . '
+			WHERE ' . $db->sql_in_set('role_name', array('ROLE_KB_MOD', 'ROLE_KB_USER', 'ROLE_KB_GUEST'));
+	$result = $db->sql_query($sql);
+	
+	$sql_ary = array();
+	while($row = $db->sql_fetchrow($result))
+	{
+		switch($row['role_name'])
+		{
+			case 'ROLE_KB_MOD':
+				$groups = array(5);
+			break;
+			
+			case 'ROLE_KB_USER':
+				$groups = array(2, 3);
+			break;
+			
+			case 'ROLE_KB_GUEST':
+				$groups = array(1, 6);
+			break;
+		}
+		
+		foreach($groups as $group_id)
+		{
+			$sql_ary[] = array(
+				'group_id'			=> $group_id,
+				'forum_id'			=> 1,
+				'auth_option_id'	=> 0,
+				'auth_role_id'		=> $row['role_id'],
+				'auth_setting'		=> 0,
+			);
+		}
+	}
+	$db->sql_freeresult($result);
+	$db->sql_multi_insert(KB_ACL_GROUPS_TABLE, $sql_ary);
+	
+	kb_install_perm_plugins();
+}
 
 // Install permanent plugins on install or update
 function kb_install_perm_plugins($action = 'install')
