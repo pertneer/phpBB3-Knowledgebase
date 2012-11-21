@@ -35,7 +35,6 @@ class acp_kb
 		include($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
 		include($phpbb_root_path . 'includes/functions_kb.' . $phpEx);
 		include($phpbb_root_path . 'includes/functions_plugins_kb.' . $phpEx);
-		include($phpbb_root_path . 'includes/functions_install_kb.' . $phpEx);
 
 		$action	= request_var('action', '');
 		$submit = (isset($_POST['submit'])) ? true : false;
@@ -618,8 +617,8 @@ function select_menu_check($value, $key = '')
 }
 
 /**
-* Reset KB Database (more like delete all kb information in db)
-* Reset should put back to installed state
+* Reset KB Database (Was more like delete all kb information in db)
+* Reset puts back to installed state
 */
 function reset_db()
 {
@@ -656,7 +655,164 @@ function reset_db()
 			SET allow_in_kb = 0';
 	$db->sql_query($sql);
 	
-	//insert_kb_data();
+	insert_kb_data();
+}
+
+function insert_kb_data()
+{
+	global $db;
+	
+	kb_install_perm_plugins('reset', 'install');
+	
+	// add log
+	add_log('admin', 'LOG_KB_RESET_PLUGINS', KB_VERSION);
+	
+	kb_install_first_information();
+	
+	set_category_perm();
+	
+}
+
+function kb_install_first_information()
+{
+	global $db, $config, $user, $phpbb_root_path, $phpEx, $template, $auth_settings;
+	
+	
+	// Data to insert:
+	// First category
+	$sql_ary = array(
+		'parent_id'		=> 0,
+		'left_id'		=> 1,
+		'right_id'		=> 2,
+		'cat_name'		=> $user->lang['KB_FIRST_CAT'],
+		'cat_desc'		=> $user->lang['KB_FIRST_CAT_DESC'],
+		'cat_desc_bitfield'		=> '',
+		'cat_desc_options'		=> 7,
+		'cat_desc_uid'			=> '',
+		'cat_image'				=> '',
+		'cat_articles'			=> 0,
+		'latest_ids'			=> serialize(array()),
+	);
+	$sql = 'INSERT INTO ' . KB_CATS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
+	$db->sql_query($sql);
+	$cat_id = $db->sql_nextid();
+	set_config('kb_total_cats', 1);
+	
+	// First article
+	$bitfield = $desc_bitfield = $uid = $desc_uid = '';
+	$options = $desc_options = 0;
+	$desc_text = $user->lang['KB_FIRST_ARTICLE_DESC'];
+	$text = $user->lang['KB_FIRST_ARTICLE_TEXT'];
+	generate_text_for_storage($desc_text, $desc_uid, $desc_bitfield, $desc_options, true, true, true);
+	generate_text_for_storage($text, $uid, $bitfield, $options, true, true, true);
+	
+	$sql_ary = array(
+		'cat_id'						=> 	$cat_id,
+		'article_title'					=>	$user->lang['KB_FIRST_ARTICLE_TITLE'],
+		'article_title_clean'			=>  utf8_clean_string($user->lang['KB_FIRST_ARTICLE_TITLE']),
+		'article_desc'					=>	$desc_text,
+		'article_desc_bitfield'			=>	$desc_bitfield,
+		'article_desc_options'			=>	$desc_options,
+		'article_desc_uid'				=>	$desc_uid,
+		'article_checksum'				=>	md5($text),
+		'article_status'				=>	STATUS_APPROVED,
+		'article_attachment'			=>	0,
+		'article_views'					=>	0,
+		'article_user_id'				=>	$user->data['user_id'],
+		'article_user_name'				=>	$user->data['username'],
+		'article_user_color'			=>	$user->data['user_colour'],
+		'article_time'					=>	time(),
+		'article_tags'					=>	'',
+		'article_type'					=>	0,
+		'article_text'					=>  $text,
+		'enable_bbcode'					=>	1,
+		'enable_smilies'				=>	1,
+		'enable_magic_url'				=>	1,
+		'enable_sig'					=>	0,
+		'bbcode_bitfield'				=>	$bitfield,
+		'bbcode_uid'					=>	$uid,
+		'article_last_edit_time'		=>	time(),
+		'article_last_edit_id'			=>	0,
+		'article_edit_reason'			=>	'',
+		'article_edit_reason_global'	=>	0,
+		'article_open'					=>  0,
+		'article_edit_contribution'		=>  0,
+		'article_edit_type'				=>  serialize(array()),
+	);
+	$sql = 'INSERT INTO ' . KB_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
+	$db->sql_query($sql);
+	$article_id = $db->sql_nextid();
+	
+	$late_articles = array(
+		'article_id'		=> $article_id,
+		'article_title'		=> $user->lang['KB_FIRST_ARTICLE_TITLE'],
+	);
+	handle_latest_articles('add', $cat_id, $late_articles, $config['kb_latest_articles_c']);
+	
+	set_config('kb_last_updated', time(), true);
+	
+	$sql = 'UPDATE ' . KB_CATS_TABLE . '
+			SET cat_articles = cat_articles + 1
+			WHERE cat_id = ' . $cat_id;
+	$db->sql_query($sql);
+	
+	$sql = 'UPDATE ' . USERS_TABLE . '
+			SET user_articles = user_articles + 1
+			WHERE user_id = ' . $user->data['user_id'];
+	$db->sql_query($sql);
+	
+	set_config('kb_last_article', $article_id, true);
+	set_config('kb_total_articles', $config['kb_total_articles'] + 1, true);
+	
+	//need to reset permissions on categories
+	
+	// add log
+	add_log('admin', 'LOG_KB_RESET_DB', KB_VERSION);
+	
+}
+
+function set_category_perm()
+{
+	
+	global $db, $config, $user, $phpbb_root_path, $phpEx, $template, $auth_settings;
+	
+	$sql = 'SELECT role_id, role_name
+			FROM ' . ACL_ROLES_TABLE . '
+			WHERE ' . $db->sql_in_set('role_name', array('ROLE_KB_MOD', 'ROLE_KB_USER', 'ROLE_KB_GUEST'));
+	$result = $db->sql_query($sql);
+	
+	$sql_ary = array();
+	while($row = $db->sql_fetchrow($result))
+	{
+		switch($row['role_name'])
+		{
+			case 'ROLE_KB_MOD':
+				$groups = array(5);
+			break;
+			
+			case 'ROLE_KB_USER':
+				$groups = array(2, 3);
+			break;
+			
+			case 'ROLE_KB_GUEST':
+				$groups = array(1, 6);
+			break;
+		}
+		
+		foreach($groups as $group_id)
+		{
+			$sql_ary[] = array(
+				'group_id'			=> $group_id,
+				'forum_id'			=> 1,
+				'auth_option_id'	=> 0,
+				'auth_role_id'		=> $row['role_id'],
+				'auth_setting'		=> 0,
+			);
+		}
+	}
+	$db->sql_freeresult($result);
+	$db->sql_multi_insert(KB_ACL_GROUPS_TABLE, $sql_ary);
+	
 }
 
 function reset_perms()
@@ -700,5 +856,7 @@ function reset_perms()
 	}
 	
 	$auth_admin->acl_clear_prefetch();
+	// add log
+	add_log('admin', 'LOG_KB_RESET_PERMS', KB_VERSION);
 }
 ?>
