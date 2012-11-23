@@ -673,6 +673,64 @@ function insert_kb_data()
 	
 }
 
+// Install permanent plugins on install or update
+function kb_install_perm_plugins($action , $version)
+{
+	global $phpbb_root_path;
+
+	if ($action == 'uninstall')
+	{
+		return;
+	}
+	
+	if(!defined('IN_KB_PLUGIN')) // Killing notice when updating through several versions all using this function
+	{
+		define('IN_KB_PLUGIN', true);
+	}
+	
+	$plugin_pages = array();
+	switch ($version)
+	{
+		
+		case 'install':
+			$plugins = array('author', 'contributors', 'rating', 'categories', 'stats', 'search', 'latest_article', 'request_list', 'bookmark', 'email_article', 'export_article', 'related_articles', 'rated_articles', 'random_article');
+			$plugin_pages = array(
+				'author'			=> array('view_article'),
+				'contributors'		=> array('view_article'),
+				'rating'			=> array('view_article'),
+				'categories'		=> array('index', 'view_cat', 'view_tag', 'request', 'search', 'history'),
+				'stats'				=> array('index', 'view_cat', 'view_tag', 'request', 'search', 'history'),
+				'search'			=> array('index', 'view_cat', 'view_tag', 'request', 'view_article', 'history'),
+				'latest_article'	=> array('index', 'view_cat', 'view_tag', 'request', 'search'),
+				'request_list'		=> array('index', 'view_cat', 'view_tag', 'view_article', 'search'),
+				'bookmark'			=> array('view_article'),
+				'email_article'		=> array('view_article'),
+				'export_article'	=> array('view_article'),
+				'related_articles'	=> array('view_article'),
+				'rated_articles'	=> array('index', 'view_cat', 'view_tag', 'request'),
+				'random_article'	=> array('index', 'view_cat', 'view_tag'),
+			);
+		break;
+	}
+	
+	if (empty($plugins))
+	{
+		return;
+	}
+	
+	foreach ($plugins as $plugin)
+	{
+		if(isset($plugin_pages[$plugin]))
+		{
+			install_plugin($plugin, $phpbb_root_path . 'includes/kb_plugins/', false, $plugin_pages[$plugin]);
+		}
+		else
+		{
+			install_plugin($plugin, $phpbb_root_path . 'includes/kb_plugins/');
+		}
+	}
+}
+
 function kb_install_first_information()
 {
 	global $db, $config, $user, $phpbb_root_path, $phpEx, $template, $auth_settings;
