@@ -21,7 +21,7 @@ if (defined('IN_KB_PLUGIN'))
 {
 	$acp_options['legend1'] 			= 'KB_SORT_RATING';
 	$acp_options['kb_rating_menu']		= array('lang' => 'WHICH_MENU',			'validate' => 'int',	'type' => 'custom', 		'function' 	=> 'select_menu_check', 	'explain' 	=> false);
-		
+
 	$details = array(
 		'PLUGIN_NAME'			=> 'PLUGIN_RATE',
 		'PLUGIN_DESC'			=> 'PLUGIN_RATE_DESC',
@@ -37,18 +37,18 @@ if (defined('IN_KB_PLUGIN'))
 function rating()
 {
 	global $template;
-	
+
 	// Everything parsed in kb.php
-	
+
 	$content = kb_parse_template('rating', 'rating.html');
-	
+
 	return $content;
 }
 
 function rating_versions()
 {
 	$versions = array(
-		'1.0.0'	=> array(			
+		'1.0.0'	=> array(
 			'config_add'	=> array(
 				array('kb_rating_menu', LEFT_MENU),
 			),

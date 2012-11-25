@@ -23,7 +23,7 @@ if (defined('IN_KB_PLUGIN'))
 	$acp_options['kb_rated_articles_enable'] 	= array('lang' => 'ENABLE_HIGHEST_RATED_ARTICLES',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' 	=> false);
 	$acp_options['kb_rated_articles_menu']		= array('lang' => 'WHICH_MENU',						'validate' => 'int',	'type' => 'custom', 		'function' 	=> 'select_menu_check', 	'explain' 	=> false);
 	$acp_options['kb_rated_articles_limit']		= array('lang' => 'HIGHEST_RATED_ARTICLES_LIMIT',	'validate' => 'int',	'type' => 'text:5:2',		'explain'	=> false);
-	
+
 	$details = array(
 		'PLUGIN_NAME'			=> 'PLUGIN_HIGH_RATE',
 		'PLUGIN_DESC'			=> 'PLUGIN_HIGH_RATE_DESC',
@@ -38,12 +38,12 @@ if (defined('IN_KB_PLUGIN'))
 function rated_articles($cat_id)
 {
 	global $db, $template, $phpbb_root_path, $phpEx, $config;
-	
+
 	if (!$config['kb_rated_articles_enable'])
 	{
 		return;
 	}
-	
+
 	$limit = $config['kb_rated_articles_limit'];
 	$sql_where = ($cat_id) ? 'a.cat_id = ' . $cat_id : $db->sql_in_set('a.cat_id', get_readable_cats(), false, true);
 	$sql = $db->sql_build_query('SELECT', array(
@@ -60,7 +60,7 @@ function rated_articles($cat_id)
 		'GROUP_BY'	=> 'a.article_id',
 		'ORDER_BY'  => 'rating DESC',
 	));
-	
+
 	$result = $db->sql_query_limit($sql, $limit);
 	while($row = $db->sql_fetchrow($result))
 	{
@@ -71,16 +71,16 @@ function rated_articles($cat_id)
 		));
 	}
 	$db->sql_freeresult($result);
-	
+
 	$content = kb_parse_template('rated_articles', 'rated_articles.html');
-	
+
 	return $content;
 }
 
 function rated_articles_versions()
 {
 	$versions = array(
-		'1.0.0'	=> array(			
+		'1.0.0'	=> array(
 			// Initial install, I suppose nothing is done here beside adding the config
 			'config_add'	=> array(
 				array('kb_rated_articles_enable', 1),

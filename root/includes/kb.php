@@ -64,7 +64,7 @@ class knowledge_base
 				}
 				else if($this->cat_id > 0)
 				{
-					$this->mode = 'view_cat';					
+					$this->mode = 'view_cat';
 				}
 				else if($this->tag !== '')
 				{
@@ -155,7 +155,7 @@ class knowledge_base
 				case '':
 				case 'index':
 				default:
-					$this->generate_index_page();					
+					$this->generate_index_page();
 				break;
 			}
 		}
@@ -375,7 +375,7 @@ class knowledge_base
 			
 			$red_url = ($this->start > 0) ? "&amp;start=$this->start" : '';
 			login_box(append_sid("{$phpbb_root_path}kb.$phpEx", "c=$this->cat_id" . $red_url), $user->lang['KB_LOGIN_EXPLAIN_VIEW']);
-		}		
+		}
 		
 		kb_display_cats($cat_data);
 		
@@ -491,7 +491,7 @@ class knowledge_base
 			'PAGINATION'		=> generate_pagination(kb_append_sid('cat', array('id' => $this->cat_id, 'title' => $cat_data['cat_name'], 'extra' => ((strlen($this->sort)) ? "sort=$this->sort" : ''))), $articles_count, $config['kb_articles_per_page'], $this->start),
 			'PAGE_NUMBER'		=> on_page($articles_count, $config['kb_articles_per_page'], $this->start),
 			'TOTAL_ARTICLES' 	=> $articles_count,			
-			'U_ADD_NEW_ARTICLE'	=> ($auth->acl_get('u_kb_add', $this->cat_id)) ? append_sid("{$phpbb_root_path}kb.$phpEx", "c=" . $this->cat_id . '&amp;i=add') : '',			
+			'U_ADD_NEW_ARTICLE'	=> ($auth->acl_get('u_kb_add', $this->cat_id)) ? append_sid("{$phpbb_root_path}kb.$phpEx", "c=" . $this->cat_id . '&amp;i=add') : '',
 			'NEW_ARTICLE_IMG'	=> $user->img('button_article_new', 'KB_ADD_ARTICLE'),
 			'S_NO_TOPIC'		=> false,
 			'S_IN_MAIN'			=> true,
@@ -945,8 +945,8 @@ class knowledge_base
 			'L_DELETE_ARTICLE'		=> $user->lang['KB_DELETE_ARTICLE'],
 			'L_HISTORY'				=> $user->lang['ARTICLE_HISTORY'],
 			'L_CONTENT' 			=> $user->lang['ARTICLE_CONTENT'],
-			'U_PERM_LINK'			=> generate_board_url() . '/' . kb_append_sid('article', array('id' => $this->article_id, 'title' => $article_type['article_title']), true),			
-			'U_LOCAL_PERM_LINK'		=> '[kb]'. $this->article_id . ', ' . $article_type['article_title'].'[/kb]',			
+			'U_PERM_LINK'			=> generate_board_url() . '/' . kb_append_sid('article', array('id' => $this->article_id, 'title' => $article_type['article_title']), true),
+			'U_LOCAL_PERM_LINK'		=> '[kb]'. $this->article_id . ', ' . $article_type['article_title'].'[/kb]',
 			
 			'U_DLOAD_WORD'			=> append_sid("{$phpbb_root_path}kb.$phpEx", 'i=export&amp;a=' . $this->article_id),
 			'POSTER_ARTICLES' 		=> $article_data['user_articles'],
@@ -2762,7 +2762,7 @@ class knowledge_base
 		$img_status		= ($bbcode_status && $auth->acl_get('u_kb_img', $comment_data['cat_id'])) ? true : false;
 		$url_status		= ($config['kb_allow_post_links']) ? true : false;
 		$flash_status	= ($bbcode_status && $auth->acl_get('u_kb_flash', $comment_data['cat_id']) && $config['kb_allow_post_flash']) ? true : false;
-																								 
+
 		if ($submit || $preview || $refresh)
 		{
 			$comment_data['comment_title']		= utf8_normalize_nfc(request_var('title', '', true));
@@ -3125,7 +3125,7 @@ class knowledge_base
 				WHERE article_id = ' . $this->article_id . '
 				AND user_id = ' . $user->data['user_id'];
 		$result = $db->sql_query($sql);	
-		$has_rated = ($db->sql_affectedrows()) ? true : false;	
+		$has_rated = ($db->sql_affectedrows()) ? true : false;
 		$db->sql_freeresult($result);
 		
 		// Everything is okay, insert vote
@@ -3752,7 +3752,7 @@ class knowledge_base
 			'S_HAS_SUBCATS' 	=> false,
 			'PAGINATION'		=> generate_pagination(kb_append_sid('tag', array('id' => $this->tag, 'title' => $this->tag, 'extra' => strlen($this->sort) ? "sort=$this->sort" : '')), $articles_count, $config['kb_articles_per_page'], $this->start),
 			'PAGE_NUMBER'		=> on_page($articles_count, $config['kb_articles_per_page'], $this->start),
-			'TOTAL_ARTICLES' 	=> $articles_count,					
+			'TOTAL_ARTICLES' 	=> $articles_count,
 			'S_NO_TOPIC'		=> false,
 			'S_IN_MAIN'			=> true,
 			'S_SORT_OPTIONS'	=> $sort_options,
@@ -4040,7 +4040,7 @@ class knowledge_base
 			{	
 				//decode uid
 				decode_message($data['article_text'], $data['bbcode_uid']);
-				$diff['t']['message'] = $data['article_text'];			
+				$diff['t']['message'] = $data['article_text'];
 			}
 			else
 			{			
@@ -4580,7 +4580,7 @@ class knowledge_base
 		$smilies_status	= ($bbcode_status && $config['kb_allow_smilies']) ? true : false;
 		$img_status		= ($bbcode_status) ? true : false;
 		$url_status		= ($config['kb_allow_post_links']) ? true : false;
-																								 
+
 		if ($submit)
 		{
 			$request_data['request_title']		= utf8_normalize_nfc(request_var('title', '', true));

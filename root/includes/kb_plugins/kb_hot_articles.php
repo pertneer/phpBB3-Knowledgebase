@@ -23,7 +23,7 @@ if (defined('IN_KB_PLUGIN'))
 	$acp_options['kb_hot_articles_enable'] 		= array('lang' => 'ENABLE_MOST_VIEWED_ARTICLES',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' 	=> false);
 	$acp_options['kb_hot_articles_menu']		= array('lang' => 'WHICH_MENU',						'validate' => 'int',	'type' => 'custom', 		'function' 	=> 'select_menu_check', 	'explain' 	=> false);
 	$acp_options['kb_hot_articles_limit']		= array('lang' => 'HOT_ARTICLES_LIMIT',				'validate' => 'int',	'type' => 'text:5:2',			'explain'	=> false);
-	
+
 	$details = array(
 		'PLUGIN_NAME'			=> 'PLUGIN_HOT',
 		'PLUGIN_DESC'			=> 'PLUGIN_HOT_DESC',
@@ -38,18 +38,18 @@ if (defined('IN_KB_PLUGIN'))
 function hot_articles($cat_id)
 {
 	global $db, $template, $phpbb_root_path, $phpEx, $config;
-	
+
 	if (!$config['kb_hot_articles_enable'])
 	{
 		return;
 	}
-	
+
 	$limit = $config['kb_hot_articles_limit'];
 	$sql_where = ($cat_id) ? 'cat_id = ' . $cat_id : $db->sql_in_set('cat_id', get_readable_cats());
 	$sql = 'SELECT article_id, article_title, article_views
 			FROM ' . KB_TABLE . "
-			WHERE article_status = " . STATUS_APPROVED . " 
-			AND $sql_where 
+			WHERE article_status = " . STATUS_APPROVED . "
+			AND $sql_where
 			ORDER BY article_views DESC";
 	$result = $db->sql_query_limit($sql, $limit);
 	while($row = $db->sql_fetchrow($result))
@@ -61,16 +61,16 @@ function hot_articles($cat_id)
 		));
 	}
 	$db->sql_freeresult($result);
-	
+
 	$content = kb_parse_template('hot_articles', 'hot_articles.html');
-	
+
 	return $content;
 }
 
 function hot_articles_versions()
 {
 	$versions = array(
-		'1.0.0'	=> array(			
+		'1.0.0'	=> array(
 			// Initial install, I suppose nothing is done here beside adding the config
 			'config_add'	=> array(
 				array('kb_hot_articles_enable', 1),

@@ -22,7 +22,7 @@ if (defined('IN_KB_PLUGIN'))
 	$acp_options['legend1'] 				= 'KB_CATS';
 	$acp_options['kb_categories_enable'] 	= array('lang' => 'ENABLE_CATS',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' 	=> false);
 	$acp_options['kb_categories_menu']		= array('lang' => 'WHICH_MENU',			'validate' => 'int',	'type' => 'custom', 		'function' 	=> 'select_menu_check', 	'explain' 	=> false);
-		
+
 	$details = array(
 		'PLUGIN_NAME'			=> 'PLUGIN_CATS',
 		'PLUGIN_DESC'			=> 'PLUGIN_CATS_DESC',
@@ -42,12 +42,12 @@ function categories($cat_id = 0)
 {
 	global $template, $phpbb_root_path, $user;
 	global $phpEx, $config, $auth;
-	
+
 	if (!$config['kb_categories_enable'])
 	{
 		return;
 	}
-	
+
 	$cats = make_cat_select($cat_id, false, false, true);
 	foreach ($cats as $cat)
 	{
@@ -59,22 +59,22 @@ function categories($cat_id = 0)
 		));
 	}
 	unset($cats);
-	
+
 	$template->assign_vars(array(
 		'T_THEME_PATH'				=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme',
 	));
-	
+
 	$content = kb_parse_template('categories', 'categories.html');
-	
+
 	unset($template->_tpldata['cat_list']);
-	
+
 	return $content;
 }
 
 function categories_versions()
 {
 	$versions = array(
-		'1.0.0'	=> array(			
+		'1.0.0'	=> array(
 			'config_add'	=> array(
 				array('kb_categories_enable', 1),
 				array('kb_categories_menu', LEFT_MENU),

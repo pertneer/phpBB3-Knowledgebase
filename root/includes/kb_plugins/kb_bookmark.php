@@ -24,7 +24,7 @@ if (defined('IN_KB_PLUGIN'))
 	$acp_options['kb_allow_bookmarks']	= array('lang' => 'KB_ALLOW_BOOK',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false);
 	$acp_options['kb_soc_bookmarks']	= array('lang' => 'KB_ALLOW_SOCBOOK',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false);
 	$acp_options['kb_bookmark_menu']	= array('lang' => 'WHICH_MENU',			'validate' => 'int',	'type' => 'custom', 		'function' 	=> 'select_menu_check', 	'explain' 	=> false);
-		
+
 	$details = array(
 		'PLUGIN_NAME'			=> 'PLUGIN_BOOK',
 		'PLUGIN_DESC'			=> 'PLUGIN_BOOK_DESC',
@@ -40,18 +40,18 @@ if (defined('IN_KB_PLUGIN'))
 function bookmark()
 {
 	global $template;
-	
+
 	// Parsed elsewhere
-	
+
 	$content = kb_parse_template('bookmark', 'bookmark.html');
-	
+
 	return $content;
 }
 
 function bookmark_versions()
 {
 	$versions = array(
-		'1.0.0'	=> array(			
+		'1.0.0'	=> array(
 			'config_add'	=> array(
 				array('kb_bookmark_menu', RIGHT_MENU),
 			),
