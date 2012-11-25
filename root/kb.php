@@ -39,13 +39,13 @@ if(!isset($config['kb_version']) || version_compare($config['kb_version'], KB_VE
 		// Stop any user in the middle of an install or update
 		trigger_error('KB_NOT_ENABLE');
 	}
-	
+
 	//include($phpbb_root_path . 'includes/functions_install_kb.' . $phpEx);
 	if(!isset($config['kb_version']))
 	{
 		header('Location:' . $phpbb_root_path . 'kb_install/');//renamed to index.php so I only need to call the folder
 	}
-	
+
 }
 
 if (!isset($config['kb_enable']) || !$config['kb_enable'] && !($auth->acl_get('a_') || $auth->acl_get('m_kb')))
@@ -62,7 +62,7 @@ $copyright .= sprintf($user->lang['KB_COPYRIGHT'], '<a href="http://kb.pertneer.
 $copyright .= ($user->lang['KB_TRANSLATION'] != '') ? '&nbsp;&bull;&nbsp;' . $user->lang['KB_TRANSLATION'] : '';
 $copyright .= ($user->lang['TRANSLATION_INFO'] != '') ? '<br />' . $user->lang['TRANSLATION_INFO'] : '';
 
-$user->lang['TRANSLATION_INFO'] = $copyright;  
+$user->lang['TRANSLATION_INFO'] = $copyright;
 
 // set cat id here needed for search and random article to work properly
 $cat_id = request_var('c', 0);

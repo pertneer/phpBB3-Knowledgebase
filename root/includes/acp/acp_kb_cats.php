@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: acp_kb_cats.php 418 2010-01-13 14:12:50Z softphp $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: acp_kb_cats.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -28,7 +28,7 @@ class acp_kb_cats
 	{
 		global $db, $user, $auth, $template, $cache;
 		global $config, $phpbb_admin_path, $phpbb_root_path, $phpEx, $table_prefix;
-		
+
 		include($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
 		include($phpbb_root_path . 'includes/functions_kb.' . $phpEx);
 
@@ -84,7 +84,7 @@ class acp_kb_cats
 
 					trigger_error($user->lang['CAT_DELETED'] . adm_back_link($this->u_action . '&amp;parent_id=' . $this->parent_id));
 				break;
-			
+
 				case 'edit':
 					$cat_data = array(
 						'cat_id'		=>	(int) $cat_id,
@@ -102,9 +102,9 @@ class acp_kb_cats
 						'cat_desc_options'		=> 7,
 						'cat_desc_bitfield'		=> '',
 						'cat_image'				=> request_var('cat_image', ''),
-						
+
 					);
-					
+
 					if($action == 'add')
 					{
 						$cat_data += array(
@@ -124,12 +124,12 @@ class acp_kb_cats
 					{
 						// Copy permissions
 						$cat_perm_from = request_var('cat_perm_from', 0);
-						
+
 						if (!empty($cat_perm_from) && $cat_perm_from != $cat_data['cat_id'] &&
 							(($action != 'edit') || empty($cat_id) || ($auth->acl_get('a_fauth') && $auth->acl_get('a_authusers') && $auth->acl_get('a_authgroups') && $auth->acl_get('a_mauth'))))
 						{
 							$cat_perm_from = request_var('cat_perm_from', 0);
-						
+
 							// if we edit a forum delete current permissions first
 							if ($action == 'edit')
 							{
@@ -189,9 +189,9 @@ class acp_kb_cats
 							$db->sql_multi_insert(KB_ACL_USERS_TABLE, $users_sql_ary);
 							$db->sql_multi_insert(KB_ACL_GROUPS_TABLE, $groups_sql_ary);
 						}
-						
+
 						$auth->acl_clear_prefetch();
-						
+
 						$message = ($action == 'add') ? $user->lang['CAT_CREATED'] : $user->lang['CAT_UPDATED'];
 
 						trigger_error($message . adm_back_link($this->u_action . '&amp;parent_id=' . $this->parent_id));
@@ -303,7 +303,7 @@ class acp_kb_cats
 					// decode...
 					$cat_desc_data = generate_text_for_edit($cat_data['cat_desc'], $cat_data['cat_desc_uid'], $cat_data['cat_desc_options']);
 				}
-				
+
 				$sql = 'SELECT cat_id
 					FROM ' . KB_CATS_TABLE . "
 					WHERE cat_id <> $cat_id";
@@ -358,12 +358,12 @@ class acp_kb_cats
 
 					'U_BACK'		=> $this->u_action . '&amp;parent_id=' . $this->parent_id,
 					'U_EDIT_ACTION'	=> $this->u_action . "&amp;parent_id={$this->parent_id}&amp;action=$action&amp;c=$cat_id",
-					
+
 					'L_TITLE'					=> $user->lang[$this->page_title],
 					'ERROR_MSG'					=> (sizeof($errors)) ? implode('<br />', $errors) : '',
 
 					'CAT_NAME'					=> $cat_data['cat_name'],
-					
+
 					'CAT_IMAGE'					=> $cat_data['cat_image'],
 					'CAT_IMAGE_SRC'				=> ($cat_data['cat_image']) ? $phpbb_root_path . $cat_data['cat_image'] : '',
 
@@ -464,9 +464,9 @@ class acp_kb_cats
 		if ($row = $db->sql_fetchrow($result))
 		{
 			do
-			{				
+			{
 				$folder_image = ($row['left_id'] + 1 != $row['right_id']) ? '<img src="images/icon_subfolder.gif" alt="' . $user->lang['SUBFORUM'] . '" />' : '<img src="images/icon_folder.gif" alt="' . $user->lang['FOLDER'] . '" />';
-						
+
 				$url = $this->u_action . "&amp;parent_id=$this->parent_id&amp;c={$row['cat_id']}";
 
 				$forum_title = $row['cat_name'];
@@ -612,7 +612,7 @@ class acp_kb_cats
 			$db->sql_query($sql);
 
 			$cat_data['cat_id'] = $db->sql_nextid();
-			
+
 			set_config('kb_total_cats', $config['kb_total_cats'] + 1);
 			$cache->destroy('config');
 
@@ -720,14 +720,14 @@ class acp_kb_cats
 
 		return $target['cat_name'];
 	}
-	
+
 	/**
 	* Remove complete cat
 	*/
 	function delete_cat($cat_id, $action_articles = 'delete', $action_subcats = 'delete', $articles_to_id = 0, $subcats_to_id = 0)
 	{
 		global $db, $user, $cache, $config;
-		
+
 		$cat_data = $this->get_cat_info($cat_id);
 
 		$errors = array();
@@ -776,7 +776,7 @@ class acp_kb_cats
 		if ($action_subcats == 'delete')
 		{
 			$log_action_cats = 'DELETE_CATS';
-			
+
 			$rows = get_cat_branch($cat_id, 'children', 'descending', false);
 			foreach ($rows as $row)
 			{
@@ -794,7 +794,7 @@ class acp_kb_cats
 			$sql = 'DELETE FROM ' . KB_CATS_TABLE . '
 					WHERE ' . $db->sql_in_set('cat_id', $cat_ids);
 			$db->sql_query($sql);
-			
+
 			// Delete auth stuff aswell
 			$sql = 'DELETE FROM ' . KB_ACL_GROUPS_TABLE . "
 					WHERE " . $db->sql_in_set('forum_id', $cat_ids);
@@ -803,7 +803,7 @@ class acp_kb_cats
 			$sql = 'DELETE FROM ' . KB_ACL_USERS_TABLE . "
 					WHERE " . $db->sql_in_set('forum_id', $cat_ids);
 			$db->sql_query($sql);
-			
+
 			set_config('kb_total_cats', $config['kb_total_cats'] - count($cat_ids));
 			$cache->destroy('config');
 		}
@@ -836,7 +836,7 @@ class acp_kb_cats
 							FROM ' . KB_CATS_TABLE . "
 							WHERE parent_id = $cat_id";
 					$result = $db->sql_query($sql);
-					
+
 					while ($row = $db->sql_fetchrow($result))
 					{
 						$this->move_cat($row['cat_id'], $subcats_to_id);
@@ -855,15 +855,15 @@ class acp_kb_cats
 					$sql = 'DELETE FROM ' . KB_CATS_TABLE . "
 							WHERE cat_id = $cat_id";
 					$db->sql_query($sql);
-					
+
 					set_config('kb_total_cats', $config['kb_total_cats'] - 1);
 					$cache->destroy('config');
-					
+
 					// Auth entries
 					$sql = 'DELETE FROM ' . KB_ACL_GROUPS_TABLE . '
 							WHERE forum_id = ' . $cat_id;
 					$db->sql_query($sql);
-					
+
 					$sql = 'DELETE FROM ' . KB_ACL_USERS_TABLE . '
 							WHERE forum_id = ' . $cat_id;
 					$db->sql_query($sql);
@@ -881,10 +881,10 @@ class acp_kb_cats
 			$sql = 'DELETE FROM ' . KB_CATS_TABLE . "
 					WHERE cat_id = $cat_id";
 			$db->sql_query($sql);
-			
+
 			set_config('kb_total_cats', $config['kb_total_cats'] - 1);
 			$cache->destroy('config');
-			
+
 			$sql = 'DELETE FROM ' . KB_ACL_GROUPS_TABLE . '
 					WHERE forum_id = ' . $cat_id;
 			$db->sql_query($sql);
@@ -932,7 +932,7 @@ class acp_kb_cats
 
 		return $errors;
 	}
-	
+
 	/**
 	* Move cat content
 	* Luckily this should be fairly easy
@@ -940,13 +940,13 @@ class acp_kb_cats
 	function move_cat_content($from_id, $to_id)
 	{
 		global $db, $user;
-		
+
 		$errors = $article_ids = array();
 		$article_count = 0;
-		
+
 		// Retrieve all articles in category
 		$sql = 'SELECT article_id
-				FROM ' . KB_TABLE . ' 
+				FROM ' . KB_TABLE . '
 				WHERE cat_id = ' . $from_id;
 		$result = $db->sql_query($sql);
 		while($row = $db->sql_fetchrow($result))
@@ -955,34 +955,34 @@ class acp_kb_cats
 		}
 		$article_count = count($article_ids);
 		$db->sql_freeresult($result);
-		
+
 		// Update article table
 		$sql = 'UPDATE ' . KB_TABLE . '
 				SET cat_id = ' . $to_id . '
 				WHERE ' . $db->sql_in_set('article_id', $article_ids);
 		$db->sql_query($sql);
-		
+
 		// Update count
 		$sql = 'UPDATE ' . KB_CATS_TABLE . "
 				SET cat_articles = cat_articles + $article_count
 				WHERE cat_id = " . (int) $to_id;
 		$db->sql_query($sql);
-		
+
 		return $errors;
 	}
-	
+
 	/**
 	* Deletes all articles in a category
 	*/
 	function delete_cat_content($cat_id)
 	{
 		global $db, $user, $config, $cache;
-		
+
 		$errors = $article_ids = array();
-		
+
 		// Retrieve all articles in category
 		$sql = 'SELECT article_id
-				FROM ' . KB_TABLE . ' 
+				FROM ' . KB_TABLE . '
 				WHERE cat_id = ' . $cat_id;
 		$result = $db->sql_query($sql);
 		while($row = $db->sql_fetchrow($result))
@@ -990,7 +990,7 @@ class acp_kb_cats
 			$article_ids[] = $row['article_id'];
 		}
 		$db->sql_freeresult($result);
-		
+
 		if(sizeof($article_ids))
 		{
 			// Delete them en masse
@@ -998,7 +998,7 @@ class acp_kb_cats
 			$sql = 'DELETE FROM ' . KB_RATE_TABLE . "
 					WHERE " . $db->sql_in_set('article_id', $article_ids);
 			$db->sql_query($sql);
-			
+
 			// Delete from comments table - no need to store these
 			$comment_ids = array();
 			$sql = 'SELECT comment_id
@@ -1011,51 +1011,51 @@ class acp_kb_cats
 				$comment_ids[] = $row['comment_id'];
 			}
 			$db->sql_freeresult($result);
-			
+
 			if(sizeof($comment_ids))
 			{
 				// Delete comments
 				$sql = 'DELETE FROM ' . KB_COMMENTS_TABLE . "
 						WHERE " . $db->sql_in_set('comment_id', $comment_ids);
 				$db->sql_query($sql);
-				
+
 				// Delete from attachments table, and delete attachment files
 				kb_delete_attachments('comment', $comment_ids);
 			}
-			
+
 			// Delete from edits table
 			$sql = 'DELETE FROM ' . KB_EDITS_TABLE . "
 					WHERE " . $db->sql_in_set('article_id', $article_ids);
 			$db->sql_query($sql);
-			
+
 			// Delete from attachments table, and delete attachment files
 			kb_delete_attachments('delete', $article_ids);
-			
+
 			// Delete from tags table
 			$sql = 'DELETE FROM ' . KB_TAGS_TABLE . "
 					WHERE " . $db->sql_in_set('article_id', $article_ids);
 			$db->sql_query($sql);
-			
+
 			// Delete from tracking table
 			$sql = 'DELETE FROM ' . KB_TRACK_TABLE . "
 					WHERE " . $db->sql_in_set('article_id', $article_ids);
 			$db->sql_query($sql);
-			
+
 			// Delete from article table
 			$sql = 'DELETE FROM ' . KB_TABLE . "
 					WHERE " . $db->sql_in_set('article_id', $article_ids);
 			$db->sql_query($sql);
-			
+
 			// Unset requests...
-			$sql = 'UPDATE ' . KB_REQ_TABLE . " 
+			$sql = 'UPDATE ' . KB_REQ_TABLE . "
 					SET article_id = 0, request_accepted = 0, request_status = " . STATUS_REQUEST . "
 					WHERE " . $db->sql_in_set('article_id', $article_ids);
 			$db->sql_query($sql);
-			
+
 			//Resync Stats
 			$total_articles = sizeof($article_ids);
 			$total_comments = sizeof($comment_ids);
-			
+
 			set_config('kb_total_articles', $config['kb_total_articles'] - $total_articles, true);
 			if ($total_comments)
 			{
@@ -1064,10 +1064,10 @@ class acp_kb_cats
 			set_config('kb_last_updated', time(), true);
 			$cache->destroy('config');
 		}
-		
+
 		return $errors;
 	}
-	
+
 	/**
 	* Move category
 	*/

@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: acp_kb_permissions.php 437 2010-02-01 15:16:57Z softphp $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: acp_kb_permissions.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -197,7 +197,7 @@ class acp_kb_permissions
 
 								$role_id = $db->sql_nextid();
 							}
-							
+
 							// Now add the auth settings
 							$auth_admin->acl_set_role($role_id, $auth_settings);
 
@@ -267,7 +267,7 @@ class acp_kb_permissions
 							{
 								trigger_error($user->lang['NO_ROLE_SELECTED'] . adm_back_link($this->u_action), E_USER_WARNING);
 							}
-					
+
 							$sql = 'SELECT *
 								FROM ' . ACL_ROLES_TABLE . '
 								WHERE role_id = ' . $role_id;
@@ -290,7 +290,7 @@ class acp_kb_permissions
 								$auth_options[$row['auth_option']] = $row['auth_setting'];
 							}
 							$db->sql_freeresult($result);
-							
+
 						}
 
 						if (!$role_row)
@@ -362,7 +362,7 @@ class acp_kb_permissions
 						$order = request_var('order', 0);
 						$order_total = $order * 2 + (($action == 'move_up') ? -1 : 1);
 						$order = array($order, (($action == 'move_up') ? $order - 1 : $order + 1));
-						
+
 						$sql = 'UPDATE ' . ACL_ROLES_TABLE . '
 							SET role_order = ' . $order_total . " - role_order
 							WHERE role_type = '" . $db->sql_escape($permission_type) . "'
@@ -444,7 +444,7 @@ class acp_kb_permissions
 					$this->display_role_mask($hold_ary);
 				}
 			break;
-			
+
 		// Here we set all kb permissions
 		case 'set_permissions':
 
@@ -466,25 +466,25 @@ class acp_kb_permissions
 
 			$group_id = request_var('group_id', array(0));
 			$select_all_groups = request_var('select_all_groups', 0);
-			
+
 			// Map usernames to ids and vice versa
 			if ($usernames)
 			{
 				$username = explode("\n", $usernames);
 			}
 			unset($usernames);
-	
+
 			if (sizeof($username) && !sizeof($user_id))
 			{
 				user_get_id_name($user_id, $username);
-	
+
 				if (!sizeof($user_id))
 				{
 					trigger_error($user->lang['SELECTED_USER_NOT_EXIST'] . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 			}
 			unset($username);
-			
+
 			// Build forum ids (of all forums are checked or subforum listing used)
 			if ($all_forums)
 			{
@@ -516,7 +516,7 @@ class acp_kb_permissions
 				'forum_id'		=> $forum_id,
 				)
 			);
-			
+
 			switch($action)
 			{
 				case 'apply_all_permissions':
@@ -569,7 +569,7 @@ class acp_kb_permissions
 				$sql = 'SELECT cat_id, cat_name, parent_id, left_id, right_id
 					FROM ' . KB_CATS_TABLE . '
 					ORDER BY left_id ASC';
-				
+
 				$result = $db->sql_query($sql);
 				while($row = $db->sql_fetchrow($result))
 				{
@@ -756,19 +756,19 @@ class acp_kb_permissions
 
 		// User or group to be set?
 		$ug_type = (sizeof($user_id)) ? 'user' : 'group';
-	
+
 		$this->acl_delete($ug_type, $auth_admin, (($ug_type == 'user') ? $user_id : $group_id), (sizeof($forum_id) ? $forum_id : false), $permission_type);
 
 		trigger_error($user->lang['AUTH_UPDATED'] . adm_back_link($this->u_action));
 	}
-	
+
 	/**
 	* Remove local permission
 	*/
 	function acl_delete($mode, &$auth_admin, $ug_id = false, $forum_id = false, $permission_type = false)
 	{
 		global $db;
-		
+
 		if ($ug_id === false && $forum_id === false)
 		{
 			return;
@@ -816,7 +816,7 @@ class acp_kb_permissions
 					AND " . implode(' AND ', $where_sql) . '
 				ORDER BY auth_role_id';
 			$result = $db->sql_query($sql);
-			
+
 			$cur_role_auth = array();
 			while ($row = $db->sql_fetchrow($result))
 			{
@@ -865,7 +865,7 @@ class acp_kb_permissions
 		$sql = "DELETE FROM $table
 			WHERE " . implode(' AND ', $where_sql);
 		$db->sql_query($sql);
-		
+
 		$auth_admin->acl_clear_prefetch();
 	}
 
@@ -877,7 +877,7 @@ class acp_kb_permissions
 		global $user, $auth;
 
 		$psubmit = request_var('psubmit', array(0 => array(0 => 0)));
-		
+
 		// User or group to be set?
 		$ug_type = (sizeof($user_id)) ? 'user' : 'group';
 		$ug_id = $forum_id = 0;
@@ -933,7 +933,7 @@ class acp_kb_permissions
 
 		// Update the permission set...
 		$this->acl_set($ug_type, $forum_id, $ug_id, $auth_settings, $assigned_role);
-		
+
 		trigger_error($user->lang['AUTH_UPDATED'] . adm_back_link($this->u_action));
 	}
 
@@ -1019,7 +1019,7 @@ class acp_kb_permissions
 	function acl_set($ug_type, $forum_id, $ug_id, $auth, $role_id = 0, $clear_prefetch = true)
 	{
 		global $db;
-		
+
 		$auth_admin = new auth_admin();
 		// One or more forums
 		if (!is_array($forum_id))
@@ -1066,7 +1066,7 @@ class acp_kb_permissions
 				AND $ug_id_sql
 				AND " . $db->sql_in_set('auth_option_id', $auth_option_ids);
 		$db->sql_query($sql);
-		
+
 		// Remove those having a role assigned... the correct type of course...
 		$sql = 'SELECT role_id
 			FROM ' . ACL_ROLES_TABLE . "
@@ -1216,14 +1216,14 @@ class acp_kb_permissions
 			WHERE o.auth_option_id = r.auth_option_id
 				AND r.role_id = ' . $role_id;
 		$result = $db->sql_query($sql);
-		
+
 		$test_auth_settings = array();
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$test_auth_settings[$row['auth_option']] = $row['auth_setting'];
 		}
 		$db->sql_freeresult($result);
-		
+
 		// We need to add any ACL_NO setting from auth_settings to compare correctly
 		foreach ($auth_settings as $option => $setting)
 		{
@@ -1237,7 +1237,7 @@ class acp_kb_permissions
 		{
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -1258,7 +1258,7 @@ class acp_kb_permissions
 		global $db, $user, $auth_admin, $kb_auth;
 		$auth_admin = new auth_admin();
 		$kb_auth = new kb_auth();
-		
+
 		$hold_ary = array();
 		$view_user_mask = ($mode == 'view' && $group_id === false) ? true : false;
 
@@ -1498,7 +1498,7 @@ class acp_kb_permissions
 			'user_ids_options'	=> $s_defined_user_options
 		);
 	}
-	
+
 	/**
 	* Get permission mask for roles
 	* This function only supports getting masks for one role

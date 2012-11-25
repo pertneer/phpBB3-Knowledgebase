@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: acp_kb_types.php 416 2010-01-12 21:02:01Z softphp $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: acp_kb_types.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

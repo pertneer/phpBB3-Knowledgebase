@@ -633,7 +633,7 @@ Here is a link to the article - {LINK}',
 	'WRONG_INFO_FILE_FORMAT'			=> 'Wrong info file format',
 
 	'YOUR_KB_DETAILS'					=> 'Your activity in the knowledge base',
-	
+
 	// New Vars DELETED: KB_CAN, KB_NOT, KB_PERM_ADD, KB_PERM_COM, KB_PERM_EDIT, KB_PERM_DEL, KB_PERM_RATE, KB_PERM_HIST, KB_PERM_ATTACH, KB_PERM_DOWN
 	'ROLE_KB_USER'						=> 'Registered Users',
 	'ROLE_KB_USER_DESC'					=> 'This is a KB role with permissions suited for registered users.',
@@ -646,8 +646,8 @@ Here is a link to the article - {LINK}',
 	'KB_FIRST_ARTICLE_TITLE'			=> 'Your First Article',
 	'KB_FIRST_ARTICLE_DESC'				=> 'You have successfully installed phpBB3-Knowledgebase Mod and this is your first article, containing information on what to do after installing and other hints.',
 	'KB_FIRST_ARTICLE_TEXT'				=> '[color=purple][size=120][b]Welcome to phpBB3-Knowledgebase Mod![/b][/size][/color]
-Congratulations you have successfully installed the phpBB3-Knowledgebase Mod. If everything seems to be working fine, then continue down this article and see what you can do now to setup your new mod. If you had any problems during installation, or experience any problems in the future, do not hesitate to visit [url=http://kb.pertneer.net]kb.pertneer.net[/url], and report any bugs or ask for support. You can also find information on additional plugins, translations, styles and new versions there. 
-The team behind phpBB3-Knowledgebase Mod hopes you will find this mod useful as well as user friendly, happy article composing!  :D 
+Congratulations you have successfully installed the phpBB3-Knowledgebase Mod. If everything seems to be working fine, then continue down this article and see what you can do now to setup your new mod. If you had any problems during installation, or experience any problems in the future, do not hesitate to visit [url=http://kb.pertneer.net]kb.pertneer.net[/url], and report any bugs or ask for support. You can also find information on additional plugins, translations, styles and new versions there.
+The team behind phpBB3-Knowledgebase Mod hopes you will find this mod useful as well as user friendly, happy article composing!  :D
 
 [url=http://kb.pertneer.net/kb.php?a=13]What to do after installing[/url]:
 [list=1]

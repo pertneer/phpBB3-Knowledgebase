@@ -23,7 +23,7 @@ include($phpbb_root_path . 'includes/functions_kb.' . $phpEx);
 
 $user->session_begin();
 $auth->acl($user->data);
-$user->setup('mods/kb'); 
+$user->setup('mods/kb');
 
 $auth_settings = array();
 if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
@@ -102,12 +102,12 @@ $versions = array(
 			'theme'
 		),
 	),
-	
+
 	'1.0.3.2'	=> array(),
-	
+
 	'1.0.3.1'	=>array(),
-		
-	
+
+
 	'1.0.3'	=> array(
 		'config_add' => array(
 			array('kb_header_name', ''),
@@ -155,7 +155,7 @@ $versions = array(
 				),
 				'PRIMARY_KEY'	=> 'article_id',
 			)),
-			
+
 			array('phpbb_article_requests', array(
 					'COLUMNS'		=> array(
 						'request_id'				=> array('UINT', NULL, 'auto_increment'),
@@ -175,8 +175,8 @@ $versions = array(
 					'PRIMARY_KEY'	=> 'request_id'
 				)
 			),
-			
-		
+
+
 				array($table_prefix . 'article_attachments', array(
 					'COLUMNS'		=> array(
 						'attach_id'			=> array('UINT', NULL, 'auto_increment'),
@@ -210,7 +210,7 @@ $versions = array(
 						'parent_id'				=> array('UINT', 0),
 						'left_id'				=> array('UINT', 0),
 						'right_id'				=> array('UINT', 0),
-						'cat_name'				=> array('VCHAR', ''),	
+						'cat_name'				=> array('VCHAR', ''),
 						'cat_desc'				=> array('TEXT_UNI', ''),
 						'cat_desc_bitfield'		=> array('VCHAR', ''),
 						'cat_desc_options'		=> array('UINT:11', 7),
@@ -283,7 +283,7 @@ $versions = array(
 					),
 					'PRIMARY_KEY'	=> 'edit_id'
 				)),
-				
+
 				array($table_prefix . 'article_rate', array(
 					'COLUMNS'		=> array(
 						'article_id'	=> array('UINT', 0),
@@ -292,7 +292,7 @@ $versions = array(
 						'rating'		=> array('TINT:2', 0),
 					),
 				)),
-				
+
 				array($table_prefix . 'article_tags', array(
 					'COLUMNS'		=> array(
 						'article_id'	=> array('UINT', 0),
@@ -300,7 +300,7 @@ $versions = array(
 						'tag_name_lc'	=> array('VCHAR:30', ''),
 					),
 				)),
-				
+
 				array($table_prefix . 'article_track', array(
 					'COLUMNS'		=> array(
 						'article_id'	=> array('UINT', 0),
@@ -311,7 +311,7 @@ $versions = array(
 						'notify_on'		=> array('TINT:1', 0),
 					),
 				)),
-				
+
 				array($table_prefix . 'article_types', array(
 					'COLUMNS'		=> array(
 						'type_id'					=> array('UINT', NULL, 'auto_increment'),
@@ -326,7 +326,7 @@ $versions = array(
 					),
 					'PRIMARY_KEY'	=> 'type_id'
 				)),
-				
+
 				array($table_prefix . 'article_plugins', array(
 					'COLUMNS'		=> array(
 						'plugin_id'					=> array('UINT', NULL, 'auto_increment'),
@@ -343,7 +343,7 @@ $versions = array(
 					),
 					'PRIMARY_KEY'	=> 'plugin_id'
 				)),
-				
+
 				array($table_prefix . 'article_acl_groups', array(
 						'COLUMNS'		=> array(
 							'group_id'			=> array('UINT', 0),
@@ -357,9 +357,9 @@ $versions = array(
 							'auth_opt_id'		=> array('INDEX', 'auth_option_id'),
 							'auth_role_id'		=> array('INDEX', 'auth_role_id'),
 						),
-					),	  
+					),
 				),
-				
+
 				array($table_prefix . 'article_acl_users', array(
 						'COLUMNS'		=> array(
 							'user_id'			=> array('UINT', 0),
@@ -375,11 +375,11 @@ $versions = array(
 						),
 					),
 				),
-				
+
 				array($table_prefix . 'article_visits', array(
 						'COLUMNS'		=> array(
 							'user_id'			=> array('UINT', 0),
-							'cat_id'			=> array('UINT', 0), 
+							'cat_id'			=> array('UINT', 0),
 							'article_id'		=> array('UINT', 0),
 							'last_visit'		=> array('TIMESTAMP', 0), // used for comment new
 						),
@@ -390,7 +390,7 @@ $versions = array(
 					),
 				),
 			),
-			
+
 			'table_column_add' => array(
 				array(EXTENSION_GROUPS_TABLE, 'allow_in_kb', array('BOOL', 0)),
 				array(USERS_TABLE, 'user_articles', array('UINT', 0)),
@@ -398,11 +398,11 @@ $versions = array(
 				array(USERS_TABLE, 'kb_last_visit', array('TIMESTAMP', 0)),
 				array(USERS_TABLE, 'kb_last_marked', array('TIMESTAMP', 0)),
 			),
-			
+
 			'permission_add' => array(
 				// Global
 				array('u_kb_request', true),
-				
+
 				// Local
 				array('u_kb_read', false),
 				array('u_kb_view', false),
@@ -424,7 +424,7 @@ $versions = array(
 				array('u_kb_types', false),
 				array('u_kb_search', false),
 				array('u_kb_viewhistory', false),
-				
+
 				// Moderator
 				array('m_kb_time', true),
 				array('m_kb_author', true),
@@ -435,8 +435,7 @@ $versions = array(
 				array('m_kb_req_edit', true),
 				array('m_kb_status', true),
 			),
-			
-			
+
 			'module_add' => array(
 				// ACP
 				array('acp', 'ACP_CAT_DOT_MODS', 'ACP_KB'),
@@ -463,7 +462,7 @@ $versions = array(
 						'modes'					=> array('manage'),
 					),
 				),
-				
+
 				// UCP
 				array('ucp', '', 'UCP_KB'),
 				array('ucp', 'UCP_KB', array(
@@ -471,7 +470,7 @@ $versions = array(
 						'modes'						=> array('front', 'subscribed', 'bookmarks', 'articles'),
 					),
 				),
-				
+
 				// MCP
 				array('mcp', '', 'MCP_KB'),
 				array('mcp', 'MCP_KB', array(
@@ -480,7 +479,7 @@ $versions = array(
 					),
 				),
 			),
-			
+
 			'config_add' => array(
 				array('kb_ajax_rating', 1),
 				array('kb_allow_attachments', 1),
@@ -524,8 +523,7 @@ $versions = array(
 				array('kb_total_comments', 0, true),
 				array('kb_total_cats', 1),
 			),
-		
-		
+
 		//table_row_insert works
 		'table_row_insert'	=> array(
 			array($table_prefix . 'article_cats', array(
@@ -541,7 +539,7 @@ $versions = array(
 				'cat_articles'			=> 1,
 				'latest_ids'			=> serialize(array()),
 			)),
-			
+
 			array($table_prefix . 'articles', array(
 				'cat_id'						=> 	1,
 				'article_title'					=>	$user->lang['KB_FIRST_ARTICLE_TITLE'],
@@ -575,7 +573,7 @@ $versions = array(
 				'article_edit_contribution'		=>  0,
 				'article_edit_type'				=>  serialize(array()),
 			)),
-		
+
 			array(ACL_ROLES_TABLE, array(
 				'role_name'			=> 'ROLE_KB_GUEST',
 				'role_description'	=> 'ROLE_KB_GUEST_DESC',
@@ -595,7 +593,7 @@ $versions = array(
 				)
 			),
 		),
-		
+
 		//these permission set items work
 		// Give permissions to admins to moderate the KB and add requests
 		'permission_set' =>
@@ -619,7 +617,7 @@ $versions = array(
 
 				// Local Permissions (local permissions can not be set for groups)
 				array('ROLE_FORUM_STANDARD', 'f_test_mod'),
-				
+
 				array('ROLE_KB_GUEST','u_kb_bbcode'),
 				array('ROLE_KB_GUEST','u_kb_comment'),
 				array('ROLE_KB_GUEST','u_kb_download'),
@@ -662,25 +660,25 @@ $versions = array(
 				array('ROLE_KB_MOD','u_kb_types'),
 				array('ROLE_KB_MOD','u_kb_view'),
 				array('ROLE_KB_MOD','u_kb_viewhistory'),
-				
+
 			),
 		'custom'	=> 'set_category_perm',
 	)
-	
+
 	);
-	
+
 // Include the UMIF Auto file and everything else will be handled automatically.
 include($phpbb_root_path . 'umil/umil_auto.' . $phpEx);
 
 function set_category_perm(){
-	
+
 	global $db, $config, $user, $phpbb_root_path, $phpEx, $template, $auth_settings;
-	
+
 	$sql = 'SELECT role_id, role_name
 			FROM ' . ACL_ROLES_TABLE . '
 			WHERE ' . $db->sql_in_set('role_name', array('ROLE_KB_MOD', 'ROLE_KB_USER', 'ROLE_KB_GUEST'));
 	$result = $db->sql_query($sql);
-	
+
 	$sql_ary = array();
 	while($row = $db->sql_fetchrow($result))
 	{
@@ -689,16 +687,16 @@ function set_category_perm(){
 			case 'ROLE_KB_MOD':
 				$groups = array(5);
 			break;
-			
+
 			case 'ROLE_KB_USER':
 				$groups = array(2, 3);
 			break;
-			
+
 			case 'ROLE_KB_GUEST':
 				$groups = array(1, 6);
 			break;
 		}
-		
+
 		foreach($groups as $group_id)
 		{
 			$sql_ary[] = array(
@@ -712,7 +710,7 @@ function set_category_perm(){
 	}
 	$db->sql_freeresult($result);
 	$db->sql_multi_insert(KB_ACL_GROUPS_TABLE, $sql_ary);
-	
+
 	kb_install_perm_plugins();
 }
 
@@ -725,14 +723,14 @@ function kb_install_perm_plugins($action = 'install')
 	{
 		return;
 	}
-	
+
 	if(!defined('IN_KB_PLUGIN')) // Killing notice when updating through several versions all using this function
 	{
 		define('IN_KB_PLUGIN', true);
 	}
-	
+
 	$plugin_pages = array();
-	
+
 	$plugins = array('author', 'contributors', 'rating', 'categories', 'stats', 'search', 'latest_article', 'request_list', 'bookmark', 'email_article', 'export_article', 'related_articles', 'rated_articles', 'random_article');
 	$plugin_pages = array(
 		'author'			=> array('view_article'),
@@ -750,12 +748,12 @@ function kb_install_perm_plugins($action = 'install')
 		'rated_articles'	=> array('index', 'view_cat', 'view_tag', 'request'),
 		'random_article'	=> array('index', 'view_cat', 'view_tag'),
 	);
-	
+
 	if (empty($plugins))
 	{
 		return;
 	}
-	
+
 	foreach ($plugins as $plugin)
 	{
 		if(isset($plugin_pages[$plugin]))

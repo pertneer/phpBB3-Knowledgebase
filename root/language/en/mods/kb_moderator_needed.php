@@ -2,10 +2,10 @@
 /**
 *
 * moderator_needed [English]
-* Modified for phpBB3_Knowledgebase
+* Modified for phpBB phpBB3-Knowledgebase Mod 
 * @package language
 * @version $Id: moderator_needed.php,v 1.0.1 2009/09/29 06:50:00 rmcgirr83 Exp $
-* @copyright (c) 2009 Richard McGirr 
+* @copyright (c) 2009 Richard McGirr
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
 */
@@ -37,12 +37,12 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	// Submitted by victory1
-    'MODERATOR_NEEDED_APPROVE_KB'      => '<strong style="color:#FF0000;">%d</strong> Article needs approval',
-    'MODERATOR_NEEDED_APPROVE_KBS'      => '<strong style="color:#FF0000;">%d</strong> Articles need approval',
-    'MODERATOR_NEEDED_REPORTED_KB'       => '<strong style="color:#FF0000;">%d</strong> Article is reported',
-    'MODERATOR_NEEDED_REPORTED_KBS'      => '<strong style="color:#FF0000;">%d</strong> Articles are reported',
-	'MODERATOR_NEEDED_REQUESTED_KB'       => '<strong style="color:#FF0000;">%d</strong> Article Request',
-    'MODERATOR_NEEDED_REQUESTED_KBS'      => '<strong style="color:#FF0000;">%d</strong> Articles Requested',		
+	'MODERATOR_NEEDED_APPROVE_KB'		=> '<strong style="color:#FF0000;">%d</strong> Article needs approval',
+	'MODERATOR_NEEDED_APPROVE_KBS'		=> '<strong style="color:#FF0000;">%d</strong> Articles need approval',
+	'MODERATOR_NEEDED_REPORTED_KB'		=> '<strong style="color:#FF0000;">%d</strong> Article is reported',
+	'MODERATOR_NEEDED_REPORTED_KBS'		=> '<strong style="color:#FF0000;">%d</strong> Articles are reported',
+	'MODERATOR_NEEDED_REQUESTED_KB'		=> '<strong style="color:#FF0000;">%d</strong> Article Request',
+	'MODERATOR_NEEDED_REQUESTED_KBS'	=> '<strong style="color:#FF0000;">%d</strong> Articles Requested',
 ));
 
 ?>

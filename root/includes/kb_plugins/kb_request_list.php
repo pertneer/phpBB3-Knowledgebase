@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: kb_request_list.php 420 2010-01-13 14:36:10Z softphp $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: kb_request_list.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *

@@ -3,7 +3,7 @@
 /**
 *
 * @author Pertneer
-* @package phpbb3-knowledgebase
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
 * @version $Id adm/mods/kb_version.php
 * @copyright (c) 2012 pertneer
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
