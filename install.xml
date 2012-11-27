@@ -1027,12 +1027,16 @@ a.kblink {
 		<php-installer><![CDATA[kb.php]]></php-installer>
 		<diy-instructions lang="en"><![CDATA[After completing this guide, login as admin and direct your browser to kb.php to install the mod. To make attachments work in the KB, go to ACP -> Posting -> Manage Extension Groups. Then edit the extension groups and tick the box that allows you to use them in the KB. For a more thorough guide on how to setup and use this mod, please turn to our website.
 
-the following bbcode must be installed on your site for local article links to work correctly
+the following bbcode will be installed on your site for local article links to work correctly
 bbCode usage:
 [kb]{INTTEXT},{TEXT}[/kb]
 html replacement:
 <a href="kb.php?a={INTTEXT}">{TEXT}</a>
 helpline:
-[kb]article id number, article name[/kb]]]></diy-instructions>
+[kb]article id number, article name[/kb]
+
+If you plan on using SEO you will need to change the html replacement to:
+<a href="a{INTTEXT}.html" class="postlink kblink">{TEXT}</a>
+NOTE: this will only work on links to other articles within the SAME Category.]]></diy-instructions>
 	</action-group>
 </mod>
