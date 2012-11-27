@@ -484,23 +484,24 @@ class knowledge_base
 		$sort_options = make_sort_select('articles', $this->sort);
 
 		$template->assign_vars(array(
-			'L_AUTHOR'			=> $user->lang['ARTICLE_AUTHOR'],
-			'L_ARTICLES_LC' 	=> utf8_strtolower($user->lang['ARTICLES']),
-			'L_KB_HEADER'		=> (isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
-			'S_HAS_SUBCATS' 	=> ($cat_data['left_id'] != $cat_data['right_id'] - 1) ? true : false,
-			'PAGINATION'		=> generate_pagination(kb_append_sid('cat', array('id' => $this->cat_id, 'title' => $cat_data['cat_name'], 'extra' => ((strlen($this->sort)) ? "sort=$this->sort" : ''))), $articles_count, $config['kb_articles_per_page'], $this->start),
-			'PAGE_NUMBER'		=> on_page($articles_count, $config['kb_articles_per_page'], $this->start),
-			'TOTAL_ARTICLES' 	=> $articles_count,
-			'U_ADD_NEW_ARTICLE'	=> ($auth->acl_get('u_kb_add', $this->cat_id)) ? append_sid("{$phpbb_root_path}kb.$phpEx", "c=" . $this->cat_id . '&amp;i=add') : '',
-			'NEW_ARTICLE_IMG'	=> $user->img('button_article_new', 'KB_ADD_ARTICLE'),
-			'S_NO_TOPIC'		=> false,
-			'S_IN_MAIN'			=> true,
-			'S_CAT_STYLE'		=> ($config['kb_layout_style']) ? true : false, // IF 1 then set to true bc. style = special
-			'S_COL_WIDTH'		=> ($config['kb_layout_style']) ? (100 / $config['kb_cats_per_row']) : 0,
-			'S_SORT_OPTIONS'	=> $sort_options,
-			'S_SORT_DIRECTION'	=> $sort_direction,
-			'S_ARTICLE_ACTION'	=> kb_append_sid('cat', array('id' => $this->cat_id, 'title' => $cat_data['cat_name'])),
-			'UNAPPROVED_IMG'	=> $user->img('icon_topic_unapproved', 'ARTICLE_UNAPPROVED'),
+			'L_AUTHOR'					=> $user->lang['ARTICLE_AUTHOR'],
+			'L_ARTICLES_LC' 			=> utf8_strtolower($user->lang['ARTICLES']),
+			'L_KB_HEADER'				=> (isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
+			'L_KB_HEADER_DESCRIPTION'	=> (isset($config['kb_header_desc']) && $config['kb_header_desc'] != '') ? htmlspecialchars_decode($config['kb_header_desc']) :  $user->lang['KB_HEADER_DESCRIPTION'],
+			'S_HAS_SUBCATS' 			=> ($cat_data['left_id'] != $cat_data['right_id'] - 1) ? true : false,
+			'PAGINATION'				=> generate_pagination(kb_append_sid('cat', array('id' => $this->cat_id, 'title' => $cat_data['cat_name'], 'extra' => ((strlen($this->sort)) ? "sort=$this->sort" : ''))), $articles_count, $config['kb_articles_per_page'], $this->start),
+			'PAGE_NUMBER'				=> on_page($articles_count, $config['kb_articles_per_page'], $this->start),
+			'TOTAL_ARTICLES' 			=> $articles_count,
+			'U_ADD_NEW_ARTICLE'			=> ($auth->acl_get('u_kb_add', $this->cat_id)) ? append_sid("{$phpbb_root_path}kb.$phpEx", "c=" . $this->cat_id . '&amp;i=add') : '',
+			'NEW_ARTICLE_IMG'			=> $user->img('button_article_new', 'KB_ADD_ARTICLE'),
+			'S_NO_TOPIC'				=> false,
+			'S_IN_MAIN'					=> true,
+			'S_CAT_STYLE'				=> ($config['kb_layout_style']) ? true : false, // IF 1 then set to true bc. style = special
+			'S_COL_WIDTH'				=> ($config['kb_layout_style']) ? (100 / $config['kb_cats_per_row']) : 0,
+			'S_SORT_OPTIONS'			=> $sort_options,
+			'S_SORT_DIRECTION'			=> $sort_direction,
+			'S_ARTICLE_ACTION'			=> kb_append_sid('cat', array('id' => $this->cat_id, 'title' => $cat_data['cat_name'])),
+			'UNAPPROVED_IMG'			=> $user->img('icon_topic_unapproved', 'ARTICLE_UNAPPROVED'),
 		));
 
 		// Build Navigation Links
@@ -932,14 +933,15 @@ class knowledge_base
 
 		// Send vars to template
 		$template->assign_vars(array(
-			'ARTICLE_COPYRIGHT'		=> ($config['kb_copyright'] != '') ? '&copy; ' . $config['kb_copyright'] : '',
-			'ARTICLE_DESC_CLEAN'	=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? strip_tags($article_desc_re) : '',
-			'ARTICLE_DESC'			=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? $article_desc_re : '',
-			'ARTICLE_ID' 			=> $this->article_id,
-			'L_KB_HEADER'			=> (isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
-			'ARTICLE_TITLE' 		=> $article_type['article_title'],
-			'ARTICLE_TITLE_CLEAN' 	=> strip_tags($article_type['article_title']),
-			'ARTICLE_POSTER'		=> $article_data['article_user_id'],
+			'ARTICLE_COPYRIGHT'			=> ($config['kb_copyright'] != '') ? '&copy; ' . $config['kb_copyright'] : '',
+			'ARTICLE_DESC_CLEAN'		=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? strip_tags($article_desc_re) : '',
+			'ARTICLE_DESC'				=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? $article_desc_re : '',
+			'ARTICLE_ID' 				=> $this->article_id,
+			'L_KB_HEADER'				=> (isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
+			'L_KB_HEADER_DESCRIPTION'	=> (isset($config['kb_header_desc']) && $config['kb_header_desc'] != '') ? htmlspecialchars_decode($config['kb_header_desc']) :  $user->lang['KB_HEADER_DESCRIPTION'],
+			'ARTICLE_TITLE' 			=> $article_type['article_title'],
+			'ARTICLE_TITLE_CLEAN' 		=> strip_tags($article_type['article_title']),
+			'ARTICLE_POSTER'			=> $article_data['article_user_id'],
 
 			'L_EDIT_ARTICLE'		=> $user->lang['KB_EDIT_ARTICLE'],
 			'L_DELETE_ARTICLE'		=> $user->lang['KB_DELETE_ARTICLE'],
@@ -1621,12 +1623,13 @@ class knowledge_base
 		generate_kb_nav();
 
 		$template->assign_vars(array(
-			'S_IN_MAIN'		=> true,
-			'S_NO_TOPIC'	=> true,
-			'S_ON_INDEX'	=> true,
-			'S_CAT_STYLE'	=> ($config['kb_layout_style']) ? true : false, // IF 1 then set to true bc. style = special
-			'S_COL_WIDTH'	=> ($config['kb_layout_style']) ? (100 / $config['kb_cats_per_row']) : 0,
-			'L_KB_HEADER'	=> (isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
+			'S_IN_MAIN'					=> true,
+			'S_NO_TOPIC'				=> true,
+			'S_ON_INDEX'				=> true,
+			'S_CAT_STYLE'				=> ($config['kb_layout_style']) ? true : false, // IF 1 then set to true bc. style = special
+			'S_COL_WIDTH'				=> ($config['kb_layout_style']) ? (100 / $config['kb_cats_per_row']) : 0,
+			'L_KB_HEADER'				=> (isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
+			'L_KB_HEADER_DESCRIPTION'	=> (isset($config['kb_header_desc']) && $config['kb_header_desc'] != '') ? htmlspecialchars_decode($config['kb_header_desc']) :  $user->lang['KB_HEADER_DESCRIPTION'],
 		));
 
 		// Output the page

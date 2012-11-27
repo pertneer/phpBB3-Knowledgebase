@@ -84,6 +84,7 @@ class acp_kb
 						//End here for kb.pertneer.net Site
 						'kb_link_name'			=> array('lang' => 'KB_LINK_NAME',		'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),
 						'kb_header_name'		=> array('lang' => 'KB_HEADER_NAME',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),
+						'kb_header_desc'		=> array('lang' => 'KB_HEADER_DESC',	'validate' => 'string',	'type' => 'textarea:5:40', 	'explain' => true),
 						'kb_copyright'			=> array('lang' => 'KB_PER_COPYRIGHT',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),
 						'kb_default_rating'		=> array('lang' => 'KB_DEFAULT_RATING',	'validate' => 'int',	'type' => 'select', 'method' => 'select_default_rating', 'explain' => false),
 						'kb_articles_per_page'	=> array('lang' => 'KB_ART_PER_PAGE',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => false),
@@ -475,6 +476,12 @@ class acp_kb
 
 			// We validate the complete config if whished
 			validate_config_vars($display_vars['vars'], $cfg_array, $error);
+
+			// Do not submit if there is an error
+			if (sizeof($error))
+			{
+				$submit = false;
+			}
 
 			// We go through the display_vars to make sure no one is trying to set variables he/she is not allowed to...
 			foreach ($display_vars['vars'] as $config_name => $null)
