@@ -451,6 +451,10 @@ class acp_kb_permissions
 			$this->tpl_name = 'acp_permissions';
 			$this->page_title = $user->lang['ACP_KB_PERMISSIONS'];
 
+			$template->assign_vars(array(
+				'U_FIND_USERNAME'			=> append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=searchuser&amp;form=add_user&amp;field=username&amp;select_single=true'),
+			));
+
 			$action = request_var('action', array('' => 0));
 			$action = key($action);
 			$action = (isset($_POST['psubmit'])) ? 'apply_permissions' : $action;
