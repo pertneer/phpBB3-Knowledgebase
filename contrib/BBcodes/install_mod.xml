@@ -20,7 +20,7 @@
 			<target-version>3.0.11</target-version>
 		</installation>
 		<link-group>
-			<link type="contrib" href="http://kb.pertneer.net/kb.php?a={addArticleID}" lang="en">Additional BBcodes</link>
+			<link type="contrib" href="http://kb.pertneer.net/kb.php?a=16" lang="en">Additional BBcodes</link>
 		</link-group>
 	</header>
 	<action-group>
