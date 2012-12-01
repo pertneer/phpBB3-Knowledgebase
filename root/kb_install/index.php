@@ -77,7 +77,7 @@ $logo_img = "{T_THEME_PATH}/images/kb_bot.png";
 */
 $mod = array(
 	'name'		=> 'phpBB3-Knowledgebase',
-	'version'	=> '1.0.3.3',
+	'version'	=> '1.0.3.4',
 	'config'	=> 'phpbb3_knowledgebase_version',
 	'enable'	=> 'phpbb3_knowledgebase_enable',
 	'kb_header_name'	=> '',
@@ -95,6 +95,11 @@ $permission_type = 'u_kb_';
 
 
 $versions = array(
+
+	'1.0.3.4'	=> array(
+		//no db changes
+	),
+
 	'1.0.3.3'	=> array(
 		'cache_purge' => array(
 			'imageset',

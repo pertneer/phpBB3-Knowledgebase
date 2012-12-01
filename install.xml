@@ -45,7 +45,7 @@
 				</contributions-group>
 			</author>
 		</author-group>
-		<mod-version>1.0.3.3</mod-version>
+		<mod-version>1.0.3.4</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>2400</time>
@@ -325,6 +325,15 @@
 					<change><![CDATA[Removed sql from install.xml]]></change>
 					<change><![CDATA[Added new features]]></change>
 					<change><![CDATA[Language Changes]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-12-01</date>
+				<rev-version>1.0.3.4</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Updated to Umil 1.0.5]]></change>
+					<change><![CDATA[Added ability to change header Description in ACP]]></change>
+					<change><![CDATA[Misc. Bugfixes]]></change>
 				</changelog>
 			</entry>
 		</history>
