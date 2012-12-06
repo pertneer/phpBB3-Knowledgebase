@@ -352,7 +352,7 @@ class acp_kb
 
 					$current_version = $config['kb_version'];
 
-					$kb_path = generate_board_url() . '/kb.' . $phpEx;
+					$kb_path = generate_board_url() . '/kb_install/';
 
 					$up_to_date = (version_compare(str_replace('rc', 'RC', strtolower($current_version)), str_replace('rc', 'RC', strtolower($latest_version)), '<')) ? false : true;
 
