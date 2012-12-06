@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: acp_kb_types.php 416 2010-01-12 21:02:01Z softphp $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: acp_kb_types.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -28,13 +28,13 @@ class acp_kb_types
 	{
 		global $db, $user, $auth, $template, $cache;
 		global $config, $phpbb_admin_path, $phpbb_root_path, $phpEx, $table_prefix;
-		
+
 		include($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
 		include($phpbb_root_path . 'includes/functions_kb.' . $phpEx);
 		include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 
 		$user->add_lang('mods/kb');
-		
+
 		$this->tpl_name = 'acp_kb_types';
 		$this->page_title = 'ACP_MANAGE_KB_TYPES';
 
@@ -44,7 +44,7 @@ class acp_kb_types
 		$action		= request_var('action', '');
 		$submit		= (isset($_POST['submit'])) ? true : false;
 		$type_id	= request_var('t', 0);
-		
+
 		// Might as well just init types this way
 		$types = $cache->obtain_article_types();
 		$types_count = count($types);
@@ -55,7 +55,7 @@ class acp_kb_types
 			$submit = false;
 			$errors[] = $user->lang['FORM_INVALID'];
 		}
-		
+
 		// Valid actions are: add|edit|delete|move_up|move_down
 		switch($action)
 		{
@@ -66,37 +66,37 @@ class acp_kb_types
 				{
 					trigger_error('KB_NO_TYPE', E_USER_ERROR);
 				}
-				
+
 				// Reorder types array
 				$ordered_types = array();
 				foreach($types as $id => $type)
 				{
 					$ordered_types[$type['order']] = $type;
 				}
-				
+
 				$type_data = $types[$type_id];
 				unset($types);
 				$new_order = ($action == 'move_down') ? $type_data['order'] + 1 : $type_data['order'] - 1;
-				
+
 				if(isset($ordered_types[$new_order]))
 				{
-					$sql = 'UPDATE ' . KB_TYPE_TABLE . ' 
-							SET type_order = ' . $new_order . ' 
+					$sql = 'UPDATE ' . KB_TYPE_TABLE . '
+							SET type_order = ' . $new_order . '
 							WHERE type_id = ' . $type_id;
 					$db->sql_query($sql);
-					
+
 					$sql = 'UPDATE ' . KB_TYPE_TABLE . '
 							SET type_order = ' . $type_data['order'] . '
 							WHERE type_id = ' . $ordered_types[$new_order]['type_id'];
 					$db->sql_query($sql);
-					
+
 					$cache->destroy('_kb_types');
 					add_log('admin', 'LOG_TYPE_' . strtoupper($action), $type_data['title']);
 				}
-				
+
 				redirect($this->u_action);
 			break;
-			
+
 			case 'add':
 			case 'edit':
 				// Add or edit
@@ -120,7 +120,7 @@ class acp_kb_types
 					{
 						trigger_error('KB_NO_TYPE', E_USER_ERROR);
 					}
-					
+
 					$type_data = array(
 						'icon_id'		=> $types[$type_id]['icon'],
 						'type_title'	=> $types[$type_id]['title'],
@@ -133,7 +133,7 @@ class acp_kb_types
 					);
 				}
 				unset($types);
-				
+
 				if($submit)
 				{
 					// Submit changes
@@ -142,7 +142,7 @@ class acp_kb_types
 					$type_data['type_before'] = truncate_string(utf8_normalize_nfc(request_var('prefix', '', true)));
 					$type_data['type_after'] = truncate_string(utf8_normalize_nfc(request_var('suffix', '', true)));
 					$img_type = request_var('img_type', '');
-					
+
 					if($img_type == 'custom')
 					{
 						$type_data['type_image'] = request_var('image', '');
@@ -162,12 +162,12 @@ class acp_kb_types
 						$type_data['type_img_w'] = 0;
 						$type_data['type_img_h'] = 0;
 					}
-					
+
 					if($type_data['type_title'] == '')
 					{
 						$errors[] = $user->lang['NO_TYPE_TITLE'];
 					}
-					
+
 					if(!sizeof($errors))
 					{
 						// Insert
@@ -178,25 +178,25 @@ class acp_kb_types
 						}
 						else if($action == 'edit')
 						{
-							$sql = 'UPDATE ' . KB_TYPE_TABLE . ' 
+							$sql = 'UPDATE ' . KB_TYPE_TABLE . '
 							SET ' . $db->sql_build_array('UPDATE', $type_data) . '
 							WHERE type_id = ' . $type_id;
 							$db->sql_query($sql);
 						}
-						
+
 						$cache->destroy('_kb_types');
 						add_log('admin', 'LOG_TYPE_' . strtoupper($action), $type_data['type_title']);
-						
+
 						$message = ($action == 'add') ? $user->lang['TYPE_CREATED'] : $user->lang['TYPE_UPDATED'];
 						trigger_error($message . adm_back_link($this->u_action));
 					}
 				}
-				
+
 				// Init some vars to use for the template
 				$custom_checked = ($type_data['type_image'] == '') ? '' : ' checked="checked"';
 				$icon_checked = ($type_data['icon_id'] > 0) ? ' checked="checked"' : '';
 				posting_gen_topic_icons('', $type_data['icon_id']);
-				
+
 				// Pass template variables
 				$template->assign_vars(array(
 					'S_EDIT_CAT'		=> true,
@@ -207,25 +207,25 @@ class acp_kb_types
 					'TYPE_AFTER'		=> $type_data['type_after'],
 					'TYPE_IMAGE'		=> $type_data['type_image'],
 					'TYPE_IMAGE_SRC'	=> ($type_data['type_image'] != '') ? $phpbb_root_path . $type_data['type_image'] : '',
-					
+
 					'S_ICON_CHECKED'	=> $icon_checked,
 					'S_CUSTOM_CHECKED'	=> $custom_checked,
 					'S_ERROR'			=> (sizeof($errors)) ? true : false,
 					'ERROR_MSG'			=> implode('<br />', $errors),
 				));
 			break;
-			
+
 			case 'delete':
 				// Delete
 				if(!$type_id)
 				{
 					trigger_error('KB_NO_TYPE', E_USER_ERROR);
 				}
-				
+
 				$s_hidden_fields = build_hidden_fields(array(
 					't'		=> $type_id,
 				));
-				
+
 				if(confirm_box(true))
 				{
 					// Delete it and reorder all other types
@@ -233,18 +233,18 @@ class acp_kb_types
 							WHERE type_id = ' . $type_id;
 					$db->sql_query($sql);
 					unset($types[$type_id]);
-					
+
 					$i = 1;
 					foreach($types as $id => $type)
 					{
 						// Oh no I did the wrongest of wrong, sql in loop... how to get rid of it?
 						$sql = 'UPDATE ' . KB_TYPE_TABLE . '
-								SET type_order = ' . $i . ' 
+								SET type_order = ' . $i . '
 								WHERE type_id = ' . $id;
 						$db->sql_query($sql);
 						$i++;
 					}
-								
+
 					$cache->destroy('_kb_types');
 					add_log('admin', 'LOG_TYPE_' . strtoupper($action));
 					trigger_error($user->lang['TYPE_DELETED'] . adm_back_link($this->u_action));
@@ -253,10 +253,10 @@ class acp_kb_types
 				{
 					confirm_box(false, 'TYPE_DELETE', $s_hidden_fields);
 				}
-				
+
 				redirect($this->u_action);
 			break;
-			
+
 			case '':
 			default:
 				// Show List
@@ -267,19 +267,19 @@ class acp_kb_types
 					$type_img = ($type_data['img'] == '') ? (($type_data['icon'] > 0 && isset($icons[$type_data['icon']])) ? '<img src="' . $phpbb_root_path . 'images/icons/' . $icons[$type_data['icon']]['img'] . '" />' : '') : '<img src="' . $phpbb_root_path . $type_data['img'] . '" />';
 					$before = ($type_data['prefix'] == '') ? '' : $type_data['prefix'] . ' ';
 					$after = ($type_data['suffix'] == '') ? '' : ' ' . $type_data['suffix'];
-					
+
 					$template->assign_block_vars('types', array(
 						'FOLDER_IMAGE'		=> $folder_img,
 						'TYPE_IMAGE'		=> $type_img,
 						'TYPE_TITLE'		=> $before . $type_data['title'] . $after,
-						
+
 						'U_EDIT'			=> $this->u_action . '&amp;action=edit&amp;t=' . $type_id,
 						'U_DELETE'			=> $this->u_action . '&amp;action=delete&amp;t=' . $type_id,
 						'U_MOVE_UP'			=> $this->u_action . '&amp;action=move_up&amp;t=' . $type_id,
 						'U_MOVE_DOWN'		=> $this->u_action . '&amp;action=move_down&amp;t=' . $type_id,
 					));
 				}
-				
+
 				$template->assign_vars(array(
 					'U_ACTION'		=> $this->u_action . '&amp;action=add',
 				));

@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: kb_author.php 420 2010-01-13 14:36:10Z softphp $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: kb_author.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -20,8 +20,8 @@ if (!defined('IN_PHPBB'))
 if (defined('IN_KB_PLUGIN'))
 {
 	$acp_options['legend1'] 			= 'ARTICLE_AUTHOR';
-	$acp_options['kb_author_menu']		= array('lang' => 'WHICH_MENU',			'validate' => 'int',	'type' => 'custom', 		'function' 	=> 'select_menu_check', 	'explain' 	=> false);
-		
+	$acp_options['kb_author_menu']		= array('lang' => 'WHICH_MENU', 'validate' => 'int', 'type' => 'custom', 'function' => 'select_menu_check', 'explain' => false);
+
 	$details = array(
 		'PLUGIN_NAME'			=> 'PLUGIN_AUTHOR',
 		'PLUGIN_DESC'			=> 'PLUGIN_AUTHOR_DESC',
@@ -36,17 +36,17 @@ if (defined('IN_KB_PLUGIN'))
 function author()
 {
 	global $template;
-	
+
 	// All info is parsed in kb.php
 	$content = kb_parse_template('body', 'author.html');
-	
+
 	return $content;
 }
 
 function author_versions()
 {
 	$versions = array(
-		'1.0.0'	=> array(			
+		'1.0.0'	=> array(
 			'config_add'	=> array(
 				array('kb_author_menu', LEFT_MENU),
 			),

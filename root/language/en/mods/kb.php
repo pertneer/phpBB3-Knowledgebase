@@ -155,7 +155,6 @@ Here is a link to the article - {LINK}',
 	'EDIT_TYPE_TAGS'					=> 'The tags have been subject to change.',
 	'EDIT_TYPE_TITLE'					=> 'The article title has been subject to change.',
 	'EDIT_TYPE_TYPE'					=> 'The article type has been changed.',
-	'EMAIL_ARTICLE'						=> 'Email Article',
 	'ENABLE_CATS'						=> 'Enable categories',
 	'ENABLE_FORUM_BOT'					=> 'Enable article post bot',
 	'ENABLE_HIGHEST_RATED_ARTICLES'		=> 'Enable highest rated articles',
@@ -248,6 +247,10 @@ Here is a link to the article - {LINK}',
 	'KB_EMPTY_TITLE'					=> 'You have to specify a title for your article.',
 	'KB_ENABLE'							=> 'Enable the Knowledge Base',
 	'KB_FEED_CAT'						=> 'Live feed',
+	//Items for kb.pertneer.net Site
+	//'KB_ENABLE_GIT_LINK'				=> 'Show Git link',
+	//'KB_ENABLE_GIT_LINK_EXPLAIN'		=> 'Show link to phpBB3-Knowledgebase Repository',
+	// end here for kb.pertneer.net Site
 	'KB_HAS_RATED'						=> 'You have already rated this article and cannot rate it twice.',
 	'KB_ICON'							=> 'Article Icon',
 	'KB_INDEX'							=> 'Knowledge Base Index',
@@ -256,6 +259,9 @@ Here is a link to the article - {LINK}',
 	'KB_KEYWORDS_EXPLAIN'				=> 'Type in the keywords you want to search for here. Use a space to search for more keywords and decide if you want to search for all terms or just some of them. Special characters like + and - is not supported in this search.',
 	'KB_HEADER_NAME'					=> 'Knowledge Base Header name',
 	'KB_HEADER_NAME_EXPLAIN'			=> 'The text you want to appear on top of articles and kb menu locations',
+	'KB_HEADER_DESC'					=> 'Header Description',
+	'KB_HEADER_DESC_EXPLAIN'			=> 'The description on each category page that describes the content of the knowledgebase, <br /><b>Note:</b> Length is 255 characters after running through htmlspecialchars',
+	'KB_HEADER_DESCRIPTION'				=> 'This section contains detailed articles elaborating on some of the common issues phpBB users encounter while using this Knowledge Base.</p><p>Below is a list of active articles currently in the Knowledge Base. ',
 	'KB_LAST_UPDATE'					=> 'Last updated',
 	'KB_LATEST'							=> 'Latest Article',
 	'KB_LINK_NAME'						=> 'Knowledge Base link name',
@@ -273,6 +279,7 @@ Here is a link to the article - {LINK}',
 	'KB_LOGIN_EXPLAIN_REQUEST_EDIT'		=> 'You need to login in order to edit this request.',
 	'KB_LOGIN_EXPLAIN_VIEW'				=> 'You need to login in order to view this article.',
 	'KB_MANAGEMENT'						=> 'Manage Knowledge Base',
+	'KB_NO_INFO'						=> 'Version server could not be contacted',
 	'KB_NOTIFY_AUTHOR_COMMENT'			=> 'Notify me when the author comments the article',
 	'KB_NOTIFY_BY'						=> 'Notify by',
 	'KB_NOTIFY_COMMENT'					=> 'Notify me when someone comments the article',
@@ -398,7 +405,7 @@ Here is a link to the article - {LINK}',
 	'LEFT_MENU'							=> 'Left menu',
 	'LINKED_IN'							=> 'Linked In',
 	'LINK_TO_THIS'						=> 'External link to this article',
-	'LOCAL_LINK_TO_THIS'				=> 'Local Link to this article',
+	'LOCAL_LINK_TO_THIS'				=> 'BBcode link to this article',
 	'LIVE'								=> 'Live',
 	'LOOK_UP_CATEGORY'					=> 'Look up category',
 
@@ -516,6 +523,7 @@ Here is a link to the article - {LINK}',
 	'SELECT_CAT'						=> 'Select category',
 	'SELECT_SUBCAT_EXPLAIN'				=> '',
 	'SELECT_TYPE'						=> 'Select article type',
+	'SEND_ARTICLE'						=> 'Send Article',
 	'SHOW_CAT'							=> 'Show categories',
 	'SOCIAL_BOOKMARKS'					=> 'Social bookmarks available',
 	'STARS_OUT_OF'						=> 'stars out of',
@@ -628,7 +636,7 @@ Here is a link to the article - {LINK}',
 	'WRONG_INFO_FILE_FORMAT'			=> 'Wrong info file format',
 
 	'YOUR_KB_DETAILS'					=> 'Your activity in the knowledge base',
-	
+
 	// New Vars DELETED: KB_CAN, KB_NOT, KB_PERM_ADD, KB_PERM_COM, KB_PERM_EDIT, KB_PERM_DEL, KB_PERM_RATE, KB_PERM_HIST, KB_PERM_ATTACH, KB_PERM_DOWN
 	'ROLE_KB_USER'						=> 'Registered Users',
 	'ROLE_KB_USER_DESC'					=> 'This is a KB role with permissions suited for registered users.',
@@ -641,8 +649,8 @@ Here is a link to the article - {LINK}',
 	'KB_FIRST_ARTICLE_TITLE'			=> 'Your First Article',
 	'KB_FIRST_ARTICLE_DESC'				=> 'You have successfully installed phpBB3-Knowledgebase Mod and this is your first article, containing information on what to do after installing and other hints.',
 	'KB_FIRST_ARTICLE_TEXT'				=> '[color=purple][size=120][b]Welcome to phpBB3-Knowledgebase Mod![/b][/size][/color]
-Congratulations you have successfully installed the phpBB3-Knowledgebase Mod. If everything seems to be working fine, then continue down this article and see what you can do now to setup your new mod. If you had any problems during installation, or experience any problems in the future, do not hesitate to visit [url=http://kb.pertneer.net]kb.pertneer.net[/url], and report any bugs or ask for support. You can also find information on additional plugins, translations, styles and new versions there. 
-The team behind phpBB3-Knowledgebase Mod hopes you will find this mod useful as well as user friendly, happy article composing!  :D 
+Congratulations you have successfully installed the phpBB3-Knowledgebase Mod. If everything seems to be working fine, then continue down this article and see what you can do now to setup your new mod. If you had any problems during installation, or experience any problems in the future, do not hesitate to visit [url=http://kb.pertneer.net]kb.pertneer.net[/url], and report any bugs or ask for support. You can also find information on additional plugins, translations, styles and new versions there.
+The team behind phpBB3-Knowledgebase Mod hopes you will find this mod useful as well as user friendly, happy article composing!  :D
 
 [url=http://kb.pertneer.net/kb.php?a=13]What to do after installing[/url]:
 [list=1]

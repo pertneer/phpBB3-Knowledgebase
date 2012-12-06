@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: kb_forum_bot.php 462 2010-04-17 14:30:38Z softphp $
+* @package phpBB3-Knowledgebase Mod (KB)
+* @version $Id: kb_forum_bot.php$
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -64,33 +64,33 @@ function forum_bot_versions()
 	global $user;
 
 	$versions = array(
-		'0.0.1'	=> array(			
+		'0.0.1'	=> array(
 			'config_add'	=> array(
 				array('kb_forum_bot_enable', 1),
 			),
 		),
 		
-		'0.0.2'	=> array(			
+		'0.0.2'	=> array(
 			'config_add'	=> array(
 				array('kb_forum_bot_user', $user->data['user_id']),
 				array('kb_forum_bot_message', $user->lang['ARTICLE_POST_BOT_MSG_EX']),
 			),
 		),
 		
-		'0.0.3'	=> array(			
+		'0.0.3'	=> array(
 			'config_add'	=> array(
 				array('kb_forum_bot_subject', $user->lang['ARTICLE_POST_BOT_SUB_EX']),
 			),
 		),
 		
-		'0.0.4'	=> array(			
+		'0.0.4'	=> array(
 			'config_add'	=> array(
 				array('kb_forum_bot_forum_id', ''),
 			),
 		),
 		
 		//Major release
-		'1.0.0'	=> array(	
+		'1.0.0'	=> array(
 		),
 	);
 
@@ -156,7 +156,7 @@ function change_auth($user_id, $mode = 'replace', $data = false)
 				$data = array(
 						'user_backup'   => $user->data,
 				);
-										
+
 				// sql to get the bots info
 				$sql = 'SELECT *
 						FROM ' . USERS_TABLE . '
@@ -165,11 +165,11 @@ function change_auth($user_id, $mode = 'replace', $data = false)
 				$row = $db->sql_fetchrow($result);
 				$db->sql_freeresult($result);
 
-				// reset the current users info to that of the bot      
-				$user->data = array_merge($user->data, $row);			
+				// reset the current users info to that of the bot
+				$user->data = array_merge($user->data, $row);
 				unset($row);
 				
-				return $data;                                      
+				return $data;
 		break;
 		
 		// now we restore the users stuff
@@ -248,7 +248,7 @@ function post_new_article($data)
 		'force_approved_state'  => true,
 	);
 
-	kb_submit_post('post', $subject, '', POST_NORMAL, $poll, $data);	
+	kb_submit_post('post', $subject, '', POST_NORMAL, $poll, $data);
 	
 	//Restore user permissions
 	change_auth('', 'restore', $perms);	

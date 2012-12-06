@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: kb_auth.php 437 2010-02-01 15:16:57Z softphp $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: kb_auth.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -24,15 +24,15 @@ class kb_auth
 	var $acl_options = array();
 	var $kb_auth_options = array();
 	var $role_cache = array();
-	
+
 	/** Setup permissions **/
 	function acl(&$userdata, &$auth)
 	{
 		global $db, $cache;
-		
+
 		$this->acl = $this->acl_options = array();
 		$this->_fill_kb_auth_options();
-		
+
 		if (($this->acl_options = $cache->get('_kb_acl_options')) === false)
 		{
 			$sql = 'SELECT auth_option_id, auth_option, is_global, is_local
@@ -53,7 +53,7 @@ class kb_auth
 
 			$cache->put('_kb_acl_options', $this->acl_options);
 		}
-		
+
 		if (!trim($userdata['user_kb_permissions']))
 		{
 			$this->acl_cache($userdata);
@@ -100,24 +100,24 @@ class kb_auth
 				}
 			}
 		}
-		
+
 		return;
 	}
-	
+
 	// Fill kb_auth_options with the KB auth options
 	function _fill_kb_auth_options()
 	{
 		$this->kb_auth_options = array(
-			'u_', 'u_kb_add', 'u_kb_add_co', 'u_kb_add_op', 
-			'u_kb_add_wa', 'u_kb_attach', 'u_kb_bbcode', 
-			'u_kb_comment', 'u_kb_delete', 'u_kb_download', 
-			'u_kb_edit', 'u_kb_flash', 'u_kb_icons', 
-			'u_kb_img', 'u_kb_rate', 'u_kb_read', 
+			'u_', 'u_kb_add', 'u_kb_add_co', 'u_kb_add_op',
+			'u_kb_add_wa', 'u_kb_attach', 'u_kb_bbcode',
+			'u_kb_comment', 'u_kb_delete', 'u_kb_download',
+			'u_kb_edit', 'u_kb_flash', 'u_kb_icons',
+			'u_kb_img', 'u_kb_rate', 'u_kb_read',
 			'u_kb_request', 'u_kb_search', 'u_kb_sigs',
 			'u_kb_smilies', 'u_kb_types', 'u_kb_view',
 			'u_kb_viewhistory');
 	}
-	
+
 	/**
 	* Fill ACL array with relevant bitstrings from user_permissions column
 	* @access private
@@ -147,7 +147,7 @@ class kb_auth
 			}
 		}
 	}
-	
+
 	function acl_cache(&$userdata)
 	{
 		global $db;
@@ -171,7 +171,7 @@ class kb_auth
 
 		return;
 	}
-	
+
 	/**
 	* Get raw acl data based on user for caching user_permissions
 	* This function returns the same data as acl_raw_data(), but without the user id as the first key within the array.
@@ -255,7 +255,7 @@ class kb_auth
 
 		return $hold_ary;
 	}
-	
+
 	/**
 	* Get raw group based permission settings
 	*/
@@ -307,7 +307,7 @@ class kb_auth
 
 		return $hold_ary;
 	}
-	
+
 	/**
 	* Get raw user based permission settings
 	*/
@@ -359,7 +359,7 @@ class kb_auth
 
 		return $hold_ary;
 	}
-	
+
 	/**
 	* Get raw acl data based on user/option/forum
 	*/
@@ -475,7 +475,7 @@ class kb_auth
 
 		return $hold_ary;
 	}
-	
+
 	/**
 	* Get assigned roles
 	*/
@@ -508,7 +508,7 @@ class kb_auth
 
 		return $roles;
 	}
-	
+
 	/**
 	* Private function snippet for setting a specific piece of the hold_ary
 	*/
@@ -537,7 +537,7 @@ class kb_auth
 			}
 		}
 	}
-	
+
 	/**
 	* Build bitstring from permission set
 	*/
@@ -598,7 +598,7 @@ class kb_auth
 
 		return $hold_str;
 	}
-	
+
 	/**
 	* Fill auth_option statement for later querying based on the supplied options
 	*/

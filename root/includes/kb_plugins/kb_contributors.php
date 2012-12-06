@@ -37,29 +37,29 @@ if (defined('IN_KB_PLUGIN'))
 function contributors()
 {
 	global $template;
-	
+
 	// Everything parsed in kb.php
-	
+
 	$content = kb_parse_template('contributors', 'contributors.html');
-	
+
 	return $content;
 }
 
 function contributors_versions()
 {
 	$versions = array(
-		'1.0.0'	=> array(			
+		'1.0.0'	=> array(
 			'config_add'	=> array(
 				//array('kb_show_contrib', 1),
 				array('kb_contrib_menu', LEFT_MENU),
 			),
 		),
-		
-		'1.0.1'	=> array(			
+
+		'1.0.1'	=> array(
 			'config_remove'	=> array(
 				array('kb_contrib_menu'),
 			),
-			
+
 			'config_add'	=> array(
 				array('kb_contributors_menu', LEFT_MENU),
 			),

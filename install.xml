@@ -45,7 +45,7 @@
 				</contributions-group>
 			</author>
 		</author-group>
-		<mod-version>1.0.3</mod-version>
+		<mod-version>1.0.3.4</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>2400</time>
@@ -291,46 +291,54 @@
 					<change><![CDATA[Added ability to change article Header name]]></change>
 				</changelog>
 			</entry>
+			<entry>
+				<date>2012-11-13</date>
+				<rev-version>1.0.3.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfix #20 and Fix for Undefined index: kb_header_name]]></change>
+					<change><![CDATA[Bugfix #22 kb_latest_article.php error when deleting all articles and categories]]></change>
+					<change><![CDATA[Bugfix #23 Language change and style improvement to Email Plugin]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-11-19</date>
+				<rev-version>1.0.3.2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Bugfix #25 Language string is missing]]></change>
+					<change><![CDATA[Bugfix #29 Profile icons issue]]></change>
+					<change><![CDATA[Bugfix #30 MCP View article differences style issue]]></change>
+					<change><![CDATA[Bugfix #31 MCP View Article History]]></change>
+					<change><![CDATA[Bugfix #32 Main Category Page Box follows side boxes]]></change>
+					<change><![CDATA[Bugfix #34 Article History layout issues]]></change>
+					<change><![CDATA[Bugfix #35 Article view_rev view, style issue]]></change>
+					<change><![CDATA[Bugfix #36 Viewing Revision Differences]]></change>
+					<change><![CDATA[Bugfix #37 New style issue created by commit 2158a4542808f951]]></change>
+					<change><![CDATA[Bugfix #41 Exporting disallowed attachments]]></change>
+					<change><![CDATA[Bugfix #42 Search Plugin Button floating outside box in certain circumstances]]></change>
+					<change><![CDATA[Bugfix #43 Sub-category layout issues in certain circumstances]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-11-21</date>
+				<rev-version>1.0.3.3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Removed sql from install.xml]]></change>
+					<change><![CDATA[Added new features]]></change>
+					<change><![CDATA[Language Changes]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-12-01</date>
+				<rev-version>1.0.3.4</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Updated to Umil 1.0.5]]></change>
+					<change><![CDATA[Added ability to change header Description in ACP]]></change>
+					<change><![CDATA[Misc. Bugfixes]]></change>
+				</changelog>
+			</entry>
 		</history>
 	</header>
 	<action-group>
-		<sql><![CDATA[CREATE TABLE IF NOT EXISTS `phpbb_articles` (
-  `article_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `cat_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_title` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_title_clean` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_desc` text COLLATE utf8_bin NOT NULL,
-  `article_desc_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_desc_options` int(11) unsigned NOT NULL DEFAULT '7',
-  `article_desc_uid` varchar(8) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_text` mediumtext COLLATE utf8_bin NOT NULL,
-  `article_checksum` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_status` tinyint(1) NOT NULL DEFAULT '0',
-  `article_attachment` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `article_views` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_comments` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_user_name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_user_color` varchar(6) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `article_tags` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_type` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_votes` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `enable_bbcode` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `enable_smilies` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `enable_magic_url` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `enable_sig` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `bbcode_bitfield` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `bbcode_uid` varchar(8) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `article_open` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `article_last_edit_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `article_last_edit_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `article_edit_reason` mediumtext COLLATE utf8_bin NOT NULL,
-  `article_edit_reason_global` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `article_edit_type` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT 'a:0:{}',
-  `article_edit_contribution` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=0 ;]]></sql>
 		<copy>
 			<file from="root/*.*" to="*.*"/>
 		</copy>
@@ -1028,12 +1036,16 @@ a.kblink {
 		<php-installer><![CDATA[kb.php]]></php-installer>
 		<diy-instructions lang="en"><![CDATA[After completing this guide, login as admin and direct your browser to kb.php to install the mod. To make attachments work in the KB, go to ACP -> Posting -> Manage Extension Groups. Then edit the extension groups and tick the box that allows you to use them in the KB. For a more thorough guide on how to setup and use this mod, please turn to our website.
 
-the following bbcode must be installed on your site for local article links to work correctly
+the following bbcode will be installed on your site for local article links to work correctly
 bbCode usage:
 [kb]{INTTEXT},{TEXT}[/kb]
 html replacement:
 <a href="kb.php?a={INTTEXT}">{TEXT}</a>
 helpline:
-[kb]article id number, article name[/kb]]]></diy-instructions>
+[kb]article id number, article name[/kb]
+
+If you plan on using SEO you will need to change the html replacement to:
+<a href="a{INTTEXT}.html" class="postlink kblink">{TEXT}</a>
+NOTE: this will only work on links to other articles within the SAME Category.]]></diy-instructions>
 	</action-group>
 </mod>

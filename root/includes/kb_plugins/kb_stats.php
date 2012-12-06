@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: kb_stats.php 420 2010-01-13 14:36:10Z softphp $
+* @package phpBB phpBB3-Knowledgebase Mod  (KB)
+* @version $Id: kb_stats.php $
 * @copyright (c) 2009 Andreas Nexmann, Tom Martin
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -22,7 +22,7 @@ if (defined('IN_KB_PLUGIN'))
 	$acp_options['legend1'] 			= 'KB_STATS';
 	$acp_options['kb_stats_enable'] 	= array('lang' => 'ENABLE_STATS',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' 	=> false);
 	$acp_options['kb_stats_menu']		= array('lang' => 'WHICH_MENU',			'validate' => 'int',	'type' => 'custom', 		'function' 	=> 'select_menu_check', 	'explain' 	=> false);
-		
+
 	$details = array(
 		'PLUGIN_NAME'			=> 'PLUGIN_STATISTICS',
 		'PLUGIN_DESC'			=> 'PLUGIN_STATISTICS_DESC',
@@ -38,7 +38,7 @@ if (defined('IN_KB_PLUGIN'))
 function stats($cat_id = 0)
 {
 	global $config, $template, $phpbb_root_path, $phpEx, $user;
-	
+
 	if (!$config['kb_stats_enable'])
 	{
 		return;
@@ -51,16 +51,16 @@ function stats($cat_id = 0)
 		'TOTAL_KB_COMMENTS'	=> $config['kb_total_comments'],
 		'LAST_UPDATED'		=> $user->format_date($config['kb_last_updated']),
 	));
-	
+
 	$content = kb_parse_template('stats', 'stats.html');
-	
+
 	return $content;
 }
 
 function stats_versions()
 {
 	$versions = array(
-		'1.0.0'	=> array(			
+		'1.0.0'	=> array(
 			'config_add'	=> array(
 				array('kb_stats_enable', 1),
 				array('kb_stats_menu', LEFT_MENU),

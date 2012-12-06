@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* @package phpBB Knowledge Base Mod (KB)
-* @version $Id: ucp_kb.php 405 2009-12-14 16:27:17Z softphp $
+* @package phpBB phpBB3-Knowledgebase Mod (KB)
+* @version $Id: ucp_kb.php $
 * @copyright (c) 2009 Andreas Nexmann
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -35,7 +35,7 @@ class ucp_kb
 	{
 		global $config, $db, $user, $auth, $template;
 		global $cache, $phpbb_root_path, $phpEx, $table_prefix;
-		
+
 		$user->add_lang('mods/kb');
 		include($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
 		include($phpbb_root_path . 'includes/functions_kb.' . $phpEx);
@@ -49,23 +49,23 @@ class ucp_kb
 
 		$form_key = 'ucp_kb';
 		add_form_key($form_key);
-		
+
 		// Get icons and types from cache
 		$icons = $cache->obtain_icons();
 		$types = $cache->obtain_article_types();
-		
+
 		switch ($mode)
 		{
 			case 'front':
 				// Generate a bit of user stats and link for the user
 				$articles = $wait_articles = $mod_comments = $comments = 0;
 				$article_ids = array(); // used for last query
-				
+
 				$sql = 'SELECT article_id, article_status
-						FROM ' . KB_TABLE . ' 
+						FROM ' . KB_TABLE . '
 						WHERE article_user_id = ' . $user->data['user_id'];
 				$result = $db->sql_query($sql);
-				
+
 				while($row = $db->sql_fetchrow($result))
 				{
 					if($row['article_status'] == STATUS_APPROVED)
@@ -76,25 +76,25 @@ class ucp_kb
 					{
 						$wait_articles++;
 					}
-					
+
 					$article_ids[] = $row['article_id'];
 				}
 				$db->sql_freeresult($result);
-				
+
 				// comments
 				$sql = 'SELECT COUNT(comment_id) as total_comments
-						FROM ' . KB_COMMENTS_TABLE . ' 
+						FROM ' . KB_COMMENTS_TABLE . '
 						WHERE comment_user_id = ' . $user->data['user_id'];
 				$result = $db->sql_query($sql);
 				$comments = $db->sql_fetchfield('total_comments', $result);
 				$db->sql_freeresult($result);
-				
+
 				// mod comments not read
 				if(sizeof($article_ids))
 				{
 					$sql = 'SELECT COUNT(comment_id) as mod_comments
 							FROM ' . KB_COMMENTS_TABLE . '
-							WHERE comment_type = ' . COMMENT_MOD . ' 
+							WHERE comment_type = ' . COMMENT_MOD . '
 							AND comment_time > ' . $user->data['user_lastvisit'] . '
 							AND ' . $db->sql_in_set('article_id', $article_ids) . '
 							AND NOT comment_user_id = ' . $user->data['user_id']; // Don't include own comments just in case
@@ -102,7 +102,7 @@ class ucp_kb
 					$mod_comments = $db->sql_fetchfield('mod_comments', $result);
 					$db->sql_freeresult($result);
 				}
-				
+
 				// Assign template vars
 				$template->assign_vars(array(
 					'L_TITLE'					=> $user->lang['UCP_KB_FRONT'],
@@ -115,17 +115,17 @@ class ucp_kb
 					'L_SEARCH_YOUR_ARTICLES'	=> $user->lang['SEARCH_YOUR_ARTICLES'],
 					'L_ARTICLE_STATUS_PAGE'		=> $user->lang['ARTICLE_STATUS_PAGE'],
 					'L_RULE'					=> $user->lang['RULE'],
-					
+
 					'ARTICLES'					=> $articles,
 					'WAITING_ARTICLES'			=> $wait_articles,
 					'COMMENTS'					=> $comments,
 					'MOD_COMMENTS'				=> $mod_comments,
-					
+
 					'U_SEARCH_ARTICLES'			=> append_sid("{$phpbb_root_path}kb.$phpEx", 'i=search&amp;author_id=' . $user->data['user_id']),
 					'U_UCP_ARTICLES'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=kb&amp;mode=articles'),
 				));
 			break;
-			
+
 			// handles add, delete, edit and list of subscriptions
 			case 'subscribed':
 				switch($action)
@@ -137,7 +137,7 @@ class ucp_kb
 						{
 							trigger_error('KB_NO_ARTICLE');
 						}
-						
+
 						if($submit && check_form_key($form_key))
 						{
 							// The user has submitted the data, insert it into the db
@@ -145,7 +145,7 @@ class ucp_kb
 							$notify_on = request_var('notify_on', 0);
 							$bookmarked = request_var('bookmarked', 0);
 							$update = request_var('update', false);
-							
+
 							$sql_data = array(
 								'article_id' 	=> $article_id,
 								'user_id'	 	=> $user->data['user_id'],
@@ -154,7 +154,7 @@ class ucp_kb
 								'notify_by'		=> $notify_by,
 								'notify_on'		=> $notify_on,
 							);
-							
+
 							if($action == 'add' && !$update)
 							{
 								$sql = 'INSERT INTO ' . KB_TRACK_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_data);
@@ -166,24 +166,24 @@ class ucp_kb
 										AND user_id = {$user->data['user_id']}";
 							}
 							$db->sql_query($sql);
-							
+
 							$url = $this->u_action;
 							meta_refresh(3, $url);
 							$message = $user->lang['KB_SUCCESS_SUBSCRIBE_' . strtoupper($action)] . '<br /><br />' . sprintf($user->lang['RETURN_UCP'], '<a href="' . $url . '">', '</a>');
 							trigger_error($message);
 						}
-						
+
 						switch($action)
 						{
 							case 'add':
 								$sql = 'SELECT article_title
-										FROM ' . KB_TABLE . "  
+										FROM ' . KB_TABLE . "
 										WHERE article_id = $article_id
 										AND article_status = " . STATUS_APPROVED;
 							break;
-							
+
 							case 'edit':
-								$sql = 'SELECT a.article_id, a.article_title, n.* 
+								$sql = 'SELECT a.article_id, a.article_title, n.*
 										FROM ' . KB_TABLE . ' a, ' . KB_TRACK_TABLE . " n
 										WHERE a.article_id = n.article_id
 										AND a.article_status = " . STATUS_APPROVED . "
@@ -195,12 +195,12 @@ class ucp_kb
 						$result = $db->sql_query($sql);
 						$notify_data = $db->sql_fetchrow($result);
 						$db->sql_freeresult($result);
-						
+
 						if(empty($notify_data))
 						{
 							trigger_error('KB_NO_ARTICLE');
 						}
-						
+
 						// Generate dropdown menus
 						// Notify on
 						$notify_on = array(
@@ -211,14 +211,14 @@ class ucp_kb
 							'KB_NOTIFY_AUTHOR_COMMENT'		=> NOTIFY_AUTHOR_COMMENT,
 							'KB_NOTIFY_MOD_COMMENT_GLOBAL'	=> NOTIFY_MOD_COMMENT_GLOBAL,
 						);
-						
+
 						$notify_on_options = '';
 						foreach($notify_on as $name => $value)
 						{
 							$selected = (($action == 'edit' && $notify_data['notify_on'] == $value) || ($action == 'add' && $value == NO_NOTIFY)) ? ' selected="selected"' : '';
 							$notify_on_options .= '<option value="' . $value . '"' . $selected . '>' . $user->lang[$name] . '</option>';
 						}
-						
+
 						// Notify by
 						$notify_by = array(
 							'KB_NOTIFY_UCP'					=> NOTIFY_UCP,
@@ -226,16 +226,16 @@ class ucp_kb
 							'KB_NOTIFY_PM'					=> NOTIFY_PM,
 							'KB_NOTIFY_POPUP'				=> NOTIFY_POPUP,
 						);
-						
+
 						$notify_by_options = '';
 						foreach($notify_by as $name => $value)
 						{
 							$selected = (($action == 'edit' && $notify_data['notify_by'] == $value) || ($action == 'add' && $value == NOTIFY_UCP)) ? ' selected="selected"' : '';
 							$notify_by_options .= '<option value="' . $value . '"' . $selected . '>' . $user->lang[$name] . '</option>';
 						}
-						
+
 						// Check if there is a bookmark entry... just update that then
-						$sql = "SELECT bookmarked 
+						$sql = "SELECT bookmarked
 								FROM " . KB_TRACK_TABLE . "
 								WHERE article_id = $article_id
 								AND user_id = {$user->data['user_id']}";
@@ -250,14 +250,14 @@ class ucp_kb
 							$hidden_fields['update'] = 1;
 						}
 						$db->sql_freeresult($result);
-						
+
 						$hidden_fields = array_merge($hidden_fields, array(
 							'a' 			=> $article_id,
 							'bookmarked' 	=> $update_data['bookmarked'],
 							'action'		=> $action,
 						));
 						$s_hidden_fields = build_hidden_fields($hidden_fields);
-						
+
 						unset($notify_by, $notify_on, $hidden_fields);
 						$template->assign_vars(array(
 							'L_TITLE'					=> $user->lang['UCP_KB_SUBSCRIBED'],
@@ -272,7 +272,7 @@ class ucp_kb
 							'S_UCP_ACTION'				=> $this->u_action,
 						));
 					break;
-						
+
 					case 'delete':
 						// Show confirm box then remove
 						$article_id = request_var('a', array(0 => 0)); // No array keys here, we want it passed along just as it is
@@ -280,12 +280,12 @@ class ucp_kb
 						{
 							trigger_error('KB_NO_ARTICLE');
 						}
-						
+
 						if(confirm_box(true))
 						{
 							$article_id = array_keys($article_id);
 							// Retain bookmark info, then just delete
-							$sql = "SELECT article_id, bookmarked 
+							$sql = "SELECT article_id, bookmarked
 									FROM " . KB_TRACK_TABLE . "
 									WHERE " . $db->sql_in_set('article_id', $article_id) . "
 									AND user_id = {$user->data['user_id']}";
@@ -305,12 +305,12 @@ class ucp_kb
 								}
 							}
 							$db->sql_freeresult($result);
-							
+
 							if(!$articles_count)
 							{
 								trigger_error('KB_NO_ARTICLES');
 							}
-							
+
 							if(!empty($delete_data['update']))
 							{
 								$sql_data = array(
@@ -319,13 +319,13 @@ class ucp_kb
 									'notify_by'		=> 0,
 									'notify_on'		=> 0,
 								);
-								
+
 								$sql = 'UPDATE ' . KB_TRACK_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_data) . "
 										WHERE " . $db->sql_in_set('article_id', $delete_data['update']) . "
 										AND user_id = {$user->data['user_id']}";
 								$db->sql_query($sql);
 							}
-							
+
 							if(!empty($delete_data['delete']))
 							{
 								$sql = "DELETE FROM " . KB_TRACK_TABLE . "
@@ -333,7 +333,7 @@ class ucp_kb
 										AND user_id = {$user->data['user_id']}";
 								$db->sql_query($sql);
 							}
-							
+
 							$url = $this->u_action;
 							meta_refresh(3, $url);
 							$message = $user->lang['KB_SUCCESS_SUBSCRIBE_' . strtoupper($action)] . '<br /><br />' . sprintf($user->lang['RETURN_UCP'], '<a href="' . $url . '">', '</a>');
@@ -349,10 +349,10 @@ class ucp_kb
 							redirect($this->u_action);
 						}
 					break;
-						
+
 					case '':
 					default:
-					$sql = "SELECT n.*, a.* 
+					$sql = "SELECT n.*, a.*
 							FROM " . KB_TRACK_TABLE . " n, " . KB_TABLE . " a
 							WHERE n.subscribed > 0
 							AND n.article_id = a.article_id
@@ -360,7 +360,7 @@ class ucp_kb
 							AND a.article_status = " . STATUS_APPROVED . "
 							ORDER BY a.article_last_edit_time DESC";
 					$result = $db->sql_query($sql);
-					
+
 					while($row = $db->sql_fetchrow($result))
 					{
 						$l_edit = '';
@@ -374,19 +374,19 @@ class ucp_kb
 							$result = $db->sql_query($sql);
 							$edit_data = $db->sql_fetchrow($result);
 							$db->sql_freeresult($result);
-							
+
 							$l_edit = sprintf($user->lang['KB_EDITED_BY'], '<a href="' . append_sid("{$phpbb_root_path}kb.$phpEx", "e={$row['article_id']}") . '">', '</a>', get_username_string('full', $edit_data['user_id'], $edit_data['username'], $edit_data['user_colour']), $user->format_date($row['article_last_edit_time'], false, true));
 						}
-						
+
 						// Set article type
 						$article_type = gen_article_type($row['article_type'], $row['article_title'], $types, $icons);
-						
+
 						// Send vars to template
 						$template->assign_block_vars('articlerow', array(
 							'ARTICLE_ID'				=> $row['article_id'],
 							'ARTICLE_AUTHOR_FULL'		=> get_username_string('full', $row['article_user_id'], $row['article_user_name'], $row['article_user_color']),
 							'FIRST_POST_TIME'			=> $user->format_date($row['article_time']),
-				
+
 							'ARTICLE_LAST_EDIT'			=> $l_edit,
 							'ARTICLE_TITLE'				=> censor_text($article_type['article_title']),
 							'ARTICLE_FOLDER_IMG'		=> $user->img($folder_img, censor_text($row['article_title'])),
@@ -394,21 +394,21 @@ class ucp_kb
 							'ARTICLE_FOLDER_IMG_ALT'	=> censor_text($row['article_title']),
 							'ARTICLE_FOLDER_IMG_WIDTH'  => $user->img($folder_img, '', false, '', 'width'),
 							'ARTICLE_FOLDER_IMG_HEIGHT'	=> $user->img($folder_img, '', false, '', 'height'),
-				
+
 							'ARTICLE_TYPE_IMG'			=> $article_type['type_image']['img'],
 							'ARTICLE_TYPE_IMG_WIDTH'	=> $article_type['type_image']['width'],
 							'ARTICLE_TYPE_IMG_HEIGHT'	=> $article_type['type_image']['height'],
 							'ATTACH_ICON_IMG'			=> ($auth->acl_get('u_kb_download', $row['cat_id']) && $row['article_attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
-							
+
 							'U_VIEW_ARTICLE'			=> append_sid("{$phpbb_root_path}kb.$phpEx", "a=" . $row['article_id']),
 						));
 					}
 					$db->sql_freeresult($result);
-					
+
 					$s_hidden_fields = build_hidden_fields(array(
 						'action'		=> 'delete',
 					));
-					
+
 					$template->assign_vars(array(
 						'L_SUBSCRIBED_ARTICLES'		=> $user->lang['KB_SUBSCRIBED_ARTICLES'],
 						'L_TITLE'					=> $user->lang['UCP_KB_SUBSCRIBED'],
@@ -419,9 +419,9 @@ class ucp_kb
 						'L_UNSUBSCRIBE_MARKED'		=> $user->lang['KB_UNSUBSCRIBE_MARKED'],
 					));
 					break;
-				}		
+				}
 			break;
-			
+
 			// handles bookmarks
 			case 'bookmarks':
 				switch($action)
@@ -432,13 +432,13 @@ class ucp_kb
 						{
 							trigger_error('KB_NO_ARTICLE');
 						}
-						
+
 						$sql = "SELECT article_id, subscribed
 								FROM " . KB_TRACK_TABLE . "
 								WHERE article_id = $article_id
 								AND user_id = {$user->data['user_id']}";
 						$result = $db->sql_query($sql);
-						
+
 						// The user has submitted the data, insert it into the db
 						$sql_data = array(
 							'article_id' 	=> $article_id,
@@ -446,7 +446,7 @@ class ucp_kb
 							'subscribed'	=> 0,
 							'bookmarked'	=> 1,
 						);
-						
+
 						if($notify_data = $db->sql_fetchrow($result))
 						{
 							$sql_data['subscribed'] = $notify_data['subscribed'];
@@ -460,13 +460,13 @@ class ucp_kb
 						}
 						$db->sql_freeresult($result);
 						$db->sql_query($sql);
-						
+
 						$url = $this->u_action;
 						meta_refresh(3, $url);
 						$message = $user->lang['KB_SUCCESS_BOOKMARK_' . strtoupper($action)] . '<br /><br />' . sprintf($user->lang['RETURN_UCP'], '<a href="' . $url . '">', '</a>');
 						trigger_error($message);
 					break;
-						
+
 					case 'delete':
 						// Show confirm box then remove
 						$article_id = request_var('a', array(0 => 0)); // No array keys here, we want it passed along just as it is
@@ -474,12 +474,12 @@ class ucp_kb
 						{
 							trigger_error('KB_NO_ARTICLE');
 						}
-						
+
 						if(confirm_box(true))
 						{
 							$article_id = array_keys($article_id);
 							// Retain subscription info, then just delete
-							$sql = "SELECT article_id, subscribed 
+							$sql = "SELECT article_id, subscribed
 									FROM " . KB_TRACK_TABLE . "
 									WHERE " . $db->sql_in_set('article_id', $article_id) . "
 									AND user_id = {$user->data['user_id']}";
@@ -499,24 +499,24 @@ class ucp_kb
 								}
 							}
 							$db->sql_freeresult($result);
-							
+
 							if(!$articles_count)
 							{
 								trigger_error('KB_NO_ARTICLES');
 							}
-							
+
 							if(!empty($delete_data['update']))
 							{
 								$sql_data = array(
 									'bookmarked'	=> 0,
 								);
-								
+
 								$sql = 'UPDATE ' . KB_TRACK_TABLE . ' SET ' . $db->sql_build_array('UPDATE', $sql_data) . "
 										WHERE " . $db->sql_in_set('article_id', $delete_data['update']) . "
 										AND user_id = {$user->data['user_id']}";
 								$db->sql_query($sql);
 							}
-							
+
 							if(!empty($delete_data['delete']))
 							{
 								$sql = "DELETE FROM " . KB_TRACK_TABLE . "
@@ -524,7 +524,7 @@ class ucp_kb
 										AND user_id = {$user->data['user_id']}";
 								$db->sql_query($sql);
 							}
-							
+
 							$url = $this->u_action;
 							meta_refresh(3, $url);
 							$message = $user->lang['KB_SUCCESS_BOOKMARK_' . strtoupper($action)] . '<br /><br />' . sprintf($user->lang['RETURN_UCP'], '<a href="' . $url . '">', '</a>');
@@ -540,10 +540,10 @@ class ucp_kb
 							redirect($this->u_action);
 						}
 					break;
-						
+
 					case '':
 					default:
-					$sql = "SELECT n.*, a.* 
+					$sql = "SELECT n.*, a.*
 							FROM " . KB_TRACK_TABLE . " n, " . KB_TABLE . " a
 							WHERE n.bookmarked = 1
 							AND a.article_status = " . STATUS_APPROVED . "
@@ -564,19 +564,19 @@ class ucp_kb
 							$result = $db->sql_query($sql);
 							$edit_data = $db->sql_fetchrow($result);
 							$db->sql_freeresult($result);
-							
+
 							$l_edit = sprintf($user->lang['KB_EDITED_BY'], '<a href="' . append_sid("{$phpbb_root_path}kb.$phpEx", "e={$row['article_id']}") . '">', '</a>', get_username_string('full', $edit_data['user_id'], $edit_data['username'], $edit_data['user_colour']), $user->format_date($row['article_last_edit_time'], false, true));
 						}
-						
+
 						// Get article types
 						$article_type = gen_article_type($row['article_type'], $row['article_title'], $types, $icons);
-						
+
 						// Send vars to template
 						$template->assign_block_vars('articlerow', array(
 							'ARTICLE_ID'				=> $row['article_id'],
 							'ARTICLE_AUTHOR_FULL'		=> get_username_string('full', $row['article_user_id'], $row['article_user_name'], $row['article_user_color']),
 							'FIRST_POST_TIME'			=> $user->format_date($row['article_time']),
-				
+
 							'ARTICLE_LAST_EDIT'			=> $l_edit,
 							'ARTICLE_TITLE'				=> censor_text($article_type['article_title']),
 							'ARTICLE_FOLDER_IMG'		=> $user->img($folder_img, censor_text($row['article_title'])),
@@ -584,21 +584,21 @@ class ucp_kb
 							'ARTICLE_FOLDER_IMG_ALT'	=> censor_text($row['article_title']),
 							'ARTICLE_FOLDER_IMG_WIDTH'  => $user->img($folder_img, '', false, '', 'width'),
 							'ARTICLE_FOLDER_IMG_HEIGHT'	=> $user->img($folder_img, '', false, '', 'height'),
-				
+
 							'ARTICLE_TYPE_IMG'			=> $article_type['type_image']['img'],
 							'ARTICLE_TYPE_IMG_WIDTH'	=> $article_type['type_image']['width'],
 							'ARTICLE_TYPE_IMG_HEIGHT'	=> $article_type['type_image']['height'],
 							'ATTACH_ICON_IMG'			=> ($auth->acl_get('u_kb_download', $row['cat_id']) && $row['article_attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
-							
+
 							'U_VIEW_ARTICLE'			=> append_sid("{$phpbb_root_path}kb.$phpEx", "a=" . $row['article_id']),
 						));
 					}
 					$db->sql_freeresult($result);
-					
+
 					$s_hidden_fields = build_hidden_fields(array(
 						'action'		=> 'delete',
 					));
-					
+
 					$template->assign_vars(array(
 						'L_BOOKMARKED_ARTICLES'		=> $user->lang['KB_BOOKMARKED_ARTICLES'],
 						'L_TITLE'					=> $user->lang['UCP_KB_BOOKMARKS'],
@@ -611,13 +611,13 @@ class ucp_kb
 					break;
 				}
 			break;
-			
+
 			case 'articles':
 				// Handle all article stuff in external file
 				include($phpbb_root_path . 'includes/kb.' . $phpEx);
 				$kb = new knowledge_base(0, false);
 				$module_action = request_var('ma', '');
-				
+
 				switch($module_action)
 				{
 					case 'comment':
@@ -625,16 +625,16 @@ class ucp_kb
 						$this->tpl_name = 'kb/posting_body';
 						$this->page_title = $page_title;
 					break;
-					
+
 					case 'view':
 						$page_title = $kb->generate_article_page('ucp');
 						$this->tpl_name = 'kb/view_article';
 						$this->page_title = $page_title;
 					break;
-					
+
 					case '':
 					default:
-						$sql = "SELECT a.* 
+						$sql = "SELECT a.*
 								FROM " . KB_TABLE . " a
 								WHERE a.article_status != " . STATUS_APPROVED . "
 								AND a.article_user_id = " . $user->data['user_id'] . "
@@ -643,22 +643,22 @@ class ucp_kb
 						while($row = $db->sql_fetchrow($result))
 						{
 							$folder_img = ($row['article_last_edit_time'] > $user->data['user_lastvisit']) ? 'topic_unread' : 'topic_read';
-							
+
 							$article_status_ary = array(
 								STATUS_UNREVIEW		=> 'KB_STATUS_UNREVIEW',
 								STATUS_DISAPPROVED	=> 'KB_STATUS_DISAPPROVED',
 								STATUS_ONHOLD		=> 'KB_STATUS_ONHOLD',
 							);
-							
+
 							// Get article types
 							$article_type = gen_article_type($row['article_type'], $row['article_title'], $types, $icons);
-							
+
 							// Send vars to template
 							$template->assign_block_vars('articlerow', array(
 								'ARTICLE_ID'				=> $row['article_id'],
 								'ARTICLE_AUTHOR_FULL'		=> get_username_string('full', $row['article_user_id'], $row['article_user_name'], $row['article_user_color']),
 								'FIRST_POST_TIME'			=> $user->format_date($row['article_time']),
-					
+
 								'ARTICLE_LAST_EDIT'			=> gen_kb_edit_string($row['article_id'], $row['article_last_edit_id'], $row['article_time'], $row['article_last_edit_time']),
 								'ARTICLE_TITLE'				=> censor_text($article_type['article_title']),
 								'ARTICLE_FOLDER_IMG'		=> $user->img($folder_img, censor_text($row['article_title'])),
@@ -667,17 +667,17 @@ class ucp_kb
 								'ARTICLE_FOLDER_IMG_WIDTH'  => $user->img($folder_img, '', false, '', 'width'),
 								'ARTICLE_FOLDER_IMG_HEIGHT'	=> $user->img($folder_img, '', false, '', 'height'),
 								'ARTICLE_STATUS'			=> $user->lang[$article_status_ary[$row['article_status']]],
-								
+
 								'ARTICLE_TYPE_IMG'			=> $article_type['type_image']['img'],
 								'ARTICLE_TYPE_IMG_WIDTH'	=> $article_type['type_image']['width'],
 								'ARTICLE_TYPE_IMG_HEIGHT'	=> $article_type['type_image']['height'],
 								'ATTACH_ICON_IMG'			=> ($auth->acl_get('u_kb_download', $row['cat_id']) && $row['article_attachment']) ? $user->img('icon_topic_attach', $user->lang['TOTAL_ATTACHMENTS']) : '',
-								
+
 								'U_VIEW_ARTICLE'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", "i=kb&amp;mode=articles&amp;ma=view&amp;a=" . $row['article_id']), // Mode articles here for style continuity
 							));
 						}
 						$db->sql_freeresult($result);
-						
+
 						$template->assign_vars(array(
 							'L_TITLE'					=> $user->lang['UCP_KB_ARTICLES'],
 							'L_KB_ARTICLES_EXPLAIN'		=> $user->lang['UCP_KB_ARTICLES_EXPLAIN'],
@@ -691,7 +691,7 @@ class ucp_kb
 				}
 			break;
 		}
-		
+
 		if($mode != 'articles' && $mode != '')
 		{
 			$this->tpl_name = 'kb/ucp_kb_' . $mode;
