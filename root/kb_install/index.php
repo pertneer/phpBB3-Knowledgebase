@@ -96,6 +96,10 @@ $permission_type = 'u_kb_';
 
 $versions = array(
 
+	'1.0.4'	=> array(
+		//no db changes
+	),
+
 	'1.0.3.4'	=> array(
 		//no db changes
 	),
