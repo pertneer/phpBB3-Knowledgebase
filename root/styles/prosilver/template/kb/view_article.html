@@ -1,7 +1,7 @@
 <!-- INCLUDE kb/kb_header.html -->
 				
 				<!-- IF .changerow -->
-				<div class="error">
+				<div class="rev">
 					<div class="inner">
 						<span class="corners-top"><span></span></span>
 							<div class="postbody">
@@ -119,8 +119,7 @@
 										<!-- IF postrow.U_QUOTE --><li class="quote-icon"><a href="{postrow.U_QUOTE}" title="{L_REPLY_WITH_QUOTE}"><span>{L_REPLY_WITH_QUOTE}</span></a></li><!-- ENDIF -->
 									</ul>
 								<!-- ENDIF -->
-
-								<h3><a href="{postrow.U_VIEW}">{postrow.TITLE}</a></h3>
+								<h3 class="first">{ARTICLE_TITLE}</h3>
 								<p class="author">
 									<a href="{postrow.U_VIEW_PERMANENT}"><img src="{T_IMAGESET_PATH}/icon_post_target.gif" alt="{L_PERMANENT_LINK}" /></a>{L_POST_BY_AUTHOR} <strong>{postrow.POST_AUTHOR_FULL}</strong> {L_POSTED_ON_DATE} {postrow.POST_DATE} 
 								</p>
