@@ -4181,7 +4181,7 @@ class knowledge_base
 				'EDIT_BY'			=> sprintf($user->lang['EDITED_BY'], get_username_string('full', $data['article_user_id'], $data['article_user_name'], $data['article_user_color'])),
 				'S_IS_CONTRIB'		=> $data['article_edit_contribution'],
 				'S_CAN_DIFF_F'		=> false,
-				'S_CAN_DIFF_T'		=> (in_array(EDIT_TYPE_CONTENT, $rowset[count($rowset) - 1]['edit_type'])) ? true : false,
+				'S_CAN_DIFF_T'		=> (isset($rowset[count($rowset) - 1]['edit_type']) && in_array(EDIT_TYPE_CONTENT, $rowset[count($rowset) - 1]['edit_type'])) ? true : false,
 				'S_NEWEST'			=> true,
 				'EDIT_TIME'			=> $user->format_date($data['article_last_edit_time'], false, true),
 				'EDIT_ID'			=> 'a_' . $this->article_id,
