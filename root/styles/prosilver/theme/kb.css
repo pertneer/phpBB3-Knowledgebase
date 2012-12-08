@@ -40,6 +40,11 @@ textarea.desc {
 	clear:none;
 }
 
+#kb_postbody .error .inner span.corners-bottom {
+	clear:none;
+	padding-bottom:30px;
+}
+
 #kb_postbody .post #cat .corners-bottom{
 	clear:none;
 }
