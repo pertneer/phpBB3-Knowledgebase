@@ -516,7 +516,7 @@ $versions = array(
 				array('kb_export_article', 1),
 				array('kb_ext_article_header', 1),
 				array('kb_latest_articles_c', 5),
-				array('kb_last_article', 0, true),
+				array('kb_last_article', 1, true),
 				array('kb_last_updated', time(), true),
 				array('kb_layout_style'	, 1),
 				array('kb_left_menu_type', 0),
