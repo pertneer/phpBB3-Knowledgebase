@@ -89,6 +89,9 @@ $options = $desc_options = 0;
 $desc_text = $user->lang['KB_FIRST_ARTICLE_DESC'];
 $text = $user->lang['KB_FIRST_ARTICLE_TEXT'];
 generate_text_for_storage($desc_text, $desc_uid, $desc_bitfield, $desc_options, true, true, true);
+if($desc_uid == ''){
+	$desc_uid = '1wg5as19';
+}
 generate_text_for_storage($text, $uid, $bitfield, $options, true, true, true);
 // KB roles
 $permission_type = 'u_kb_';
