@@ -4187,7 +4187,7 @@ class knowledge_base
 				'EDIT_ID'			=> 'a_' . $this->article_id,
 				'EDIT_STATUS'		=> $user->lang[$article_status_ary[$data['article_status']]],
 				'U_EDIT'			=> ($data['article_status'] == STATUS_APPROVED) ? kb_append_sid('article', array('id' => $this->article_id, 'title' => $data['article_title'], 'extra' => 'view_rev=true')) : append_sid("{$phpbb_root_path}ucp.{$phpEx}", 'i=kb&amp;mode=articles&amp;ma=view&amp;a=' . $this->article_id),
-				'U_VIEW_REV'		=> append_sid("{$phpbb_root_path}kb.$phpEx", 'i=history&amp;e=' . $rowset[count($rowset) - 1]['edit_id']),
+				'U_VIEW_REV'		=> ((count($rowset) > 0) ? append_sid("{$phpbb_root_path}kb.$phpEx", 'i=history&amp;e=' . $rowset[count($rowset) - 1]['edit_id']) : false ),
 
 				// Numbers for the checkbox
 				'NUM'				=> $num,
@@ -4211,12 +4211,14 @@ class knowledge_base
 					$article_type = gen_article_type($data['article_type'], $edit['edit_article_title'], $types, $icons);
 				}
 
+				//($parent_id > 0) ? $tmp_parent_id = $parent_id - 1 : $tmp_parent_id = $parent_id;
+
 				$template->assign_block_vars('editrow', array(
 					'ARTICLE_TITLE'		=> censor_text($article_type['article_title']),
 					'EDIT_BY'			=> sprintf($user->lang['EDITED_BY'], get_username_string('full', $edit['edit_user_id'], $edit['edit_user_name'], $edit['edit_user_color'])),
 					'S_IS_CONTRIB'		=> ($edit['edit_contribution']) ? true : false,
-					'S_CAN_DIFF_F'		=> ($can_diff_from && (!$rowset[$parent_id - 1]['no_diff'] || ($diff_from_old && $num == $total_edits))) ? true : false,
-					'S_CAN_DIFF_T'		=> ($rowset[$parent_id - 1]['no_diff'] || $num == $total_edits) ? false : true,
+					'S_CAN_DIFF_F'		=> ($can_diff_from && (!@$rowset[$parent_id - 1]['no_diff'] || ($diff_from_old && $num == $total_edits))) ? true : false,
+					'S_CAN_DIFF_T'		=> (@$rowset[$parent_id - 1]['no_diff'] || $num == $total_edits) ? false : true,
 					'S_ORG'				=> ($num == $total_edits) ? true : false,
 					'EDIT_TIME'			=> $user->format_date($edit['edit_time'], false, true),
 					'EDIT_ID'			=> $edit['edit_id'],
@@ -4230,7 +4232,7 @@ class knowledge_base
 					'NUM_PLUS'			=> $num + 1,
 				));
 
-				if($rowset[$parent_id - 1]['no_diff'] && $can_diff_from)
+				if(@$rowset[$parent_id - 1]['no_diff'] && $can_diff_from)
 				{
 					$can_diff_from = false;
 				}
