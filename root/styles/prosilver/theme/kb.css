@@ -234,3 +234,7 @@ a.kblink {
 #kb_postbody .post .corners-bottom{
 	clear:none;
 }
+
+#kb_postbody .history .corners-bottom{
+	clear:both;
+}
