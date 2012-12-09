@@ -75,13 +75,14 @@
 									<!-- END attachment -->
 								</dl>
 							<!-- ENDIF -->
-							
+
 							<!-- IF S_DISPLAY_NOTICE --><div class="rules">{L_DOWNLOAD_NOTICE}</div><!-- ENDIF -->
 							<strong>{ARTICLE_COPYRIGHT}</strong>
-							<!-- IF EDITED_MESSAGE -->
-								<div class="notice">{EDITED_MESSAGE}</div>
+							<!-- IF U_MCP -->
+								<!-- IF EDITED_MESSAGE -->
+									<div class="notice">{EDITED_MESSAGE}</div>
+								<!-- ENDIF -->
 							<!-- ENDIF -->
-							
 							<br />
 
 							<!-- IF SIGNATURE or ARTICLE_TAGS != '' --><div id="sig" class="signature"><!-- IF SIGNATURE -->{SIGNATURE}<!-- ENDIF --><!-- IF ARTICLE_TAGS != '' --><!-- IF SIGNATURE --><br /><!-- ENDIF --><strong>{L_TAGS}:</strong> {ARTICLE_TAGS}<!-- ENDIF --></div><!-- ENDIF -->
@@ -95,7 +96,7 @@
 					<div class="inner"><span class="corners-top"><span></span></span>
 						<strong>{L_COMMENTS}</strong>
 					<span class="corners-bottom"><span></span></span></div>
-				</div>				
+				</div>
 				<!-- IF S_SORT_REPLY -->
 					<form id="view_blog" method="post" action="{S_POST_ACTION}">
 					<fieldset class="display-options" style="margin-top: 0; ">

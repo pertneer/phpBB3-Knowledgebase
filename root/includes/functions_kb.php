@@ -2692,7 +2692,7 @@ function gen_kb_edit_string($article_id, $last_edit_id, $article_time, $edit_tim
 		$edit_data = $db->sql_fetchrow($result);
 		$db->sql_freeresult($result);
 
-		$l_edit = sprintf($user->lang['KB_EDITED_BY'], '<a href="' . append_sid("{$phpbb_root_path}kb.$phpEx", "i=history&amp;e=$article_id") . '">', '</a>', get_username_string('full', $edit_data['edit_user_id'], $edit_data['edit_user_name'], $edit_data['edit_user_color']), $user->format_date($edit_time, false, true));
+		$l_edit = sprintf($user->lang['KB_EDITED_BY'], '<a href="' . append_sid("{$phpbb_root_path}kb.$phpEx", "i=history&amp;a=$article_id") . '">', '</a>', get_username_string('full', $edit_data['edit_user_id'], $edit_data['edit_user_name'], $edit_data['edit_user_color']), $user->format_date($edit_time, false, true));
 
 		if($reason != '' && $reason_global)
 		{
