@@ -238,3 +238,13 @@ a.kblink {
 #kb_postbody .history .corners-bottom{
 	clear:both;
 }
+
+#kb_postbody li.header dt, li.header dd {
+    color: #105289;
+}
+
+#kb_postbody dl.icon dt, dl.icon dd {
+    color: #FFFFFF;
+}
+
+
