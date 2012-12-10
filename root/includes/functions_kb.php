@@ -2419,6 +2419,7 @@ function feed_output($feed, $feed_type, $feed_data = false)
 			$sql_where = 'a.article_status = ' . STATUS_APPROVED;
 			$sql_order = 'a.article_views DESC';
 		break;
+
 		default:
 			$title = $user->lang['KB_LATEST'];
 			$sql_where = 'a.article_status = ' . STATUS_APPROVED;
