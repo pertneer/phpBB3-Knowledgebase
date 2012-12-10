@@ -2393,6 +2393,7 @@ function feed_output($feed, $feed_type, $feed_data = false)
 {
 	global $template, $phpbb_root_path, $phpEx, $config, $db, $user;
 
+	$sql_where = $sql_order = $title = '';
 	switch ($feed_type)
 	{
 		case 'latest':
@@ -2417,6 +2418,11 @@ function feed_output($feed, $feed_type, $feed_data = false)
 			$title = $user->lang['POPULAR_ART'];
 			$sql_where = 'a.article_status = ' . STATUS_APPROVED;
 			$sql_order = 'a.article_views DESC';
+		break;
+		default:
+			$title = $user->lang['KB_LATEST'];
+			$sql_where = 'a.article_status = ' . STATUS_APPROVED;
+			$sql_order = 'a.article_time DESC';
 		break;
 	}
 
