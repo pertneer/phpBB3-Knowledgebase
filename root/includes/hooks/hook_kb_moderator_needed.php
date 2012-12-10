@@ -21,7 +21,7 @@ if (!defined('IN_PHPBB'))
  */
 
  // Make install is complete before using this hook: contributed by wintstar
- if (function_exists('kb_enable'))
+if (isset($config['kb_mod_notify']) && $config['kb_mod_notify'] == 1)
 {
 	function hook_kb_moderator_needed(&$hook)
 	{

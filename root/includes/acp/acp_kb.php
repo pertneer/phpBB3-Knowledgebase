@@ -89,6 +89,7 @@ class acp_kb
 						'kb_default_rating'		=> array('lang' => 'KB_DEFAULT_RATING',	'validate' => 'int',	'type' => 'select', 'method' => 'select_default_rating', 'explain' => false),
 						'kb_articles_per_page'	=> array('lang' => 'KB_ART_PER_PAGE',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => false),
 						'kb_comments_per_page'	=> array('lang' => 'KB_COM_PER_PAGE',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => false),
+						'kb_mod_notify'			=> array('lang' => 'KB_MOD_NOTIFY_ENABLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => true),
 						'kb_seo'				=> array('lang' => 'KB_SEO_ENABLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => true),
 						'kb_ajax_rating'		=> array('lang' => 'KB_AJAX_RATING',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'kb_ext_article_header' => array('lang' => 'KB_EXT_HEADER',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => true),

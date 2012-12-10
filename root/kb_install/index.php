@@ -98,6 +98,11 @@ $permission_type = 'u_kb_';
 
 
 $versions = array(
+	'1.0.4.1'	=> array(
+		'config_add' => array(
+			array('kb_mod_notify', 0),
+		)
+	)
 
 	'1.0.4'	=> array(
 		//no db changes
