@@ -822,7 +822,15 @@ function kb_parse_template($filename, $template_file)
 {
 	global $phpbb_root_path, $template, $user;
 
-	$tpl_path = $phpbb_root_path . 'styles/' . $user->theme['template_path'] . '/template/kb/plugins/';
+	// check for inherited templates
+	if (isset($user->theme['template_inherits_id']) && $user->theme['template_inherit_path'])
+	{
+		$tpl_path = $phpbb_root_path . 'styles/' . $user->theme['template_inherit_path'] . '/template/kb/plugins/';
+	}
+	else
+	{
+		$tpl_path = $phpbb_root_path . 'styles/' . $user->theme['template_path'] . '/template/kb/plugins/';
+	}
 
 	// If the template file does not exist
 	if (!file_exists($tpl_path . $template_file))
