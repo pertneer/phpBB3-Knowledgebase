@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- MODX by the phpBB MOD Team XSL file v1.2.4 copyright 2005-2010 the phpBB MOD Team.
 	This file is released under the GNU GPL version 2.  See license.txt.
-	$Id: modx.prosilver.en.xsl 3762 2010-03-04 01:45:51Z tumba25 $ -->
+	$Id: modx.prosilver.en.xsl 211 2010-02-27 20:05:11Z tumba25 $ -->
 <!DOCTYPE xsl:stylesheet[
 	<!ENTITY nbsp "&#160;">
 ]>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:mod="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:mod="https://www.phpbb.com/mods/xml/modx-1.2.6-RC1.xsd">
 	<xsl:output method="html" omit-xml-declaration="no" indent="yes" />
 	<xsl:variable name="title" select="mod:mod/mod:header/mod:title" />
 	<xsl:variable name="version">
@@ -646,6 +646,7 @@ var enStrings = "dir=ltr\n" +
 "a-e=Email:\n" +
 "a-n=Name:\n" +
 "a-h=WWW:\n" +
+"a-git=Github:\n" +
 "a-c=Contributions:\n" +
 "a-c-f=From\n" +
 "a-c-t=to\n" +
@@ -709,8 +710,8 @@ var enStrings = "dir=ltr\n" +
 "regex=This find contains an advanced feature known as regular expressions.\n" +
 "mhe-v=- Version\n" +
 "mh=MOD history\n" +
-"addtl-modx=Additional MODX files\n" +
-"imn=This MOD has no additional MODX files.\n" +
+"addtl-modx=Additional file(s)\n" +
+"imn=This MOD has no additional file(s).\n" +
 "link-c=Contrib\n" +
 "link-d=Dependency\n" +
 "link-l=Language\n" +
@@ -741,14 +742,14 @@ var arrClasCnt = [
 	['cde-'	, codes_ll			],
 	['edt-'	, edits_ll			],
 	['fnd'	, finds_ll			],
-	['fnd'	, removes_ll			],
+	['rem'	, removes_ll			],
 	['regex', regex_ll			],
 	['rplw'	, replacewiths_ll	],
 	['aft'	, addafters_ll		],
 	['bef'	, addbefores_ll		],
 	['inc'	, increments_ll		],
 	['ifnd'	, ifinds_ll			],
-	['ifnd'	, iremoves_ll			],
+	['irem'	, iremoves_ll			],
 	['regex', iregex_ll			],
 	['irplw', ireplacewiths_ll	],
 	['iaft'	, iaddafters_ll		],
@@ -780,6 +781,8 @@ function changeLanguage(langCode)
 		applyLanguage(enStrings.split("\n"));
 	}
 	xslLanguage(langCode);
+
+	show_title(langCode);
 }
 
 function load_languages()
@@ -806,6 +809,71 @@ function load_language()
 	$output = 'load_language';
 	cachernd = parseInt(Math.random() * 99999999); // cache
 	send('', host + currentLanguage + '.txt?rnd=' + cachernd);
+}
+
+/**
+* From http://stackoverflow.com/questions/1280903/javascript-ie-and-getelementsbyclassname-problems/8472488#8472488
+*/
+if (typeof document.getElementsByClassName != 'function')
+{
+	document.getElementsByClassName = function()
+	{
+		var elms = document.getElementsByTagName('*');
+		var ei = new Array();
+		for (i = 0; i < elms.length; i++)
+		{
+			if (elms[i].getAttribute('class'))
+			{
+				ecl = elms[i].getAttribute('class').split(' ');
+				for (j = 0; j < ecl.length; j++)
+				{
+					if (ecl[j].toLowerCase() == arguments[0].toLowerCase())
+					{
+						ei.push(elms[i]);
+					}
+				}
+			}
+			else if (elms[i].className)
+			{
+				ecl = elms[i].className.split(' ');
+				for (j = 0; j < ecl.length; j++)
+				{
+					if (ecl[j].toLowerCase() == arguments[0].toLowerCase())
+					{
+						ei.push(elms[i]);
+					}
+				}
+			}
+		}
+		return ei;
+	}
+}
+
+function show_title(langCode)
+{
+	var sel_title = document.getElementById('title-' + langCode);
+
+	if (sel_title == null)
+	{
+		// A title in English is required.
+		sel_title = document.getElementById('title-en')
+
+		if (sel_title == null)
+		{
+			// No title in English or the selected language.
+			return;
+		}
+	}
+
+	var hide_title = document.getElementsByClassName('hide-title');
+
+	for (var i = 0; i < hide_title.length; i++)
+	{
+		hide_title[i].style.display='none';
+	}
+
+	sel_title.style.display='inline';
+	document.title = "phpBB MOD » " + sel_title.innerHTML;
 }
 
 /*****************
@@ -1425,7 +1493,7 @@ function change_dbms($form)
 		'mssql',
 		'oracle',
 		'postgres',
-		'sqllite'
+		'sqlite'
 	];
 	$exists = 0;
 	$tags = document.getElementsByTagName('dbms');
@@ -1440,7 +1508,7 @@ function change_dbms($form)
 	{
 		for ($i = 0; $i < $tags.length; $i++)
 		{
-			if (!($dbms = $tags[$i].attributes['type'].nodeValue))
+			if (!($dbms = $tags[$i].attributes['type'].value))
 			{
 				continue;
 			}
@@ -1472,7 +1540,7 @@ function sql_display($value)
 	// show the dbms of type we have selected, hide all others except for non dbms specific
 	for ($i = 0; $i < $tags.length; $i++)
 	{
-		if (!($dbms = $tags[$i].attributes['type'].nodeValue))
+		if (!($dbms = $tags[$i].attributes['type'].value))
 		{
 			continue;
 		}
@@ -1520,7 +1588,7 @@ function sql_dropdown()
 		'mssql',
 		'oracle',
 		'postgres',
-		'sqllite'
+		'sqlite'
 	];
 	$options = [];
 	$ie_options = [];
@@ -1530,7 +1598,7 @@ function sql_dropdown()
 	// Show the dbms of type we have selected, hide all others except for non dbms specific
 	for ($i = 0; $i < $tags.length; $i++)
 	{
-		if (!($dbms = $tags[$i].attributes['type'].nodeValue))
+		if (!($dbms = $tags[$i].attributes['type'].value))
 		{
 			continue;
 		}
@@ -1628,7 +1696,14 @@ function toggle_edit(o)
 		<div id="debug"></div>
 		<div id="wrap">
 			<div id="page-header">
-				<h1><span id="lang-h1">Installation instructions for</span> '<xsl:value-of select="$title" />' <span id="lang-V">version</span>&nbsp;<xsl:value-of select="$version" /></h1>
+				<h1>
+					<span id="lang-h1">Installation instructions for</span>
+					<span class="hide-title" lang="{@lang}"> '<xsl:value-of select="$title" />' </span>
+					<xsl:for-each select="mod:header/mod:title">
+						<span class="hide-title" lang="{@lang}" id="title-{@lang}" style="display: none;"> '<xsl:value-of select="current()" />' </span>
+					</xsl:for-each>
+					<span id="lang-V">version</span>&nbsp;<xsl:value-of select="$version" />
+				</h1>
 				<form method="post" action="" id="lang-selector" style="display: none;">
 				<fieldset class="nobg">
 					<label for="language"><span id="lang-slg">Select language:</span></label>&nbsp;<select id="language" name="language" onclick="load_languages()"><option value="en" selected="selected">English</option></select>
@@ -1666,6 +1741,7 @@ function toggle_edit(o)
 		</body>
 		</html>
 	</xsl:template>
+
 
 	<xsl:template name="give-header">
 		<fieldset>
@@ -1750,6 +1826,12 @@ function toggle_edit(o)
 							</xsl:if>
 						</dd>
 					</xsl:if>
+					<xsl:if test="mod:github != 'N/A' and mod:github != 'n/a' and mod:github != ''">
+						<xsl:if test="contains(mod:github, 'https://github.com/')">
+							<dt id="lang-a-git[{generate-id()}]">Github:</dt>
+							<dd name="author-dd"><a href="{mod:github}" dir="ltr"><xsl:value-of select="mod:github" /></a></dd>
+						</xsl:if>
+					</xsl:if>
 				</dl>
 				<span class="corners-bottom"><span></span></span>
 			</div>
@@ -1778,9 +1860,9 @@ function toggle_edit(o)
 		<xsl:for-each select="../mod:action-group">
 			<xsl:call-template name="give-files-included"></xsl:call-template>
 		</xsl:for-each>
-		<h3 id="lang-addtl-modx">Additional MODX files</h3>
+		<h3 id="lang-addtl-modx">Additional file(s)</h3>
 		<xsl:if test="count(mod:link-group/mod:link) = 0">
-			<p id="lang-imn">This MOD has no additional MODX files.</p>
+			<p id="lang-imn">This MOD has no additional file(s).</p>
 		</xsl:if>
 
 		<ul class="link-group" id="link-group">
@@ -2083,7 +2165,7 @@ function toggle_edit(o)
 						<option value="mssql">MSSQL</option>
 						<option value="oracle">Oracle</option>
 						<option value="postgres">Postgres</option>
-						<option value="sqllite">SQLLite</option>
+						<option value="sqlite">SQLite</option>
 					</select>
 				</fieldset>
 			</form>
