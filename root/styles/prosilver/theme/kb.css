@@ -239,12 +239,18 @@ a.kblink {
 	clear:both;
 }
 
-#kb_postbody li.header dt, li.header dd {
-    color: #105289;
+#kb_postbody li.header dt, #kb_postbody li.header dd {
+	color: #105289;
 }
 
-#kb_postbody dl.icon dt, dl.icon dd {
-    color: #FFFFFF;
+#kb_postbody dl.icon dt, #kb_postbody dl.icon dd {
+	color: #FFFFFF;
 }
 
+#kb_postbody .row dl.icon dt, #kb_postbody .row dl.icon dd {
+	color:#4C5D77;
+}
 
+#kb_postbody div.bg3 span.corners-bottom{
+	clear:none;
+}
