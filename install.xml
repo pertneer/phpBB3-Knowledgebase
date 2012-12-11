@@ -846,6 +846,14 @@ else
 						// Mod KB End]]></action>
 			</edit>
 		</open>
+		<open src="includes/acp/acp_board.php">
+			<edit>
+				<find><![CDATA['feed_exclude_id'			=> array('lang' => 'ACP_FEED_EXCLUDE_ID',			'validate' => 'string',	'type' => 'custom', 'method' => 'select_exclude_forums', 'explain' => true),]]></find>
+				<action type="after-add"><![CDATA[						
+						'legend5'					=> 'ACP_KB_FEED_SETTINGS',
+						'kb_feed_enable'			=> array('lang' => 'KB_FEED_ENABLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false),]]></action>
+			</edit>
+		</open>
 		<open src="includes/acp/acp_styles.php">
 			<edit>
 				<find><![CDATA['icon_back_top', 'icon_contact_aim', 'icon_contact_email', 'icon_contact_icq', 'icon_contact_jabber', 'icon_contact_msnm', 'icon_contact_pm', 'icon_contact_yahoo', 'icon_contact_www', 'icon_post_delete', 'icon_post_edit', 'icon_post_info', 'icon_post_quote', 'icon_post_report', 'icon_user_online', 'icon_user_offline', 'icon_user_profile', 'icon_user_search', 'icon_user_warn', 'button_pm_forward', 'button_pm_new', 'button_pm_reply', 'button_topic_locked', 'button_topic_new', 'button_topic_reply',]]></find>
@@ -920,6 +928,12 @@ else
 	'ALLOW_IN_KB'						=> 'Allowed in the Knowledge Base',
 	'NOT_ALLOWED_IN_KB'					=> 'Not allowed in the Knowledge Base',
 	// Mod KB End]]></action>
+			</edit>
+		</open>
+		<open src="language/en/acp/board.php">
+			<edit>
+				<find><![CDATA['ACP_FEED_EXCLUDE_ID_EXPLAIN'		=> 'Content from these will be <strong>not included in feeds</strong>. Select no forum to pull data from all forums.<br />Select/Deselect multiple forums by holding <samp>CTRL</samp> and clicking.',]]></find>
+				<action type="after-add"><![CDATA[	'KB_FEED_ENABLE'					=> 'Enable Knowledge Base Feeds',]]></action>
 			</edit>
 		</open>
 		<open src="language/en/acp/styles.php">
