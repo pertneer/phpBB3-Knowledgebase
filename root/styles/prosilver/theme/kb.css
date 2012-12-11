@@ -254,3 +254,7 @@ a.kblink {
 #kb_postbody div.bg3 span.corners-bottom{
 	clear:none;
 }
+
+#kb_postbody #preview span.corners-bottom{
+	clear:both;
+}
