@@ -35,7 +35,11 @@ if (defined('IN_KB_PLUGIN'))
 
 function author()
 {
-	global $template;
+	global $template, $config;
+
+	$template->assign_vars(array(
+		'U_SHOW_FEED'				=> ($config['kb_feed_enable'] && $config['feed_enable'])? true : false,
+	));
 
 	// All info is parsed in kb.php
 	$content = kb_parse_template('body', 'author.html');

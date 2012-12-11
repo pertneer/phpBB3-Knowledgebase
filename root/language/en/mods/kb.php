@@ -231,6 +231,7 @@ Here is a link to the article - {LINK}',
 	'KB_EMPTY_TITLE'					=> 'You have to specify a title for your article.',
 	'KB_ENABLE'							=> 'Enable the Knowledge Base',
 	'KB_FEED_CAT'						=> 'Live feed',
+	'KB_FEED_ENABLE'					=> 'Enable Knowledge Base Feeds',
 	//Items for kb.pertneer.net Site
 	//'KB_ENABLE_GIT_LINK'				=> 'Show Git link',
 	//'KB_ENABLE_GIT_LINK_EXPLAIN'		=> 'Show link to phpBB3-Knowledgebase Repository',

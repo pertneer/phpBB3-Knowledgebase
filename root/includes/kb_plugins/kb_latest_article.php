@@ -97,6 +97,7 @@ function latest_article($cat_id = 0)
 
 		'U_LAST_ARTICLE'			=> kb_append_sid('article', array('id' => $config['kb_latest_article'], 'title' => censor_text($row['article_title']))),
 		'U_RSS_LAST_ARTICLE'		=> append_sid("{$phpbb_root_path}kb.$phpEx", 'i=feed&amp;feed_type=latest'),
+		'U_SHOW_FEED'				=> ($config['kb_feed_enable'] && $config['feed_enable'])? true : false,
 
 		'T_THEME_PATH'				=> "{$phpbb_root_path}styles/" . $user->theme['theme_path'] . '/theme',
 	));

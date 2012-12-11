@@ -101,6 +101,7 @@ $versions = array(
 	'1.0.4.1'	=> array(
 		'config_add' => array(
 			array('kb_mod_notify', 0),
+			array('kb_feed_enable', 0),
 		)
 	),
 

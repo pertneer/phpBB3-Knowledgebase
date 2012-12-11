@@ -100,7 +100,10 @@ class acp_kb
 						'kb_list_subcats'		=> array('lang' => 'KB_LIST_SUBCATS',	'validate' => 'int',	'type' => 'radio:yes_no', 	'explain' => false),
 						'kb_latest_articles_c'	=> array('lang' => 'KB_ACP_LATEST_ART',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => true),
 
-						'legend2'				=> 'ACP_KB_MENU_SETTINGS',
+						'legend2'				=> 'ACP_KB_FEED_SETTINGS',
+						'kb_feed_enable'		=> array('lang' => 'KB_FEED_ENABLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false),
+
+						'legend3'				=> 'ACP_KB_MENU_SETTINGS',
 						'kb_disable_left_menu'	=> array('lang' => 'DISABLE_LEFT_MENU',		'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'kb_left_menu_width'	=> array('lang' => 'KB_LEFT_MENU_WIDTH',	'validate' => 'int',	'type' => 'text:3:5',		'explain' => true),
 						'kb_left_menu_type'		=> array('lang' => 'KB_LEFT_MENU_TYPE',		'validate' => 'int',	'type' => 'select',	'method' => 'select_menu_type', 'explain' => false),
@@ -108,7 +111,7 @@ class acp_kb
 						'kb_right_menu_width'	=> array('lang' => 'KB_RIGHT_MENU_WIDTH',	'validate' => 'int',	'type' => 'text:3:5',		'explain' => true),
 						'kb_right_menu_type'	=> array('lang' => 'KB_RIGHT_MENU_TYPE',	'validate' => 'int',	'type' => 'select',	'method' => 'select_menu_type', 'explain' => false),
 
-						'legend3'				=> 'ACP_KB_POST_SETTINGS',
+						'legend4'				=> 'ACP_KB_POST_SETTINGS',
 						'kb_allow_attachments'	=> array('lang'	=> 'KB_ALLOW_ATTACH',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false),
 						'kb_allow_sig'			=> array('lang' => 'KB_ALLOW_SIG',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false),
 						'kb_allow_bbcode'		=> array('lang'	=> 'KB_ALLOW_BBCODE',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false),

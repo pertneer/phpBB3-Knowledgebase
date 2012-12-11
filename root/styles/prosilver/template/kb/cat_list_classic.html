@@ -23,7 +23,7 @@
 				<!-- IF catrow.cat.CAT_DESC} --><br />{catrow.cat.CAT_DESC}<!-- ENDIF -->
 				<!-- IF catrow.cat.SUBCATS --><br /><strong>{catrow.cat.L_SUBCAT}:</strong> {catrow.cat.SUBCATS}<!-- ENDIF -->
 			</dt>
-			<dd class="topics"><a href="{catrow.cat.U_RSS_CAT}"><img src="{T_THEME_PATH}/images/feed.gif" width="14" height="14" alt="{L_RSS_CAT}" title="{L_RSS_CAT}" /></a> <dfn>{L_KB_FEED_CAT}</dfn></dd>
+			<dd class="topics"><!-- IF U_SHOW_FEED --><a href="{catrow.cat.U_RSS_CAT}"><img src="{T_THEME_PATH}/images/feed.gif" width="14" height="14" alt="{L_RSS_CAT}" title="{L_RSS_CAT}" /></a> <dfn>{L_KB_FEED_CAT}</dfn><!-- ENDIF --></dd>
 			<dd class="posts">{catrow.cat.ARTICLES} <dfn>{L_ARTICLES}</dfn></dd>
 			<dd class="lastpost"><span>
 				<!-- IF catrow.cat.LATEST_ARTICLE --><strong>{L_LATEST_ARTICLES}:</strong> {catrow.cat.LATEST_ARTICLE}<!-- ELSE -->{L_KB_NO_LATEST}<!-- ENDIF --></span>
