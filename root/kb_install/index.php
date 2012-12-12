@@ -102,7 +102,12 @@ $versions = array(
 		'config_add' => array(
 			array('kb_mod_notify', 0),
 			array('kb_feed_enable', 0),
-		)
+		),
+		'cache_purge' => array(
+			'imageset',
+			'template',
+			'theme'
+		),
 	),
 
 	'1.0.4'	=> array(
@@ -114,11 +119,6 @@ $versions = array(
 	),
 
 	'1.0.3.3'	=> array(
-		'cache_purge' => array(
-			'imageset',
-			'template',
-			'theme'
-		),
 	),
 
 	'1.0.3.2'	=> array(),
