@@ -31,10 +31,13 @@ if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 	trigger_error('Please download the latest UMIL (Unified MOD Install Library) from: <a href="http://www.phpbb.com/mods/umil/">phpBB.com/mods/umil</a>', E_USER_ERROR);
 }
 
+//disable moderator notification
+//was causing issues with uninstall process
 if (isset($config['kb_mod_notify']) && $config['kb_mod_notify'] == 1)
 {
 	$db->sql_query('UPDATE ' . CONFIG_TABLE . ' SET config_value = 0 WHERE config_name = \'kb_mod_notify\'');
 }
+
 // Some blog files we need
 //require "{$phpbb_root_path}includes/mods/constants_blog.$phpEx";
 
