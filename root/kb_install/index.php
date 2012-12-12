@@ -103,6 +103,7 @@ $versions = array(
 			array('kb_mod_notify', 0),
 			array('kb_feed_enable', 0),
 		),
+
 		'cache_purge' => array(
 			'imageset',
 			'template',
@@ -681,14 +682,40 @@ $versions = array(
 
 			),
 		'custom'	=> 'set_category_perm',
-	)
+	),
 
-	);
+	//this is added to make sure all roles are removed after all other database stuff is done
+	//sorry for a previous version but it had to be done last
+	'1.0.0' => array(
+		'custom' => 'uninstall_actions',
+	),
+);
 
 // Include the UMIF Auto file and everything else will be handled automatically.
 include($phpbb_root_path . 'umil/umil_auto.' . $phpEx);
 
-function set_category_perm(){
+//lets make sure all kb config and roels are deleted during the uninstall process
+function uninstall_actions()
+{
+	global $action;
+	global $db, $config, $user, $phpbb_root_path, $phpEx, $template, $auth_settings;
+
+	if($action == 'uninstall')
+	{
+		$plugin_configs = array('kb_author_menu', 'kb_author_version', 'kb_bookmark_menu', 'kb_bookmark_version', 'kb_categories_enable', 'kb_categories_menu', 'kb_categories_version', 'kb_contributors_menu', 'kb_contributors_version', 'kb_email_article_menu', 'kb_email_article_version', 'kb_export_article_menu', 'kb_export_article_version', 'kb_latest_article', 'kb_latest_article_enable', 'kb_latest_article_menu', 'kb_latest_article_version', 'kb_random_article_enable', 'kb_random_article_menu', 'kb_random_article_version', 'kb_rated_articles_enable', 'kb_rated_articles_limit', 'kb_rated_articles_menu', 'kb_rated_articles_version', 'kb_rating_menu', 'kb_rating_version', 'kb_related_articles_menu', 'kb_related_articles_version', 'kb_request_list_enable', 'kb_request_list_limit', 'kb_request_list_menu', 'kb_request_list_version', 'kb_search_enable', 'kb_search_menu', 'kb_search_version', 'kb_stats_enable', 'kb_stats_menu', 'kb_stats_version');
+		$sql = 'DELETE FROM ' . CONFIG_TABLE . '
+			WHERE ' . $db->sql_in_set('config_name', $plugin_configs);
+		$result = $db->sql_query($sql);
+		
+		$kb_roles = array('ROLE_KB_MOD', 'ROLE_KB_USER', 'ROLE_KB_GUEST');
+		$sql = 'DELETE FROM ' . ACL_ROLES_TABLE . '
+			WHERE ' . $db->sql_in_set('role_name', $kb_roles);
+		$result = $db->sql_query($sql);
+	}
+}
+
+function set_category_perm()
+{
 
 	global $db, $config, $user, $phpbb_root_path, $phpEx, $template, $auth_settings;
 
@@ -730,6 +757,7 @@ function set_category_perm(){
 	$db->sql_multi_insert(KB_ACL_GROUPS_TABLE, $sql_ary);
 
 	kb_install_perm_plugins();
+
 }
 
 // Install permanent plugins on install or update
