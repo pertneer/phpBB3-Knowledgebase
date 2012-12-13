@@ -27,6 +27,7 @@ if (isset($config['kb_mod_notify']) && $config['kb_mod_notify'] == 1)
 	{
 		global $auth, $cache, $db, $template, $user, $phpEx, $phpbb_root_path, $table_prefix;
 
+		include_once($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
 		//make sure table exists during the uninstall process
 		$sql = 'SHOW TABLES LIKE \'' . KB_TABLE . '\'';
 
@@ -34,7 +35,6 @@ if (isset($config['kb_mod_notify']) && $config['kb_mod_notify'] == 1)
 		{
 			// needed language
 			$user->add_lang('mods/kb_moderator_needed');
-			include_once($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
 
 			if ($auth->acl_getf_global('m_approve') || $auth->acl_getf_global('m_report'))
 			{
