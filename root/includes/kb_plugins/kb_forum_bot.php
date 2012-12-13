@@ -204,6 +204,7 @@ function post_new_article($data)
 		'{DESC}'		=> $data['article_desc'],
 		'{TIME}'		=> $user->format_date($data['article_time']),
 		'{LINK}'		=> generate_board_url() . '/kb.' . $phpEx . '?a=' . $data['article_id'],
+		'{LOCAL_LINK}'	=> '[kb]'. $data['article_id'] . ', ' . $data['article_title'].'[/kb]',
 	);
 	
 	//Get post bots permissions
