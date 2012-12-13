@@ -1,5 +1,5 @@
 <!-- INCLUDE kb/kb_header.html -->
-				
+
 				<!-- IF .changerow -->
 				<div class="rev">
 					<div class="inner">
@@ -33,14 +33,14 @@
 									<h2 class="kb">{L_KB_HEADER}</h2>
 							<span class="error" style="font-size: 120%">{ARTICLE_TITLE}</span><br/>
 							<!-- IF S_EXTENDED_HEADER -->
-							
+
 							<strong>{L_ARTICLE_ID}:</strong> {ARTICLE_ID}<br />
 							<strong>{L_WRITTEN_BY}:</strong> {POST_AUTHOR_FULL}<br />
 							<strong>{L_WRITTEN_ON}:</strong> {ARTICLE_TIME}<br />
-							
+
 							<!-- IF ARTICLE_DESC --><strong>{L_DESCRIPTION}:</strong> {ARTICLE_DESC}<br /><!-- ENDIF -->
 							{ARTICLE_VIEWS}<br/>
-							
+
 							<div class="content">
 								<dl class="codebox">
                                 	<dt>{L_LOCAL_LINK_TO_THIS}: <a href="#" onclick="selectCode(this); return false;">Select all</a></dt>
@@ -57,14 +57,14 @@
 							</div>
 							<!-- ELSEIF DISABLE_LEFT_MENU and not S_EXTENDED_HEADER -->
 								<p class="author">
-									<img src="{T_IMAGESET_PATH}/icon_post_target.gif" alt="{L_PERMANENT_LINK}" />{L_WRITTEN_BY} <strong>{POST_AUTHOR_FULL}</strong> {L_POSTED_ON_DATE} {ARTICLE_TIME} 
+									<img src="{T_IMAGESET_PATH}/icon_post_target.gif" alt="{L_PERMANENT_LINK}" />{L_WRITTEN_BY} <strong>{POST_AUTHOR_FULL}</strong> {L_POSTED_ON_DATE} {ARTICLE_TIME}
 								</p>
 							<!-- ENDIF -->
 							<!-- IF not S_EXTENDED_HEADER and ARTICLE_DESC -->
 							<span class="genmed"><strong>{L_DESCRIPTION}:</strong> {ARTICLE_DESC}</span>
 							<!-- ENDIF -->
 							<hr />
-							
+
 							<div class="content">{ARTICLE_MESSAGE}</div>
 
 							<!-- IF S_HAS_ATTACHMENTS -->
@@ -90,7 +90,7 @@
 						</div>
 					<span class="corners-bottom"><span></span></span></div>
 				</div>
-			
+
 			<!-- IF .postrow -->
 				<div id="replies" class="<!-- IF S_IS_MCP or S_IS_UCP -->panel<!-- ELSE -->post bg3<!-- ENDIF -->">
 					<div class="inner"><span class="corners-top"><span></span></span>
@@ -122,7 +122,7 @@
 								<!-- ENDIF -->
 								<h3 class="first">{ARTICLE_TITLE}</h3>
 								<p class="author">
-									<a href="{postrow.U_VIEW_PERMANENT}"><img src="{T_IMAGESET_PATH}/icon_post_target.gif" alt="{L_PERMANENT_LINK}" /></a>{L_POST_BY_AUTHOR} <strong>{postrow.POST_AUTHOR_FULL}</strong> {L_POSTED_ON_DATE} {postrow.POST_DATE} 
+									<a href="{postrow.U_VIEW_PERMANENT}"><img src="{T_IMAGESET_PATH}/icon_post_target.gif" alt="{L_PERMANENT_LINK}" /></a>{L_POST_BY_AUTHOR} <strong>{postrow.POST_AUTHOR_FULL}</strong> {L_POSTED_ON_DATE} {postrow.POST_DATE}
 								</p>
 
 								<div class="content">{postrow.COMMENT_MESSAGE}</div>
@@ -189,10 +189,10 @@
 				<label>{L_KB_SORT_COMMENT_BY} {S_SORT_OPTIONS}</label> <label>{S_SORT_DIRECTION} <input type="submit" name="gosort" value="{L_GO}" class="button2" /></label>
 				<!-- ENDIF -->
 			</fieldset>
-		
+
 			</form>
 			<!-- ENDIF -->
-			
+
 
 			<div class="topic-actions">
 				<!-- IF U_ADD_COMMENT -->
@@ -200,7 +200,7 @@
 					<!-- IF U_ADD_COMMENT --><div class="comment-icon"><a href="{U_ADD_COMMENT}" title="{L_KB_ADD_COMMENT}"><span></span>{L_KB_ADD_COMMENT}</a></div><!-- ENDIF -->
 				</div>
 				<!-- ENDIF -->
-				
+
 				<div class="pagination">
 				{TOTAL_COMMENTS} {L_COMMENTS_LC}
 				<!-- IF PAGE_NUMBER -->

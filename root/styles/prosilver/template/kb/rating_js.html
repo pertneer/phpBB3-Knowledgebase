@@ -21,18 +21,18 @@
 		$("ul.rating li a").hover(
 			function(){
 				// Over function. This will change the stars up to the point that was hovered on to red
-	
+
 				// Get the child img id which holds some info we need.
 				var child = $(this).children().attr('id');
-	
+
 				// Child contains the object_id and the star number.
 				var object = child.split('_');
-	
+
 				// Set all the stars to grey first
 				$('#rating_' + object[1] + " li a img").each(function() {
 					$(this).attr({src: grey_star.src});
 				});
-	
+
 				// Set the red stars that we neeed to.
 				for (i = 1; i <= object[2]; i++)
 				{
@@ -44,11 +44,11 @@
 				$("ul.rating li a img.green").each(function() {
 					$(this).attr({src: green_star.src});
 				});
-	
+
 				$("ul.rating li a img.orange").each(function() {
 					$(this).attr({src: orange_star.src});
 				});
-	
+
 				$("ul.rating li a img.grey").each(function() {
 					$(this).attr({src: grey_star.src});
 				});
@@ -112,7 +112,7 @@ dataServer.prototype.send = function(urlget,data) {
 		if (this._xh.readyState == 4 && this._xh.status == 200) {
 			return this._xh.responseText;
 		}
-		
+
 	}
 	return false;
 }
@@ -129,7 +129,7 @@ function rateArticle(rating)  {
 	remote = new dataServer;
 	nt = remote.send('{RATE_URL}&rating='+rating);
 	document.getElementById('ratingtext').innerHTML = '{LA_RATED_THANKS}';
-	
+
 	if(rating == 0)
 	{
 		document.getElementById('rating_{ARTICLE_ID}_1').src = org_star_1;

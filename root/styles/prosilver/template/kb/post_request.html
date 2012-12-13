@@ -3,7 +3,7 @@
 <form id="postform" method="post" action="{S_POST_ACTION}"{S_FORM_ENCTYPE}>
 <div class="panel" id="postingbox">
 	<div class="inner"><span class="corners-top"><span></span></span>
-	
+
 	<h3>{L_POST_A}</h3>
 
 	<fieldset class="fields1">
@@ -15,7 +15,7 @@
 		<dd><input type="text" tabindex="1" name="guest_username" id="guest_username" size="25" value="{USERNAME}" class="inputbox" /></dd>
 	</dl>
 	<!-- ENDIF -->
-		
+
 	<!-- IF S_POST_ACTION -->
 	<dl style="clear: left;">
 		<dt><label for="title">{L_REQUEST_TITLE}:</label></dt>
@@ -51,10 +51,10 @@
 		<textarea name="message" id="message" rows="15" cols="76" tabindex="3" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" class="inputbox">{TEXT_MESSAGE}</textarea>
 	</div>
 	</fieldset>
-	
+
 		<span class="corners-bottom"><span></span></span></div>
 	</div>
-	
+
 	<div class="panel bg2">
 		<div class="inner"><span class="corners-top"><span></span></span>
 		<fieldset class="submit-buttons">
@@ -63,7 +63,7 @@
 		</fieldset>
 
 		<span class="corners-bottom"><span></span></span></div>
-	</div>	
+	</div>
 {S_FORM_TOKEN}
 </form>
 
