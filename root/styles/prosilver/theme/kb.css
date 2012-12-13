@@ -235,6 +235,11 @@ a.kblink {
 	clear:none;
 }
 
+
+#kb_postbody .panel .corners-bottom{
+	clear:none;
+}
+
 #kb_postbody .history .corners-bottom{
 	clear:both;
 }
