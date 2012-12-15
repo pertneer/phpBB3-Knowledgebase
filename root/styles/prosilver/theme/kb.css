@@ -10,7 +10,7 @@ textarea.desc {
 	clear:none;
 }
 
-.inner{
+#kb_postbody .inner{
 	font-size: 1.2em;
 }
 
@@ -42,6 +42,7 @@ textarea.desc {
 
 #kb_postbody .inner .postbody{
 	clear:none;
+	font-size: 1.2em;
 }
 
 #kb_postbody .error .inner span.corners-bottom {
@@ -157,7 +158,7 @@ ul.rating li, ul.rated li {
 .error {
 	color: #BC2A4D;
 	font-weight: bold;
-	font-size: 1em;
+	font-size: 1.2em;
 }
 
 /* kb link */
