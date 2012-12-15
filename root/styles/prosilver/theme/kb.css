@@ -10,6 +10,10 @@ textarea.desc {
 	clear:none;
 }
 
+.inner{
+	font-size: 1.2em;
+}
+
 #kb_postbody hr{
 	clear:none;
 }
