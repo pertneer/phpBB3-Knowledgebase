@@ -23,7 +23,7 @@ include($phpbb_root_path . 'includes/functions_kb.' . $phpEx);
 
 $user->session_begin();
 $auth->acl($user->data);
-$user->setup('mods/kb');
+$user->setup(array('mods/kb', 'mods/info_acp_kb', 'mods/info_mcp_kb', 'mods/info_ucp_kb', 'mods/info_acp_kb_permissions'));
 
 $auth_settings = array();
 if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
