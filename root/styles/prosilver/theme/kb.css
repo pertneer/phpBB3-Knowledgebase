@@ -183,7 +183,7 @@ a.kblink {
 	clear:none;
 }
 
-#kb_postbody .online .inner .kb_postbody {
+#kb_postbody #p.post .inner .kb_postbody {
 	width: 76%;
 }
 
