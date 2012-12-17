@@ -20,9 +20,9 @@ class acp_kb_info
 			'title'		=> 'ACP_KB_MANAGEMENT',
 			'version'	=> '1.0.1',
 			'modes'		=> array(
-				'settings'		=> array('title' => 'ACP_KB_SETTINGS', 'auth' => 'acl_a_board', 'cat' => array('ACP_KB')),
-				'health_check'	=> array('title' => 'ACP_KB_HEALTH_CHECK', 'auth' => 'acl_a_board', 'cat' => array('ACP_KB')),
-				'plugins'		=> array('title' => 'ACP_KB_PLUGINS', 'auth' => 'acl_a_board', 'cat' => array('ACP_KB')),
+				'settings'		=> array('title' => 'ACP_KB_SETTINGS', 'auth' => 'acl_a_kb_settings', 'cat' => array('ACP_KB')),
+				'health_check'	=> array('title' => 'ACP_KB_HEALTH_CHECK', 'auth' => 'acl_a_kb_maintenance', 'cat' => array('ACP_KB')),
+				'plugins'		=> array('title' => 'ACP_KB_PLUGINS', 'auth' => 'acl_a_kb_plugins', 'cat' => array('ACP_KB')),
 			),
 		);
 	}

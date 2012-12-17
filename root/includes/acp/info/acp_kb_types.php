@@ -20,7 +20,7 @@ class acp_kb_types_info
 			'title'		=> 'ACP_KB_ARTICLE_TYPES',
 			'version'	=> '1.0.1',
 			'modes'		=> array(
-				'manage'	=> array('title' => 'ACP_MANAGE_KB_TYPES', 'auth' => 'acl_a_board', 'cat' => array('ACP_KB')),
+				'manage'	=> array('title' => 'ACP_MANAGE_KB_TYPES', 'auth' => 'acl_a_kb_types', 'cat' => array('ACP_KB')),
 			),
 		);
 	}

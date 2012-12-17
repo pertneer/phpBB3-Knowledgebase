@@ -84,7 +84,7 @@ $logo_img = "{T_THEME_PATH}/images/kb_bot.png";
 */
 $mod = array(
 	'name'		=> 'phpBB3-Knowledgebase',
-	'version'	=> '1.0.4.1',
+	'version'	=> '1.0.4.2',
 	'config'	=> 'phpbb3_knowledgebase_version',
 	'enable'	=> 'phpbb3_knowledgebase_enable',
 	'kb_header_name'	=> '',
@@ -105,6 +105,34 @@ $permission_type = 'u_kb_';
 
 
 $versions = array(
+	'1.0.4.2'	=> array(
+		'permission_add' => array(
+			// Global
+			array('a_kb_settings', true),
+			array('a_kb_maintenance', true),
+			array('a_kb_plugins', true),
+			array('a_kb_category', true),
+			array('a_kb_perm', true),
+			array('a_kb_roles', true),
+			array('a_kb_types', true),
+		),
+
+		'permission_set' => array(
+			// Global Role permissions
+			array('ROLE_ADMIN_FULL', 'a_kb_settings'),
+			array('ROLE_ADMIN_FULL', 'a_kb_plugins'),
+			array('ROLE_ADMIN_FULL', 'a_kb_category'),
+			array('ROLE_ADMIN_FULL', 'a_kb_perm'),
+			array('ROLE_ADMIN_FULL', 'a_kb_roles'),
+			array('ROLE_ADMIN_FULL', 'a_kb_types'),
+			array('ROLE_ADMIN_FULL', 'a_kb_maintenance'),
+			array('ROLE_ADMIN_STANDARD', 'a_kb_category'),
+			array('ROLE_ADMIN_STANDARD', 'a_kb_perm'),
+			array('ROLE_ADMIN_STANDARD', 'a_kb_roles'),
+			array('ROLE_ADMIN_STANDARD', 'a_kb_types'),
+		),
+	),
+
 	'1.0.4.1'	=> array(
 		'config_add' => array(
 			array('kb_mod_notify', 0),
@@ -634,16 +662,6 @@ $versions = array(
 				array('ADMINISTRATORS', 'm_kb_view', 'group'),
 				array('ADMINISTRATORS', 'u_kb_request', 'group'),
 				array('REGISTERED', 'u_kb_request', 'group'),
-				// Global Role permissions
-				array('ROLE_ADMIN_FULL', 'a_test_mod'),
-				array('ROLE_USER_FULL', 'u_test_mod'),
-
-				// Global Group permissions
-				array('GUESTS', 'u_test_mod', 'group'),
-
-				// Local Permissions (local permissions can not be set for groups)
-				array('ROLE_FORUM_STANDARD', 'f_test_mod'),
-
 				array('ROLE_KB_GUEST','u_kb_bbcode'),
 				array('ROLE_KB_GUEST','u_kb_comment'),
 				array('ROLE_KB_GUEST','u_kb_download'),

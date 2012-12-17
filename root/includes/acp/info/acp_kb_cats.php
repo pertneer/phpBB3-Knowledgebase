@@ -20,7 +20,7 @@ class acp_kb_cats_info
 			'title'		=> 'ACP_KB_MANAGEMENT',
 			'version'	=> '1.0.1',
 			'modes'		=> array(
-				'manage'	=> array('title' => 'ACP_MANAGE_CATS', 'auth' => 'acl_a_board', 'cat' => array('ACP_KB')),
+				'manage'	=> array('title' => 'ACP_MANAGE_CATS', 'auth' => 'acl_a_kb_category', 'cat' => array('ACP_KB')),
 			),
 		);
 	}
