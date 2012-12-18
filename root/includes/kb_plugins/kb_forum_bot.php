@@ -138,6 +138,11 @@ function append_to_kb_options()
 					<td><b>{LINK}</b></td>
 					<td><b>" . generate_board_url() . '/kb.' . $phpEx . "?a=1</b></td>
 				</tr>
+				<tr>
+					<td>" . $user->lang['ARTICLE_LINK_LOCAL'] . "</td>
+					<td><b>{LOCAL_LINK}</b></td>
+					<td><b>[kb]1, Article Name[/kb]</b></td>
+				</tr>
 			</tbody>
 		</table>
 	";
@@ -183,13 +188,13 @@ function change_auth($user_id, $mode = 'replace', $data = false)
 
 function post_new_article($data)
 {
-	global $config, $user, $phpbb_root_path, $phpEx;
+	global $config, $user, $phpbb_root_path, $phpEx, $db, $auth;
 
 	if (!function_exists('user_notification'))
 	{
 		include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 	}
-	
+
 	if (($config['kb_forum_bot_forum_id'] == '' || $config['kb_forum_bot_forum_id'] == 0)
 		|| ($config['kb_forum_bot_user'] == '' || $config['kb_forum_bot_user'] == 0)
 		|| $config['kb_forum_bot_subject'] == '' 
@@ -197,7 +202,9 @@ function post_new_article($data)
 	{
 		return;
 	}
-	
+
+	include_once($phpbb_root_path . 'includes/constants_kb.' . $phpEx);
+
 	$vars = array(
 		'{AUTHOR}'		=> '[url=' . generate_board_url() . '/memberlist.' . $phpEx . '?mode=viewprofile&u=' . $data['article_user_id'] . '][color=#' . $data['article_user_color'] . ']' . $data['article_user_name'] . '[/color][/url]',
 		'{TITLE}'		=> $data['article_title'],
@@ -206,9 +213,22 @@ function post_new_article($data)
 		'{LINK}'		=> generate_board_url() . '/kb.' . $phpEx . '?a=' . $data['article_id'],
 		'{LOCAL_LINK}'	=> '[kb]'. $data['article_id'] . ', ' . $data['article_title'].'[/kb]',
 	);
-	
+
 	//Get post bots permissions
 	$perms = change_auth($config['kb_forum_bot_user']);
+
+	//check article cat for permissions
+	// use $data['article_id'] to find category
+	$sql = 'SELECT cat_id
+		FROM '. KB_TABLE .'
+		WHERE article_id = \''. $data['article_id'] .'\'';
+	$result = $db->sql_query($sql);
+	$cat_id = (int) $db->sql_fetchfield('cat_id');
+	$db->sql_freeresult($result);
+	if (!$auth->acl_get('u_kb_view', $cat_id))
+	{
+		return;
+	}
 
 	//Parse the text with the bbcode parser and write into $text
 	$subject	= utf8_normalize_nfc($config['kb_forum_bot_subject']);
