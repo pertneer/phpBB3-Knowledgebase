@@ -84,7 +84,7 @@ $logo_img = "{T_THEME_PATH}/images/kb_bot.png";
 */
 $mod = array(
 	'name'		=> 'phpBB3-Knowledgebase',
-	'version'	=> '1.0.4.2',
+	'version'	=> '1.0.4.3',
 	'config'	=> 'phpbb3_knowledgebase_version',
 	'enable'	=> 'phpbb3_knowledgebase_enable',
 	'kb_header_name'	=> '',
@@ -105,6 +105,53 @@ $permission_type = 'u_kb_';
 
 
 $versions = array(
+	'1.0.4.3'	=> array(
+		'permission_unset' => array(
+				array('ADMINISTRATORS', 'm_kb_author', 'group'),
+				array('ADMINISTRATORS', 'm_kb_comment', 'group'),
+				array('ADMINISTRATORS', 'm_kb_edit', 'group'),
+				array('ADMINISTRATORS', 'm_kb_delete', 'group'),
+				array('ADMINISTRATORS', 'm_kb_req_edit', 'group'),
+				array('ADMINISTRATORS', 'm_kb_status', 'group'),
+				array('ADMINISTRATORS', 'm_kb_time', 'group'),
+				array('ADMINISTRATORS', 'm_kb_view', 'group'),
+				array('ADMINISTRATORS', 'u_kb_request', 'group'),
+				array('REGISTERED', 'u_kb_request', 'group'),
+		),
+
+		'permission_set' => array(
+			//moderator full permissions
+			array('ROLE_MOD_FULL', 'm_kb_author'),
+			array('ROLE_MOD_FULL', 'm_kb_comment'),
+			array('ROLE_MOD_FULL', 'm_kb_edit'),
+			array('ROLE_MOD_FULL', 'm_kb_delete'),
+			array('ROLE_MOD_FULL', 'm_kb_req_edit'),
+			array('ROLE_MOD_FULL', 'm_kb_status'),
+			array('ROLE_MOD_FULL', 'm_kb_time'),
+			array('ROLE_MOD_FULL', 'm_kb_view'),
+			array('ROLE_MOD_FULL', 'u_kb_request'),
+			//moderator standard permissions
+			array('ROLE_MOD_STANDARD', 'm_kb_comment'),
+			array('ROLE_MOD_STANDARD', 'm_kb_edit'),
+			array('ROLE_MOD_STANDARD', 'm_kb_delete'),
+			array('ROLE_MOD_STANDARD', 'm_kb_status'),
+			array('ROLE_MOD_STANDARD', 'm_kb_view'),
+			array('ROLE_MOD_STANDARD', 'u_kb_request'),
+			//moderator queue permissions
+			array('ROLE_MOD_QUEUE', 'm_kb_comment'),
+			array('ROLE_MOD_QUEUE', 'm_kb_status'),
+			array('ROLE_MOD_QUEUE', 'm_kb_view'),
+			array('ROLE_MOD_QUEUE', 'u_kb_request'),
+			//moderator simple permissions
+			array('ROLE_MOD_SIMPLE', 'm_kb_comment'),
+			//user roles
+			array('ROLE_USER_FULL', 'u_kb_request'),
+			array('ROLE_USER_NOAVATAR', 'u_kb_request'),
+			array('ROLE_USER_NOPM', 'u_kb_request'),
+			array('ROLE_USER_STANDARD', 'u_kb_request'),
+		),
+	),
+
 	'1.0.4.2'	=> array(
 		'permission_add' => array(
 			// Global
