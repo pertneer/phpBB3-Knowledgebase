@@ -2,8 +2,9 @@
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
-<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6-RC1.xsd">
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
 	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator 1.2.6 by tumba25 (offline version)"/>
 		<meta name="generator" content="MODX file generated with PP MODX Creator 1.0.1 by tumba25 (offline version)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
 		<title lang="en"><![CDATA[phpBB3-Knowledgebase]]></title>
@@ -46,7 +47,7 @@
 				</contributions-group>
 			</author>
 		</author-group>
-		<mod-version>1.0.4.2</mod-version>
+		<mod-version>1.0.5</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>2400</time>
@@ -358,6 +359,14 @@
 				<rev-version>1.0.4.2</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Added administrator role permissions]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2012-12-20</date>
+				<rev-version>1.0.5</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Updating for new beta release]]></change>
+					<change><![CDATA[Moved board related permissions to roles instead of groups]]></change>
 				</changelog>
 			</entry>
 		</history>
