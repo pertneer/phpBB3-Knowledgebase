@@ -29,7 +29,7 @@ class kb_version
 			'title'		=> 'phpBB3-Knowledgebase',
 			'tag'		=> 'kb',
 			'version'	=> '1.0.5',//only changed when releasing new beta or final version
-			'file'		=> array('pertneer.net', 'mods', 'knowledgebase.xml'),
+			'file'		=> array('kb.pertneer.net', 'mods', 'knowledgebase.xml'),
 		);
 	}
 }
