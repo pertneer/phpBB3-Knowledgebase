@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator 1.2.6 by tumba25 (offline version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[phpBB3-Knowledgebase Upgrade]]></title>
+		<description lang="en"><![CDATA[Upgrade from V1.0.4 to V1.0.5]]></description>
+		<author-notes lang="en"><![CDATA[Only use this if you are upgrading from version 1.0.4]]></author-notes>
+		<github><![CDATA[https://github.com/pertneer/phpBB3-Knowledgebase]]></github>
+		<author-group>
+			<author>
+				<username><![CDATA[Pertneer]]></username>
+			</author>
+		</author-group>
+		<mod-version>1.0.5</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>1200</time>
+			<target-version>3.0.11</target-version>
+		</installation>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/*.*" to="*.*"/>
+		</copy>
+		<open src="includes/acp/acp_board.php">
+			<edit>
+				<find><![CDATA[						'feed_exclude_id'			=> array('lang' => 'ACP_FEED_EXCLUDE_ID',			'validate' => 'string',	'type' => 'custom', 'method' => 'select_exclude_forums', 'explain' => true),]]></find>
+				<action type="after-add"><![CDATA[						'legend5'					=> 'ACP_KB_FEED_SETTINGS',
+						'kb_feed_enable'			=> array('lang' => 'KB_FEED_ENABLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false),]]></action>
+			</edit>
+		</open>
+		<open src="language/en/common.php">
+			<edit>
+				<find><![CDATA[	'ARE_WATCHING_TOPIC'			=> 'You have subscribed to be notified of new posts in this topic.',]]></find>
+				<action type="after-add"><![CDATA[	'ARTICLES'						=> 'Articles',]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	'ARTICLES'				=> 'Articles',]]></find>
+				<action type="replace-with"/>
+			</edit>
+		</open>
+		<open src="language/en/acp/board.php">
+			<edit>
+				<find><![CDATA[	'ACP_FEED_EXCLUDE_ID_EXPLAIN'		=> 'Content from these will be <strong>not included in feeds</strong>. Select no forum to pull data from all forums.<br />Select/Deselect multiple forums by holding <samp>CTRL</samp> and clicking.',]]></find>
+				<action type="after-add"><![CDATA[	'KB_FEED_ENABLE'					=> 'Enable Knowledge Base Feeds',]]></action>
+			</edit>
+		</open>
+		<php-installer><![CDATA[kb_install/]]></php-installer>
+	</action-group>
+</mod>
