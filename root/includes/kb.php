@@ -486,6 +486,7 @@ class knowledge_base
 		$template->assign_vars(array(
 			'L_AUTHOR'					=> $user->lang['ARTICLE_AUTHOR'],
 			'L_ARTICLES_LC' 			=> utf8_strtolower($user->lang['ARTICLES']),
+			'L_KB_LINK'					=> (isset($config['kb_link_name']) && $config['kb_link_name'] != '') ? $config['kb_link_name'] : $user->lang['KB'],
 			'L_KB_HEADER'				=> (isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
 			'L_KB_HEADER_DESCRIPTION'	=> (isset($config['kb_header_desc']) && $config['kb_header_desc'] != '') ? htmlspecialchars_decode($config['kb_header_desc']) :  $user->lang['KB_HEADER_DESCRIPTION'],
 			'S_HAS_SUBCATS' 			=> ($cat_data['left_id'] != $cat_data['right_id'] - 1) ? true : false,
@@ -937,6 +938,7 @@ class knowledge_base
 			'ARTICLE_DESC_CLEAN'		=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? strip_tags($article_desc_re) : '',
 			'ARTICLE_DESC'				=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? $article_desc_re : '',
 			'ARTICLE_ID' 				=> $this->article_id,
+			'L_KB_LINK'					=> (isset($config['kb_link_name']) && $config['kb_link_name'] != '') ? $config['kb_link_name'] : $user->lang['KB'],
 			'L_KB_HEADER'				=> (isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] :  $user->lang['KB_HEADER'],
 			'L_KB_HEADER_DESCRIPTION'	=> (isset($config['kb_header_desc']) && $config['kb_header_desc'] != '') ? htmlspecialchars_decode($config['kb_header_desc']) :  $user->lang['KB_HEADER_DESCRIPTION'],
 			'ARTICLE_TITLE' 			=> $article_type['article_title'],

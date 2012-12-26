@@ -760,7 +760,7 @@ else
 			<edit>
 				<find><![CDATA[		'U_RESTORE_PERMISSIONS'	=> ($user->data['user_perm_from'] && $auth->acl_get('a_switchperm')) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=restore_perm') : '',]]></find>
 				<action type="after-add"><![CDATA['U_KB'					=> append_sid("{$phpbb_root_path}kb.$phpEx"),
-'L_KB'					=> (isset($config['kb_link_name']) && $config['kb_link_name'] != '') ? $config['kb_link_name'] : $user->lang['KB_NAME'],]]></action>
+'L_KB_LINK'				=> (isset($config['kb_link_name']) && $config['kb_link_name'] != '') ? $config['kb_link_name'] : $user->lang['KB'],]]></action>
 			</edit>
 		</open>
 		<open src="includes/functions_user.php">
@@ -928,7 +928,7 @@ else
 			</edit>
 			<edit>
 				<find><![CDATA[	'KIB'					=> 'KiB',]]></find>
-				<action type="after-add"><![CDATA[	'KB_NAME'				=> 'Knowledge Base',
+				<action type="after-add"><![CDATA[	'KB'				=> 'KB',
 	'KB_HEADER'				=> 'Knowledge Base',
 	'KB_EXPLAIN'			=> 'phpBB3-KnowledgeBase',]]></action>
 			</edit>
@@ -1038,7 +1038,7 @@ img_button_request_new = button_request_new.gif*25*116]]></action>
 			</edit>
 			<edit>
 				<find><![CDATA[<li class="icon-faq"><a href="{U_FAQ}" title="{L_FAQ_EXPLAIN}">{L_FAQ}</a></li>]]></find>
-				<action type="before-add"><![CDATA[<li class="icon-kb"> <a href="{U_KB}" title="{L_KB_EXPLAIN}">{L_KB}</a></li>]]></action>
+				<action type="before-add"><![CDATA[<li class="icon-kb"> <a href="{U_KB}" title="{L_KB_EXPLAIN}">{L_KB_LINK}</a></li>]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/viewforum_body.html">
