@@ -786,6 +786,19 @@ function uninstall_actions()
 	}
 }
 
+function first_article_count_fix()
+{
+	global $db, $config, $user, $phpbb_root_path, $phpEx, $template, $auth_settings;
+	$user_sql = array(
+		'user_articles'		=> '1',
+	);
+
+	$sql = 'UPDATE ' . USERS_TABLE . '
+			SET ' . $db->sql_build_array('UPDATE', $user_sql) . "
+			WHERE user_id = " . $user->data['user_id'];
+	$db->sql_query($sql);
+}
+
 function set_category_perm()
 {
 
@@ -829,6 +842,7 @@ function set_category_perm()
 	$db->sql_multi_insert(KB_ACL_GROUPS_TABLE, $sql_ary);
 
 	kb_install_perm_plugins();
+	first_article_count_fix();
 
 }
 
