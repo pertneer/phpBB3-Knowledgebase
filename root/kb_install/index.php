@@ -788,7 +788,7 @@ function uninstall_actions()
 
 function first_article_count_fix()
 {
-	global $db, $config, $user, $phpbb_root_path, $phpEx, $template, $auth_settings;
+	global $db, $user;
 	$user_sql = array(
 		'user_articles'		=> '1',
 	);
