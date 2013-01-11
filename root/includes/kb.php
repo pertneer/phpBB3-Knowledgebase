@@ -932,9 +932,12 @@ class knowledge_base
 			$db->sql_freeresult($result);
 		}
 
+		//give option to not show copyright symbol
+		$kb_copy = ($config['kb_copyright_symbol']) ? '&copy; ' : '';
+
 		// Send vars to template
 		$template->assign_vars(array(
-			'ARTICLE_COPYRIGHT'			=> ($config['kb_copyright'] != '') ? '&copy; ' . $config['kb_copyright'] : '',
+			'ARTICLE_COPYRIGHT'			=> ($config['kb_copyright'] != '') ? $kb_copy . $config['kb_copyright'] : '',
 			'ARTICLE_DESC_CLEAN'		=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? strip_tags($article_desc_re) : '',
 			'ARTICLE_DESC'				=> ($config['kb_show_desc_article'] && !$config['kb_disable_desc']) ? $article_desc_re : '',
 			'ARTICLE_ID' 				=> $this->article_id,

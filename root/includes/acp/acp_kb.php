@@ -86,6 +86,7 @@ class acp_kb
 						'kb_header_name'		=> array('lang' => 'KB_HEADER_NAME',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),
 						'kb_header_desc'		=> array('lang' => 'KB_HEADER_DESC',	'validate' => 'string',	'type' => 'textarea:5:40', 	'explain' => true),
 						'kb_copyright'			=> array('lang' => 'KB_PER_COPYRIGHT',	'validate' => 'string',	'type' => 'text:40:50', 	'explain' => true),
+						'kb_copyright_symbol'	=> array('lang' => 'KB_COPYRIGHT_SYMBOL',	'validate' => 'bool',	'type' => 'radio:yes_no',	'explain' => true),
 						'kb_default_rating'		=> array('lang' => 'KB_DEFAULT_RATING',	'validate' => 'int',	'type' => 'select', 'method' => 'select_default_rating', 'explain' => false),
 						'kb_articles_per_page'	=> array('lang' => 'KB_ART_PER_PAGE',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => false),
 						'kb_comments_per_page'	=> array('lang' => 'KB_COM_PER_PAGE',	'validate' => 'int',	'type' => 'text:3:5', 		'explain' => false),
