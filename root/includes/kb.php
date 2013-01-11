@@ -933,7 +933,7 @@ class knowledge_base
 		}
 
 		//give option to not show copyright symbol
-		$kb_copy = ($config['kb_copyright_symbol']) ? '&copy; ' : '';
+		$kb_copy = (isset($config['kb_copyright_symbol']) && $config['kb_copyright_symbol'] == 0) ? '' : '&copy; ';
 
 		// Send vars to template
 		$template->assign_vars(array(
