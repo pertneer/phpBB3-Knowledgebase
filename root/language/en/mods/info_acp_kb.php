@@ -78,6 +78,8 @@ $lang = array_merge($lang, array(
 	'KB_EMAIL_ARTICLE'						=> 'Enable emailing of articles to a friend',
 	'KB_EMAIL_ARTICLE_EXPLAIN'				=> 'This feature requires that emailing is enabled for this phpBB installation.',
 	'KB_EXP_ARTICLE'						=> 'Enable export of articles',
+	'KB_EXP_ARTICLE_PDF'					=> 'Enable exporting in pdf format',
+	'KB_EXP_ARTICLE_PDF_EXPLAIN'			=> '<a href="http://www.fpdf.org/" onclick="window.open(this.href); return false;">fpdf</a> is required to use this feature. <br /> Place fpdf.php in includes directory.',
 	'KB_EXT_HEADER'							=> 'Enable extended header on article page',
 	'KB_EXT_HEADER_EXPLAIN'					=> 'If enabled an extended header will be shown on the article page, with information such as permanent link and article id.',
 	'KB_LAYOUT_STYLE'						=> 'Category listing style',

@@ -3047,7 +3047,7 @@ function fix_error_vars($mode, $error)
 	return $error;
 }
 
-function export_data($type = 'word', $article_id)
+function export_data($article_id, $type = 'word')
 {
 	global $db, $phpbb_root_path, $user, $config, $phpEx;
 
@@ -3585,47 +3585,36 @@ function export_data($type = 'word', $article_id)
 
 		break;
 
-		// not working need to find a new way of doing this or just leave it as word?
-		/*
+		// this requires the use of fpdf from http://www.fpdf.org?
 		case 'pdf':
-			$output .= "<html>";
-			$output .= "<head>
-							<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
-							<meta name=\"ProgId\" content=\"Pdf.Document\">
-							<style>
-							@page Section1
-							{
-								margin: 3cm 2.5cm 3cm 2.5cm;
-							}
-							</style>
-						</head>
-						<body>
-						<div class=\"Section1\">";
-			$output .= "<span style=\"font-weight: bold; text-align: center; font-size: 150%; \">" . $article_data['article_title'] . "</span><br /><br />";
-			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['ARTICLE_ID'] . ": </span>" . $article_data['article_id'] . "<br />";
-			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['WRITTEN_BY'] . ": </span>" . $article_data['article_user_name'] . "<br />";
-			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['WRITTEN_ON'] . ": </span>" . $user->format_date($article_data['article_time']) . "<br />";
-			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['DESCRIPTION'] . ": </span>" . $desc . "<hr /><br />";
-			$output .= "<span style=\"font-weight: bold; \">" . $user->lang['ARTICLE_CONTENT'] . "</span><br />";
-			$output .= $text;
-			$output .= "</div></body></html>";
-
-			//Set some formal stuff
+			if (!file_exists($phpbb_root_path . 'includes/fpdf.' . $phpEx))
+			{
+				trigger_error('KB_NOT_ENABLE_PDF');
+			}
+			
+			require_once($phpbb_root_path . 'includes/fpdf.' . $phpEx);
+			$pdf = new FPDF();
+			$title = $article_data['article_title'];
+			$pdf->SetTitle($title);
+			$pdf->SetAuthor($article_data['article_user_name']);
 			$extension = '.pdf';
-
 			$save_as = str_replace(' ', '_', $article_data['article_title']);
-			$location = $phpbb_root_path . 'store/' . $save_as . $extension;
-
-			$fp = fopen($location, 'w+');
-			fwrite($fp, $output);
-			fclose($fp);
+			$pdf->AddPage();
+			$pdf->SetFont('Arial','B',16);
+			$pdf->Cell(40,10,$article_data['article_title']);
+			$filename = $save_as . $extension;
+			$pdf->Output($filename, 'D');
 		break;
-		*/
 	}
 
-	set_download($save_as, $filename, $extension);
-	unlink($location);
-	unlink($filename);
+	switch ($type)
+	{
+		case 'word':
+			set_download($save_as, $filename, $extension);
+			unlink($location);
+			unlink($filename);
+		break;
+	}
 }
 
 function set_download($filename, $location, $extension)

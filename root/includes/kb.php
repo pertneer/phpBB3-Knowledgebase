@@ -46,6 +46,7 @@ class knowledge_base
 		$this->cat_id 		= $cat_id;
 		$this->tag 			= request_var('t', '', true);
 		$this->mode 		= request_var('i', '');
+		$this->export_type	= request_var('e', 'word');
 		$this->sort 		= request_var('sort', '');
 		$this->dir	 		= request_var('dir', 'DESC');
 		$this->start 		= request_var('start', 0);
@@ -148,7 +149,7 @@ class knowledge_base
 				break;
 
 				case 'export':
-					$this->export_article();
+					$this->export_article($this->export_type);
 				break;
 
 				// View the kb index screen
@@ -164,16 +165,22 @@ class knowledge_base
 	/**
 	* Export article
 	*/
-	function export_article()
+	function export_article($type = 'word')
 	{
-		global $config;
+		global $config, $phpEx, $phpbb_root_path;
 
 		if(!$config['kb_export_article'])
 		{
 			trigger_error('KB_DISABLE_EXPORT');
 		}
 
-		export_data('word', $this->article_id);
+		if($type == 'pdf' && isset($config['kb_export_article_pdf']) && $config['kb_export_article_pdf'] == 1){
+			export_data($this->article_id, 'pdf');
+		}elseif($type == 'word'){
+			export_data($this->article_id);
+		}else{
+			trigger_error('Something is wrong, contact Admin for assistance');
+		}
 	}
 
 	/**
@@ -956,6 +963,8 @@ class knowledge_base
 			'U_LOCAL_PERM_LINK'		=> '[kb]'. $this->article_id . ', ' . $article_type['article_title'].'[/kb]',
 
 			'U_DLOAD_WORD'			=> append_sid("{$phpbb_root_path}kb.$phpEx", 'i=export&amp;a=' . $this->article_id),
+			'U_PDF_ENABLE'			=> (isset($config['kb_export_article_pdf']) && $config['kb_export_article_pdf'] == 1 ) ? true : false,
+			'U_DLOAD_PDF'			=> append_sid("{$phpbb_root_path}kb.$phpEx", 'i=export&amp;e=pdf&amp;a=' . $this->article_id),
 			'POSTER_ARTICLES' 		=> $article_data['user_articles'],
 			'U_POSTER_ARTICLES'		=> append_sid("{$phpbb_root_path}kb.$phpEx", 'i=search&amp;author_id=' . $article_data['article_user_id']),
 			'ARTICLE_AUTHOR_FULL'	=> get_username_string('full', $article_data['article_user_id'], $article_data['article_user_name'], $article_data['article_user_color']),
