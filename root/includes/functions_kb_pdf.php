@@ -23,6 +23,7 @@ class PDF extends FPDF
 	var $I;
 	var $U;
 	var $SPAN;
+	var $BLOCKQUOTE;
 	var $IMG;
 	var $LI;
 	var $HREF;
@@ -36,7 +37,8 @@ class PDF extends FPDF
 		$this->I = 0;
 		$this->U = 0;
 		$this->IMG = '';
-		$this->SPAN = '';
+		$this->SPAN = 
+		$this->BLOCKQUOTE = '';
 		$this->LI = 0;
 		$this->HREF = '';
 	}
@@ -44,6 +46,8 @@ class PDF extends FPDF
 	{
 		// HTML parser
 		$html = str_replace("\n",' ',$html);
+		$html = str_replace('<blockquote class="uncited"><div>','<blockquote>',$html);
+		$html = str_replace('</div></blockquote>','</blockquote>',$html);
 		$a = preg_split('/<(.*)>/U',$html,-1,PREG_SPLIT_DELIM_CAPTURE);
 		foreach($a as $key=>$value)
 		{
@@ -67,19 +71,23 @@ class PDF extends FPDF
 						{
 							case $h1:
 								$this->SetFont('Arial','B',16);
-								$this->SetTextColor(128,0,64);
+								$color = $this->hex2dec('#800040');
+								$this->SetTextColor($color['R'], $color['G'], $color['B']);
 							break;
 							case $h2 :
 								$this->SetFont('Arial','B',15);
-								$this->SetTextColor(0,0,191);
+								$color = $this->hex2dec('#0000BF');
+								$this->SetTextColor($color['R'], $color['G'], $color['B']);
 							break;
 							case $h3:
 								$this->SetFont('Arial','B',14);
-								$this->SetTextColor(0,128,0);
+								$color = $this->hex2dec('#008000');
+								$this->SetTextColor($color['R'], $color['G'], $color['B']);
 							break;
 							case $h4:
 								$this->SetFont('Arial','B',13);
-								$this->SetTextColor(64,128,128);
+								$color = $this->hex2dec('#408080');
+								$this->SetTextColor($color['R'], $color['G'], $color['B']);
 							break;
 						}
 					}
@@ -90,7 +98,25 @@ class PDF extends FPDF
 						//$this->Write(40, print_r($this->IMG));
 						$this->Image($img_name,$this->GetX(),$this->GetY());
 						$this->IMG = '';
+						$size = getimagesize($img_name);
+						$this->Ln($this->px2mm($size[1]));//set an integer of the height of the image?
 					}
+					if($this->BLOCKQUOTE)
+					{
+						$this->SetX($this->GetX()+20);
+						//$this->Write(40, print_r($this->BLOCKQUOTE));
+						// background #EBEADD
+						$color = $this->hex2dec('#EBEADD');
+						$this->SetFillColor($color['R'], $color['G'], $color['B']);
+						// border color #DBDBCE
+						$color = $this->hex2dec('#DBDBCE');
+						$this->SetDrawColor($color['R'], $color['G'], $color['B']);
+						$this->SetTextColor(0,0,0);
+						$this->Rect($this->GetX(), $this->GetY(), $this->GetStringWidth($value) + 3, 10 , 'DF');
+						$this->Ln(3);
+						$this->SetX($this->GetX()+20);
+					}
+					
 					$this->Write(5,$value);
 					$this->SetTextColor(0,0,0);
 				}
@@ -117,6 +143,13 @@ class PDF extends FPDF
 							$attr[strtoupper($a3[1])] = $a3[2];
 						}
 					}
+					/*$debug = '';
+					foreach($attr as $stuff){
+						$debug .= $stuff;
+					}
+					$this->Write(5, $tag . $debug);
+					$this->Ln();
+					*/
 					$this->OpenTag($tag,$attr);
 				}
 			}
@@ -136,6 +169,10 @@ class PDF extends FPDF
 		if($tag == 'IMG')
 		{
 			$this->IMG = $attr['SRC'];
+		}
+		if($tag == 'BLOCKQUOTE')
+		{
+			$this->BLOCKQUOTE = $tag;//$attr['BLOCKQUOTE']
 		}
 
 		if(in_array($tag, $tags))
@@ -158,6 +195,10 @@ class PDF extends FPDF
 		if($tag == 'SPAN')
 		{
 			$this->SPAN = '';
+		}
+		if($tag =='BLOCKQUOTE')
+		{
+			$this->BLOCKQUOTE = '';
 		}
 		if($tag=='B' || $tag=='I' || $tag=='U')
 		{
@@ -192,6 +233,26 @@ class PDF extends FPDF
 		$this->Write(5,$txt,$URL);
 		$this->SetStyle('U',false);
 		$this->SetTextColor(0);
+	}
+
+	function hex2dec($couleur = "#000000")
+	{
+		$R = substr($couleur, 1, 2);
+		$rouge = hexdec($R);
+		$V = substr($couleur, 3, 2);
+		$vert = hexdec($V);
+		$B = substr($couleur, 5, 2);
+		$bleu = hexdec($B);
+		$tbl_couleur = array();
+		$tbl_couleur['R']=$rouge;
+		$tbl_couleur['G']=$vert;
+		$tbl_couleur['B']=$bleu;
+		return $tbl_couleur;
+	}
+
+	function px2mm($px)
+	{
+		return $px*25.4/72;
 	}
 }
 ?>
