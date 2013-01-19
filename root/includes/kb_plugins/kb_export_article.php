@@ -19,9 +19,10 @@ if (!defined('IN_PHPBB'))
 // Only add these options if in acp
 if (defined('IN_KB_PLUGIN'))
 {
-	$acp_options['legend1'] 			= 'EXPORT_ARTICLE';
-	$acp_options['kb_export_article']	= array('lang' => 'KB_EXP_ARTICLE',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false);
-	$acp_options['kb_export_article_pdf']	= array('lang' => 'KB_EXP_ARTICLE_PDF',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => true);
+	$acp_options['legend1'] 					= 'EXPORT_ARTICLE';
+	$acp_options['kb_export_article']			= array('lang' => 'KB_EXP_ARTICLE',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false);
+	$acp_options['kb_export_article_pdf']		= array('lang' => 'KB_EXP_ARTICLE_PDF',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => true);
+	$acp_options['kb_pdf_force_dwnld']			= array('lang' => 'KB_PDF_FORCE_DWNLD',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => true);
 	$acp_options['kb_export_article_menu']		= array('lang' => 'WHICH_MENU',			'validate' => 'int',	'type' => 'custom', 		'function' 	=> 'select_menu_check', 	'explain' 	=> false);
 
 	$details = array(

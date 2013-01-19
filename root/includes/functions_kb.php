@@ -3593,17 +3593,38 @@ function export_data($article_id, $type = 'word')
 			}
 			
 			require_once($phpbb_root_path . 'includes/fpdf.' . $phpEx);
-			$pdf = new FPDF();
+			require_once($phpbb_root_path . 'includes/functions_kb_pdf.' . $phpEx);
+			$pdf = new PDF();
 			$title = $article_data['article_title'];
 			$pdf->SetTitle($title);
+			$pdf->SetDisplayMode('real');//real, fullwidth, fullpage, default
 			$pdf->SetAuthor($article_data['article_user_name']);
+			$pdf->SetCreator('phpBB3-Knowledgebase');
+			$pdf->SetKeywords($article_data['article_tags']);
+			$pdf->SetSubject($article_data['article_desc'],true);
 			$extension = '.pdf';
-			$save_as = str_replace(' ', '_', $article_data['article_title']);
+			$save_as = str_replace(' ', '_', $title);
 			$pdf->AddPage();
+			$pdf->SetFont('Arial','B',20);
+			$pdf->SetTextColor(79,132,173);
+			$pdf->Cell(40,8,(isset($config['kb_header_name']) && $config['kb_header_name'] != '') ? $config['kb_header_name'] : 'Knowledge Base Article');
+			$pdf->Ln();
+			$pdf->SetTextColor(188,42,77);
 			$pdf->SetFont('Arial','B',16);
-			$pdf->Cell(40,10,$article_data['article_title']);
+			$pdf->Cell(40,8,$title);
+			$pdf->Ln();
+			$pdf->SetTextColor(0,0,0);
+			$pdf->SetFont('Arial','I',6);
+			$pdf->Cell(10, 2, 'by: ' . $article_data['article_user_name']);
+			$pdf->Ln();
+			$pdf->SetFont('courier','I',10);
+			$pdf->WriteHTML($article_data['article_desc']);
+			$pdf->Ln();
+			$pdf->Ln();
+			$pdf->SetFont('Arial','',12);
+			$pdf->WriteHTML($message);
 			$filename = $save_as . $extension;
-			$pdf->Output($filename, 'D');
+			(isset($config['kb_pdf_force_dwnld']) && $config['kb_pdf_force_dwnld'] == 1) ? $pdf->Output($filename, 'D') : $pdf->Output($filename, 'I');
 		break;
 	}
 
