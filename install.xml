@@ -47,7 +47,7 @@
 				</contributions-group>
 			</author>
 		</author-group>
-		<mod-version>1.0.5</mod-version>
+		<mod-version>1.0.6</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>2400</time>
@@ -367,6 +367,16 @@
 				<changelog lang="en">
 					<change><![CDATA[Updating for new beta release]]></change>
 					<change><![CDATA[Moved board related permissions to roles instead of groups]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2013-01-19</date>
+				<rev-version>1.0.6</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Added pdf export option]]></change>
+					<change><![CDATA[Added ability to hide the copyright symbol]]></change>
+					<change><![CDATA[Fixed xHTML compliant issue]]></change>
+					<change><![CDATA[Misc bugfixes]]></change>
 				</changelog>
 			</entry>
 		</history>
