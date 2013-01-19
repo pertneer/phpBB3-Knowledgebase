@@ -37,7 +37,7 @@ class PDF extends FPDF
 		$this->I = 0;
 		$this->U = 0;
 		$this->IMG = '';
-		$this->SPAN = 
+		$this->SPAN = '';
 		$this->BLOCKQUOTE = '';
 		$this->LI = 0;
 		$this->HREF = '';
