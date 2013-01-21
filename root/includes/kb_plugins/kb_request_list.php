@@ -23,6 +23,12 @@ if (defined('IN_KB_PLUGIN'))
 	$acp_options['kb_request_list_enable'] 		= array('lang' => 'ENABLE_REQUEST_ARTICLES',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' 	=> false);
 	$acp_options['kb_request_list_menu']		= array('lang' => 'WHICH_MENU',						'validate' => 'int',	'type' => 'custom', 		'function' 	=> 'select_menu_check', 	'explain' 	=> false);
 	$acp_options['kb_request_list_limit']		= array('lang' => 'REQUEST_ARTICLES_LIMIT',			'validate' => 'int',	'type' => 'text:5:2',		'explain'	=> false);
+	
+	$acp_options['legend2'] 					= 'KB_REQUEST_STATUS_COLOR';
+	$acp_options['kb_request_color_enable'] 	= array('lang' => 'KB_REQUEST_STATUS_COLOR_ENABLE',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' 	=> false);
+	$acp_options['kb_request_status_pending'] 	= array('lang' => 'KB_COLOR_PENDING',		'validate' => 'string',	'type' => 'text:6:6', 	'explain' 	=> true);
+	$acp_options['kb_request_status_added'] 	= array('lang' => 'KB_COLOR_ADDED',		'validate' => 'string',	'type' => 'text:6:6', 	'explain' 	=> true);
+	$acp_options['kb_request_status_request'] 	= array('lang' => 'KB_COLOR_REQUEST',		'validate' => 'string',	'type' => 'text:6:6', 	'explain' 	=> true);
 
 	$details = array(
 		'PLUGIN_NAME'			=> 'PLUGIN_REQUEST',

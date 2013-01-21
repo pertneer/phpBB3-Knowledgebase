@@ -1585,7 +1585,7 @@ function kb_user_delete($mode, $user_id, $post_username)
 */
 function show_request_list($in_menu, $num, $start = 0)
 {
-	global $phpEx, $user, $auth;
+	global $phpEx, $user, $auth, $config;
 	global $db, $phpbb_root_path, $template;
 
 	$sql = $db->sql_build_query('SELECT', array(
@@ -1624,17 +1624,41 @@ function show_request_list($in_menu, $num, $start = 0)
 		{
 			// Has been added
 			case STATUS_ADDED:
-				$title = '<b><span style="color: #008000;">[' . $user->lang['STATUS_ADDED'] . ']</span></b> ' . $row['request_title'];
+				$color = (isset($config['kb_request_status_added']) && $config['kb_request_status_added'] != '') ? $config['kb_request_status_added'] : '';
+				if($color != '' && isset($config['kb_request_color_enable']) && $config['kb_request_color_enable'] == 1)
+				{
+					$title = '<b><span style="color: #'.$color.';">[' . $user->lang['STATUS_ADDED'] . ']</span></b> ' . $row['request_title'];
+				}
+				else
+				{
+					$title = '<b>[' . $user->lang['STATUS_ADDED'] . ']</b> ' . $row['request_title'];
+				}
 			break;
 
 			// Has been accepted by someone
 			case STATUS_PENDING:
-				$title = '<b>[' . $user->lang['STATUS_PENDING'] . ']</b> ' . $row['request_title'];
+				$color = (isset($config['kb_request_status_pending']) && $config['kb_request_status_pending'] != '') ? $config['kb_request_status_pending'] : '';
+				if($color != '' && isset($config['kb_request_color_enable']) && $config['kb_request_color_enable'] == 1)
+				{
+					$title = '<b><span style="color: #'.$color.';">[' . $user->lang['STATUS_PENDING'] . ']</span></b> ' . $row['request_title'];
+				}
+				else
+				{
+					$title = '<b>[' . $user->lang['STATUS_PENDING'] . ']</b> ' . $row['request_title'];
+				}
 			break;
 
 			case STATUS_REQUEST:
 			default:
-				$title = '<b><span style="color: #ff0000;">[' . $user->lang['STATUS_REQUEST'] . ']</span></b> ' . $row['request_title'];
+				$color = (isset($config['kb_request_status_request']) && $config['kb_request_status_request'] != '') ? $config['kb_request_status_request'] : '';
+				if($color != '' && isset($config['kb_request_color_enable']) && $config['kb_request_color_enable'] == 1)
+				{
+					$title = '<b><span style="color: #'.$color.';">[' . $user->lang['STATUS_REQUEST'] . ']</span></b> ' . $row['request_title'];
+				}
+				else
+				{
+					$title = '<b>[' . $user->lang['STATUS_REQUEST'] . ']</b> ' . $row['request_title'];
+				}
 			break;
 		}
 
