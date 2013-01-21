@@ -1075,7 +1075,25 @@ class knowledge_base
 			'DISABLE_LEFT_MENU'		=> ($config['kb_disable_left_menu']) ? true : false,
 			'DISABLE_RIGHT_MENU'	=> ($config['kb_disable_right_menu']) ? true : false,
 			'S_EXTENDED_HEADER'		=> ($config['kb_ext_article_header']) ? true : false,
-			'S_SOCIAL_BOOKMARKS'	=> ($config['kb_soc_bookmarks']) ? true : false,
+			'S_SOCIAL_BOOKMARKS'	=> (isset($config['kb_soc_bookmarks']) && $config['kb_soc_bookmarks']) ? true : false,
+			
+			'S_KB_BLOGGER'			=> (isset($config['kb_blogger']) && $config['kb_blogger'] == 1) ? true : false,
+			'S_KB_DELICIOUS'		=> (isset($config['kb_delicious']) && $config['kb_delicious'] == 1) ? true : false,
+			'S_KB_DIGG'				=> (isset($config['kb_digg']) && $config['kb_digg'] == 1) ? true : false,
+			'S_KB_FACEBOOK'			=> (isset($config['kb_facebook']) && $config['kb_facebook'] == 1) ? true : false,
+			'S_KB_FRIEND'			=> (isset($config['kb_friend']) && $config['kb_friend'] == 1) ? true : false,
+			'S_KB_GOOGLE'			=> (isset($config['kb_google']) && $config['kb_google'] == 1) ? true : false,
+			'S_KB_LINKED IN'		=> (isset($config['kb_linked in']) && $config['kb_linked in'] == 1) ? true : false,
+			'S_KB_LIVE'				=> (isset($config['kb_live']) && $config['kb_live'] == 1) ? true : false,
+			'S_KB_MIXX'				=> (isset($config['kb_mixx']) && $config['kb_mixx'] == 1) ? true : false,
+			'S_KB_MYSPACE'			=> (isset($config['kb_myspace']) && $config['kb_myspace'] == 1) ? true : false,
+			'S_KB_NETVIBES'			=> (isset($config['kb_netvibes']) && $config['kb_netvibes'] == 1) ? true : false,
+			'S_KB_REDDIT'			=> (isset($config['kb_reddit']) && $config['kb_reddit'] == 1) ? true : false,
+			'S_KB_STUMBLE'			=> (isset($config['kb_stumble']) && $config['kb_stumble'] == 1) ? true : false,
+			'S_KB_TECHNORATI'		=> (isset($config['kb_technorati']) && $config['kb_technorati'] == 1) ? true : false,
+			'S_KB_TWITTER'			=> (isset($config['kb_twitter']) && $config['kb_twitter'] == 1) ? true : false,
+			'S_KB_WORDPRESS'		=> (isset($config['kb_wordpress']) && $config['kb_wordpress'] == 1) ? true : false,
+
 			'S_EXPORT_OPTIONS'		=> ($config['kb_export_article']) ? true : false,
 		));
 
