@@ -1624,17 +1624,17 @@ function show_request_list($in_menu, $num, $start = 0)
 		{
 			// Has been added
 			case STATUS_ADDED:
-				$title = '[' . $user->lang['STATUS_ADDED'] . '] ' . $row['request_title'];
+				$title = '<b><span style="color: #008000;">[' . $user->lang['STATUS_ADDED'] . ']</span></b> ' . $row['request_title'];
 			break;
 
 			// Has been accepted by someone
 			case STATUS_PENDING:
-				$title = '[' . $user->lang['STATUS_PENDING'] . '] ' . $row['request_title'];
+				$title = '<b>[' . $user->lang['STATUS_PENDING'] . ']</b> ' . $row['request_title'];
 			break;
 
 			case STATUS_REQUEST:
 			default:
-				$title = '[' . $user->lang['STATUS_REQUEST'] . '] ' . $row['request_title'];
+				$title = '<b><span style="color: #ff0000;">[' . $user->lang['STATUS_REQUEST'] . ']</span></b> ' . $row['request_title'];
 			break;
 		}
 
