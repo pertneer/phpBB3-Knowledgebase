@@ -22,7 +22,6 @@ if (defined('IN_KB_PLUGIN'))
 	$acp_options['legend1'] 			= 'BOOKMARK_OPTIONS';
 	$acp_options['kb_allow_subscribe']	= array('lang' => 'KB_ALLOW_SUB',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false);
 	$acp_options['kb_allow_bookmarks']	= array('lang' => 'KB_ALLOW_BOOK',		'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false);
-	$acp_options['kb_soc_bookmarks']	= array('lang' => 'KB_ALLOW_SOCBOOK',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => false);
 	$acp_options['kb_bookmark_menu']	= array('lang' => 'WHICH_MENU',			'validate' => 'int',	'type' => 'custom', 		'function' 	=> 'select_menu_check', 	'explain' 	=> false);
 	$acp_options['legend2'] 			= 'KB_SOCBOOK_LIST';
 	$acp_options['kb_soc_bookmarks']	= array('lang' => 'KB_ALLOW_SOCBOOK',	'validate' => 'bool',	'type' => 'radio:yes_no', 	'explain' => true);
