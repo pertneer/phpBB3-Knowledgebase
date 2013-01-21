@@ -34,7 +34,7 @@ if (defined('IN_KB_PLUGIN'))
 		'PLUGIN_NAME'			=> 'PLUGIN_REQUEST',
 		'PLUGIN_DESC'			=> 'PLUGIN_REQUEST_DESC',
 		'PLUGIN_COPY'			=> 'PLUGIN_COPY',
-		'PLUGIN_VERSION'		=> '1.0.0',
+		'PLUGIN_VERSION'		=> '1.0.1',
 		'PLUGIN_MENU'			=> RIGHT_MENU,
 		'PLUGIN_PERM'			=> true,
 		'PLUGIN_PAGES'			=> array('index', 'view_tag', 'view_cat', 'view_article', 'search', 'history'),
@@ -61,6 +61,10 @@ function request_list($cat_id)
 function request_list_versions()
 {
 	$versions = array(
+		'1.0.1'	=> array(
+		
+		),
+
 		'1.0.0'	=> array(
 			// Initial install, I suppose nothing is done here beside adding the config
 			'config_add'	=> array(
