@@ -1083,7 +1083,7 @@ class knowledge_base
 			'S_KB_FACEBOOK'			=> (isset($config['kb_facebook']) && $config['kb_facebook'] == 1) ? true : false,
 			'S_KB_FRIEND'			=> (isset($config['kb_friend']) && $config['kb_friend'] == 1) ? true : false,
 			'S_KB_GOOGLE'			=> (isset($config['kb_google']) && $config['kb_google'] == 1) ? true : false,
-			'S_KB_LINKED_IN'		=> (isset($config['kb_linked in']) && $config['kb_linked in'] == 1) ? true : false,
+			'S_KB_LINKED_IN'		=> (isset($config['kb_linked_in']) && $config['kb_linked_in'] == 1) ? true : false,
 			'S_KB_LIVE'				=> (isset($config['kb_live']) && $config['kb_live'] == 1) ? true : false,
 			'S_KB_MIXX'				=> (isset($config['kb_mixx']) && $config['kb_mixx'] == 1) ? true : false,
 			'S_KB_MYSPACE'			=> (isset($config['kb_myspace']) && $config['kb_myspace'] == 1) ? true : false,
