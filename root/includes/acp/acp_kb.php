@@ -569,12 +569,22 @@ class acp_kb
 					continue;
 				}
 
+				$request_status = array('kb_request_status_added', 'kb_request_status_pending', 'kb_request_status_request');
+				if(!in_array(strtolower($config_key), $request_status))
+				{
+					$swatch = false;
+				}
+				else
+				{
+					$swatch = append_sid("{$phpbb_admin_path}swatch.$phpEx", 'form=acp_board&amp;name=' . $config_key);
+				}
 				$template->assign_block_vars('options', array(
 					'KEY'			=> $config_key,
 					'TITLE'			=> (isset($user->lang[$vars['lang']])) ? $user->lang[$vars['lang']] : $vars['lang'],
 					'S_EXPLAIN'		=> $vars['explain'],
 					'TITLE_EXPLAIN'	=> $l_explain,
 					'CONTENT'		=> $content,
+					'U_SWATCH'		=> $swatch,
 					)
 				);
 
