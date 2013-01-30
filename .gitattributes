@@ -6,3 +6,6 @@
 *.xml text eol=lf
 =======
 *.* text eol=lf
+
+.gitattributes export-ignore
+README.md export-ignore
