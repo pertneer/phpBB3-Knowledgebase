@@ -386,7 +386,8 @@ class acp_kb
 					if(confirm_box(true))
 					{
 						reset_db();
-						add_log('admin', 'LOG_KB_RESET_DB');
+						// add log
+						add_log('admin', 'LOG_KB_RESET_DB', KB_VERSION);
 
 						trigger_error($user->lang['KB_RESET_DB'] . adm_back_link($this->u_action));
 					}
@@ -405,7 +406,9 @@ class acp_kb
 					if(confirm_box(true))
 					{
 						reset_perms();
-						add_log('admin', 'LOG_KB_RESET_PERMS');
+
+						// add log
+						add_log('admin', 'LOG_KB_RESET_PERMS', KB_VERSION);
 
 						trigger_error($user->lang['KB_RESET_PERMS'] . adm_back_link($this->u_action));
 					}
@@ -427,7 +430,8 @@ class acp_kb
 						$db->sql_query($sql);
 
 						kb_install_perm_plugins('reset', 'install');
-						add_log('admin', 'LOG_KB_RESET_PLUGINS');
+						// add log
+						add_log('admin', 'LOG_KB_RESET_PLUGINS', KB_VERSION);
 
 						trigger_error($user->lang['KB_RESET_PLUGINS'] . adm_back_link($this->u_action));
 					}
@@ -686,12 +690,9 @@ function insert_kb_data()
 
 	kb_install_perm_plugins('reset', 'install');
 
-	// add log
-	add_log('admin', 'LOG_KB_RESET_PLUGINS', KB_VERSION);
-
 	kb_install_first_information();
 
-	set_category_perm();
+	reset_category_perm();
 
 }
 
@@ -846,15 +847,11 @@ function kb_install_first_information()
 
 	//need to reset permissions on categories
 
-	// add log
-	add_log('admin', 'LOG_KB_RESET_DB', KB_VERSION);
-
 }
 
-function set_category_perm()
+function reset_category_perm()
 {
-
-	global $db, $config, $user, $phpbb_root_path, $phpEx, $template, $auth_settings;
+	global $db;
 
 	$sql = 'SELECT role_id, role_name
 			FROM ' . ACL_ROLES_TABLE . '
@@ -936,7 +933,38 @@ function reset_perms()
 	}
 
 	$auth_admin->acl_clear_prefetch();
-	// add log
-	add_log('admin', 'LOG_KB_RESET_PERMS', KB_VERSION);
+
+	if(!class_exists('auth_admin'))
+	{
+		include($phpbb_root_path . 'includes/acp/auth.' . $phpEx);
+	}
+	$auth_admin = new auth_admin();
+
+	if (!class_exists('umil'))
+	{
+		$umil_file = $phpbb_root_path . 'umil/umil.' . $phpEx;
+		if (!file_exists($umil_file))
+		{
+			trigger_error('KB_UPDATE_UMIL', E_USER_ERROR);
+		}
+
+		include($umil_file);
+	}
+	$umil = new umil(true);
+
+	require($phpbb_root_path . 'includes/kb_permissions.' . $phpEx);
+	remove_perms($umil, $versions);
+	add_perms($umil, $versions);
+	unset($versions);
+}
+
+function remove_perms($umil, $versions)
+{
+	$umil->run_actions('uninstall', $versions, 'kb_version');
+}
+
+function add_perms($umil, $versions)
+{
+	$umil->run_actions('install', $versions, 'kb_version');
 }
 ?>

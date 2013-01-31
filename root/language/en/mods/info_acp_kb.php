@@ -164,9 +164,9 @@ $lang = array_merge($lang, array(
 	'RESET_DB'								=> 'Reset Database',
 	'RESET_DB_CONFIRM'						=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset the Knowledge Base database, not removing the tables, but emptying them so you have a fresh install ready to go. It will also remove all attachments associated with the mod.',
 	'RESET_PERMS'							=> 'Reset Permissions',
-	'RESET_PERMS_CONFIRM'					=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset all Knowledge Base permissions, so that you will have to remake them all from the start. It will also remove Knowledge Base related roles.',
+	'RESET_PERMS_CONFIRM'					=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset all Knowledge Base permissions and roles back to their original installation settings.',
 	'RESET_PLUGINS'							=> 'Reset Plugins',
-	'RESET_PLUGINS_CONFIRM'					=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset all Knowledge Base plugins back to their original installion settings.',
+	'RESET_PLUGINS_CONFIRM'					=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset all Knowledge Base plugins back to their original installation settings.',
 
 	'UNINSTALL_CONFIRM'						=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will uninstall the mod completely, removing both data, permissions, configs and tables.',
 ));
