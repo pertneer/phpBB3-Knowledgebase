@@ -47,7 +47,7 @@
 				</contributions-group>
 			</author>
 		</author-group>
-		<mod-version>1.0.6</mod-version>
+		<mod-version>1.0.7RC1</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>2400</time>
@@ -376,6 +376,16 @@
 					<change><![CDATA[Added pdf export option]]></change>
 					<change><![CDATA[Added ability to hide the copyright symbol]]></change>
 					<change><![CDATA[Fixed xHTML compliant issue]]></change>
+					<change><![CDATA[Misc bugfixes]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2013-02-3</date>
+				<rev-version>1.0.7RC1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Fixed permission reset]]></change>
+					<change><![CDATA[Option to select which social bookmarks to use]]></change>
+					<change><![CDATA[Misc language fixes]]></change>
 					<change><![CDATA[Misc bugfixes]]></change>
 				</changelog>
 			</entry>
