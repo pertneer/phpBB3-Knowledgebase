@@ -1100,7 +1100,7 @@ a.kblink {
 				<action type="after-add"><![CDATA[@import url("kb.css");]]></action>
 			</edit>
 		</open>
-		<php-installer><![CDATA[kb.php]]></php-installer>
+		<php-installer><![CDATA[kb_install/index.php]]></php-installer>
 		<diy-instructions lang="en"><![CDATA[After completing this guide, login as admin and direct your browser to kb.php to install the mod. To make attachments work in the KB, go to ACP -> Posting -> Manage Extension Groups. Then edit the extension groups and tick the box that allows you to use them in the KB. For a more thorough guide on how to setup and use this mod, please turn to our website.
 
 the following bbcode will be installed on your site for local article links to work correctly
