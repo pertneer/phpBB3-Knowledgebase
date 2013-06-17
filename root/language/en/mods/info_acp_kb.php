@@ -134,6 +134,7 @@ $lang = array_merge($lang, array(
 	'KB_SHOW_RELART'						=> 'Show related articles',
 	'KB_SHOW_RELART_EXPLAIN'				=> 'Determine how many related articles you want displayed in the related article box. Use 0 to disable.',
 	'KB_SOCBOOK_LIST'						=> 'List of social bookmarks to be shown',
+	'KB_SYNC_ARTICLE_COUNT'					=> 'The article syncing process was successful.',
 	'KB_UNINSTALL_CONTINUE'					=> 'The uninstallation will continue to the next step within seconds. Please do not close your browser or this window while the page loads. Click %shere%s if the uninstallation doesn\'t automatically continue.',
 
 	'LOG_CAT_ADD'							=> '<strong>Category added</strong><br /> - %1$s',
@@ -150,6 +151,7 @@ $lang = array_merge($lang, array(
 	'LOG_KB_RESET_DB'						=> '<strong>Knowledge Base Mod database reset</strong>',
 	'LOG_KB_RESET_PERMS'					=> '<strong>Knowledge Base Mod permissions reset</strong',
 	'LOG_KB_RESET_PLUGINS'					=> '<strong>Knowledge Base Mod Plugins reset</strong>',
+	'LOG_KB_SYNC_ARTICLE_COUNT'				=> '<strong>Knowledge Base Mod Article count synchronized</strong>',
 	'LOG_KB_UNINSTALL'						=> '<strong>Knowledge Base Mod removed</strong>',
 	'LOG_KB_UPDATED'						=> '<strong>Knowledge Base Mod updated</strong><br /> - From version %2$s to %1$s',
 	'LOG_TYPE_ADD'							=> '<strong>Article type added</strong><br /> - %1$s ',
@@ -167,6 +169,10 @@ $lang = array_merge($lang, array(
 	'RESET_PERMS_CONFIRM'					=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset all Knowledge Base permissions and roles back to their original installation settings.',
 	'RESET_PLUGINS'							=> 'Reset Plugins',
 	'RESET_PLUGINS_CONFIRM'					=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset all Knowledge Base plugins back to their original installation settings.',
+
+	'SYNC_ARTICLE_COUNT'					=> 'Synchronize Article Count',
+	'SYNC_ARTICLE_COUNT_CONFIRM'			=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will synchronize the article count of users with articles they have written currently in the database.',
+	
 
 	'UNINSTALL_CONFIRM'						=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will uninstall the mod completely, removing both data, permissions, configs and tables.',
 ));

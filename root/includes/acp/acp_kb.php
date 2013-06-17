@@ -443,6 +443,27 @@ class acp_kb
 						confirm_box(false, 'RESET_PLUGINS', $hidden_fields);
 					}
 				}
+
+				$sync_article_count = (isset($_POST['sync_article_count'])) ? true : false;
+				if ($sync_article_count)
+				{
+					if(confirm_box(true))
+					{
+
+						SYNC_ARTICLE_COUNT();
+						// add log
+						add_log('admin', 'LOG_KB_SYNC_ARTICLE_COUNT', KB_VERSION);
+
+						trigger_error($user->lang['KB_SYNC_ARTICLE_COUNT'] . adm_back_link($this->u_action));
+					}
+					else
+					{
+						$hidden_fields = build_hidden_fields(array(
+							'sync_article_count'	=> true,
+						));
+						confirm_box(false, 'SYNC_ARTICLE_COUNT', $hidden_fields);
+					}
+				}
 			break;
 
 			default:
@@ -966,5 +987,23 @@ function remove_perms($umil, $versions)
 function add_perms($umil, $versions)
 {
 	$umil->run_actions('install', $versions, 'kb_version');
+}
+
+function sync_article_count()
+{
+	global $db;
+
+	$sql = "SELECT user_id FROM " . USERS_TABLE . " WHERE group_id <> 6";//no need to sync bots
+	$user_ids = $db->sql_query($sql);
+	while($user_id = $db->sql_fetchrow($user_ids))
+	{
+		//SELECT count(*) FROM `phpbb_articles` WHERE `article_user_id` = 2
+		$sql = "SELECT count(*) FROM " . KB_TABLE . " WHERE article_user_id = " . $user_id['user_id'];
+		$count = $db->sql_query($sql);
+		$count = $db->sql_fetchrow($count);
+		//UPDATE `phpbb_users` SET `user_articles` = 1 WHERE `user_id` = 2
+		$sql = "UPDATE " . USERS_TABLE . " SET user_articles = " . $count['count(*)']. " WHERE user_id = " . $user_id['user_id'];
+		$db->sql_query($sql);
+	}
 }
 ?>
