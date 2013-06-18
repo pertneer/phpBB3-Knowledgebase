@@ -2216,6 +2216,11 @@ function handle_related_articles($article_id, $article_title, $article_title_cle
 		$tag .= "(a.article_title " . $db->sql_like_expression($db->any_char . utf8_clean_string($term) . $db->any_char) . " OR a.article_title_clean " . $db->sql_like_expression($db->any_char . utf8_clean_string($term) . $db->any_char) . ")";
 	}
 
+	if(empty($tag))
+		{
+			$tag = ' 1 = 1 ';
+		}
+
 	// Get the titles
 	$sql = $db->sql_build_query('SELECT', array(
 		'SELECT'	=> 'a.article_id, a.article_title',
