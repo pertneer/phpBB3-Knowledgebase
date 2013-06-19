@@ -124,6 +124,7 @@ $lang = array_merge($lang, array(
 	'KB_RESET_DB'							=> 'The database has been successfully reset.',
 	'KB_RESET_PLUGINS'						=> 'Plugins have been successfully reset',
 	'KB_RESET_PERMS'						=> 'The permissions have successfully been reset.',
+	'KB_RESET_STATS'						=> 'The statistics have successfully been reset',
 	'KB_RIGHT_MENU_TYPE'					=> 'Width type',
 	'KB_RIGHT_MENU_WIDTH'					=> 'Right menu width',
 	'KB_RIGHT_MENU_WIDTH_EXPLAIN'			=> 'Specify the width of the right column in numbers. Specify below whether it is in pixels or percent. Beware, changing these numbers might break your layout.',
@@ -135,6 +136,7 @@ $lang = array_merge($lang, array(
 	'KB_SHOW_RELART_EXPLAIN'				=> 'Determine how many related articles you want displayed in the related article box. Use 0 to disable.',
 	'KB_SOCBOOK_LIST'						=> 'List of social bookmarks to be shown',
 	'KB_SYNC_ARTICLE_COUNT'					=> 'The article syncing process was successful.',
+	'KB_STATS_NO_ENABLE'					=> 'Statistics are not enabled',
 	'KB_UNINSTALL_CONTINUE'					=> 'The uninstallation will continue to the next step within seconds. Please do not close your browser or this window while the page loads. Click %shere%s if the uninstallation doesn\'t automatically continue.',
 
 	'LOG_CAT_ADD'							=> '<strong>Category added</strong><br /> - %1$s',
@@ -151,6 +153,7 @@ $lang = array_merge($lang, array(
 	'LOG_KB_RESET_DB'						=> '<strong>Knowledge Base Mod database reset</strong>',
 	'LOG_KB_RESET_PERMS'					=> '<strong>Knowledge Base Mod permissions reset</strong',
 	'LOG_KB_RESET_PLUGINS'					=> '<strong>Knowledge Base Mod Plugins reset</strong>',
+	'LOG_KB_RESET_STATS'					=> '<strong>Knowledge Base Mod Statistics reset</strong>',
 	'LOG_KB_SYNC_ARTICLE_COUNT'				=> '<strong>Knowledge Base Mod Article count synchronized</strong>',
 	'LOG_KB_UNINSTALL'						=> '<strong>Knowledge Base Mod removed</strong>',
 	'LOG_KB_UPDATED'						=> '<strong>Knowledge Base Mod updated</strong><br /> - From version %2$s to %1$s',
@@ -169,6 +172,8 @@ $lang = array_merge($lang, array(
 	'RESET_PERMS_CONFIRM'					=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset all Knowledge Base permissions and roles back to their original installation settings.',
 	'RESET_PLUGINS'							=> 'Reset Plugins',
 	'RESET_PLUGINS_CONFIRM'					=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will reset all Knowledge Base plugins back to their original installation settings.',
+	'RESET_STATS'							=> 'Reset Statistics',
+	'RESET_STATS_CONFIRM'					=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br /> This will reset the Knowledge base statistics to counts of current articles',
 
 	'SYNC_ARTICLE_COUNT'					=> 'Synchronize Article Count',
 	'SYNC_ARTICLE_COUNT_CONFIRM'			=> '<span style="color:#ff0000"><b>Warning: This cannot be undone</b></span>. <br />This will synchronize the article count of users with articles they have written currently in the database.',
