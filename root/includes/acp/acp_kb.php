@@ -444,6 +444,34 @@ class acp_kb
 					}
 				}
 
+				$reset_stats = (isset($_POST['reset_stats'])) ? true : false;
+				if ($reset_stats)
+				{
+					if($config['kb_stats_enable'] == 1)//no reason to reset if they are not enabled
+						{
+						if(confirm_box(true))
+						{
+
+							reset_statistics();
+							// add log
+							add_log('admin', 'LOG_KB_RESET_STATS', KB_VERSION);
+
+							trigger_error($user->lang['KB_RESET_STATS'] . adm_back_link($this->u_action));
+						}
+						else
+						{
+							$hidden_fields = build_hidden_fields(array(
+								'reset_stats'	=> true,
+							));
+							confirm_box(false, 'RESET_STATS', $hidden_fields);
+						}
+					}
+					else
+					{
+						trigger_error($user->lang['KB_STATS_NO_ENABLE'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}
+				}
+
 				$sync_article_count = (isset($_POST['sync_article_count'])) ? true : false;
 				if ($sync_article_count)
 				{
@@ -987,6 +1015,35 @@ function remove_perms($umil, $versions)
 function add_perms($umil, $versions)
 {
 	$umil->run_actions('install', $versions, 'kb_version');
+}
+
+function reset_statistics()
+{
+	global $db, $config;
+
+	$sql = "SELECT count(*) FROM " . KB_TABLE . " WHERE 1";
+	$count = $db->sql_query($sql);
+	$count = $db->sql_fetchrow($count);
+	if($count['count(*)'] != $config['kb_total_articles'])
+	{
+		set_config('kb_total_articles', $count['count(*)']);
+	}
+
+	$sql = "SELECT count(*) FROM " . KB_CATS_TABLE . " WHERE 1";
+	$count = $db->sql_query($sql);
+	$count = $db->sql_fetchrow($count);
+	if($count['count(*)'] != $config['kb_total_cats'])
+	{
+		set_config('kb_total_cats', $count['count(*)']);
+	}
+
+	$sql = "SELECT count(*) FROM " . KB_COMMENTS_TABLE . " WHERE 1";
+	$count = $db->sql_query($sql);
+	$count = $db->sql_fetchrow($count);
+	if($count['count(*)'] != $config['kb_total_comments'])
+	{
+		set_config('kb_total_comments', $count['count(*)']);
+	}
 }
 
 function sync_article_count()
